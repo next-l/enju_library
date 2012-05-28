@@ -7,11 +7,11 @@ require "enju_library/version"
 Gem::Specification.new do |s|
   s.name        = "enju_library"
   s.version     = EnjuLibrary::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of EnjuLibrary."
-  s.description = "TODO: Description of EnjuLibrary."
+  s.authors     = ["Kosuke Tanabe"]
+  s.email       = ["tanabe@mwr.mediacom.keio.ac.jp"]
+  s.homepage    = "https://github.com/next-l/enju_library"
+  s.summary     = "enju_library plugin"
+  s.description = "Library module for Next-L Enju"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
