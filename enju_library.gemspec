@@ -20,6 +20,8 @@ Gem::Specification.new do |s|
   # s.add_dependency "jquery-rails"
   s.add_dependency "devise"
   s.add_dependency "cancan"
+  s.add_dependency "inherited_resources"
+  s.add_dependency "acts_as_list", "~> 0.1.6"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
