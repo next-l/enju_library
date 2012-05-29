@@ -72,6 +72,26 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
 
   add_index "library_groups", ["short_name"], :name => "index_library_groups_on_short_name"
 
+  create_table "picture_files", :force => true do |t|
+    t.integer  "picture_attachable_id"
+    t.string   "picture_attachable_type"
+    t.string   "content_type"
+    t.text     "title"
+    t.text     "filename"
+    t.string   "thumbnail"
+    t.integer  "position"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.text     "picture_meta"
+    t.string   "picture_fingerprint"
+  end
+
+  add_index "picture_files", ["picture_attachable_id", "picture_attachable_type"], :name => "index_picture_files_on_picture_attachable_id_and_type"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.text     "display_name"
