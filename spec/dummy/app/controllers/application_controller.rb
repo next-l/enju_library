@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from CanCan::AccessDenied, :with => :render_403
 
+  enju_library
+
   private
   def render_403
     return if performed?
@@ -19,9 +21,5 @@ class ApplicationController < ActionController::Base
         format.json
       end
     end
-  end
-
-  def get_library
-    @library = Library.find(params[:library_id]) if params[:library_id]
   end
 end
