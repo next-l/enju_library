@@ -12,6 +12,7 @@ PATH
       inherited_resources
       rails (~> 3.2)
       sunspot_rails
+      will_paginate
 
 GEM
   remote: http://rubygems.org/
@@ -151,6 +152,7 @@ GEM
     vcr (2.1.1)
     warden (1.1.1)
       rack (>= 1.0)
+    will_paginate (3.0.3)
 
 PLATFORMS
   ruby

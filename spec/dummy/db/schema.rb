@@ -13,6 +13,20 @@
 
 ActiveRecord::Schema.define(:version => 20120510140958) do
 
+  create_table "bookstores", :force => true do |t|
+    t.text     "name",             :null => false
+    t.string   "zip_code"
+    t.text     "address"
+    t.text     "note"
+    t.string   "telephone_number"
+    t.string   "fax_number"
+    t.string   "url"
+    t.integer  "position"
+    t.datetime "deleted_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "libraries", :force => true do |t|
     t.string   "name",                                   :null => false
     t.text     "display_name"

@@ -20,4 +20,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def get_library
+    @library = Library.find(params[:library_id]) if params[:library_id]
+  end
 end

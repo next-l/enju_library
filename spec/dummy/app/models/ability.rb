@@ -4,13 +4,25 @@ class Ability
   def initialize(user)
     case user.try(:role).try(:name)
     when 'Administrator'
-      can :read, UserGroup
+      can :read, Bookstore
+      can :read, Shelf
+      can :read, Library
+      can :read, LibraryGroup
     when 'Librarian'
-      can :read, UserGroup
+      can :read, Bookstore
+      can :read, Shelf
+      can :read, Library
+      can :read, LibraryGroup
     when 'User'
-      can :read, UserGroup
+      can :read, Bookstore
+      can :read, Shelf
+      can :read, Library
+      can :read, LibraryGroup
     else
-      can :read, UserGroup
+      can :read, Bookstore
+      can :read, Shelf
+      can :read, Library
+      can :read, LibraryGroup
     end
   end
 end

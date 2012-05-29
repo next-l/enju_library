@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_dependency "sunspot_rails"
   s.add_dependency "geocoder"
   s.add_dependency "addressable"
+  s.add_dependency "will_paginate"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
