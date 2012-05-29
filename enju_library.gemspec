@@ -24,7 +24,15 @@ Gem::Specification.new do |s|
   s.add_dependency "acts_as_list", "~> 0.1.6"
   s.add_dependency "attribute_normalizer", "~> 1.1"
   s.add_dependency "friendly_id", "~> 4.0"
+  s.add_dependency "sunspot_rails"
+  s.add_dependency "geocoder"
+  s.add_dependency "addressable"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
+  s.add_development_dependency "vcr"
+  s.add_development_dependency "fakeweb"
+  s.add_development_dependency "factory_girl_rails"
+  s.add_development_dependency "sunspot-rails-tester"
+  s.add_development_dependency "sunspot_solr"
 end
