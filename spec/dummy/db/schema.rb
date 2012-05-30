@@ -27,6 +27,37 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "countries", :force => true do |t|
+    t.string  "name",         :null => false
+    t.text    "display_name"
+    t.string  "alpha_2"
+    t.string  "alpha_3"
+    t.string  "numeric_3"
+    t.text    "note"
+    t.integer "position"
+  end
+
+  add_index "countries", ["alpha_2"], :name => "index_countries_on_alpha_2"
+  add_index "countries", ["alpha_3"], :name => "index_countries_on_alpha_3"
+  add_index "countries", ["name"], :name => "index_countries_on_name"
+  add_index "countries", ["numeric_3"], :name => "index_countries_on_numeric_3"
+
+  create_table "languages", :force => true do |t|
+    t.string  "name",         :null => false
+    t.string  "native_name"
+    t.text    "display_name"
+    t.string  "iso_639_1"
+    t.string  "iso_639_2"
+    t.string  "iso_639_3"
+    t.text    "note"
+    t.integer "position"
+  end
+
+  add_index "languages", ["iso_639_1"], :name => "index_languages_on_iso_639_1"
+  add_index "languages", ["iso_639_2"], :name => "index_languages_on_iso_639_2"
+  add_index "languages", ["iso_639_3"], :name => "index_languages_on_iso_639_3"
+  add_index "languages", ["name"], :name => "index_languages_on_name", :unique => true
+
   create_table "libraries", :force => true do |t|
     t.string   "name",                                   :null => false
     t.text     "display_name"
