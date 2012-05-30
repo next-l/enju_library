@@ -449,6 +449,20 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.datetime "updated_at",   :null => false
   end
 
+  create_table "search_engines", :force => true do |t|
+    t.string   "name",             :null => false
+    t.text     "display_name"
+    t.string   "url",              :null => false
+    t.text     "base_url",         :null => false
+    t.text     "http_method",      :null => false
+    t.text     "query_param",      :null => false
+    t.text     "additional_param"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "series_has_manifestations", :force => true do |t|
     t.integer  "series_statement_id"
     t.integer  "manifestation_id"

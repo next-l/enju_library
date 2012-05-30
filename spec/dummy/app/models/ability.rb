@@ -21,6 +21,7 @@ class Ability
       can :destroy, Shelf do |shelf|
         shelf.items.empty?
       end
+      can :manage, SearchEngine
       can :manage, Subscribe
       can :manage, Subscription
     when 'Librarian'
@@ -28,6 +29,7 @@ class Ability
       can :read, Library
       can :read, LibraryGroup
       can :read, Shelf
+      can :read, SearchEngine
       can :manage, Subscribe
       can :manage, Subscription
     when 'User'

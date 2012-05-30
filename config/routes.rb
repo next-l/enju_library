@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   resources :library_groups
   resources :subscriptions
   resources :subscribes
+  resources :search_engines
 end
