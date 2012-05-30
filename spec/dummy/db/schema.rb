@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "budget_types", :force => true do |t|
+    t.string   "name"
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "carrier_types", :force => true do |t|
     t.string   "name",         :null => false
     t.text     "display_name"
@@ -439,6 +448,24 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
 
   add_index "realizes", ["expression_id"], :name => "index_realizes_on_expression_id"
   add_index "realizes", ["patron_id"], :name => "index_realizes_on_patron_id"
+
+  create_table "request_status_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "request_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"
