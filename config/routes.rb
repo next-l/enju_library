@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :shelves
   resources :bookstores
   resources :library_groups
+  resources :subscriptions
+  resources :subscribes
 end

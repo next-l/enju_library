@@ -2,7 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   rescue_from CanCan::AccessDenied, :with => :render_403
+  rescue_from ActiveRecord::RecordNotFound, :with => :render_404
 
+  enju_biblio
   enju_library
 
   private
@@ -21,6 +23,20 @@ class ApplicationController < ActionController::Base
         format.json
       end
     end
+  end
+
+  def render_404
+    return if performed?
+    respond_to do |format|
+      format.html {render :template => 'page/404', :status => 404}
+      format.mobile {render :template => 'page/404', :status => 404}
+      format.xml {render :template => 'page/404', :status => 404}
+      format.json
+    end
+  end
+
+  def access_denied
+    raise CanCan::AccessDenied
   end
 
   def current_ability

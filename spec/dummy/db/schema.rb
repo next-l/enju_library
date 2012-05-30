@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.datetime "updated_at",       :null => false
   end
 
+  create_table "carrier_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "countries", :force => true do |t|
     t.string  "name",         :null => false
     t.text    "display_name"
@@ -41,6 +50,79 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
   add_index "countries", ["alpha_3"], :name => "index_countries_on_alpha_3"
   add_index "countries", ["name"], :name => "index_countries_on_name"
   add_index "countries", ["numeric_3"], :name => "index_countries_on_numeric_3"
+
+  create_table "create_types", :force => true do |t|
+    t.string   "name"
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "creates", :force => true do |t|
+    t.integer  "patron_id",      :null => false
+    t.integer  "work_id",        :null => false
+    t.integer  "position"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "create_type_id"
+  end
+
+  add_index "creates", ["patron_id"], :name => "index_creates_on_patron_id"
+  add_index "creates", ["work_id"], :name => "index_creates_on_work_id"
+
+  create_table "donates", :force => true do |t|
+    t.integer  "patron_id",  :null => false
+    t.integer  "item_id",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "donates", ["item_id"], :name => "index_donates_on_item_id"
+  add_index "donates", ["patron_id"], :name => "index_donates_on_patron_id"
+
+  create_table "exemplifies", :force => true do |t|
+    t.integer  "manifestation_id", :null => false
+    t.integer  "item_id",          :null => false
+    t.integer  "position"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "exemplifies", ["item_id"], :name => "index_exemplifies_on_item_id", :unique => true
+  add_index "exemplifies", ["manifestation_id"], :name => "index_exemplifies_on_manifestation_id"
+
+  create_table "items", :force => true do |t|
+    t.string   "call_number"
+    t.string   "item_identifier"
+    t.integer  "circulation_status_id",       :default => 5,     :null => false
+    t.integer  "checkout_type_id",            :default => 1,     :null => false
+    t.datetime "created_at",                                     :null => false
+    t.datetime "updated_at",                                     :null => false
+    t.datetime "deleted_at"
+    t.integer  "shelf_id",                    :default => 1,     :null => false
+    t.boolean  "include_supplements",         :default => false, :null => false
+    t.integer  "checkouts_count",             :default => 0,     :null => false
+    t.integer  "owns_count",                  :default => 0,     :null => false
+    t.integer  "resource_has_subjects_count", :default => 0,     :null => false
+    t.text     "note"
+    t.string   "url"
+    t.integer  "price"
+    t.integer  "lock_version",                :default => 0,     :null => false
+    t.integer  "required_role_id",            :default => 1,     :null => false
+    t.string   "state"
+    t.integer  "required_score",              :default => 0,     :null => false
+    t.datetime "acquired_at"
+    t.integer  "bookstore_id"
+  end
+
+  add_index "items", ["bookstore_id"], :name => "index_items_on_bookstore_id"
+  add_index "items", ["checkout_type_id"], :name => "index_items_on_checkout_type_id"
+  add_index "items", ["circulation_status_id"], :name => "index_items_on_circulation_status_id"
+  add_index "items", ["item_identifier"], :name => "index_items_on_item_identifier"
+  add_index "items", ["required_role_id"], :name => "index_items_on_required_role_id"
+  add_index "items", ["shelf_id"], :name => "index_items_on_shelf_id"
 
   create_table "languages", :force => true do |t|
     t.string  "name",         :null => false
@@ -103,6 +185,199 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
 
   add_index "library_groups", ["short_name"], :name => "index_library_groups_on_short_name"
 
+  create_table "manifestation_relationship_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "manifestation_relationships", :force => true do |t|
+    t.integer  "parent_id"
+    t.integer  "child_id"
+    t.integer  "manifestation_relationship_type_id"
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "position"
+  end
+
+  add_index "manifestation_relationships", ["child_id"], :name => "index_manifestation_relationships_on_child_id"
+  add_index "manifestation_relationships", ["parent_id"], :name => "index_manifestation_relationships_on_parent_id"
+
+  create_table "manifestations", :force => true do |t|
+    t.text     "original_title",                                     :null => false
+    t.text     "title_alternative"
+    t.text     "title_transcription"
+    t.string   "classification_number"
+    t.string   "manifestation_identifier"
+    t.datetime "date_of_publication"
+    t.datetime "date_copyrighted"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.datetime "deleted_at"
+    t.string   "access_address"
+    t.integer  "language_id",                     :default => 1,     :null => false
+    t.integer  "carrier_type_id",                 :default => 1,     :null => false
+    t.integer  "extent_id",                       :default => 1,     :null => false
+    t.integer  "start_page"
+    t.integer  "end_page"
+    t.integer  "height"
+    t.integer  "width"
+    t.integer  "depth"
+    t.string   "isbn"
+    t.string   "isbn10"
+    t.string   "wrong_isbn"
+    t.string   "nbn"
+    t.string   "lccn"
+    t.string   "oclc_number"
+    t.string   "issn"
+    t.integer  "price"
+    t.text     "fulltext"
+    t.string   "volume_number_string"
+    t.string   "issue_number_string"
+    t.string   "serial_number_string"
+    t.integer  "edition"
+    t.text     "note"
+    t.integer  "produces_count",                  :default => 0,     :null => false
+    t.integer  "exemplifies_count",               :default => 0,     :null => false
+    t.integer  "embodies_count",                  :default => 0,     :null => false
+    t.integer  "work_has_subjects_count",         :default => 0,     :null => false
+    t.boolean  "repository_content",              :default => false, :null => false
+    t.integer  "lock_version",                    :default => 0,     :null => false
+    t.integer  "required_role_id",                :default => 1,     :null => false
+    t.string   "state"
+    t.integer  "required_score",                  :default => 0,     :null => false
+    t.integer  "frequency_id",                    :default => 1,     :null => false
+    t.boolean  "subscription_master",             :default => false, :null => false
+    t.integer  "volume_number"
+    t.integer  "issue_number"
+    t.integer  "serial_number"
+    t.string   "pub_date"
+    t.text     "title_alternative_transcription"
+    t.text     "description"
+    t.text     "abstract"
+    t.datetime "available_at"
+    t.datetime "valid_until"
+    t.datetime "date_submitted"
+    t.datetime "date_accepted"
+    t.datetime "date_caputured"
+    t.string   "edition_string"
+  end
+
+  add_index "manifestations", ["access_address"], :name => "index_manifestations_on_access_address"
+  add_index "manifestations", ["carrier_type_id"], :name => "index_manifestations_on_carrier_type_id"
+  add_index "manifestations", ["frequency_id"], :name => "index_manifestations_on_frequency_id"
+  add_index "manifestations", ["isbn"], :name => "index_manifestations_on_isbn"
+  add_index "manifestations", ["issn"], :name => "index_manifestations_on_issn"
+  add_index "manifestations", ["lccn"], :name => "index_manifestations_on_lccn"
+  add_index "manifestations", ["manifestation_identifier"], :name => "index_manifestations_on_manifestation_identifier"
+  add_index "manifestations", ["nbn"], :name => "index_manifestations_on_nbn"
+  add_index "manifestations", ["oclc_number"], :name => "index_manifestations_on_oclc_number"
+  add_index "manifestations", ["required_role_id"], :name => "index_manifestations_on_required_role_id"
+  add_index "manifestations", ["updated_at"], :name => "index_manifestations_on_updated_at"
+
+  create_table "owns", :force => true do |t|
+    t.integer  "patron_id",  :null => false
+    t.integer  "item_id",    :null => false
+    t.integer  "position"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "owns", ["item_id"], :name => "index_owns_on_item_id"
+  add_index "owns", ["patron_id"], :name => "index_owns_on_patron_id"
+
+  create_table "patron_relationship_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "patron_relationships", :force => true do |t|
+    t.integer  "parent_id"
+    t.integer  "child_id"
+    t.integer  "patron_relationship_type_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+    t.integer  "position"
+  end
+
+  add_index "patron_relationships", ["child_id"], :name => "index_patron_relationships_on_child_id"
+  add_index "patron_relationships", ["parent_id"], :name => "index_patron_relationships_on_parent_id"
+
+  create_table "patron_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "patrons", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "last_name"
+    t.string   "middle_name"
+    t.string   "first_name"
+    t.string   "last_name_transcription"
+    t.string   "middle_name_transcription"
+    t.string   "first_name_transcription"
+    t.string   "corporate_name"
+    t.string   "corporate_name_transcription"
+    t.string   "full_name"
+    t.text     "full_name_transcription"
+    t.text     "full_name_alternative"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.datetime "deleted_at"
+    t.string   "zip_code_1"
+    t.string   "zip_code_2"
+    t.text     "address_1"
+    t.text     "address_2"
+    t.text     "address_1_note"
+    t.text     "address_2_note"
+    t.string   "telephone_number_1"
+    t.string   "telephone_number_2"
+    t.string   "fax_number_1"
+    t.string   "fax_number_2"
+    t.text     "other_designation"
+    t.text     "place"
+    t.string   "postal_code"
+    t.text     "street"
+    t.text     "locality"
+    t.text     "region"
+    t.datetime "date_of_birth"
+    t.datetime "date_of_death"
+    t.integer  "language_id",                         :default => 1, :null => false
+    t.integer  "country_id",                          :default => 1, :null => false
+    t.integer  "patron_type_id",                      :default => 1, :null => false
+    t.integer  "lock_version",                        :default => 0, :null => false
+    t.text     "note"
+    t.integer  "creates_count",                       :default => 0, :null => false
+    t.integer  "realizes_count",                      :default => 0, :null => false
+    t.integer  "produces_count",                      :default => 0, :null => false
+    t.integer  "owns_count",                          :default => 0, :null => false
+    t.integer  "required_role_id",                    :default => 1, :null => false
+    t.integer  "required_score",                      :default => 0, :null => false
+    t.string   "state"
+    t.text     "email"
+    t.text     "url"
+    t.text     "full_name_alternative_transcription"
+    t.string   "birth_date"
+    t.string   "death_date"
+  end
+
+  add_index "patrons", ["country_id"], :name => "index_patrons_on_country_id"
+  add_index "patrons", ["full_name"], :name => "index_patrons_on_full_name"
+  add_index "patrons", ["language_id"], :name => "index_patrons_on_language_id"
+  add_index "patrons", ["required_role_id"], :name => "index_patrons_on_required_role_id"
+  add_index "patrons", ["user_id"], :name => "index_patrons_on_user_id", :unique => true
+
   create_table "picture_files", :force => true do |t|
     t.integer  "picture_attachable_id"
     t.string   "picture_attachable_type"
@@ -123,6 +398,48 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
 
   add_index "picture_files", ["picture_attachable_id", "picture_attachable_type"], :name => "index_picture_files_on_picture_attachable_id_and_type"
 
+  create_table "produce_types", :force => true do |t|
+    t.string   "name"
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "produces", :force => true do |t|
+    t.integer  "patron_id",        :null => false
+    t.integer  "manifestation_id", :null => false
+    t.integer  "position"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "produce_type_id"
+  end
+
+  add_index "produces", ["manifestation_id"], :name => "index_produces_on_manifestation_id"
+  add_index "produces", ["patron_id"], :name => "index_produces_on_patron_id"
+
+  create_table "realize_types", :force => true do |t|
+    t.string   "name"
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "realizes", :force => true do |t|
+    t.integer  "patron_id",       :null => false
+    t.integer  "expression_id",   :null => false
+    t.integer  "position"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "realize_type_id"
+  end
+
+  add_index "realizes", ["expression_id"], :name => "index_realizes_on_expression_id"
+  add_index "realizes", ["patron_id"], :name => "index_realizes_on_patron_id"
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.text     "display_name"
@@ -131,6 +448,54 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "series_has_manifestations", :force => true do |t|
+    t.integer  "series_statement_id"
+    t.integer  "manifestation_id"
+    t.integer  "position"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "series_has_manifestations", ["manifestation_id"], :name => "index_series_has_manifestations_on_manifestation_id"
+  add_index "series_has_manifestations", ["series_statement_id"], :name => "index_series_has_manifestations_on_series_statement_id"
+
+  create_table "series_statement_merge_lists", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "series_statement_merges", :force => true do |t|
+    t.integer  "series_statement_id",            :null => false
+    t.integer  "series_statement_merge_list_id", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "series_statement_merges", ["series_statement_id"], :name => "index_series_statement_merges_on_series_statement_id"
+  add_index "series_statement_merges", ["series_statement_merge_list_id"], :name => "index_series_statement_merges_on_series_statement_merge_list_id"
+
+  create_table "series_statements", :force => true do |t|
+    t.text     "original_title"
+    t.text     "numbering"
+    t.text     "title_subseries"
+    t.text     "numbering_subseries"
+    t.integer  "position"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.text     "title_transcription"
+    t.text     "title_alternative"
+    t.string   "series_statement_identifier"
+    t.string   "issn"
+    t.boolean  "periodical"
+    t.integer  "root_manifestation_id"
+    t.text     "note"
+    t.text     "title_subseries_transcription"
+  end
+
+  add_index "series_statements", ["root_manifestation_id"], :name => "index_series_statements_on_manifestation_id"
+  add_index "series_statements", ["series_statement_identifier"], :name => "index_series_statements_on_series_statement_identifier"
 
   create_table "shelves", :force => true do |t|
     t.string   "name",                            :null => false
@@ -146,6 +511,32 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
   end
 
   add_index "shelves", ["library_id"], :name => "index_shelves_on_library_id"
+
+  create_table "subscribes", :force => true do |t|
+    t.integer  "subscription_id", :null => false
+    t.integer  "work_id",         :null => false
+    t.datetime "start_at",        :null => false
+    t.datetime "end_at",          :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "subscribes", ["subscription_id"], :name => "index_subscribes_on_subscription_id"
+  add_index "subscribes", ["work_id"], :name => "index_subscribes_on_work_id"
+
+  create_table "subscriptions", :force => true do |t|
+    t.text     "title",                           :null => false
+    t.text     "note"
+    t.integer  "user_id"
+    t.integer  "order_list_id"
+    t.datetime "deleted_at"
+    t.integer  "subscribes_count", :default => 0, :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "subscriptions", ["order_list_id"], :name => "index_subscriptions_on_order_list_id"
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "user_groups", :force => true do |t|
     t.string   "name"
@@ -195,5 +586,16 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
 
   add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.string   "item_type",  :null => false
+    t.integer  "item_id",    :null => false
+    t.string   "event",      :null => false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
 
 end
