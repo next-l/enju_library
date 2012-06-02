@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 # Declare your gem's dependencies in enju_library.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -14,7 +14,6 @@ gem "jquery-rails"
 # your gem to rubygems.org.
 gem 'enju_biblio', :git => 'git://github.com/next-l/enju_biblio.git'
 gem 'enju_manifestation_viewer', :git => 'git://github.com/nabeta/enju_manifestation_viewer.git'
-gem 'isbn-tools', :git => 'git://github.com/nabeta/isbn-tools.git', :require => 'isbn/tools'
 gem 'sunspot-rails-tester', :git => 'git://github.com/nabeta/sunspot-rails-tester.git'
 
 # To use debugger
