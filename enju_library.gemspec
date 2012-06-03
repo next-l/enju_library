@@ -38,4 +38,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "configatron"
   s.add_development_dependency "paperclip"
   s.add_development_dependency "enju_ndl"
+  s.add_development_dependency "enju_manifestation_viewer"
 end

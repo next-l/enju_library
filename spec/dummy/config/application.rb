@@ -55,3 +55,4 @@ module Dummy
 end
 
 require 'paperclip'
+require 'enju_manifestation_viewer'
