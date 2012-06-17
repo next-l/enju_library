@@ -29,9 +29,7 @@ class Library < ActiveRecord::Base
   validates_uniqueness_of :short_display_name, :case_sensitive => false
   validates_uniqueness_of :isil, :allow_blank => true
   validates :display_name, :uniqueness => true
-  validates :name, :format => {:with => /^[a-z][0-9a-z]{2,254}$/}
   validates :isil, :format => {:with => /^[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}$/}, :allow_blank => true
-  #before_save :set_calil_neighborhood_library
   after_validation :geocode, :if => :address_changed?
   after_create :create_shelf
   after_save :clear_all_cache
