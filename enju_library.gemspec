@@ -18,16 +18,9 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2"
   # s.add_dependency "jquery-rails"
-  s.add_dependency "devise"
-  s.add_dependency "cancan"
   s.add_dependency "inherited_resources"
-  s.add_dependency "acts_as_list", "~> 0.1.6"
-  s.add_dependency "attribute_normalizer", "~> 1.1"
-  s.add_dependency "friendly_id", "~> 4.0"
   s.add_dependency "sunspot_rails"
   s.add_dependency "geocoder"
-  s.add_dependency "addressable"
-  s.add_dependency "will_paginate"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
