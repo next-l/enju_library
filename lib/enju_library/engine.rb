@@ -1,5 +1,4 @@
 require 'inherited_resources'
-require 'sunspot_rails'
 require 'geocoder'
 require 'configatron'
 
