@@ -1,9 +1,7 @@
 <h4><%= t('activerecord.models.library') -%></h4>
 <ul>
   <%- @library_facet.each do |facet| -%>
-    <li>
-      <%= library_shelf_facet(@library, facet) %>
-    </li>
+    <%= library_shelf_facet(@library, facet) %>
   <%- end -%>
   <%- if params[:library_id] -%>
     <li><%= link_to t('page.remove_this_facet'), url_for(params.merge(:library_id => nil, :page => nil, :only_path => true)) -%></li>
