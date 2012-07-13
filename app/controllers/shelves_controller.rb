@@ -38,7 +38,7 @@ class ShelvesController < ApplicationController
       end
       @shelves = search.results
       @library_facet = search.facet(:library).rows
-      @library_names = Library.select(:name).collect(&:name)
+      @library_names = Library.pluck(:name)
     end
 
     respond_to do |format|
