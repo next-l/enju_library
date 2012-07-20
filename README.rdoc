@@ -1,3 +1,3 @@
-= EnjuLibrary
+= EnjuLibrary {<img src="https://secure.travis-ci.org/next-l/enju_library.png?branch=master" alt="Build Status" />}[http://travis-ci.org/next-l/enju_library]
 
 This project rocks and uses MIT-LICENSE.
