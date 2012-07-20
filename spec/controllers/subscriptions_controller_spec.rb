@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'sunspot/rails/spec_helper'
 
 describe SubscriptionsController do
+  fixtures :all
 
   def valid_attributes
     FactoryGirl.attributes_for(:subscription)
