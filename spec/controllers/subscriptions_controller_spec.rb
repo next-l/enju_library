@@ -2,13 +2,16 @@ require 'spec_helper'
 require 'sunspot/rails/spec_helper'
 
 describe SubscriptionsController do
-  disconnect_sunspot
 
   def valid_attributes
     FactoryGirl.attributes_for(:subscription)
   end
 
-  describe "GET index" do
+  describe "GET index", :solr => true do
+    before do
+      Subscription.reindex
+    end
+
     describe "When logged in as Administrator" do
       login_admin
 
