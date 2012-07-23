@@ -24,9 +24,7 @@ class Shelf < ActiveRecord::Base
     integer :position
   end
 
-  def self.per_page
-    10
-  end
+  paginates_per 10
 
   def web_shelf?
     return true if self.id == 1

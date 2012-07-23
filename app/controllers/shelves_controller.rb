@@ -28,7 +28,7 @@ class ShelvesController < ApplicationController
 
       search = Shelf.search(:include => [:library]) do
         fulltext query if query.present?
-        paginate :page => page.to_i, :per_page => Shelf.per_page
+        paginate :page => page.to_i, :per_page => Shelf.default_per_page
         if library
           with(:library).equal_to library.name
           order_by :position, :asc
