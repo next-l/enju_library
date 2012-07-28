@@ -8,6 +8,7 @@ one:
   note: 
   my_networks: 0.0.0.0/0
   url: "http://localhost:3000/"
+  position: 1
 
 
 # == Schema Information
@@ -26,7 +27,6 @@ one:
 #  created_at                  :datetime        not null
 #  updated_at                  :datetime        not null
 #  admin_networks              :text
-#  allow_bookmark_external_url :boolean         default(FALSE), not null
 #  position                    :integer
 #  url                         :string(255)     default("http://localhost:3000/")
 #
