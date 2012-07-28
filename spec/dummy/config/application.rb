@@ -56,4 +56,3 @@ end
 
 require 'enju_biblio'
 require 'enju_manifestation_viewer'
-require 'enju_core'
