@@ -12,7 +12,7 @@ class LibraryGroup < ActiveRecord::Base
 
   validates :email, :format => {:with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i}, :presence => true
   validates :url, :presence => true, :url => true
-  after_save :clear_site_config_cache
+  after_save :clear_site_config_cache, :save_system_email
 
   def clear_site_config_cache
     Rails.cache.delete('library_site_config')
@@ -59,6 +59,12 @@ class LibraryGroup < ActiveRecord::Base
       end
     end
     return false
+  end
+
+  def save_system_email
+    user = User.find(1)
+    user.email = email
+    user.save!
   end
 end
 

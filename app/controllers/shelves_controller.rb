@@ -28,7 +28,7 @@ class ShelvesController < ApplicationController
 
       search = Shelf.search(:include => [:library]) do
         fulltext query if query.present?
-        paginate :page => page.to_i, :per_page => Shelf.per_page
+        paginate :page => page.to_i, :per_page => Shelf.default_per_page
         if library
           with(:library).equal_to library.name
           order_by :position, :asc
@@ -38,7 +38,7 @@ class ShelvesController < ApplicationController
       end
       @shelves = search.results
       @library_facet = search.facet(:library).rows
-      @library_names = Library.select(:name).collect(&:name)
+      @library_names = Library.pluck(:name)
     end
 
     respond_to do |format|

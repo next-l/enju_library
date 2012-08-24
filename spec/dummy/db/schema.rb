@@ -182,11 +182,10 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.string   "short_name",                                         :null => false
     t.string   "email"
     t.text     "my_networks"
-    t.boolean  "use_dsbl",     :default => false,                    :null => false
-    t.text     "dsbl_list"
     t.text     "login_banner"
     t.text     "note"
     t.integer  "country_id"
+    t.integer  "position"
     t.datetime "created_at",                                         :null => false
     t.datetime "updated_at",                                         :null => false
     t.string   "url",          :default => "http://localhost:3000/"

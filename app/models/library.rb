@@ -3,7 +3,7 @@ class Library < ActiveRecord::Base
   attr_accessible :name, :display_name, :short_display_name, :zip_code, :street,
     :locality, :region, :telephone_number_1, :telephone_number_2, :fax_number,
     :note, :call_number_rows, :call_number_delimiter, :library_group_id,
-    :country_id, :opening_hour, :isil
+    :country_id, :opening_hour, :isil, :position
 
   include MasterModel
   default_scope :order => 'libraries.position'
@@ -36,9 +36,7 @@ class Library < ActiveRecord::Base
   after_save :clear_all_cache
   after_destroy :clear_all_cache
 
-  def self.per_page
-    10
-  end
+  paginates_per 10
 
   def self.all_cache
     if Rails.env == 'production'
