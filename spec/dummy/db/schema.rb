@@ -177,18 +177,19 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
   add_index "libraries", ["name"], :name => "index_libraries_on_name", :unique => true
 
   create_table "library_groups", :force => true do |t|
-    t.string   "name",                                               :null => false
+    t.string   "name",                                                 :null => false
     t.text     "display_name"
-    t.string   "short_name",                                         :null => false
+    t.string   "short_name",                                           :null => false
     t.string   "email"
     t.text     "my_networks"
     t.text     "login_banner"
     t.text     "note"
     t.integer  "country_id"
     t.integer  "position"
-    t.datetime "created_at",                                         :null => false
-    t.datetime "updated_at",                                         :null => false
-    t.string   "url",          :default => "http://localhost:3000/"
+    t.datetime "created_at",                                           :null => false
+    t.datetime "updated_at",                                           :null => false
+    t.string   "url",            :default => "http://localhost:3000/"
+    t.text     "admin_networks"
   end
 
   add_index "library_groups", ["short_name"], :name => "index_library_groups_on_short_name"

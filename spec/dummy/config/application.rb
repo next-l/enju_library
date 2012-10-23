@@ -55,4 +55,7 @@ module Dummy
 end
 
 require 'enju_biblio'
+require 'library_stdnums'
+require 'mobile-fu'
+require 'RedCloth'
 require 'enju_manifestation_viewer'
