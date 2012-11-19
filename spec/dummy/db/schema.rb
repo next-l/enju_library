@@ -188,8 +188,8 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.integer  "position"
     t.datetime "created_at",                                           :null => false
     t.datetime "updated_at",                                           :null => false
-    t.string   "url",            :default => "http://localhost:3000/"
     t.text     "admin_networks"
+    t.string   "url",            :default => "http://localhost:3000/"
   end
 
   add_index "library_groups", ["short_name"], :name => "index_library_groups_on_short_name"

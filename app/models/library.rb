@@ -99,10 +99,10 @@ end
 #
 # Table name: libraries
 #
-#  id                    :integer         not null, primary key
-#  name                  :string(255)     not null
+#  id                    :integer          not null, primary key
+#  name                  :string(255)      not null
 #  display_name          :text
-#  short_display_name    :string(255)     not null
+#  short_display_name    :string(255)      not null
 #  zip_code              :string(255)
 #  street                :text
 #  locality              :text
@@ -111,18 +111,15 @@ end
 #  telephone_number_2    :string(255)
 #  fax_number            :string(255)
 #  note                  :text
-#  call_number_rows      :integer         default(1), not null
-#  call_number_delimiter :string(255)     default("|"), not null
-#  library_group_id      :integer         default(1), not null
-#  users_count           :integer         default(0), not null
+#  call_number_rows      :integer          default(1), not null
+#  call_number_delimiter :string(255)      default("|"), not null
+#  library_group_id      :integer          default(1), not null
+#  users_count           :integer          default(0), not null
 #  position              :integer
 #  country_id            :integer
-#  created_at            :datetime        not null
-#  updated_at            :datetime        not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #  deleted_at            :datetime
-#  opening_hour          :text
-#  latitude              :float
-#  longitude             :float
 #  isil                  :string(255)
 #
 
