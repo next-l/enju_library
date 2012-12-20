@@ -28,10 +28,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency "fakeweb"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "paperclip"
-  s.add_development_dependency "enju_ndl", "~> 0.1.0.pre6"
+  s.add_development_dependency "enju_ndl", "~> 0.1.0.pre7"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.1.0.pre3"
   s.add_development_dependency "enju_biblio", "~> 0.1.0.pre13"
   s.add_development_dependency "sunspot_solr", "~> 2.0.0.pre.120925"
   s.add_development_dependency "mobile-fu"
   s.add_development_dependency "RedCloth"
+  s.add_development_dependency "simplecov"
 end

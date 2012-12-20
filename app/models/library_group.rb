@@ -4,7 +4,6 @@ class LibraryGroup < ActiveRecord::Base
     :login_banner, :note, :country_id, :admin_networks, :url
 
   #include Singleton
-  #include Configurator
   include MasterModel
 
   has_many :libraries
