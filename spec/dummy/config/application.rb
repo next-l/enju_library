@@ -4,6 +4,8 @@ require 'rails/all'
 
 Bundler.require
 require "enju_library"
+require "enju_event"
+require "enju_inter_library_loan"
 
 module Dummy
   class Application < Rails::Application
