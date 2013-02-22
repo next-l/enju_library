@@ -11,7 +11,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510140958) do
+ActiveRecord::Schema.define(:version => 20121119153944) do
+
+  create_table "accepts", :force => true do |t|
+    t.integer  "basket_id"
+    t.integer  "item_id"
+    t.integer  "librarian_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "accepts", ["basket_id"], :name => "index_accepts_on_basket_id"
+  add_index "accepts", ["item_id"], :name => "index_accepts_on_item_id"
+
+  create_table "baskets", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "note"
+    t.integer  "lock_version", :default => 0, :null => false
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
+
+  add_index "baskets", ["user_id"], :name => "index_baskets_on_user_id"
 
   create_table "bookstores", :force => true do |t|
     t.text     "name",             :null => false
@@ -37,6 +58,46 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
   end
 
   create_table "carrier_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  create_table "checkout_types", :force => true do |t|
+    t.string   "name",         :null => false
+    t.text     "display_name"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "checkout_types", ["name"], :name => "index_checkout_types_on_name"
+
+  create_table "checkouts", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "item_id",                               :null => false
+    t.integer  "checkin_id"
+    t.integer  "librarian_id"
+    t.integer  "basket_id"
+    t.datetime "due_date"
+    t.integer  "checkout_renewal_count", :default => 0, :null => false
+    t.integer  "lock_version",           :default => 0, :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+  end
+
+  add_index "checkouts", ["basket_id"], :name => "index_checkouts_on_basket_id"
+  add_index "checkouts", ["checkin_id"], :name => "index_checkouts_on_checkin_id"
+  add_index "checkouts", ["item_id", "basket_id"], :name => "index_checkouts_on_item_id_and_basket_id", :unique => true
+  add_index "checkouts", ["item_id"], :name => "index_checkouts_on_item_id"
+  add_index "checkouts", ["librarian_id"], :name => "index_checkouts_on_librarian_id"
+  add_index "checkouts", ["user_id"], :name => "index_checkouts_on_user_id"
+
+  create_table "circulation_statuses", :force => true do |t|
     t.string   "name",         :null => false
     t.text     "display_name"
     t.text     "note"
@@ -124,6 +185,7 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
     t.integer  "required_score",              :default => 0,     :null => false
     t.datetime "acquired_at"
     t.integer  "bookstore_id"
+    t.integer  "manifestation_id"
   end
 
   add_index "items", ["bookstore_id"], :name => "index_items_on_bookstore_id"
@@ -578,6 +640,26 @@ ActiveRecord::Schema.define(:version => 20120510140958) do
 
   add_index "subscriptions", ["order_list_id"], :name => "index_subscriptions_on_order_list_id"
   add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
+
+  create_table "user_group_has_checkout_types", :force => true do |t|
+    t.integer  "user_group_id",                                      :null => false
+    t.integer  "checkout_type_id",                                   :null => false
+    t.integer  "checkout_limit",                  :default => 0,     :null => false
+    t.integer  "checkout_period",                 :default => 0,     :null => false
+    t.integer  "checkout_renewal_limit",          :default => 0,     :null => false
+    t.integer  "reservation_limit",               :default => 0,     :null => false
+    t.integer  "reservation_expired_period",      :default => 7,     :null => false
+    t.boolean  "set_due_date_before_closing_day", :default => false, :null => false
+    t.datetime "fixed_due_date"
+    t.text     "note"
+    t.integer  "position"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
+    t.integer  "current_checkout_count"
+  end
+
+  add_index "user_group_has_checkout_types", ["checkout_type_id"], :name => "index_user_group_has_checkout_types_on_checkout_type_id"
+  add_index "user_group_has_checkout_types", ["user_group_id"], :name => "index_user_group_has_checkout_types_on_user_group_id"
 
   create_table "user_groups", :force => true do |t|
     t.string   "name"

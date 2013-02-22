@@ -1,5 +1,6 @@
 require 'enju_core'
 require 'inherited_resources'
+require 'mobylette'
 require 'geocoder'
 require 'ipaddr'
 

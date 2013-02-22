@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include EnjuBiblio::BiblioHelper
+
   def back_to_index(options = {})
     if options == nil
       options = {}

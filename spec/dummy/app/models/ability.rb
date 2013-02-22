@@ -4,6 +4,7 @@ class Ability
   def initialize(user, ip_address = nil)
     case user.try(:role).try(:name)
     when 'Administrator'
+      can :manage, Accept
       can [:read, :create, :update], Bookstore
       can :manage, BudgetType
       can :destroy, Bookstore do |bookstore|
@@ -28,6 +29,7 @@ class Ability
       can :manage, Subscribe
       can :manage, Subscription
     when 'Librarian'
+      can :manage, Accept
       can :read, Bookstore
       can :read, BudgetType
       can :read, Library
