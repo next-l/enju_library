@@ -59,4 +59,5 @@ end
 require 'enju_biblio'
 require 'enju_circulation'
 require 'enju_manifestation_viewer'
+require 'mobylette'
 require 'RedCloth'
