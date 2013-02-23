@@ -10,8 +10,8 @@ end
 #
 # Table name: bookstores
 #
-#  id               :integer         not null, primary key
-#  name             :text            not null
+#  id               :integer          not null, primary key
+#  name             :text             not null
 #  zip_code         :string(255)
 #  address          :text
 #  note             :text
@@ -20,7 +20,7 @@ end
 #  url              :string(255)
 #  position         :integer
 #  deleted_at       :datetime
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
 

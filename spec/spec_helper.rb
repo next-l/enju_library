@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start 'rails'
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../spec/dummy/config/environment", __FILE__)
@@ -35,8 +38,6 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.extend ControllerMacros, :type => :controller
-
-  config.extend VCR::RSpec::Macros
 
   $original_sunspot_session = Sunspot.session
 

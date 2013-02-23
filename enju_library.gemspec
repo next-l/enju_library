@@ -16,11 +16,10 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"]
 
-  s.add_dependency "rails", "~> 3.2"
-  # s.add_dependency "jquery-rails"
+  s.add_dependency "enju_core", "~> 0.1.1.pre3"
   s.add_dependency "inherited_resources"
   s.add_dependency "geocoder"
-  s.add_dependency "enju_core", "~> 0.1.1.pre"
+  # s.add_dependency "jquery-rails"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "rspec-rails"
@@ -28,8 +27,14 @@ Gem::Specification.new do |s|
   s.add_development_dependency "fakeweb"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "paperclip"
-  s.add_development_dependency "enju_ndl", "~> 0.1.0.pre2"
-  s.add_development_dependency "enju_manifestation_viewer"
-  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre5"
-  s.add_development_dependency "sunspot_solr", "~> 2.0.0.pre.120720"
+  s.add_development_dependency "enju_ndl", "~> 0.1.0.pre8"
+  s.add_development_dependency "enju_manifestation_viewer", "~> 0.1.0.pre3"
+  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre17"
+  s.add_development_dependency "enju_event", "~> 0.1.17.pre6"
+  s.add_development_dependency "enju_circulation", "~> 0.1.0.pre11"
+  s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre5"
+  s.add_development_dependency "sunspot_solr", "~> 2.0.0.pre.130115"
+  s.add_development_dependency "mobylette"
+  s.add_development_dependency "RedCloth"
+  s.add_development_dependency "simplecov"
 end

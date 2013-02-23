@@ -29,8 +29,8 @@ class Library < ActiveRecord::Base
   validates_uniqueness_of :short_display_name, :case_sensitive => false
   validates_uniqueness_of :isil, :allow_blank => true
   validates :display_name, :uniqueness => true
-  validates :name, :format => {:with => /^[a-z][0-9a-z\-_]{1,254}$/}
-  validates :isil, :format => {:with => /^[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}$/}, :allow_blank => true
+  validates :name, :format => {:with => /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
+  validates :isil, :format => {:with => /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/}, :allow_blank => true
   after_validation :geocode, :if => :address_changed?
   after_create :create_shelf
   after_save :clear_all_cache
@@ -99,10 +99,10 @@ end
 #
 # Table name: libraries
 #
-#  id                    :integer         not null, primary key
-#  name                  :string(255)     not null
+#  id                    :integer          not null, primary key
+#  name                  :string(255)      not null
 #  display_name          :text
-#  short_display_name    :string(255)     not null
+#  short_display_name    :string(255)      not null
 #  zip_code              :string(255)
 #  street                :text
 #  locality              :text
@@ -111,18 +111,15 @@ end
 #  telephone_number_2    :string(255)
 #  fax_number            :string(255)
 #  note                  :text
-#  call_number_rows      :integer         default(1), not null
-#  call_number_delimiter :string(255)     default("|"), not null
-#  library_group_id      :integer         default(1), not null
-#  users_count           :integer         default(0), not null
+#  call_number_rows      :integer          default(1), not null
+#  call_number_delimiter :string(255)      default("|"), not null
+#  library_group_id      :integer          default(1), not null
+#  users_count           :integer          default(0), not null
 #  position              :integer
 #  country_id            :integer
-#  created_at            :datetime        not null
-#  updated_at            :datetime        not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #  deleted_at            :datetime
-#  opening_hour          :text
-#  latitude              :float
-#  longitude             :float
 #  isil                  :string(255)
 #
 

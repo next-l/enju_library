@@ -9,7 +9,7 @@ class Shelf < ActiveRecord::Base
   validates_associated :library
   validates_presence_of :library
   validates_uniqueness_of :display_name, :scope => :library_id
-  validates :name, :format => {:with => /^[a-z][0-9a-z\-_]{1,254}$/}
+  validates :name, :format => {:with => /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
 
   acts_as_list :scope => :library
 
@@ -50,16 +50,16 @@ end
 #
 # Table name: shelves
 #
-#  id           :integer         not null, primary key
-#  name         :string(255)     not null
+#  id           :integer          not null, primary key
+#  name         :string(255)      not null
 #  display_name :text
 #  note         :text
-#  library_id   :integer         default(1), not null
-#  items_count  :integer         default(0), not null
+#  library_id   :integer          default(1), not null
+#  items_count  :integer          default(0), not null
 #  position     :integer
-#  created_at   :datetime        not null
-#  updated_at   :datetime        not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #  deleted_at   :datetime
-#  closed       :boolean         default(FALSE), not null
+#  closed       :boolean          default(FALSE), not null
 #
 
