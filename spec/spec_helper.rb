@@ -39,8 +39,6 @@ RSpec.configure do |config|
 
   config.extend ControllerMacros, :type => :controller
 
-  config.extend VCR::RSpec::Macros
-
   $original_sunspot_session = Sunspot.session
 
   config.before do
