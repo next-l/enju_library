@@ -11,6 +11,7 @@ en:
       subscription: Subscription
       request_status_type: Request status type
       request_type: Request type
+      search_engine: Search engine
 
     attributes:
       library:
@@ -82,5 +83,14 @@ en:
       request_type:
         name: Name
         display_name: Display name
+        note: Note
+        position: Position
+      search_engine:
+        name: Name
+        url: URL
+        base_url: Base URL
+        http_method: HTTP method
+        query_param: Query param
+        additional_param: Additional param
         note: Note
         position: Position

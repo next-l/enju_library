@@ -11,6 +11,7 @@ ja:
       subscription: 購読
       request_status_type: 依頼の状態の種類
       request_type: 依頼の種類
+      search_engine: 検索エンジン
 
     attributes:
       library:
@@ -82,5 +83,14 @@ ja:
       request_type:
         name: 名前
         display_name: 表示名
+        note: 注記
+        position: 位置
+      search_engine:
+        name: 名前
+        url: URL
+        base_url: ベースURL
+        http_method: HTTPメソッド
+        query_param: クエリパラメータ
+        additional_param: 追加のパラメータ
         note: 注記
         position: 位置

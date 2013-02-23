@@ -35,8 +35,8 @@
       </td>
     </tr>
   <%- end -%>
-  </table>
-  <%= javascript_tag("$('#accept_item_identifier').focus()") -%>
+</table>
+  <%= javascript_tag("$(function(){$('#accept_item_identifier').focus()})") %>
 
   <%= paginate(@accepts) %>
 </div>
