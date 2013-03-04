@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Library module for Next-L Enju"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["spec/**/*"]
+  s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids}/*"]
 
   s.add_dependency "enju_core", "~> 0.1.1.pre3"
   s.add_dependency "inherited_resources"
@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "paperclip"
   s.add_development_dependency "enju_ndl", "~> 0.1.0.pre8"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.1.0.pre3"
-  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre19"
+  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre20"
   s.add_development_dependency "enju_event", "~> 0.1.17.pre6"
   s.add_development_dependency "enju_circulation", "~> 0.1.0.pre11"
   s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre5"
