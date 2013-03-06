@@ -20,7 +20,7 @@
 
 <div>
   <strong><%= t('activerecord.attributes.library_group.login_banner') -%>:</strong>
-  <%= raw textilize(h(@library_group.login_banner)) -%>
+  <%= markdown_helper(@library_group.login_banner) -%>
 </div>
 
 <% if defined?(EnjuBookmark) %>
