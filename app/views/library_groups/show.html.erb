@@ -18,6 +18,11 @@
   <%= @library_group.email -%>
 </p>
 
+<p>
+  <strong><%= t('activerecord.attributes.library_group.url') -%>:</strong>
+  <%= @library_group.url -%>
+</p>
+
 <div>
   <strong><%= t('activerecord.attributes.library_group.login_banner') -%>:</strong>
   <%= markdown_helper(@library_group.login_banner) -%>
