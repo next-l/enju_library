@@ -51,6 +51,7 @@ en:
         note: Note
         login_banner: Login banner
         post_to_union_catalog: Post to union catalog
+        url: URL
       bookstore:
         name: Name
         zip_code: Zip code

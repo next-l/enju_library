@@ -51,6 +51,7 @@ ja:
         note: 注記
         login_banner: ログイン画面でのメッセージ
         post_to_union_catalog: 総合目録に登録する
+        url: URL
       bookstore:
         name: 名前
         zip_code: 郵便番号
