@@ -1,4 +1,5 @@
 require "enju_library/engine"
+require "enju_library/item"
 
 module EnjuLibrary
   def self.included(base)
