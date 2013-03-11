@@ -1,5 +1,5 @@
 module EnjuLibrary
-  module EnjuItem
+  module LibraryItem
     def self.included(base)
       base.extend ClassMethods
     end

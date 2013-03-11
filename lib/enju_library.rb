@@ -45,4 +45,5 @@ module EnjuLibrary
   end
 end
 
+ActiveRecord::Base.send :include, EnjuLibrary::LibraryItem
 ActionController::Base.send(:include, EnjuLibrary)
