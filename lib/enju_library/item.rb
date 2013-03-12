@@ -21,7 +21,7 @@ module EnjuLibrary
       end
     end
 
-    def InstanceMethods
+    module InstanceMethods
       def shelf_name
         shelf.name
       end
