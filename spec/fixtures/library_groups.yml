@@ -10,6 +10,7 @@ one:
   url: "http://localhost:3000/"
   position: 1
   login_banner: "*Next-L Enju*"
+  admin_networks: 0.0.0.0/0
 
 # == Schema Information
 #

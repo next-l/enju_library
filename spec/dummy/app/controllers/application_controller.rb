@@ -39,9 +39,9 @@ class ApplicationController < ActionController::Base
     raise CanCan::AccessDenied
   end
 
-  def current_ability
-    @current_ability ||= Ability.new(current_user, request.remote_ip)
-  end
+  #def current_ability
+  #  @current_ability ||= Ability.new(current_user, request.remote_ip.split('%')[0])
+  #end
 
   def solr_commit
     Sunspot.commit

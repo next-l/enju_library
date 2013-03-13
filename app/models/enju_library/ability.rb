@@ -6,15 +6,15 @@ module EnjuLibrary
       case user.try(:role).try(:name)
       when 'Administrator'
         can [:read, :create, :update], Bookstore
-        can :destroy, Bookstore do |bookstore|
+        can [:delete, :destroy], Bookstore do |bookstore|
           bookstore.items.empty?
         end
         can [:read, :create, :update], Library
-        can :destroy, Library do |library|
+        can [:delete, :destroy], Library do |library|
           library.shelves.empty? and !library.web?
         end
         can [:read, :create, :update], Shelf
-        can :destroy, Shelf do |shelf|
+        can [:delete, :destroy], Shelf do |shelf|
           shelf.items.empty?
         end
         can :manage, [
