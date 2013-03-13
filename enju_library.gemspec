@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids}/*"]
 
-  s.add_dependency "rails", "~> 3.2.13.rc1"
+  s.add_dependency "rails", "~> 3.2.13.rc2"
   s.add_dependency "enju_core", "~> 0.1.1.pre3"
   s.add_dependency "inherited_resources"
   s.add_dependency "geocoder"
@@ -28,10 +28,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency "fakeweb"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "paperclip"
-  s.add_development_dependency "enju_ndl", "~> 0.1.0.pre9"
+  s.add_development_dependency "enju_ndl", "~> 0.1.0.pre10"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.1.0.pre3"
   s.add_development_dependency "enju_biblio", "~> 0.1.0.pre23"
-  s.add_development_dependency "enju_event", "~> 0.1.17.pre6"
+  s.add_development_dependency "enju_event", "~> 0.1.17.pre7"
   s.add_development_dependency "enju_circulation", "~> 0.1.0.pre14"
   s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre6"
   s.add_development_dependency "sunspot_solr", "~> 2.0.0"
