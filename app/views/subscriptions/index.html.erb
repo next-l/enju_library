@@ -14,7 +14,7 @@
     <td><%= link_to subscription.title, subscription -%></td>
     <td><%= subscription.works.size -%></td>
     <td>
-      <% if can? :destroy, subscription %>
+      <% if can? :delete, subscription %>
         <%= link_to t('page.edit'), edit_subscription_path(subscription) -%>
         <%= link_to t('page.destroy'), subscription, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
       <% end %>

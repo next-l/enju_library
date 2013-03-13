@@ -51,7 +51,7 @@
       <%- if can? :update, shelf -%>
         <%= link_to t('page.edit'), edit_shelf_path(shelf) -%>
       <% end %>
-      <%- if can? :destroy, shelf -%>
+      <%- if can? :delete, shelf -%>
         <%= link_to t('page.destroy'), shelf, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
       <%- end -%>
     </td>
