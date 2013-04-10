@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "paperclip"
   s.add_development_dependency "enju_ndl", "~> 0.1.0.pre10"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.1.0.pre4"
-  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre26"
+  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre28"
   s.add_development_dependency "enju_event", "~> 0.1.17.pre7"
   s.add_development_dependency "enju_circulation", "~> 0.1.0.pre16"
   s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre6"
