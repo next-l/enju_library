@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121119153944) do
+ActiveRecord::Schema.define(:version => 20130416054135) do
 
   create_table "accepts", :force => true do |t|
     t.integer  "basket_id"
@@ -166,8 +166,6 @@ ActiveRecord::Schema.define(:version => 20121119153944) do
   create_table "items", :force => true do |t|
     t.string   "call_number"
     t.string   "item_identifier"
-    t.integer  "circulation_status_id",       :default => 5,     :null => false
-    t.integer  "checkout_type_id",            :default => 1,     :null => false
     t.datetime "created_at",                                     :null => false
     t.datetime "updated_at",                                     :null => false
     t.datetime "deleted_at"
@@ -186,6 +184,8 @@ ActiveRecord::Schema.define(:version => 20121119153944) do
     t.datetime "acquired_at"
     t.integer  "bookstore_id"
     t.integer  "manifestation_id"
+    t.integer  "circulation_status_id",       :default => 5,     :null => false
+    t.integer  "checkout_type_id",            :default => 1,     :null => false
   end
 
   add_index "items", ["bookstore_id"], :name => "index_items_on_bookstore_id"
@@ -232,7 +232,10 @@ ActiveRecord::Schema.define(:version => 20121119153944) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.datetime "deleted_at"
+    t.text     "opening_hour"
     t.string   "isil"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "libraries", ["library_group_id"], :name => "index_libraries_on_library_group_id"
