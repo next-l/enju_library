@@ -37,4 +37,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "mobylette"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "redcarpet"
+  s.add_development_dependency "sunspot-rails-tester"
 end
