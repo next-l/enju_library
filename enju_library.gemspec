@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.1.0.pre7"
   s.add_development_dependency "enju_biblio", "~> 0.1.0.pre33"
   s.add_development_dependency "enju_event", "~> 0.1.17.pre12"
-  s.add_development_dependency "enju_circulation", "~> 0.1.0.pre21"
+  s.add_development_dependency "enju_circulation", "~> 0.1.0.pre23"
   s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre7"
   s.add_development_dependency "sunspot_solr", "~> 2.0.0"
   s.add_development_dependency "mobylette"
