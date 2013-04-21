@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130416054135) do
+ActiveRecord::Schema.define(:version => 20130421164124) do
 
   create_table "accepts", :force => true do |t|
     t.integer  "basket_id"
@@ -338,6 +338,7 @@ ActiveRecord::Schema.define(:version => 20130416054135) do
     t.integer  "volume_number"
     t.integer  "issue_number"
     t.integer  "serial_number"
+    t.boolean  "periodical"
   end
 
   add_index "manifestations", ["access_address"], :name => "index_manifestations_on_access_address"
@@ -588,19 +589,23 @@ ActiveRecord::Schema.define(:version => 20130416054135) do
     t.text     "title_subseries"
     t.text     "numbering_subseries"
     t.integer  "position"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.text     "title_transcription"
     t.text     "title_alternative"
     t.string   "series_statement_identifier"
     t.string   "issn"
     t.boolean  "periodical"
-    t.integer  "root_manifestation_id"
+    t.integer  "manifestation_id"
     t.text     "note"
     t.text     "title_subseries_transcription"
+    t.text     "creator_string"
+    t.text     "volume_number_string"
+    t.text     "volume_number_transcription_string"
+    t.boolean  "series_master"
   end
 
-  add_index "series_statements", ["root_manifestation_id"], :name => "index_series_statements_on_manifestation_id"
+  add_index "series_statements", ["manifestation_id"], :name => "index_series_statements_on_manifestation_id"
   add_index "series_statements", ["series_statement_identifier"], :name => "index_series_statements_on_series_statement_identifier"
 
   create_table "shelves", :force => true do |t|
