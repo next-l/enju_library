@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421164124) do
+ActiveRecord::Schema.define(:version => 20130429020822) do
 
   create_table "accepts", :force => true do |t|
     t.integer  "basket_id"
@@ -183,7 +183,6 @@ ActiveRecord::Schema.define(:version => 20130421164124) do
     t.integer  "required_score",              :default => 0,     :null => false
     t.datetime "acquired_at"
     t.integer  "bookstore_id"
-    t.integer  "manifestation_id"
     t.integer  "circulation_status_id",       :default => 5,     :null => false
     t.integer  "checkout_type_id",            :default => 1,     :null => false
   end
@@ -556,17 +555,6 @@ ActiveRecord::Schema.define(:version => 20130421164124) do
     t.datetime "updated_at",       :null => false
   end
 
-  create_table "series_has_manifestations", :force => true do |t|
-    t.integer  "series_statement_id"
-    t.integer  "manifestation_id"
-    t.integer  "position"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "series_has_manifestations", ["manifestation_id"], :name => "index_series_has_manifestations_on_manifestation_id"
-  add_index "series_has_manifestations", ["series_statement_id"], :name => "index_series_has_manifestations_on_series_statement_id"
-
   create_table "series_statement_merge_lists", :force => true do |t|
     t.string   "title"
     t.datetime "created_at", :null => false
@@ -603,9 +591,11 @@ ActiveRecord::Schema.define(:version => 20130421164124) do
     t.text     "volume_number_string"
     t.text     "volume_number_transcription_string"
     t.boolean  "series_master"
+    t.integer  "root_manifestation_id"
   end
 
   add_index "series_statements", ["manifestation_id"], :name => "index_series_statements_on_manifestation_id"
+  add_index "series_statements", ["root_manifestation_id"], :name => "index_series_statements_on_root_manifestation_id"
   add_index "series_statements", ["series_statement_identifier"], :name => "index_series_statements_on_series_statement_identifier"
 
   create_table "shelves", :force => true do |t|
