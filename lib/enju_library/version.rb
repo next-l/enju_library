@@ -1,3 +1,3 @@
 module EnjuLibrary
-  VERSION = "0.1.0.pre22"
+  VERSION = "0.1.0.pre23"
 end
