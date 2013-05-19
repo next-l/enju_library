@@ -39,6 +39,9 @@ end
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  deleted_at            :datetime
+#  opening_hour          :text
 #  isil                  :string(255)
+#  latitude              :float
+#  longitude             :float
 #
 
