@@ -66,11 +66,6 @@ describe AcceptsController do
         get :show, :id => accept.id
         assigns(:accept).should eq(accept)
       end
-
-      it "should not show missing accept" do
-        get :show, :id => 'missing'
-        response.should be_missing
-      end
     end
 
     describe "When logged in as Librarian" do
@@ -256,11 +251,6 @@ describe AcceptsController do
       it "redirects to the accepts list" do
         delete :destroy, :id => @accept.id
         response.should redirect_to(accepts_url)
-      end
-
-      it "should not destroy missing accept" do
-        delete :destroy, :id => 'missing'
-        response.should be_missing
       end
     end
 

@@ -4,8 +4,6 @@ require 'rails/all'
 
 Bundler.require
 require "enju_library"
-require "enju_event"
-require "enju_inter_library_loan"
 
 module Dummy
   class Application < Rails::Application
@@ -56,8 +54,8 @@ module Dummy
   end
 end
 
+require 'enju_leaf'
 require 'enju_biblio'
 require 'enju_circulation'
-require 'enju_manifestation_viewer'
-require 'mobylette'
-require 'redcarpet'
+require "enju_event"
+require "enju_inter_library_loan"

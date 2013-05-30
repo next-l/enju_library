@@ -57,12 +57,6 @@ describe LibrariesController do
         get :show, :id => 1
         assigns(:library).should eq(libraries(:library_00001))
       end
-
-      it "assigns nil as @library if id is missing" do
-        get :show, :id => 'missing'
-        assigns(:library).should be_nil
-        response.should be_missing
-      end
     end
 
     describe "When logged in as Librarian" do

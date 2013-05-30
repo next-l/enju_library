@@ -12,6 +12,6 @@ class SearchEnginesController < InheritedResources::Base
   end
 
   def index
-    @search_engines = @search_engines.page(params[:page])
+    @search_engines = SearchEngine.page(params[:page])
   end
 end
