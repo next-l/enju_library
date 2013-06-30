@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  has_one :patron
+  #has_one :agent
   has_one :user_has_role
   has_one :role, :through => :user_has_role
   belongs_to :user_group
@@ -76,19 +76,14 @@ class User < ActiveRecord::Base
     end
   end
 
-  if defined?(EnjuMessage)
-    has_many :sent_messages, :foreign_key => 'sender_id', :class_name => 'Message'
-    has_many :received_messages, :foreign_key => 'receiver_id', :class_name => 'Message'
+  enju_bookmark_user_model if defined?(EnjuBookmark)
+  enju_message_user_model if defined?(EnjuBookmark)
 
-    def send_message(status, options = {})
-      MessageRequest.transaction do
-        request = MessageRequest.new
-        request.sender = User.find(1)
-        request.receiver = self
-        request.message_template = MessageTemplate.localized_template(status, self.locale)
-        request.save_message_body(options)
-        request.sm_send_message!
-      end
-    end
+  def agent
+    LocalAgent.new(self)
+  end
+
+  def full_name
+    username
   end
 end

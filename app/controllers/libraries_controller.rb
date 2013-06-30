@@ -70,7 +70,6 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
-    #patron = Patron.create(:name => params[:library][:name], :patron_type => 'CorporateBody')
     @library = Library.new(params[:library])
 
     respond_to do |format|

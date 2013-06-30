@@ -184,7 +184,7 @@ describe SubscribesController do
           assigns(:subscribe).should be_valid
         end
 
-        it "redirects to the created patron" do
+        it "redirects to the created agent" do
           post :create, :subscribe => @attrs
           response.should redirect_to(assigns(:subscribe))
         end
@@ -212,7 +212,7 @@ describe SubscribesController do
           assigns(:subscribe).should be_valid
         end
 
-        it "redirects to the created patron" do
+        it "redirects to the created agent" do
           post :create, :subscribe => @attrs
           response.should redirect_to(assigns(:subscribe))
         end
