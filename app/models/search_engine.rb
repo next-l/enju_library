@@ -1,7 +1,7 @@
 class SearchEngine < ActiveRecord::Base
   attr_accessible :name, :display_name, :url, :base_url, :http_method,
     :query_param, :additional_param, :note
-  default_scope :order => "search_engines.position"
+  default_scope {order("search_engines.position")}
   acts_as_list
 
   validates :name, :presence => true
