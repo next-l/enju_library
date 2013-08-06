@@ -20,11 +20,11 @@ module EnjuLibrary
     end
 
     def get_shelf
-      @shelf = Shelf.find(params[:shelf_id], :include => :library) if params[:shelf_id]
+      @shelf = Shelf.includes(:library).find(params[:shelf_id]) if params[:shelf_id]
     end
 
     def get_library
-      @library = Library.find(params[:library_id]) if params[:library_id]
+      @library = Library.friendly.find(params[:library_id]) if params[:library_id]
     end
 
     def get_libraries

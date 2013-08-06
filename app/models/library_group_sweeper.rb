@@ -4,6 +4,7 @@ class LibraryGroupSweeper < ActionController::Caching::Sweeper
     I18n.available_locales.each do |locale|
       expire_fragment(:controller => 'page', :action => 'advanced_search', :locale => locale)
     end
+    expire_page '/page/opensearch'
   end
 
   def after_destroy(record)

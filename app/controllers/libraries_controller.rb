@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 class LibrariesController < ApplicationController
+  before_action :set_library, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
-  after_filter :solr_commit, :only => [:create, :update, :destroy]
+  after_action :solr_commit, :only => [:create, :update, :destroy]
 
   # GET /libraries
   # GET /libraries.json
@@ -117,6 +118,11 @@ class LibrariesController < ApplicationController
   end
 
   private
+
+  def set_library
+    @library = Library.friendly.find(params[:id])
+  end
+
   def prepare_options
     @library_groups = LibraryGroup.all
     @countries = Country.all_cache

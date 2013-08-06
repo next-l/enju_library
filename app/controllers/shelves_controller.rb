@@ -1,7 +1,7 @@
 class ShelvesController < ApplicationController
   load_and_authorize_resource
-  before_filter :get_library
-  before_filter :get_libraries, :only => [:new, :edit, :create, :update]
+  before_action :get_library
+  before_action :get_libraries, :only => [:new, :edit, :create, :update]
 
   # GET /shelves
   # GET /shelves.json
@@ -50,7 +50,7 @@ class ShelvesController < ApplicationController
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-    @shelf = Shelf.find(params[:id], :include => :library)
+    @shelf = Shelf.includes(:library).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -75,7 +75,7 @@ class ShelvesController < ApplicationController
 
   # GET /shelves/1/edit
   def edit
-    @shelf = Shelf.find(params[:id], :include => :library)
+    @shelf = Shelf.includes(:library).find(params[:id])
   end
 
   # POST /shelves

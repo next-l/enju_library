@@ -1,6 +1,6 @@
 class SubscribesController < ApplicationController
   load_and_authorize_resource
-  before_filter :get_subscription, :get_work
+  before_action :get_subscription, :get_work
 
   # GET /subscribes
   # GET /subscribes.json

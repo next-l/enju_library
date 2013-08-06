@@ -2,7 +2,7 @@ class AcceptsController < InheritedResources::Base
   load_and_authorize_resource :except => :index
   authorize_resource :only => :index
   respond_to :html, :json
-  before_filter :get_basket, :only => [:index, :create]
+  before_action :get_basket, :only => [:index, :create]
 
   # GET /accepts
   # GET /accepts.json
