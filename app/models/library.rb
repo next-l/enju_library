@@ -6,8 +6,8 @@ class Library < ActiveRecord::Base
     :country_id, :opening_hour, :isil, :position
 
   include MasterModel
-  default_scope :order => 'libraries.position'
-  scope :real, where('id != 1')
+  default_scope {order('libraries.position')}
+  scope :real, -> {where('id != 1')}
   has_many :shelves, :order => 'shelves.position'
   belongs_to :library_group, :validate => true
   has_many :users
