@@ -21,7 +21,6 @@ gem "enju_circulation", github: "next-l/enju_circulation", branch: "rails4"
 gem "enju_event", github: "next-l/enju_event", branch: "rails4"
 gem "enju_message", github: "next-l/enju_message", branch: "rails4"
 gem "paper_trail", github: "airblade/paper_trail", branch: "rails4"
-gem "acts_as_list", github: "swanandp/acts_as_list"
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
