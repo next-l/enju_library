@@ -8,7 +8,7 @@ class Library < ActiveRecord::Base
   include MasterModel
   default_scope {order('libraries.position')}
   scope :real, -> {where('id != 1')}
-  has_many :shelves, :order => 'shelves.position'
+  has_many :shelves, -> {order('shelves.position')}
   belongs_to :library_group, :validate => true
   has_many :users
   belongs_to :country
@@ -83,7 +83,7 @@ class Library < ActiveRecord::Base
   end
 
   if defined?(EnjuEvent)
-    has_many :events, :include => :event_category
+    has_many :events, -> {includes(:event_category)}
 
     def closed?(date)
       events.closing_days.collect{|c| c.start_at.beginning_of_day}.include?(date.beginning_of_day)
