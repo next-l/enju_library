@@ -1,6 +1,8 @@
 class BasketsController < ApplicationController
   load_and_authorize_resource
-  cache_sweeper :circulation_sweeper, :only => [:create, :update, :destroy]
+  if defined?(EnjuCirculation)
+    cache_sweeper :circulation_sweeper, :only => [:create, :update, :destroy]
+  end
 
   # GET /baskets
   # GET /baskets.json
