@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   #s.add_development_dependency "enju_biblio", "~> 0.1.0.pre43"
   #s.add_development_dependency "enju_event", "~> 0.1.17.pre13"
   #s.add_development_dependency "enju_circulation", "~> 0.1.0.pre30"
-  s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre7"
+  #s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre7"
   #s.add_development_dependency "sunspot_solr", "~> 2.0.0"
   s.add_development_dependency "mobylette"
   s.add_development_dependency "simplecov"
