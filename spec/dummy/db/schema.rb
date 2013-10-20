@@ -403,6 +403,7 @@ ActiveRecord::Schema.define(version: 20130519065837) do
   add_index "item_has_use_restrictions", ["use_restriction_id"], name: "index_item_has_use_restrictions_on_use_restriction_id"
 
   create_table "items", force: true do |t|
+    t.integer  "manifestation_id"
     t.string   "call_number"
     t.string   "item_identifier"
     t.datetime "created_at"
@@ -430,6 +431,7 @@ ActiveRecord::Schema.define(version: 20130519065837) do
   add_index "items", ["checkout_type_id"], name: "index_items_on_checkout_type_id"
   add_index "items", ["circulation_status_id"], name: "index_items_on_circulation_status_id"
   add_index "items", ["item_identifier"], name: "index_items_on_item_identifier"
+  add_index "items", ["manifestation_id"], name: "index_items_on_manifestation_id"
   add_index "items", ["required_role_id"], name: "index_items_on_required_role_id"
   add_index "items", ["shelf_id"], name: "index_items_on_shelf_id"
 
@@ -617,8 +619,8 @@ ActiveRecord::Schema.define(version: 20130519065837) do
     t.integer  "volume_number"
     t.integer  "issue_number"
     t.integer  "serial_number"
-    t.boolean  "periodical"
     t.string   "doi"
+    t.boolean  "periodical"
     t.text     "statement_of_responsibility"
   end
 
