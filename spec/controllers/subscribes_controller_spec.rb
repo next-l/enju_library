@@ -17,7 +17,7 @@ describe SubscribesController do
 
       it "assigns all subscribes as @subscribes" do
         get :index
-        assigns(:subscribes).should eq(Subscribe.all)
+        assigns(:subscribes).should eq(Subscribe.page(1))
       end
     end
 
@@ -26,7 +26,7 @@ describe SubscribesController do
 
       it "assigns all subscribes as @subscribes" do
         get :index
-        assigns(:subscribes).should eq(Subscribe.all)
+        assigns(:subscribes).should eq(Subscribe.page(1))
       end
     end
 
@@ -35,7 +35,7 @@ describe SubscribesController do
 
       it "should be forbidden" do
         get :index
-        assigns(:subscribes).should be_empty
+        assigns(:subscribes).should be_nil
         response.should be_forbidden
       end
     end
@@ -43,7 +43,7 @@ describe SubscribesController do
     describe "When not logged in" do
       it "assigns all subscribes as @subscribes" do
         get :index
-        assigns(:subscribes).should be_empty
+        assigns(:subscribes).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end

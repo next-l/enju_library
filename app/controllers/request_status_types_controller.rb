@@ -1,6 +1,7 @@
 class RequestStatusTypesController < InheritedResources::Base
   respond_to :html, :json
-  load_and_authorize_resource
+  load_and_authorize_resource :except => :index
+  authorize_resource :only => :index
 
   def update
     @request_status_type = RequestStatusType.find(params[:id])

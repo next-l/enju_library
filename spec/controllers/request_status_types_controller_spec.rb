@@ -37,7 +37,7 @@ describe RequestStatusTypesController do
 
       it "should not assign request_status_types as @request_status_types" do
         get :index
-        assigns(:request_status_types).should be_empty
+        assigns(:request_status_types).should be_nil
         response.should be_forbidden
       end
     end
@@ -45,7 +45,7 @@ describe RequestStatusTypesController do
     describe "When not logged in" do
       it "should not assign request_status_types as @request_status_types" do
         get :index
-        assigns(:request_status_types).should be_empty
+        assigns(:request_status_types).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
