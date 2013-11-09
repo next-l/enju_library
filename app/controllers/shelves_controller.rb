@@ -126,9 +126,8 @@ class ShelvesController < ApplicationController
   # DELETE /shelves/1
   # DELETE /shelves/1.json
   def destroy
-    if @shelf.id == 1
-      access_denied; return
-    end
+    @shelf.picture_files.destroy_all
+    @shelf.reload
     @shelf.destroy
 
     respond_to do |format|
