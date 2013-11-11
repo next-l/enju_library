@@ -1,3 +1,4 @@
+require 'enju_core'
 require 'inherited_resources'
 require 'geocoder'
 require 'ipaddr'
