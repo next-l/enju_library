@@ -14,7 +14,7 @@ gem "jquery-rails"
 # your gem to rubygems.org.
 gem "enju_seed", github: "next-l/enju_seed", branch: "rails4"
 gem "enju_biblio", github: "next-l/enju_biblio", branch: "rails4"
-gem "enju_leaf", github: "nabeta/enju_leaf", branch: "master"
+gem "enju_leaf", github: "next-l/enju_leaf", branch: "master"
 gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer", branch: "rails4"
 gem "enju_ndl", github: "next-l/enju_ndl", branch: "rails4"
 gem "enju_circulation", github: "next-l/enju_circulation", branch: "rails4"
