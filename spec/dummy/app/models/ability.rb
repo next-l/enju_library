@@ -2,7 +2,7 @@
   class Ability
     include CanCan::Ability
   
-    def initialize(user)
+    def initialize(user, ip_address = nil)
       case user.try(:role).try(:name)
       when 'Administrator'
         can [:read, :create, :update], Bookstore
@@ -15,7 +15,7 @@
         end
         can [:read, :create, :update], Shelf
         can [:delete, :destroy], Shelf do |shelf|
-          shelf.items.empty?
+          shelf.items.empty? and !shelf.web_shelf?
         end
         can :manage, [
           Accept,
@@ -28,7 +28,7 @@
           LibraryGroup,
           RequestStatusType,
           RequestType
-        ]
+        ] if LibraryGroup.site_config.network_access_allowed?(ip_address)
         can :read, [
           LibraryGroup,
           RequestStatusType,
