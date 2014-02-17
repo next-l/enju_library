@@ -28,7 +28,7 @@ module EnjuLibrary
           LibraryGroup,
           RequestStatusType,
           RequestType
-        ] if LibraryGroup.site_config.network_access_allowed?(ip_address)
+        ] if LibraryGroup.site_config.network_access_allowed?(ip_address, :network_type => :admin)
         can :read, [
           LibraryGroup,
           RequestStatusType,
