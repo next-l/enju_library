@@ -31,10 +31,6 @@ module EnjuLibrary
       @libraries = Library.all_cache
     end
 
-    def get_library_group
-      @library_group = LibraryGroup.site_config
-    end
-
     def get_bookstore
       @bookstore = Bookstore.find(params[:bookstore_id]) if params[:bookstore_id]
     end
