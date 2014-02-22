@@ -32,7 +32,9 @@
         <li><a href="#tab2"><em><%= t('library.staff') -%></em></a></li>
         <li><a href="#tab3"><em><%= t('activerecord.models.shelf') -%></em></a></li>
         <% if defined?(EnjuEvent) %>
+          <!--
           <li><a href="#tab4"><em><%= t('activerecord.models.event') -%></em></a></li>
+          -->
         <% end %>
         <%- if can? :update, @library -%>
           <li><a href="#tab5"><em><%= t('page.configuration') -%></em></a></li>
@@ -83,14 +85,15 @@
         </table>
       </div>
 
+      <!--
       <% if defined?(EnjuEvent) %>
         <div id="tab4">
           <h3><%= link_to t('activerecord.models.event'), library_events_path(@library) -%></h3>
           <div id="library_calendar" style="text-align:left">
-            <%= render 'calendar' -%>
           </div>
         </div>
       <% end %>
+      -->
 
       <%- if can? :update, @library -%>
         <div id="tab5">
