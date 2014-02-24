@@ -1,7 +1,7 @@
 class BudgetTypesController < InheritedResources::Base
   respond_to :html, :json
-  load_and_authorize_resource :except => :index
-  authorize_resource :only => :index
+  load_and_authorize_resource :except => [:index, :create]
+  authorize_resource :only => [:index, :create]
 
   def index
     @budget_types = BudgetType.order(:position)
@@ -14,5 +14,12 @@ class BudgetTypesController < InheritedResources::Base
       return
     end
     update!
+  end
+
+  private
+  def budget_type_params
+    params.require(:budget_type).permit(
+      :name, :display_name, :note
+    )
   end
 end

@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource except: [:index, :create]
+  authorize_resource only: [:index, :create]
   after_action :solr_commit, :only => [:create, :update, :destroy]
 
   # GET /libraries
@@ -71,7 +72,7 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
-    @library = Library.new(params[:library])
+    @library = Library.new(library_params)
 
     respond_to do |format|
       if @library.save
@@ -94,7 +95,7 @@ class LibrariesController < ApplicationController
     end
 
     respond_to do |format|
-      if @library.update_attributes(params[:library])
+      if @library.update_attributes(library_params)
         format.html { redirect_to @library, :notice => t('controller.successfully_updated', :model => t('activerecord.models.library')) }
         format.json { head :no_content }
       else
@@ -126,5 +127,14 @@ class LibrariesController < ApplicationController
   def prepare_options
     @library_groups = LibraryGroup.all
     @countries = Country.all_cache
+  end
+
+  def library_params
+    params.require(:library).permit(
+      :name, :display_name, :short_display_name, :zip_code, :street,
+      :locality, :region, :telephone_number_1, :telephone_number_2, :fax_number,
+      :note, :call_number_rows, :call_number_delimiter, :library_group_id,
+      :country_id, :opening_hour, :isil, :position
+    )
   end
 end

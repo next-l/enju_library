@@ -1,5 +1,5 @@
 class BudgetType < ActiveRecord::Base
-  attr_accessible :name, :display_name, :note, :position
+  #attr_accessible :name, :display_name, :note, :position
   include MasterModel
   default_scope {order('budget_types.position')}
   has_many :items

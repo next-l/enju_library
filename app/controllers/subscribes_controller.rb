@@ -1,6 +1,6 @@
 class SubscribesController < ApplicationController
-  load_and_authorize_resource :except => :index
-  authorize_resource :only => :index
+  load_and_authorize_resource :except => [:index, :create]
+  authorize_resource :only => [:index, :create]
   before_action :get_subscription, :get_work
 
   # GET /subscribes
@@ -43,7 +43,7 @@ class SubscribesController < ApplicationController
   # POST /subscribes
   # POST /subscribes.json
   def create
-    @subscribe = Subscribe.new(params[:subscribe])
+    @subscribe = Subscribe.new(subscribe_params)
 
     respond_to do |format|
       if @subscribe.save
@@ -60,7 +60,7 @@ class SubscribesController < ApplicationController
   # PUT /subscribes/1.json
   def update
     respond_to do |format|
-      if @subscribe.update_attributes(params[:subscribe])
+      if @subscribe.update_attributes(subscribe_params)
         format.html { redirect_to @subscribe, :notice => t('controller.successfully_updated', :model => t('activerecord.models.subscribe')) }
         format.json { head :no_content }
       else
@@ -79,5 +79,12 @@ class SubscribesController < ApplicationController
       format.html { redirect_to subscribes_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def subscribe_params
+    params.require(:subscribe).permit(
+      :subscription_id, :work_id, :start_at, :end_at
+    )
   end
 end

@@ -1,5 +1,6 @@
 class SubscriptionsController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource except: :create
+  authorize_resource only: :create
   before_action :get_work
   after_action :solr_commit, :only => [:create, :update, :destroy]
 
@@ -45,7 +46,7 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    @subscription = Subscription.new(params[:subscription])
+    @subscription = Subscription.new(subscription_params)
     @subscription.user = current_user
 
     respond_to do |format|
@@ -62,7 +63,7 @@ class SubscriptionsController < ApplicationController
   # PUT /subscriptions/1
   # PUT /subscriptions/1.json
   def update
-    @subscription.assign_attributes(params[:subscription])
+    @subscription.assign_attributes(subscription_params)
     respond_to do |format|
       if @subscription.save
         format.html { redirect_to @subscription, :notice => t('controller.successfully_updated', :model => t('activerecord.models.subscription')) }
@@ -83,5 +84,12 @@ class SubscriptionsController < ApplicationController
       format.html { redirect_to subscriptions_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def subscription_params
+    params.require(:subscription).permit(
+      :title, :note, :order_list_id, :user_id
+    )
   end
 end

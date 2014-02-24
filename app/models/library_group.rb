@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
 class LibraryGroup < ActiveRecord::Base
-  attr_accessible :name, :display_name, :short_name, :email, :my_networks,
-    :login_banner, :note, :country_id, :admin_networks, :url
-
   #include Singleton
   include MasterModel
 

@@ -1,5 +1,4 @@
 class Subscribe < ActiveRecord::Base
-  attr_accessible :subscription_id, :work_id, :start_at, :end_at
   belongs_to :subscription, :counter_cache => true, :validate => true
   belongs_to :work, :class_name => 'Manifestation', :validate => true
 

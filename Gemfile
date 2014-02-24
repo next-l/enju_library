@@ -20,7 +20,6 @@ gem "enju_circulation", github: "next-l/enju_circulation", branch: "rails4"
 gem "enju_event", github: "next-l/enju_event", branch: "rails4"
 gem "enju_message", github: "next-l/enju_message", branch: "rails4"
 gem "enju_inter_library_loan", github: "next-l/enju_inter_library_loan", branch: "rails4"
-gem "protected_attributes", github: "rails/protected_attributes"
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'

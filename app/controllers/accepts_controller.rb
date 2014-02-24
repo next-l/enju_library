@@ -80,4 +80,10 @@ class AcceptsController < InheritedResources::Base
       end
     end
   end
+
+  def accept_params
+    params.require(:accept).permit(
+      :item_identifier, :librarian_id, :item_id
+    )
+  end
 end
