@@ -13,9 +13,9 @@ class RequestTypesController < InheritedResources::Base
   end
 
   private
-  def request_type_params
-    params.require(:request_type).permit(
-      :name, :display_name, :note
+  def permitted_params
+    params.permit(
+      :request_type => [:name, :display_name, :note]
     )
   end
 end

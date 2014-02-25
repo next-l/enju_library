@@ -13,9 +13,9 @@ class RequestStatusTypesController < InheritedResources::Base
   end
 
   private
-  def request_status_type_params
-    params.require(:request_status_type).permit(
-      :name, :display_name, :note
+  def permitted_params
+    params.permit(
+      :request_status_type => [:name, :display_name, :note]
     )
   end
 end

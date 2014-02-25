@@ -1,6 +1,6 @@
 class AcceptsController < InheritedResources::Base
-  load_and_authorize_resource :except => :index
-  authorize_resource :only => :index
+  load_and_authorize_resource :except => [:index, :create]
+  authorize_resource :only => [:index, :create]
   respond_to :html, :json
   before_action :get_basket, :only => [:index, :create]
 
@@ -81,9 +81,9 @@ class AcceptsController < InheritedResources::Base
     end
   end
 
-  def accept_params
-    params.require(:accept).permit(
-      :item_identifier, :librarian_id, :item_id
+  def permitted_params
+    params.permit(
+      :accept => [:item_identifier, :librarian_id, :item_id]
     )
   end
 end

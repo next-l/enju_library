@@ -17,9 +17,7 @@ class BookstoresController < InheritedResources::Base
   end
 
   private
-  def bookstore_params
-    params.require(:bookstore).permit(
-      :name, :display_name, :note
-    )
+  def permitted_params
+    params.permit(:bookstore => [:name, :display_name, :note])
   end
 end

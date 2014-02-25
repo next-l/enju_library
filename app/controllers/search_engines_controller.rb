@@ -17,10 +17,11 @@ class SearchEnginesController < InheritedResources::Base
   end
 
   private
-  def search_engine_params
-    params.require(:search_engine).permit(
-      :name, :display_name, :url, :base_url, :http_method,
-      :query_param, :additional_param, :note
+  def permitted_params
+    params.permit(:search_engine => [
+        :name, :display_name, :url, :base_url, :http_method,
+        :query_param, :additional_param, :note
+      ]
     )
   end
 end

@@ -17,9 +17,9 @@ class BudgetTypesController < InheritedResources::Base
   end
 
   private
-  def budget_type_params
-    params.require(:budget_type).permit(
-      :name, :display_name, :note
+  def permitted_params
+    params.permit(
+      :budget_type => [:name, :display_name, :note]
     )
   end
 end
