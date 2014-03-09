@@ -1,12 +1,12 @@
-class AcceptsController < InheritedResources::Base
-  load_and_authorize_resource :except => [:index, :create]
-  authorize_resource :only => [:index, :create]
-  respond_to :html, :json
+class AcceptsController < ApplicationController
+  before_action :set_accept, only: [:show, :edit, :update, :destroy]
   before_action :get_basket, :only => [:index, :create]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
 
   # GET /accepts
-  # GET /accepts.json
   def index
+    authorize Accept
     if params[:format] == 'csv'
       @accepts = Accept.order('accepts.created_at DESC').page(params[:page]).per(65534)
     else
@@ -25,38 +25,35 @@ class AcceptsController < InheritedResources::Base
         end
       end
     end
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @accepts }
-      format.js { @accept = Accept.new }
-      format.csv
-    end
   end
 
-  # GET /new
-  # GET /new.json
+  # GET /accepts/1
+  def show
+  end
+
+  # GET /accepts/new
   def new
+    @accept = Accept.new
+    authorize @accept
     @basket = Basket.new
     @basket.user = current_user
     @basket.save!
-    @accept = Accept.new
     @accepts = []
+  end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render :json => @accept }
-    end
+  # GET /accepts/1/edit
+  def edit
   end
 
   # POST /accepts
-  # POST /accepts.json
   def create
     unless @basket
       access_denied; return
     end
+    @accept = Accept.new(accept_params)
     @accept.basket = @basket
     @accept.librarian = current_user
+    authorize @accept
 
     flash[:message] = ''
     if @accept.item_identifier.blank?
@@ -69,7 +66,7 @@ class AcceptsController < InheritedResources::Base
     respond_to do |format|
       if @accept.save
         flash[:message] << t('accept.successfully_accepted', :model => t('activerecord.models.accept'))
-        format.html { redirect_to basket_accepts_url(@basket) }
+        format.html {redirect_to basket_accepts_url(@basket), notice: 'Accept was successfully created.'}
         format.json { render :json => @accept, :status => :created, :location => @accept }
         format.js { redirect_to basket_accepts_url(@basket, :format => :js) }
       else
@@ -81,9 +78,30 @@ class AcceptsController < InheritedResources::Base
     end
   end
 
-  def permitted_params
-    params.permit(
-      :accept => [:item_identifier, :librarian_id, :item_id]
-    )
+  # PATCH/PUT /accepts/1
+  def update
+    if @accept.update(accept_params)
+      redirect_to @accept, notice: 'Accept was successfully updated.'
+    else
+      render action: 'edit'
+    end
   end
+
+  # DELETE /accepts/1
+  def destroy
+    @accept.destroy
+    redirect_to accepts_url, notice: 'Accept was successfully destroyed.'
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_accept
+      @accept = Accept.find(params[:id])
+      authorize @accept
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def accept_params
+      params.require(:accept).permit(:item_identifier, :librarian_id, :item_id)
+    end
 end

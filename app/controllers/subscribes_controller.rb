@@ -1,6 +1,7 @@
 class SubscribesController < ApplicationController
-  load_and_authorize_resource :except => [:index, :create]
-  authorize_resource :only => [:index, :create]
+  before_action :set_subscribe, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
   before_action :get_subscription, :get_work
 
   # GET /subscribes
@@ -44,6 +45,7 @@ class SubscribesController < ApplicationController
   # POST /subscribes.json
   def create
     @subscribe = Subscribe.new(subscribe_params)
+    authorize @subscribe
 
     respond_to do |format|
       if @subscribe.save
@@ -82,6 +84,11 @@ class SubscribesController < ApplicationController
   end
 
   private
+  def set_subscribe
+    @subscribe = Subscribe.find(params[:id])
+    authorize @subscribe
+  end
+
   def subscribe_params
     params.require(:subscribe).permit(
       :subscription_id, :work_id, :start_at, :end_at

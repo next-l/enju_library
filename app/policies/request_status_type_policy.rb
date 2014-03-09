@@ -1,0 +1,2 @@
+class RequestStatusTypePolicy < AdminPolicy
+end

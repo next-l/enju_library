@@ -186,7 +186,7 @@ describe SearchEnginesController do
           assigns(:search_engine).should be_valid
         end
 
-        it "redirects to the created patron" do
+        it "redirects to the created search_engine" do
           post :create, :search_engine => @attrs
           response.should redirect_to(assigns(:search_engine))
         end

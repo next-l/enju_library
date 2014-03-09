@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids}/*"]
 
   s.add_dependency "enju_seed", "~> 0.2.0.pre4"
-  s.add_dependency "inherited_resources"
   s.add_dependency "geocoder"
 
   s.add_development_dependency "sqlite3"

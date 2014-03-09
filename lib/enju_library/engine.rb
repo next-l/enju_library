@@ -1,4 +1,3 @@
-require 'inherited_resources'
 require 'geocoder'
 require 'ipaddr'
 

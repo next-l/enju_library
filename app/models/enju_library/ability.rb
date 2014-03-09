@@ -5,14 +5,6 @@ module EnjuLibrary
     def initialize(user, ip_address = nil)
       case user.try(:role).try(:name)
       when 'Administrator'
-        can [:read, :create, :update], Bookstore
-        can [:delete, :destroy], Bookstore do |bookstore|
-          bookstore.items.empty?
-        end
-        can [:read, :create, :update], Library
-        can [:delete, :destroy], Library do |library|
-          library.shelves.empty? and !library.web?
-        end
         can [:read, :create, :update], Shelf
         can [:delete, :destroy], Shelf do |shelf|
           shelf.items.empty? and !shelf.web_shelf?
@@ -41,9 +33,7 @@ module EnjuLibrary
           Subscription
         ]
         can :read, [
-          Bookstore,
           BudgetType,
-          Library,
           LibraryGroup,
           RequestStatusType,
           RequestType,
@@ -52,13 +42,11 @@ module EnjuLibrary
         ]
       when 'User'
         can :read, [
-          Library,
           LibraryGroup,
           Shelf
         ]
       else
         can :read, [
-          Library,
           LibraryGroup,
           Shelf
         ]

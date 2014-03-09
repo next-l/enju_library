@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource except: [:index, :create]
-  authorize_resource only: [:index, :create]
+  after_action :verify_authorized
   after_action :solr_commit, :only => [:create, :update, :destroy]
 
   # GET /libraries
@@ -55,6 +54,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/new
   def new
     @library = Library.new
+    authorize @library
     @library.country = LibraryGroup.site_config.country
     prepare_options
 
@@ -73,6 +73,7 @@ class LibrariesController < ApplicationController
   # POST /libraries.json
   def create
     @library = Library.new(library_params)
+    authorize @library
 
     respond_to do |format|
       if @library.save
@@ -121,6 +122,7 @@ class LibrariesController < ApplicationController
   private
   def set_library
     @library = Library.friendly.find(params[:id])
+    authorize @library
   end
 
   def prepare_options

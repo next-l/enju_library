@@ -1,8 +1,9 @@
 class ShelvesController < ApplicationController
-  load_and_authorize_resource except: [:index, :create]
-  authorize_resource only: [:index, :create]
+  before_action :set_shelf, only: [:show, :edit, :update, :destroy]
   before_action :get_library
   before_action :get_libraries, :only => [:new, :edit, :create, :update]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
 
   # GET /shelves
   # GET /shelves.json
@@ -82,6 +83,7 @@ class ShelvesController < ApplicationController
   # POST /shelves
   # POST /shelves.json
   def create
+    authorize Shelf
     @shelf = Shelf.new(shelf_params)
     if @library
       @shelf.library = @library
@@ -138,6 +140,11 @@ class ShelvesController < ApplicationController
   end
 
   private
+  def set_shelf
+    @shelf = Shelf.find(params[:id])
+    authorize @shelf
+  end
+
   def shelf_params
     params.require(:shelf).permit(
       :name, :display_name, :note, :library_id, :closed
