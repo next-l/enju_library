@@ -7,6 +7,7 @@ class SubscribesController < ApplicationController
   # GET /subscribes
   # GET /subscribes.json
   def index
+    authorize Subscribe
     @subscribes = Subscribe.page(params[:page])
 
     respond_to do |format|
@@ -28,6 +29,7 @@ class SubscribesController < ApplicationController
   # GET /subscribes/new.json
   def new
     @subscribe = Subscribe.new
+    authorize @subscribe
     @subscribe.subscription = @subscription if @subscription
     @subscribe.work = @work if @work
 

@@ -6,7 +6,7 @@ class BookstoresController < ApplicationController
   # GET /bookstores
   def index
     authorize Bookstore
-    @bookstores = policy_scope(Bookstore).order(:position)
+    @bookstores = Bookstore.order(:position).page(params[:page])
   end
 
   # GET /bookstores/1
@@ -51,7 +51,7 @@ class BookstoresController < ApplicationController
   # DELETE /bookstores/1
   def destroy
     @bookstore.destroy
-    redirect_to bookstores_url, notice: 'Bookstore was successfully destroyed.'
+    redirect_to bookstores_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.bookstore'))
   end
 
   private

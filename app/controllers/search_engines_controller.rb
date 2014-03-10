@@ -6,7 +6,7 @@ class SearchEnginesController < ApplicationController
   # GET /search_engines
   def index
     authorize SearchEngine
-    @search_engines = policy_scope(SearchEngine)
+    @search_engines = SearchEngine.order(:position)
   end
 
   # GET /search_engines/1
@@ -51,7 +51,7 @@ class SearchEnginesController < ApplicationController
   # DELETE /search_engines/1
   def destroy
     @search_engine.destroy
-    redirect_to search_engines_url, notice: 'Request type was successfully destroyed.'
+    redirect_to search_engines_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.search_engine'))
   end
 
   private

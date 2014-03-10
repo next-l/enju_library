@@ -1,41 +1,9 @@
-class BookstorePolicy
-  attr_reader :user, :record
-
-  def initialize(user, record)
-    @user = user
-    @record = record
-  end
-
-  def index?
-    user.has_role?('Librarian')
-  end
-
-  def show?
-    user.has_role?('Librarian') and scope.where(:id => record.id).exists?
-  end
-
+class BookstorePolicy < AdminPolicy
   def create?
-    user.has_role?('Administrator')
-  end
-
-  def new?
-    create?
-  end
-
-  def update?
-    user.has_role?('Administrator')
-  end
-
-  def edit?
-    update?
+    user.try(:has_role?, 'Administrator')
   end
 
   def destroy?
-    user.has_role?('Administrator') and record.items.empty?
-  end
-
-  def scope
-    Pundit.policy_scope!(user, record.class)
+    user.try(:has_role?, 'Administrator')
   end
 end
-

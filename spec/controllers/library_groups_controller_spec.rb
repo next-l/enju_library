@@ -32,11 +32,29 @@ describe LibraryGroupsController do
       end
     end
 
-    describe "When not logged in" do
+    describe "When logged in as Librarian" do
+      login_librarian
       it "assigns the requested library_group as @library_group" do
         get :show, :id => 1
         assigns(:library_group).should eq(LibraryGroup.find(1))
         response.should be_success
+      end
+    end
+
+    describe "When logged in as User" do
+      login_user
+      it "assigns the requested library_group as @library_group" do
+        get :show, :id => 1
+        assigns(:library_group).should eq(LibraryGroup.find(1))
+        response.should be_forbidden
+      end
+    end
+
+    describe "When not logged in" do
+      it "assigns the requested library_group as @library_group" do
+        get :show, :id => 1
+        assigns(:library_group).should eq(LibraryGroup.find(1))
+        response.should redirect_to new_user_session_url
       end
     end
   end

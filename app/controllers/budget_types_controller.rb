@@ -51,7 +51,7 @@ class BudgetTypesController < ApplicationController
   # DELETE /budget_types/1
   def destroy
     @budget_type.destroy
-    redirect_to budget_types_url, notice: 'Budget type was successfully destroyed.'
+    redirect_to budget_types_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.budget_type'))
   end
 
   private

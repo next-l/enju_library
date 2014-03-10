@@ -64,8 +64,9 @@ class ShelvesController < ApplicationController
   # GET /shelves/new
   # GET /shelves/new.json
   def new
-    @library = Library.web if @library.nil?
     @shelf = Shelf.new
+    authorize @shelf
+    @library = Library.web if @library.nil?
     @shelf.library = @library
     #@shelf.user = current_user
 
@@ -83,8 +84,8 @@ class ShelvesController < ApplicationController
   # POST /shelves
   # POST /shelves.json
   def create
-    authorize Shelf
     @shelf = Shelf.new(shelf_params)
+    authorize @shelf
     if @library
       @shelf.library = @library
     else

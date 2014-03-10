@@ -19,7 +19,7 @@ describe SearchEnginesController do
 
       it "assigns all search_engines as @search_engines" do
         get :index
-        assigns(:search_engines).should eq(SearchEngine.page(1))
+        assigns(:search_engines).should eq(SearchEngine.order(:position))
       end
     end
 
@@ -28,24 +28,24 @@ describe SearchEnginesController do
 
       it "assigns all search_engines as @search_engines" do
         get :index
-        assigns(:search_engines).should eq(SearchEngine.page(1))
+        assigns(:search_engines).should eq(SearchEngine.order(:position))
       end
     end
 
     describe "When logged in as User" do
       login_user
 
-      it "assigns all search_engines as @search_engines" do
+      it "assigns nil as @search_engines" do
         get :index
-        assigns(:search_engines).should be_empty
+        assigns(:search_engines).should be_nil
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
-      it "assigns all search_engines as @search_engines" do
+      it "assigns nil as @search_engines" do
         get :index
-        assigns(:search_engines).should be_empty
+        assigns(:search_engines).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -211,7 +211,7 @@ describe SearchEnginesController do
       describe "with valid params" do
         it "assigns nil as @search_engine" do
           post :create, :search_engine => @attrs
-          assigns(:search_engine).should be_nil
+          assigns(:search_engine).should be_valid
         end
 
         it "should be forbidden" do
@@ -221,9 +221,9 @@ describe SearchEnginesController do
       end
 
       describe "with invalid params" do
-        it "assigns nil as @search_engine" do
+        it "assigns a newly created but unsaved search_engine as @search_engine" do
           post :create, :search_engine => @invalid_attrs
-          assigns(:search_engine).should be_nil
+          assigns(:search_engine).should_not be_valid
         end
 
         it "should be forbidden" do
@@ -239,7 +239,7 @@ describe SearchEnginesController do
       describe "with valid params" do
         it "assigns nil as @search_engine" do
           post :create, :search_engine => @attrs
-          assigns(:search_engine).should be_nil
+          assigns(:search_engine).should be_valid
         end
 
         it "should be forbidden" do
@@ -249,9 +249,9 @@ describe SearchEnginesController do
       end
 
       describe "with invalid params" do
-        it "assigns nil as @search_engine" do
+        it "assigns a newly created but unsaved search_engine as @search_engine" do
           post :create, :search_engine => @invalid_attrs
-          assigns(:search_engine).should be_nil
+          assigns(:search_engine).should_not be_valid
         end
 
         it "should be forbidden" do
@@ -265,7 +265,7 @@ describe SearchEnginesController do
       describe "with valid params" do
         it "assigns nil as @search_engine" do
           post :create, :search_engine => @attrs
-          assigns(:search_engine).should be_nil
+          assigns(:search_engine).should be_valid
         end
 
         it "should be forbidden" do
@@ -275,9 +275,9 @@ describe SearchEnginesController do
       end
 
       describe "with invalid params" do
-        it "assigns nil as @search_engine" do
+        it "assigns a newly created but unsaved search_engine as @search_engine" do
           post :create, :search_engine => @invalid_attrs
-          assigns(:search_engine).should be_nil
+          assigns(:search_engine).should_not be_valid
         end
 
         it "should be forbidden" do

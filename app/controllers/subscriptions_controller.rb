@@ -7,6 +7,7 @@ class SubscriptionsController < ApplicationController
 
   # GET /subscriptions
   def index
+    authorize Subscription
     if @work
       @subscriptions = @work.subscriptions.page(params[:page])
     else

@@ -13,7 +13,7 @@
 <%- @budget_types.each do |budget_type| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if can? :update, budget_type -%>
+      <%- if policy(budget_type).update? -%>
         <%= move_position(budget_type) -%>
       <%- end -%>
     </td>
@@ -22,10 +22,10 @@
     </td>
     <td><%= budget_type.note -%></td>
     <td>
-      <%- if can? :update, budget_type -%>
+      <%- if policy(budget_type).update? -%>
         <%= link_to t('page.edit'), edit_budget_type_path(budget_type) -%>
       <% end %>
-      <%- if can? :delete, budget_type -%>
+      <%- if policy(budget_type).destroy? -%>
         <%= link_to t('page.destroy'), budget_type, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
       <%- end -%>
     </td>
