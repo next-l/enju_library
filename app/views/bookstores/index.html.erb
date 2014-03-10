@@ -14,7 +14,7 @@
 <%- @bookstores.each_with_index do |bookstore, i| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if can? :update, bookstore -%>
+      <%- if policy(bookstore).update? -%>
         <%= move_position(bookstore) -%>
       <%- end -%>
     </td>
@@ -25,7 +25,7 @@
     <td><%= bookstore.telephone_number -%></td>
     <td><%= bookstore.fax_number -%></td>
     <td>
-      <%- if can? :update, bookstore -%>
+      <%- if policy(bookstore).update? -%>
         <%= link_to image_tag('icons/page_white_edit.png', :size => '16x16', :alt => t('page.edit')), edit_bookstore_path(bookstore) -%>
       <% end %>
       <%- if can? :delete, bookstore -%>
