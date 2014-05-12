@@ -33,7 +33,7 @@ describe BudgetTypesController do
     it "assigns all budget_types as @budget_types" do
       budget_type = BudgetType.create! valid_attributes
       get :index
-      assigns(:budget_types).should eq(BudgetType.all)
+      assigns(:budget_types).should eq(BudgetType.order(:position))
     end
   end
 
@@ -84,14 +84,14 @@ describe BudgetTypesController do
       it "assigns a newly created but unsaved budget_type as @budget_type" do
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        post :create, :budget_type => {}
+        post :create, :budget_type => {:name => '0'}
         assigns(:budget_type).should be_a_new(BudgetType)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        post :create, :budget_type => {}
+        post :create, :budget_type => {:name => '0'}
         #response.should render_template("new")
       end
     end

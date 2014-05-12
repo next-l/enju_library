@@ -36,14 +36,14 @@ describe SubscriptionsController do
 
       it "assigns all subscriptions as @subscriptions" do
         get :index
-        assigns(:subscriptions).should be_empty
+        assigns(:subscriptions).should be_nil
       end
     end
 
     describe "When not logged in" do
       it "assigns all subscriptions as @subscriptions" do
         get :index
-        assigns(:subscriptions).should be_empty
+        assigns(:subscriptions).should be_nil
       end
     end
   end

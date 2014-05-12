@@ -1,5 +1,4 @@
 class Subscription < ActiveRecord::Base
-  attr_accessible :title, :note, :order_list_id, :user_id
   has_many :subscribes, :dependent => :destroy
   has_many :works, :through => :subscribes
   belongs_to :user, :validate => true

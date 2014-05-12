@@ -1,6 +1,5 @@
 class Accept < ActiveRecord::Base
-  attr_accessible :item_identifier, :librarian_id, :item_id
-  default_scope :order => 'accepts.id DESC'
+  default_scope {order('accepts.id DESC')}
   belongs_to :basket
   belongs_to :item
   belongs_to :librarian, :class_name => 'User'
@@ -17,9 +16,9 @@ class Accept < ActiveRecord::Base
 
   def accept!
     if defined?(EnjuCirculation)
-      item.circulation_status = CirculationStatus.where(:name => 'Available On Shelf').first
+      circulation_status = CirculationStatus.where(:name => 'Available On Shelf').first
+      item.update_column(:circulation_status_id, circulation_status.id) if circulation_status
     end
-    item.save(:validate => false)
   end
 end
 

@@ -44,7 +44,7 @@ describe LibrariesController do
       it "should get index with query" do
         get :index, :query => 'kamata'
         response.should be_success
-        assigns(:libraries).include?(Library.find('kamata')).should be_true
+        assigns(:libraries).include?(Library.friendly.find('kamata')).should be_true
       end
     end
   end

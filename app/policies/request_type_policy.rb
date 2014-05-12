@@ -1,0 +1,2 @@
+class RequestTypePolicy < AdminPolicy
+end

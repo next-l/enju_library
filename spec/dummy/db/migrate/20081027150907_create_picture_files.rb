@@ -5,7 +5,6 @@ class CreatePictureFiles < ActiveRecord::Migration
       t.string :picture_attachable_type
       t.string :content_type
       t.text :title
-      t.text :filename
       t.string :thumbnail
       t.integer :position
 

@@ -1,7 +1,9 @@
 class ShelvesController < ApplicationController
-  load_and_authorize_resource
-  before_filter :get_library
-  before_filter :get_libraries, :only => [:new, :edit, :create, :update]
+  before_action :set_shelf, only: [:show, :edit, :update, :destroy]
+  before_action :get_library
+  before_action :get_libraries, :only => [:new, :edit, :create, :update]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
 
   # GET /shelves
   # GET /shelves.json
@@ -50,20 +52,21 @@ class ShelvesController < ApplicationController
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-    @shelf = Shelf.find(params[:id], :include => :library)
+    @shelf = Shelf.includes(:library).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @shelf }
-      format.mobile
+      format.html.phone
     end
   end
 
   # GET /shelves/new
   # GET /shelves/new.json
   def new
-    @library = Library.web if @library.nil?
     @shelf = Shelf.new
+    authorize @shelf
+    @library = Library.web if @library.nil?
     @shelf.library = @library
     #@shelf.user = current_user
 
@@ -75,13 +78,14 @@ class ShelvesController < ApplicationController
 
   # GET /shelves/1/edit
   def edit
-    @shelf = Shelf.find(params[:id], :include => :library)
+    @shelf = Shelf.includes(:library).find(params[:id])
   end
 
   # POST /shelves
   # POST /shelves.json
   def create
-    @shelf = Shelf.new(params[:shelf])
+    @shelf = Shelf.new(shelf_params)
+    authorize @shelf
     if @library
       @shelf.library = @library
     else
@@ -112,7 +116,7 @@ class ShelvesController < ApplicationController
     end
 
     respond_to do |format|
-      if @shelf.update_attributes(params[:shelf])
+      if @shelf.update_attributes(shelf_params)
         format.html { redirect_to @shelf, :notice => t('controller.successfully_updated', :model => t('activerecord.models.shelf')) }
         format.json { head :no_content }
       else
@@ -126,11 +130,25 @@ class ShelvesController < ApplicationController
   # DELETE /shelves/1
   # DELETE /shelves/1.json
   def destroy
+    @shelf.picture_files.destroy_all
+    @shelf.reload
     @shelf.destroy
 
     respond_to do |format|
       format.html { redirect_to shelves_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def set_shelf
+    @shelf = Shelf.find(params[:id])
+    authorize @shelf
+  end
+
+  def shelf_params
+    params.require(:shelf).permit(
+      :name, :display_name, :note, :library_id, :closed
+    )
   end
 end

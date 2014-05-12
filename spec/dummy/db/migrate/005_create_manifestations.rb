@@ -19,13 +19,6 @@ class CreateManifestations < ActiveRecord::Migration
       t.integer :height
       t.integer :width
       t.integer :depth
-      t.string :isbn
-      t.string :isbn10
-      t.string :wrong_isbn
-      t.string :nbn
-      t.string :lccn
-      t.string :oclc_number
-      t.string :issn
       t.integer :price # TODO: 通貨単位
       t.text :fulltext
       t.string :volume_number_list
@@ -33,11 +26,6 @@ class CreateManifestations < ActiveRecord::Migration
       t.string :serial_number_list
       t.integer :edition
       t.text :note
-      t.integer :produces_count, :default => 0, :null => false
-      t.integer :exemplifies_count, :default => 0, :null => false
-      t.integer :embodies_count, :default => 0, :null => false
-      t.integer :exemplifies_count, :default => 0, :null => false
-      t.integer :work_has_subjects_count, :default => 0, :null => false
       t.boolean :repository_content, :default => false, :null => false
       t.integer :lock_version, :default => 0, :null => false
       t.integer :required_role_id, :default => 1, :null => false
@@ -48,11 +36,6 @@ class CreateManifestations < ActiveRecord::Migration
     end
     add_index :manifestations, :carrier_type_id
     add_index :manifestations, :required_role_id
-    add_index :manifestations, :isbn
-    add_index :manifestations, :nbn
-    add_index :manifestations, :lccn
-    add_index :manifestations, :oclc_number
-    add_index :manifestations, :issn
     add_index :manifestations, :access_address
     add_index :manifestations, :frequency_id
     add_index :manifestations, :manifestation_identifier

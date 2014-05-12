@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 class LibrariesController < ApplicationController
-  load_and_authorize_resource
-  after_filter :solr_commit, :only => [:create, :update, :destroy]
+  before_action :set_library, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  after_action :solr_commit, :only => [:create, :update, :destroy]
 
   # GET /libraries
   # GET /libraries.json
@@ -33,9 +34,9 @@ class LibrariesController < ApplicationController
   def show
     if defined?(EnjuEvent)
       search = Sunspot.new_search(Event)
-      library = @library.dup
+      library_id = @library.id
       search.build do
-        with(:library_id).equal_to library.id
+        with(:library_id).equal_to library_id
         order_by(:start_at, :desc)
       end
       page = params[:event_page] || 1
@@ -53,6 +54,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/new
   def new
     @library = Library.new
+    authorize @library
     @library.country = LibraryGroup.site_config.country
     prepare_options
 
@@ -70,7 +72,8 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
-    @library = Library.new(params[:library])
+    @library = Library.new(library_params)
+    authorize @library
 
     respond_to do |format|
       if @library.save
@@ -93,7 +96,7 @@ class LibrariesController < ApplicationController
     end
 
     respond_to do |format|
-      if @library.update_attributes(params[:library])
+      if @library.update_attributes(library_params)
         format.html { redirect_to @library, :notice => t('controller.successfully_updated', :model => t('activerecord.models.library')) }
         format.json { head :no_content }
       else
@@ -109,16 +112,26 @@ class LibrariesController < ApplicationController
   # DELETE /libraries/1.json
   def destroy
     @library.destroy
-
-    respond_to do |format|
-      format.html { redirect_to libraries_url }
-      format.json { head :no_content }
-    end
+    redirect_to libraries_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.library'))
   end
 
   private
+  def set_library
+    @library = Library.friendly.find(params[:id])
+    authorize @library
+  end
+
   def prepare_options
     @library_groups = LibraryGroup.all
     @countries = Country.all_cache
+  end
+
+  def library_params
+    params.require(:library).permit(
+      :name, :display_name, :short_display_name, :zip_code, :street,
+      :locality, :region, :telephone_number_1, :telephone_number_2, :fax_number,
+      :note, :call_number_rows, :call_number_delimiter, :library_group_id,
+      :country_id, :opening_hour, :isil, :position
+    )
   end
 end

@@ -1,10 +1,13 @@
 class SubscribesController < ApplicationController
-  load_and_authorize_resource
-  before_filter :get_subscription, :get_work
+  before_action :set_subscribe, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
+  before_action :get_subscription, :get_work
 
   # GET /subscribes
   # GET /subscribes.json
   def index
+    authorize Subscribe
     @subscribes = Subscribe.page(params[:page])
 
     respond_to do |format|
@@ -26,6 +29,7 @@ class SubscribesController < ApplicationController
   # GET /subscribes/new.json
   def new
     @subscribe = Subscribe.new
+    authorize @subscribe
     @subscribe.subscription = @subscription if @subscription
     @subscribe.work = @work if @work
 
@@ -42,7 +46,8 @@ class SubscribesController < ApplicationController
   # POST /subscribes
   # POST /subscribes.json
   def create
-    @subscribe = Subscribe.new(params[:subscribe])
+    @subscribe = Subscribe.new(subscribe_params)
+    authorize @subscribe
 
     respond_to do |format|
       if @subscribe.save
@@ -59,7 +64,7 @@ class SubscribesController < ApplicationController
   # PUT /subscribes/1.json
   def update
     respond_to do |format|
-      if @subscribe.update_attributes(params[:subscribe])
+      if @subscribe.update_attributes(subscribe_params)
         format.html { redirect_to @subscribe, :notice => t('controller.successfully_updated', :model => t('activerecord.models.subscribe')) }
         format.json { head :no_content }
       else
@@ -78,5 +83,17 @@ class SubscribesController < ApplicationController
       format.html { redirect_to subscribes_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def set_subscribe
+    @subscribe = Subscribe.find(params[:id])
+    authorize @subscribe
+  end
+
+  def subscribe_params
+    params.require(:subscribe).permit(
+      :subscription_id, :work_id, :start_at, :end_at
+    )
   end
 end

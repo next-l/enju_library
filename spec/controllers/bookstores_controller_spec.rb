@@ -19,7 +19,7 @@ describe BookstoresController do
 
       it "assigns all bookstores as @bookstores" do
         get :index
-        assigns(:bookstores).should eq(Bookstore.page(1))
+        assigns(:bookstores).should eq(Bookstore.order(:position).page(1))
       end
     end
 
@@ -28,24 +28,24 @@ describe BookstoresController do
 
       it "assigns all bookstores as @bookstores" do
         get :index
-        assigns(:bookstores).should eq(Bookstore.page(1))
+        assigns(:bookstores).should eq(Bookstore.order(:position).page(1))
       end
     end
 
     describe "When logged in as User" do
       login_user
 
-      it "assigns all bookstores as @bookstores" do
+      it "assigns nil as @bookstores" do
         get :index
-        assigns(:bookstores).should be_empty
+        assigns(:bookstores).should be_nil
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
-      it "assigns all bookstores as @bookstores" do
+      it "assigns nil as @bookstores" do
         get :index
-        assigns(:bookstores).should be_empty
+        assigns(:bookstores).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -263,7 +263,7 @@ describe BookstoresController do
 
     describe "When not logged in" do
       describe "with valid params" do
-        it "assigns a newly created bookstore as @bookstore" do
+        it "assigns a newly created but unsaved bookstore as @bookstore" do
           post :create, :bookstore => @attrs
           assigns(:bookstore).should be_valid
         end

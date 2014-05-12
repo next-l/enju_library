@@ -1,0 +1,2 @@
+class LibraryGroupPolicy < AdminPolicy
+end

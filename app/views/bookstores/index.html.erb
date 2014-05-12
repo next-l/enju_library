@@ -1,4 +1,4 @@
-<div id="content_detail" class="ui-corner-all">
+<div id="content_detail" class="ui-corner-all ui-widget-content">
 <h1 class="title"><%= t('page.listing', :model => t('activerecord.models.bookstore')) -%></h1>
 <div id="content_list">
 
@@ -14,7 +14,7 @@
 <%- @bookstores.each_with_index do |bookstore, i| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if can? :update, bookstore -%>
+      <%- if policy(bookstore).update? -%>
         <%= move_position(bookstore) -%>
       <%- end -%>
     </td>
@@ -25,10 +25,10 @@
     <td><%= bookstore.telephone_number -%></td>
     <td><%= bookstore.fax_number -%></td>
     <td>
-      <%- if can? :update, bookstore -%>
+      <%- if policy(bookstore).update? -%>
         <%= link_to image_tag('icons/page_white_edit.png', :size => '16x16', :alt => t('page.edit')), edit_bookstore_path(bookstore) -%>
       <% end %>
-      <%- if can? :delete, bookstore -%>
+      <%- if policy(bookstore).destroy? -%>
         <%= link_to image_tag('icons/delete.png', :size => '16x16', :alt => t('page.destroy')), bookstore, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
       <%- end -%>
     </td>
@@ -36,12 +36,12 @@
 <%- end -%>
 </table>
 
-<%= paginate(@bookstores) -%>
+<%= paginate(@bookstores, :theme => 'enju_leaf') -%>
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all">
-  <%- if can? :create, Bookstore -%>
+<div id="submenu" class="ui-corner-all ui-widget-content">
+  <%- if policy(Bookstore).create? -%>
     <ul>
       <li><%= link_to t('page.new', :model => t('activerecord.models.bookstore')), new_bookstore_path -%></li>
     </ul>

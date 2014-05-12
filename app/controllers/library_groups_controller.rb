@@ -1,7 +1,8 @@
 # -*- encoding: utf-8 -*-
 class LibraryGroupsController < ApplicationController
-  load_and_authorize_resource
-  cache_sweeper :library_group_sweeper, :only => [:update]
+  before_action :set_library_group, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
+  after_action :verify_policy_scoped, :only => :index
 
   # GET /library_groups
   # GET /library_groups.json
@@ -32,8 +33,7 @@ class LibraryGroupsController < ApplicationController
   # PUT /library_groups/1.json
   def update
     respond_to do |format|
-      if @library_group.update_attributes(params[:library_group])
-        expire_page '/page/opensearch'
+      if @library_group.update_attributes(library_group_params)
         format.html { redirect_to @library_group, :notice => t('controller.successfully_updated', :model => t('activerecord.models.library_group')) }
         format.json { head :no_content }
       else
@@ -42,5 +42,18 @@ class LibraryGroupsController < ApplicationController
         format.json { render :json => @library_group.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  private
+  def set_library_group
+    @library_group = LibraryGroup.first
+    authorize @library_group
+  end
+
+  def library_group_params
+    params.require(:library_group).permit(
+      :name, :display_name, :short_name, :email, :my_networks,
+      :login_banner, :note, :country_id, :admin_networks, :url
+    )
   end
 end

@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
 class LibraryGroup < ActiveRecord::Base
-  attr_accessible :name, :display_name, :short_name, :email, :my_networks,
-    :login_banner, :note, :country_id, :admin_networks, :url
-
   #include Singleton
   include MasterModel
 
@@ -37,7 +34,7 @@ class LibraryGroup < ActiveRecord::Base
 
   def real_libraries
     # 物理的な図書館 = IDが1以外
-    libraries.where('id != 1').all
+    libraries.where('id != 1')
   end
 
   def network_access_allowed?(ip_address, options = {})

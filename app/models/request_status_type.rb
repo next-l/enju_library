@@ -1,7 +1,6 @@
 class RequestStatusType < ActiveRecord::Base
-  attr_accessible :name, :display_name, :note
   include MasterModel
-  default_scope :order => 'position'
+  default_scope {order('request_status_types.position')}
   has_many :reserves
 end
 
