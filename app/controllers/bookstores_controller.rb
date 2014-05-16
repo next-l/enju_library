@@ -1,7 +1,7 @@
 class BookstoresController < ApplicationController
   before_action :set_bookstore, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
+  #after_action :verify_policy_scoped, :only => :index
 
   # GET /bookstores
   def index

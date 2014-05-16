@@ -1,7 +1,7 @@
 class SubscribesController < ApplicationController
   before_action :set_subscribe, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
+  #after_action :verify_policy_scoped, :only => :index
   before_action :get_subscription, :get_work
 
   # GET /subscribes

@@ -7,6 +7,7 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
+    authorize Library
     sort = {:sort_by => 'position', :order => 'asc'}
     case params[:sort_by]
     when 'name'

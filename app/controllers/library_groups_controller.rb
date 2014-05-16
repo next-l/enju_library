@@ -2,11 +2,12 @@
 class LibraryGroupsController < ApplicationController
   before_action :set_library_group, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
+  #after_action :verify_policy_scoped, :only => :index
 
   # GET /library_groups
   # GET /library_groups.json
   def index
+    authorize LibraryGroup
     @library_groups = LibraryGroup.all
 
     respond_to do |format|

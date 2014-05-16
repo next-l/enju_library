@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
   before_action :get_work
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
+  #after_action :verify_policy_scoped, :only => :index
   after_action :solr_commit, :only => [:create, :update, :destroy]
 
   # GET /subscriptions

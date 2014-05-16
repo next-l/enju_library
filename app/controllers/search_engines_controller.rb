@@ -1,7 +1,7 @@
 class SearchEnginesController < ApplicationController
   before_action :set_search_engine, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
+  #after_action :verify_policy_scoped, :only => :index
 
   # GET /search_engines
   def index

@@ -3,11 +3,11 @@ class ShelvesController < ApplicationController
   before_action :get_library
   before_action :get_libraries, :only => [:new, :edit, :create, :update]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
 
   # GET /shelves
   # GET /shelves.json
   def index
+    authorize Shelf
     if params[:mode] == 'select'
       if @library
         @shelves = @library.shelves

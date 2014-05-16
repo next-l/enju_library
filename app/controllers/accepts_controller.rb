@@ -2,7 +2,7 @@ class AcceptsController < ApplicationController
   before_action :set_accept, only: [:show, :edit, :update, :destroy]
   before_action :get_basket, :only => [:index, :create]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
+  #after_action :verify_policy_scoped, :only => :index
 
   # GET /accepts
   def index
@@ -47,13 +47,14 @@ class AcceptsController < ApplicationController
 
   # POST /accepts
   def create
+    authorize Accept
     unless @basket
       access_denied; return
     end
     @accept = Accept.new(accept_params)
+
     @accept.basket = @basket
     @accept.librarian = current_user
-    authorize @accept
 
     flash[:message] = ''
     if @accept.item_identifier.blank?
