@@ -19,7 +19,7 @@ gem "enju_ndl", github: "next-l/enju_ndl"
 gem "enju_circulation", github: "next-l/enju_circulation"
 gem "enju_event", github: "next-l/enju_event"
 gem "enju_message", github: "next-l/enju_message"
-gem "enju_inter_library_loan", github: "next-l/enju_inter_library_loan", branch: "rails4"
+gem "enju_inter_library_loan", github: "next-l/enju_inter_library_loan"
 
 # To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
+# gem 'debugger'
