@@ -51,7 +51,7 @@ class RequestTypesController < ApplicationController
   # DELETE /request_types/1
   def destroy
     @request_type.destroy
-    redirect_to libraries_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.request_type'))
+    redirect_to libraries_url, :notice => t('controller.successfully_destroyed', :model => t('activerecord.models.request_type'))
   end
 
   private

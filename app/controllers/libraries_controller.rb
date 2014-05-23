@@ -113,7 +113,7 @@ class LibrariesController < ApplicationController
   # DELETE /libraries/1.json
   def destroy
     @library.destroy
-    redirect_to libraries_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.library'))
+    redirect_to libraries_url, :notice => t('controller.successfully_destroyed', :model => t('activerecord.models.library'))
   end
 
   private

@@ -51,7 +51,7 @@ class SearchEnginesController < ApplicationController
   # DELETE /search_engines/1
   def destroy
     @search_engine.destroy
-    redirect_to search_engines_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.search_engine'))
+    redirect_to search_engines_url, :notice => t('controller.successfully_destroyed', :model => t('activerecord.models.search_engine'))
   end
 
   private

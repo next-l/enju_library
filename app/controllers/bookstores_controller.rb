@@ -51,7 +51,7 @@ class BookstoresController < ApplicationController
   # DELETE /bookstores/1
   def destroy
     @bookstore.destroy
-    redirect_to bookstores_url, :notice => t('controller.successfully_deleted', :model => t('activerecord.models.bookstore'))
+    redirect_to bookstores_url, :notice => t('controller.successfully_destroyed', :model => t('activerecord.models.bookstore'))
   end
 
   private
