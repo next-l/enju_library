@@ -1,7 +1,7 @@
 class BudgetTypesController < ApplicationController
   before_action :set_budget_type, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :verify_policy_scoped, :only => :index
+  #after_action :verify_policy_scoped, :only => :index
 
   # GET /budget_types
   def index

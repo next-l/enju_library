@@ -1,7 +1,11 @@
 require 'spec_helper'
 
 describe "budget_types/index" do
+  fixtures :users, :roles, :user_has_roles
+
   before(:each) do
+    view.extend EnjuLeaf::EnjuLeafHelper
+
     assign(:budget_types, [
       stub_model(BudgetType,
         :name => "Public funds",

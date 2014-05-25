@@ -105,8 +105,8 @@ describe BudgetTypesController do
         # specifies that the BudgetType created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        BudgetType.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => budget_type.id, :budget_type => {'these' => 'params'}
+        BudgetType.any_instance.should_receive(:update).with({'name' => 'test'})
+        put :update, :id => budget_type.id, :budget_type => {'name' => 'test'}
       end
 
       it "assigns the requested budget_type as @budget_type" do
@@ -135,7 +135,7 @@ describe BudgetTypesController do
         budget_type = BudgetType.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        put :update, :id => budget_type.id, :budget_type => {}
+        put :update, :id => budget_type.id, :budget_type => {:name => ''}
         assigns(:budget_type).should eq(budget_type)
       end
 
@@ -143,7 +143,7 @@ describe BudgetTypesController do
         budget_type = BudgetType.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        put :update, :id => budget_type.id, :budget_type => {}
+        put :update, :id => budget_type.id, :budget_type => {:name => ''}
         #response.should render_template("edit")
       end
     end
