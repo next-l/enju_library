@@ -1,14 +1,13 @@
 class BasketsController < ApplicationController
-  load_and_authorize_resource
-  if defined?(EnjuCirculation)
-    cache_sweeper :circulation_sweeper, :only => [:create, :update, :destroy]
-  end
+  before_action :set_basket, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized
 
   # GET /baskets
   # GET /baskets.json
   def index
+    authorize Basket
     if current_user.has_role?('Librarian')
-     @baskets = Basket.page(params[:page])
+     @baskets = Basket.order('baskets.id DESC').page(params[:page])
     else
       redirect_to new_basket_url
       return
@@ -33,6 +32,7 @@ class BasketsController < ApplicationController
   # GET /baskets/new.json
   def new
     @basket = Basket.new
+    authorize @basket
     @basket.user_number = params[:user_number]
 
     respond_to do |format|
@@ -48,7 +48,8 @@ class BasketsController < ApplicationController
   # POST /baskets
   # POST /baskets.json
   def create
-    @basket = Basket.new(params[:basket])
+    @basket = Basket.new(basket_params)
+    authorize @basket
     @user = User.where(:user_number => @basket.user_number).first if @basket.user_number
     if @user
       if @user.user_number?
@@ -71,20 +72,19 @@ class BasketsController < ApplicationController
   # PUT /baskets/1.json
   def update
     librarian = current_user
-    begin
+    #begin
       unless @basket.basket_checkout(librarian)
         redirect_to new_basket_checked_item_url(@basket)
         return
       end
-    rescue ActiveRecord::RecordInvalid
-      flash[:message] = t('checked_item.already_checked_out_try_again')
-      @basket.checked_items.delete_all
-      redirect_to new_basket_checked_item_url(@basket)
-      return
-    end
+    #rescue ActiveRecord::RecordInvalid
+    #  flash[:message] = t('checked_item.already_checked_out_try_again')
+    #  @basket.checked_items.delete_all
+    #  redirect_to new_basket_checked_item_url(@basket)
+    #  return
+    #end
 
     respond_to do |format|
-      #if @basket.update_attributes({})
       if @basket.save(:validate => false)
         # 貸出完了時
         format.html { redirect_to user_checkouts_url(@basket.user), :notice => t('basket.checkout_completed') }
@@ -107,5 +107,17 @@ class BasketsController < ApplicationController
       format.html { redirect_to user_checkouts_url(@basket.user) }
       format.json { head :no_content }
     end
+  end
+
+  private
+  def set_basket
+    @basket = Basket.find(params[:id])
+    authorize @basket
+  end
+
+  def basket_params
+    params.require(:basket).permit(
+      :note, :user_number, :username
+    )
   end
 end
