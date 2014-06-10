@@ -1,5 +1,7 @@
 # -*- encoding: utf-8 -*-
 class Library < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
   include MasterModel
   default_scope {order('libraries.position')}
   scope :real, -> {where('id != 1')}
@@ -12,11 +14,22 @@ class Library < ActiveRecord::Base
   friendly_id :name
   geocoded_by :address
 
-  searchable do
-    text :name, :display_name, :note, :address
-    time :created_at
-    time :updated_at
-    integer :position
+  settings do
+    mappings dynamic: 'false', _routing: {required: true, path: :required_role_id} do
+      indexes :name
+      indexes :display_name
+      indexes :note
+      indexes :address
+      indexes :created_at
+      indexes :updated_at
+      indexes :position
+    end
+  end
+
+  def as_indexed_json
+    as_json.merge(
+      address: address
+    )
   end
 
   validates_associated :library_group
