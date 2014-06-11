@@ -1,4 +1,6 @@
 class Shelf < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
   include MasterModel
   scope :real, -> {where('library_id != 1')}
   belongs_to :library, :validate => true
@@ -12,15 +14,19 @@ class Shelf < ActiveRecord::Base
 
   acts_as_list :scope => :library
 
-  searchable do
-    string :name
-    string :library do
-      library.name
+  settings do
+    mappings dynamic: 'false', _routing: {required: true, path: :required_role_id} do
+      indexes :name
+      indexes :library
+      indexes :position
     end
-    text :name do
-      [name, library.name, display_name, library.display_name]
-    end
-    integer :position
+  end
+
+  def as_indexed_json(options={})
+    as_json.merge(
+      name: [name, library.name, display_name, library.display_name],
+      library: library.name,
+    )
   end
 
   paginates_per 10

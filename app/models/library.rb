@@ -14,6 +14,20 @@ class Library < ActiveRecord::Base
   friendly_id :name
   geocoded_by :address
 
+  index_name "#{name.downcase.pluralize}-#{Rails.env}"
+
+  after_commit on: :create do
+    index_document
+  end
+
+  after_commit on: :update do
+    update_document
+  end
+
+  after_commit on: :destroy do
+    delete_document
+  end
+
   settings do
     mappings dynamic: 'false', _routing: {required: true, path: :required_role_id} do
       indexes :name
@@ -26,7 +40,7 @@ class Library < ActiveRecord::Base
     end
   end
 
-  def as_indexed_json
+  def as_indexed_json(options={})
     as_json.merge(
       address: address
     )

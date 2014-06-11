@@ -13,15 +13,21 @@ module EnjuLibrary
         belongs_to :shelf, :counter_cache => true, :validate => true
         validates_associated :shelf
 
-        searchable do
-          string :library do
-            shelf.library.name if shelf
+        settings do
+          mappings dynamic: 'false', _routing: {required: true, path: :required_role_id} do
+            indexes :library
           end
         end
       end
     end
 
     module InstanceMethods
+      def as_indexed_json(options={})
+        super.merge(
+          library: shelf.library.try(:name)
+        )
+      end
+
       def shelf_name
         shelf.name
       end
