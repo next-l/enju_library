@@ -50,11 +50,14 @@
       <%= library.address -%>
     </td>
     <td>
-      <%= library.telephone_number_1 -%>
+      tel: <%= library.telephone_number_1 -%>
+      <% if library.telephone_number_2.present? %>
       <br />
-      <%= library.telephone_number_2 -%>
+        tel: <%= library.telephone_number_2 -%>
+      <% end %>
+      <br />
+      fax: <%= library.fax_number -%>
     </td>
-    <td><%= library.fax_number -%></td>
     <td>
       <%- if policy(library).update? -%>
         <%= link_to t('page.edit'), edit_library_path(library) -%>
