@@ -34,6 +34,7 @@ ja:
         deleted_at: 削除時刻
         opening_hour: 開館時間
         isil: ISIL
+        address: 住所
       shelf:
         name: 名前
         display_name: 表示名
