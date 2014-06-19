@@ -22,7 +22,6 @@ class Accept < ActiveRecord::Base
       use_restriction = UseRestriction.where(name: 'Limited Circulation, Normal Loan Period').first
       item.use_restriction = use_restriction if use_restriction
     end
-    item.save(:validate => false)
   end
 end
 
