@@ -20,11 +20,15 @@
     <th id="position"></th>
     <th><%= t('activerecord.attributes.library.name') -%></th>
     <th>
+      <%= t('activerecord.attributes.library.display_name') -%>
+      /
+      <%= t('activerecord.attributes.library.address') -%>
+    </th>
+    <th>
       <%= t('activerecord.attributes.library.telephone_number_1') -%>
       /
       <%= t('activerecord.attributes.library.telephone_number_2') -%>
-    </th>
-    <th>
+      <br />
       <%= t('activerecord.attributes.library.fax_number') -%>
     </th>
     <th></th>
@@ -38,6 +42,7 @@
         <%= library.last? ? image_tag('icons/stop.png', :size => '16x16') : link_to(image_tag('icons/arrow_down.png', :size => '16x16', :alt => t('page.desc')), {:action => 'update', :move => 'lower', :id => library.name}, :method => :put) -%>
       <%- end -%>
     </td>
+    <td><%= link_to library.name, library -%></td>
     <td>
       <%= link_to library.display_name.localize, library -%>
       <br />
@@ -45,11 +50,14 @@
       <%= library.address -%>
     </td>
     <td>
-      <%= library.telephone_number_1 -%>
+      tel: <%= library.telephone_number_1 -%>
+      <% if library.telephone_number_2.present? %>
       <br />
-      <%= library.telephone_number_2 -%>
+        tel: <%= library.telephone_number_2 -%>
+      <% end %>
+      <br />
+      fax: <%= library.fax_number -%>
     </td>
-    <td><%= library.fax_number -%></td>
     <td>
       <%- if can? :update, library -%>
         <%= link_to t('page.edit'), edit_library_path(library) -%>
