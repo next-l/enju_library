@@ -10,6 +10,7 @@ class Accept < ActiveRecord::Base
   validates_presence_of :basket_id
 
   before_save :accept!, :on => :create
+  after_save :expire_manifestation_cache, if: Proc.new{|record| record.item.try(:manifestation).present?}
 
   attr_accessor :item_identifier
 
@@ -22,6 +23,10 @@ class Accept < ActiveRecord::Base
       use_restriction = UseRestriction.where(name: 'Limited Circulation, Normal Loan Period').first
       item.use_restriction = use_restriction if use_restriction
     end
+  end
+
+  def expire_manifestation_cache
+    ExpireFragmentCache.expire_fragment_cache(item.manifestation)
   end
 end
 
