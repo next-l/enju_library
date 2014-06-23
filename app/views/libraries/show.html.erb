@@ -1,4 +1,4 @@
-<div id="content_detail" class="ui-corner-all">
+<div id="content_detail" class="ui-corner-all ui-widget-content">
 <h1 class="title"><%= @library.display_name.localize -%></h1>
 <div id="content_list">
 <p id="notice"><%= notice %></p>
@@ -112,7 +112,7 @@
   </div>
 </div>
 
-<div id="submenu" class="ui-corner-all">
+<div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
   <%- if can? :update, @library -%>
     <li><%= link_to t('page.edit'), edit_library_path(@library) -%></li>
