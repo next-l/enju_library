@@ -2,7 +2,6 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
-  after_action :solr_commit, :only => [:create, :update, :destroy]
 
   # GET /libraries
   # GET /libraries.json

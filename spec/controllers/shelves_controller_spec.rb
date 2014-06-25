@@ -9,7 +9,8 @@ describe ShelvesController do
 
   describe "GET index", :solr => true do
     before do
-      Shelf.reindex
+      Shelf.__elasticsearch__.create_index!
+      Shelf.import
     end
 
     describe "When logged in as Administrator" do

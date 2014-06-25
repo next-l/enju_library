@@ -1,9 +1,7 @@
 require 'spec_helper'
-require 'sunspot/rails/spec_helper'
 
 describe SearchEnginesController do
   fixtures :all
-  disconnect_sunspot
 
   def valid_attributes
     FactoryGirl.attributes_for(:search_engine)

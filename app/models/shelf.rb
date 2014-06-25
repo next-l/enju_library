@@ -15,7 +15,7 @@ class Shelf < ActiveRecord::Base
   acts_as_list :scope => :library
 
   settings do
-    mappings dynamic: 'false', _routing: {required: true, path: :required_role_id} do
+    mappings dynamic: 'false', _routing: {required: false} do
       indexes :name
       indexes :library
       indexes :position

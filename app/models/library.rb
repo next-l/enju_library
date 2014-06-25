@@ -29,7 +29,7 @@ class Library < ActiveRecord::Base
   end
 
   settings do
-    mappings dynamic: 'false', _routing: {required: true, path: :required_role_id} do
+    mappings dynamic: 'false', _routing: {required: false} do
       indexes :name
       indexes :display_name
       indexes :note

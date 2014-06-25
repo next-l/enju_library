@@ -3,9 +3,10 @@ require 'spec_helper'
 describe LibrariesController do
   fixtures :all
 
-  describe "GET index", :solr => true do
+  describe "GET index" do
     before do
-      Library.reindex
+      Library.__elasticsearch__.create_index!
+      Library.import
     end
 
     describe "When logged in as Administrator" do
