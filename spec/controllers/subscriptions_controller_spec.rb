@@ -9,7 +9,8 @@ describe SubscriptionsController do
 
   describe "GET index", :solr => true do
     before do
-      Subscription.reindex
+      Subscription.__elasticsearch__.create_index!
+      Subscription.import
     end
 
     describe "When logged in as Administrator" do
