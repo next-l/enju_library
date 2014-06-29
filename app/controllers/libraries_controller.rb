@@ -7,6 +7,11 @@ class LibrariesController < ApplicationController
   # GET /libraries.json
   def index
     authorize Library
+    if params[:query].to_s.strip == ''
+      user_query = '*'
+    else
+      user_query = params[:query]
+    end
     sort = {:sort_by => 'position', :order => 'asc'}
     case params[:sort_by]
     when 'name'
@@ -14,14 +19,25 @@ class LibrariesController < ApplicationController
     end
     sort[:order] = 'desc' if params[:order] == 'desc'
 
-    query = @query = params[:query].to_s.strip
+    @query = params[:query]
     page = params[:page] || 1
 
-    @libraries = Library.search(:include => [:shelves]) do
-      fulltext query if query.present?
-      paginate :page => page.to_i, :per_page => Library.default_per_page
-      order_by sort[:sort_by], sort[:order]
-    end.results
+    query = {
+      query: {
+        filtered: {
+          query: {
+            query_string: {
+              query: user_query, fields: ['_all']
+            }
+          }
+        }
+      },
+      sort: {
+        :"#{sort[:sort_by]}" => sort[:order]
+      }
+    }
+
+    @libraries = Library.search(query).page(params[:page]).records
 
     respond_to do |format|
       format.html # index.html.erb
@@ -33,15 +49,23 @@ class LibrariesController < ApplicationController
   # GET /libraries/1.json
   def show
     if defined?(EnjuEvent)
-      search = Sunspot.new_search(Event)
-      library_id = @library.id
-      search.build do
-        with(:library_id).equal_to library_id
-        order_by(:start_at, :desc)
-      end
+      query = {
+        query: {
+          filtered: {
+            filter: {
+              term: {
+                library_id: @library.id
+              }
+            }
+          }
+        },
+        sort: {
+          start_at: 'desc'
+        }
+      }
+
       page = params[:event_page] || 1
-      search.query.paginate(page.to_i, Event.default_per_page)
-      @events = search.execute!.results
+      @events = Event.search(query).page(page).per(Event.default_per_page)
     end
 
     respond_to do |format|
