@@ -9,6 +9,7 @@ require 'rspec/autorun'
 require 'vcr'
 require 'factory_girl'
 require 'sunspot-rails-tester'
+require 'rspec/active_model/mocks'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -50,6 +51,8 @@ RSpec.configure do |config|
     Sunspot.session = $original_sunspot_session
     Sunspot.remove_all!
   end
+
+  config.infer_spec_type_from_file_location!
 end
 
 FactoryGirl.definition_file_paths << "#{::Rails.root}/../../spec/factories"

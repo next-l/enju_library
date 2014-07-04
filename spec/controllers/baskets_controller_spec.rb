@@ -233,14 +233,14 @@ describe BasketsController do
       it "should not create basket when user is suspended" do
         post :create, :basket => {:user_number => users(:user4).user_number }
         assigns(:basket).should_not be_valid
-        assigns(:basket).errors["base"].include?(I18n.t('basket.this_account_is_suspended')).should be_true
+        assigns(:basket).errors["base"].include?(I18n.t('basket.this_account_is_suspended')).should be_truthy
         response.should be_success
       end
 
       it "should not create basket when user is not found" do
         post :create, :basket => {:user_number => 'not found' }
         assigns(:basket).should_not be_valid
-        assigns(:basket).errors["base"].include?(I18n.t('user.not_found')).should be_true
+        assigns(:basket).errors["base"].include?(I18n.t('user.not_found')).should be_truthy
         response.should be_success
       end
 
