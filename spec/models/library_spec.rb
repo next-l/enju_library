@@ -9,7 +9,7 @@ describe Library do
   end
 
   it "should should create default shelf" do
-    @library.shelves.first.should be_true
+    @library.shelves.first.should be_truthy
     @library.shelves.first.name.should eq "#{@library.name}_default"
   end
 end
