@@ -4,7 +4,7 @@ describe RequestTypesController do
   fixtures :all
 
   def valid_attributes
-    FactoryGirl.attributes_for(:request_status_type)
+    FactoryGirl.attributes_for(:request_type)
   end
 
   describe "GET index" do
