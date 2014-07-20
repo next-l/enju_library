@@ -7,7 +7,7 @@ class AcceptsController < ApplicationController
   # GET /accepts
   def index
     authorize Accept
-    if params[:format] == 'csv'
+    if params[:format] == 'txt'
       @accepts = Accept.order('accepts.created_at DESC').page(params[:page]).per(65534)
     else
       if params[:accept]
