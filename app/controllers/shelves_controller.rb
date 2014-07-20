@@ -66,7 +66,7 @@ class ShelvesController < ApplicationController
   def new
     @shelf = Shelf.new
     authorize @shelf
-    @library = Library.web if @library.nil?
+    @library = current_user.library unless @library
     @shelf.library = @library
     #@shelf.user = current_user
 
