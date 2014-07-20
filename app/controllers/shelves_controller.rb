@@ -62,8 +62,8 @@ class ShelvesController < ApplicationController
   # GET /shelves/new
   # GET /shelves/new.json
   def new
-    @library = current_user.library
     @shelf = Shelf.new
+    @library = current_user.library unless @library
     @shelf.library = @library
     #@shelf.user = current_user
 
