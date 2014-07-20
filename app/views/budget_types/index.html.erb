@@ -6,6 +6,7 @@
   <tr>
     <th id="position"></th>
     <th><%= t('activerecord.attributes.budget_type.name') -%></th>
+    <th><%= t('activerecord.attributes.budget_type.display_name') -%></th>
     <th><%= t('activerecord.attributes.budget_type.note') -%></th>
     <th></th>
   </tr>
@@ -17,9 +18,8 @@
         <%= move_position(budget_type) -%>
       <%- end -%>
     </td>
-    <td>
-      <%= link_to budget_type.name, budget_type -%>
-    </td>
+    <td><%= link_to budget_type.name, budget_type -%></td>
+    <td><%= link_to budget_type.display_name.localize, budget_type -%></td>
     <td><%= budget_type.note -%></td>
     <td>
       <%- if policy(budget_type).update? -%>
