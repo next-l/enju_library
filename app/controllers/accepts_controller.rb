@@ -7,7 +7,7 @@ class AcceptsController < InheritedResources::Base
   # GET /accepts
   # GET /accepts.json
   def index
-    if params[:format] == 'csv'
+    if params[:format] == 'txt'
       @accepts = Accept.order('accepts.created_at DESC').page(params[:page]).per(65534)
     else
       if params[:accept]
@@ -30,7 +30,7 @@ class AcceptsController < InheritedResources::Base
       format.html # index.html.erb
       format.json { render :json => @accepts }
       format.js { @accept = Accept.new }
-      format.csv
+      format.txt
     end
   end
 
