@@ -50,13 +50,17 @@
       <%= library.address -%>
     </td>
     <td>
-      tel: <%= library.telephone_number_1 -%>
+      <% if library.telephone_number_1.present? %>
+        tel: <%= library.telephone_number_1 -%>
+      <% end %>
       <% if library.telephone_number_2.present? %>
       <br />
         tel: <%= library.telephone_number_2 -%>
       <% end %>
       <br />
-      fax: <%= library.fax_number -%>
+      <% if library.fax_number.present? %>
+        fax: <%= library.fax_number -%>
+      <% end %>
     </td>
     <td>
       <%- if can? :update, library -%>
