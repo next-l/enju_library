@@ -4,13 +4,13 @@ describe "budget_types/index" do
   before(:each) do
     assign(:budget_types, [
       stub_model(BudgetType,
-        :name => "Public funds",
+        :name => "public_funds",
         :display_name => "Public funds",
         :note => "MyText",
         :position => 1
       ),
       stub_model(BudgetType,
-        :name => "Donation",
+        :name => "donation",
         :display_name => "Donation",
         :note => "MyText",
         :position => 2
