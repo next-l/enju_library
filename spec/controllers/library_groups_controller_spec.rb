@@ -84,7 +84,7 @@ describe LibraryGroupsController do
   describe "PUT update" do
     before(:each) do
       @library_group = LibraryGroup.find(1)
-      @attrs = {:name => 'example', :email => 'library@example.jp'}
+      @attrs = {:name => 'example'}
       @invalid_attrs = {:name => ''}
     end
 

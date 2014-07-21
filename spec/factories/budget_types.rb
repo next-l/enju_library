@@ -3,3 +3,16 @@ FactoryGirl.define do
     f.sequence(:name){|n| "budget_type_#{n}"}
   end
 end
+
+# == Schema Information
+#
+# Table name: budget_types
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  display_name :text
+#  note         :text
+#  position     :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
