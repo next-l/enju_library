@@ -8,20 +8,9 @@ class LibraryGroup < ActiveRecord::Base
 
   validates :email, :format => {:with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i}, :presence => true
   validates :url, :presence => true, :url => true
-  after_save :clear_site_config_cache, :save_system_email
-
-  def clear_site_config_cache
-    Rails.cache.delete('library_site_config')
-  end
 
   def self.site_config
-    #if Rails.env == 'production'
-    #  Rails.cache.fetch('library_site_config'){LibraryGroup.find(1)}
-    #else
-      LibraryGroup.find(1)
-    #end
-  rescue ActiveRecord::RecordNotFound
-    nil
+    LibraryGroup.find(1)
   end
 
   def self.system_name(locale = I18n.locale)
@@ -57,10 +46,8 @@ class LibraryGroup < ActiveRecord::Base
     return false
   end
 
-  def save_system_email
-    user = User.find(1)
-    user.email = email
-    user.save!
+  def user
+    User.find(1)
   end
 end
 
