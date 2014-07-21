@@ -7,3 +7,15 @@ FactoryGirl.define do
     librarian_id{FactoryGirl.create(:librarian).id}
   end
 end
+
+# == Schema Information
+#
+# Table name: accepts
+#
+#  id           :integer          not null, primary key
+#  basket_id    :integer
+#  item_id      :integer
+#  librarian_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#

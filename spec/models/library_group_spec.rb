@@ -23,15 +23,13 @@ end
 #  name           :string(255)      not null
 #  display_name   :text
 #  short_name     :string(255)      not null
-#  email          :string(255)
 #  my_networks    :text
 #  login_banner   :text
 #  note           :text
 #  country_id     :integer
 #  position       :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #  admin_networks :text
 #  url            :string(255)      default("http://localhost:3000/")
 #
-

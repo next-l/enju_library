@@ -1,10 +1,9 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
   id: 1
-  name: enju_library
-  display_name: "<%= I18n.locale %>: Enju Library"
-  short_name: enju
-  email: next-l@library.example.jp
+  name: unknown
+  display_name: unknown
+  short_name: unknown
   note: 
   my_networks: "0.0.0.0/0\r\n\
     ::/0"
@@ -13,7 +12,6 @@ one:
   login_banner: "*Next-L Enju*"
   admin_networks: "0.0.0.0/0\r\n\
     ::/0"
-
 # == Schema Information
 #
 # Table name: library_groups
@@ -22,7 +20,21 @@ one:
 #  name           :string(255)      not null
 #  display_name   :text
 #  short_name     :string(255)      not null
+#  my_networks    :text
+#  login_banner   :text
+#  note           :text
+#  country_id     :integer
+#  position       :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#  admin_networks :text
+#  url            :string(255)      default("http://localhost:3000/")
+#
+
+<<<<<<< HEAD
 #  email          :string(255)
+=======
+>>>>>>> 4e77fe8... updated annotations
 #  my_networks    :text
 #  login_banner   :text
 #  note           :text
@@ -33,4 +45,3 @@ one:
 #  admin_networks :text
 #  url            :string(255)      default("http://localhost:3000/")
 #
-

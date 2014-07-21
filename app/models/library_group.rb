@@ -6,7 +6,6 @@ class LibraryGroup < ActiveRecord::Base
   has_many :libraries
   belongs_to :country
 
-  validates :email, :format => {:with => /\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})\z/i}, :presence => true
   validates :url, :presence => true, :url => true
 
   def self.site_config
@@ -59,15 +58,13 @@ end
 #  name           :string(255)      not null
 #  display_name   :text
 #  short_name     :string(255)      not null
-#  email          :string(255)
 #  my_networks    :text
 #  login_banner   :text
 #  note           :text
 #  country_id     :integer
 #  position       :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #  admin_networks :text
 #  url            :string(255)      default("http://localhost:3000/")
 #
-
