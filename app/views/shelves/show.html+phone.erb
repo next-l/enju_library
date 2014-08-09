@@ -1,5 +1,5 @@
 <div data-role="header">
-<h1 class="title"><%= t('page.showing', :model => t('activerecord.models.shelf')) -%></h1>
+<h1 class="title"><%= t('page.showing', model: t('activerecord.models.shelf')) -%></h1>
 </div>
 <div data-role="content">
 <% if current_user.try(:has_role?, 'Librarian') %>

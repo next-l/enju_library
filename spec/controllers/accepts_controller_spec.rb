@@ -168,7 +168,7 @@ describe AcceptsController do
         describe "When basket_id is specified" do
           it "redirects to the created accept" do
             post :create, :accept => @attrs, :basket_id => 9
-            response.should redirect_to(basket_accepts_url(assigns(:accept).basket))
+            response.should redirect_to(accepts_url(basket_id: assigns(:accept).basket.id))
             assigns(:accept).item.circulation_status.name.should eq 'Available On Shelf'
           end
         end
