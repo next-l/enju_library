@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.subscription')) -%></h1>
+<h1 class="title"><%= t('page.listing', model: t('activerecord.models.subscription')) -%></h1>
 <div id="content_list">
 
 <table class="table table-striped index">
@@ -16,7 +16,7 @@
     <td>
       <% if can? :delete, subscription %>
         <%= link_to t('page.edit'), edit_subscription_path(subscription) -%>
-        <%= link_to t('page.destroy'), subscription, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
+        <%= link_to t('page.destroy'), subscription, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <% end %>
     </td>
   </tr>
@@ -31,9 +31,9 @@
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
     <%- if @work -%>
-      <li><%= link_to t('page.add', :model => t('activerecord.models.work')), subscriptions_path -%></li>
+      <li><%= link_to t('page.add', model: t('activerecord.models.work')), subscriptions_path -%></li>
     <%- else -%>
-      <li><%= link_to t('page.new', :model => t('activerecord.models.subscription')), new_subscription_path -%></li>
+      <li><%= link_to t('page.new', model: t('activerecord.models.subscription')), new_subscription_path -%></li>
     <%- end -%>
   </ul>
 </div>

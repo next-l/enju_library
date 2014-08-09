@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.subscribe')) -%></h1>
+<h1 class="title"><%= t('page.listing', model: t('activerecord.models.subscribe')) -%></h1>
 <div id="content_list">
 
 <table class="table table-striped index">
@@ -14,7 +14,7 @@
     <td><%= link_to subscribe.work.original_title, subscribe.work -%></td>
     <td><%= link_to t('page.show'), subscribe -%></td>
     <td><%= link_to t('page.edit'), edit_subscribe_path(subscribe) -%></td>
-    <td><%= link_to t('page.destroy'), subscribe, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%></td>
+    <td><%= link_to t('page.destroy'), subscribe, data: {confirm: t('page.are_you_sure')}, method: :delete -%></td>
   </tr>
 <%- end -%>
 </table>
@@ -26,6 +26,6 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.new', :model => t('activerecord.models.subscribe')), new_subscribe_path -%></li>
+    <li><%= link_to t('page.new', model: t('activerecord.models.subscribe')), new_subscribe_path -%></li>
   </ul>
 </div>

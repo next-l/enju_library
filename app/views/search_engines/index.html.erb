@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.search_engine')) -%></h1>
+<h1 class="title"><%= t('page.listing', model: t('activerecord.models.search_engine')) -%></h1>
 <div id="content_list">
 
 <table class="table table-striped index">
@@ -26,7 +26,7 @@
         <%= link_to t('page.edit'), edit_search_engine_path(search_engine) -%>
       <% end %>
       <%- if can? :delete, search_engine -%>
-        <%= link_to t('page.destroy'), search_engine, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
+        <%= link_to t('page.destroy'), search_engine, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
   </tr>
@@ -39,6 +39,6 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.new', :model => t('activerecord.models.search_engine')), new_search_engine_path -%></li>
+    <li><%= link_to t('page.new', model: t('activerecord.models.search_engine')), new_search_engine_path -%></li>
   </ul>
 </div>

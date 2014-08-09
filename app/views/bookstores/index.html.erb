@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.bookstore')) -%></h1>
+<h1 class="title"><%= t('page.listing', model: t('activerecord.models.bookstore')) -%></h1>
 <div id="content_list">
 
 <table class="table table-striped index">
@@ -29,7 +29,7 @@
         <%= link_to t('page.edit'), edit_bookstore_path(bookstore) -%>
       <% end %>
       <%- if can? :delete, bookstore -%>
-        <%= link_to t('page.destroy'), bookstore, :data => {:confirm => t('page.are_you_sure')}, :method => :delete -%>
+        <%= link_to t('page.destroy'), bookstore, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
   </tr>
@@ -43,7 +43,7 @@
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <%- if can? :create, Bookstore -%>
     <ul>
-      <li><%= link_to t('page.new', :model => t('activerecord.models.bookstore')), new_bookstore_path -%></li>
+      <li><%= link_to t('page.new', model: t('activerecord.models.bookstore')), new_bookstore_path -%></li>
     </ul>
   <%- end -%>
 </div>

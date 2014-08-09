@@ -107,7 +107,7 @@ class ShelvesController < ApplicationController
 
     if params[:move]
       move_position(@shelf, params[:move], false)
-      redirect_to library_shelves_url(@shelf.library)
+      redirect_to shelves_url(library_id: @shelf.library_id)
       return
     end
 

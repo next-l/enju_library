@@ -1,5 +1,5 @@
 <div id="content_detail" class="ui-corner-all ui-widget-content">
-<h1 class="title"><%= t('page.listing', :model => t('activerecord.models.basket')) -%></h1>
+<h1 class="title"><%= t('page.listing', model: t('activerecord.models.basket')) -%></h1>
 <div id="content_list">
 
 <table class="table table-striped index">
@@ -7,6 +7,7 @@
     <th><%= t('activerecord.models.user') -%></th>
     <th><%= t('activerecord.attributes.basket.note') -%></th>
     <th><%= t('page.updated_at') -%></th>
+    <th></th>
   </tr>
 
 <%- @baskets.each do |basket| -%>
@@ -26,6 +27,6 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.new', :model => t('activerecord.models.basket')), new_basket_path -%></li>
+    <li><%= link_to t('page.new', model: t('activerecord.models.basket')), new_basket_path -%></li>
   </ul>
 </div>

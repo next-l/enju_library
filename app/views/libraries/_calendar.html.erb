@@ -1,5 +1,5 @@
 <div id="event_list">
-  (<%= link_to t('page.calendar'), :controller => :calendar, :action => :index, :library_id => @library.name -%>)
+  (<%= link_to t('page.calendar'), controller: :calendar, action: :index, library_id: @library.name -%>)
   <ul>
     <%- @events.each do |event| -%>
       <li>
@@ -9,5 +9,5 @@
     <%- end -%>
   </ul>
 
-  <%= paginate(@events, :param_name => :event_page, :remote => true) -%>
+  <%= paginate(@events, param_name: :event_page, remote: true) -%>
 </div>
