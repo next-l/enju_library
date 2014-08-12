@@ -49,11 +49,9 @@ class BasketsController < ApplicationController
   # POST /baskets.json
   def create
     @basket = Basket.new(params[:basket])
-    @user = User.where(:user_number => @basket.user_number).first if @basket.user_number
+    @user = Profile.where(user_number: @basket.user_number).first.try(:user) if @basket.user_number.present?
     if @user
-      if @user.user_number?
-        @basket.user = @user
-      end
+      @basket.user = @user
     end
 
     respond_to do |format|

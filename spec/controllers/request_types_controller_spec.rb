@@ -15,7 +15,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all request_types as @request_types" do
         get :index
@@ -24,7 +24,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns all request_types as @request_types" do
         get :index
@@ -33,7 +33,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign request_types as @request_types" do
         get :index
@@ -57,7 +57,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested request_type as @request_type" do
         get :show, :id => @request_type.id
@@ -66,7 +66,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested request_type as @request_type" do
         get :show, :id => @request_type.id
@@ -75,7 +75,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested request_type as @request_type" do
         get :show, :id => @request_type.id
@@ -93,7 +93,7 @@ describe RequestTypesController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested request_type as @request_type" do
         get :new
@@ -103,7 +103,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "should not assign the requested request_type as @request_type" do
         get :new
@@ -113,7 +113,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign the requested request_type as @request_type" do
         get :new
@@ -137,7 +137,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested request_type as @request_type" do
         get :edit, :id => @request_type.id
@@ -146,7 +146,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested request_type as @request_type" do
         get :edit, :id => @request_type.id
@@ -155,7 +155,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested request_type as @request_type" do
         get :edit, :id => @request_type.id
@@ -178,7 +178,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "assigns a newly created request_type as @request_type" do
@@ -206,7 +206,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "assigns a newly created request_type as @request_type" do
@@ -234,7 +234,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "assigns a newly created request_type as @request_type" do
@@ -296,7 +296,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested request_type" do
@@ -323,7 +323,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "updates the requested request_type" do
@@ -346,7 +346,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "updates the requested request_type" do
@@ -395,7 +395,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "destroys the requested request_type" do
         delete :destroy, :id => @request_type.id
@@ -408,7 +408,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "destroys the requested request_type" do
         delete :destroy, :id => @request_type.id
@@ -421,7 +421,7 @@ describe RequestTypesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "destroys the requested request_type" do
         delete :destroy, :id => @request_type.id

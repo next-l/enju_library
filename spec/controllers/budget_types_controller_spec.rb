@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe BudgetTypesController do
   fixtures :all
-  login_admin
+  login_fixture_admin
 
   # This should return the minimal set of attributes required to create a valid
   # BudgetType. As you add validations to BudgetType, be sure to

@@ -15,7 +15,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all search_engines as @search_engines" do
         get :index
@@ -24,7 +24,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns all search_engines as @search_engines" do
         get :index
@@ -33,7 +33,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns all search_engines as @search_engines" do
         get :index
@@ -53,7 +53,7 @@ describe SearchEnginesController do
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested search_engine as @search_engine" do
         search_engine = FactoryGirl.create(:search_engine)
@@ -63,7 +63,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested search_engine as @search_engine" do
         search_engine = FactoryGirl.create(:search_engine)
@@ -73,7 +73,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested search_engine as @search_engine" do
         search_engine = FactoryGirl.create(:search_engine)
@@ -93,7 +93,7 @@ describe SearchEnginesController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested search_engine as @search_engine" do
         get :new
@@ -103,7 +103,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "should not assign the requested search_engine as @search_engine" do
         get :new
@@ -113,7 +113,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign the requested search_engine as @search_engine" do
         get :new
@@ -133,7 +133,7 @@ describe SearchEnginesController do
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested search_engine as @search_engine" do
         search_engine = FactoryGirl.create(:search_engine)
@@ -143,7 +143,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested search_engine as @search_engine" do
         search_engine = FactoryGirl.create(:search_engine)
@@ -153,7 +153,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested search_engine as @search_engine" do
         search_engine = FactoryGirl.create(:search_engine)
@@ -178,7 +178,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "assigns a newly created search_engine as @search_engine" do
@@ -206,7 +206,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "assigns a newly created search_engine as @search_engine" do
@@ -234,7 +234,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "assigns a newly created search_engine as @search_engine" do
@@ -296,7 +296,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested search_engine" do
@@ -323,7 +323,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "updates the requested search_engine" do
@@ -346,7 +346,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "updates the requested search_engine" do
@@ -395,7 +395,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "destroys the requested search_engine" do
         delete :destroy, :id => @search_engine.id
@@ -408,7 +408,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "destroys the requested search_engine" do
         delete :destroy, :id => @search_engine.id
@@ -421,7 +421,7 @@ describe SearchEnginesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "destroys the requested search_engine" do
         delete :destroy, :id => @search_engine.id
