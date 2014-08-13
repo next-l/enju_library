@@ -74,7 +74,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       if @library.save
-        format.html { redirect_to @library, :notice => t('controller.successfully_created', :model => t('activerecord.models.library')) }
+        format.html { redirect_to @library, notice:  t('controller.successfully_created', model:  t('activerecord.models.library')) }
         format.json { render json: @library, status: :created }
       else
         prepare_options
@@ -94,7 +94,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       if @library.update_attributes(params[:library])
-        format.html { redirect_to @library, :notice => t('controller.successfully_updated', :model => t('activerecord.models.library')) }
+        format.html { redirect_to @library, notice:  t('controller.successfully_updated', model:  t('activerecord.models.library')) }
         format.json { head :no_content }
       else
         @library.name = @library.name_was
