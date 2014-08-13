@@ -9,7 +9,7 @@ class LibraryGroup < ActiveRecord::Base
   has_many :libraries
   belongs_to :country
 
-  validates :url, :presence => true, :url => true
+  validates :url, presence: true, url: true
 
   def self.site_config
     LibraryGroup.find(1)

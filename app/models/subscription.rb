@@ -1,10 +1,10 @@
 class Subscription < ActiveRecord::Base
   attr_accessible :title, :note, :order_list_id, :user_id
-  has_many :subscribes, :dependent => :destroy
-  has_many :works, :through => :subscribes
-  belongs_to :user, :validate => true
+  has_many :subscribes, dependent: :destroy
+  has_many :works, through: :subscribes
+  belongs_to :user, validate: true
   if defined?(EnjuPurchasRequest)
-    belongs_to :order_list, :validate => true
+    belongs_to :order_list, validate: true
   end
 
   validates_presence_of :title, :user

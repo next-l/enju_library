@@ -13,7 +13,7 @@ class BasketsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @baskets }
+      format.json { render json: @baskets }
     end
   end
 
@@ -22,7 +22,7 @@ class BasketsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @basket }
+      format.json { render json: @basket }
     end
   end
 
@@ -34,7 +34,7 @@ class BasketsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @basket }
+      format.json { render json: @basket }
     end
   end
 
@@ -54,10 +54,10 @@ class BasketsController < ApplicationController
     respond_to do |format|
       if @basket.save
         format.html { redirect_to new_basket_checked_item_url(@basket), :notice => t('controller.successfully_created', :model => t('activerecord.models.basket')) }
-        format.json { render :json => @basket, :status => :created, :location => @basket }
+        format.json { render json: @basket, status: :created, :location => @basket }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @basket.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @basket.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -86,7 +86,7 @@ class BasketsController < ApplicationController
         format.json { head :no_content }
       else
         format.html { redirect_to basket_checked_items_url(@basket) }
-        format.json { render :json => @basket.errors, :status => :unprocessable_entity }
+        format.json { render json: @basket.errors, status: :unprocessable_entity }
       end
     end
 

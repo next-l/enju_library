@@ -1,14 +1,14 @@
 class SearchEngine < ActiveRecord::Base
   attr_accessible :name, :display_name, :url, :base_url, :http_method,
     :query_param, :additional_param, :note
-  default_scope :order => "search_engines.position"
+  default_scope order: "search_engines.position"
   acts_as_list
 
-  validates :name, :presence => true
-  validates :query_param, :presence => true
-  validates :http_method, :presence => true, :inclusion => %w(get post)
-  validates :url, :presence => true, :url => true, :length => {:maximum => 255}
-  validates :base_url, :presence => true, :url => true, :length => {:maximum => 255}
+  validates :name, presence: true
+  validates :query_param, presence: true
+  validates :http_method, presence: true, :inclusion => %w(get post)
+  validates :url, presence: true, url: true, :length => {:maximum => 255}
+  validates :base_url, presence: true, url: true, :length => {:maximum => 255}
   after_save :clear_all_cache
   after_destroy :clear_all_cache
 

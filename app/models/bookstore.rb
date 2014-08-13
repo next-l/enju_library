@@ -1,12 +1,12 @@
 class Bookstore < ActiveRecord::Base
   attr_accessible :name, :zip_code, :address, :note, :telephone_number,
     :fax_number, :url
-  default_scope :order => "bookstores.position"
+  default_scope order: "bookstores.position"
   has_many :items
 
   acts_as_list
   validates_presence_of :name
-  validates :url, :url => true, :allow_blank => true, :length => {:maximum => 255}
+  validates :url, url: true, :allow_blank => true, :length => {:maximum => 255}
 
   paginates_per 10
 

@@ -14,7 +14,7 @@ class SubscriptionsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @subscriptions }
+      format.json { render json: @subscriptions }
     end
   end
 
@@ -23,7 +23,7 @@ class SubscriptionsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @subscription }
+      format.json { render json: @subscription }
     end
   end
 
@@ -34,7 +34,7 @@ class SubscriptionsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @subscription }
+      format.json { render json: @subscription }
     end
   end
 
@@ -51,10 +51,10 @@ class SubscriptionsController < ApplicationController
     respond_to do |format|
       if @subscription.save
         format.html { redirect_to @subscription, :notice => t('controller.successfully_created', :model => t('activerecord.models.subscription')) }
-        format.json { render :json => @subscription, :status => :created, :location => @subscription }
+        format.json { render json: @subscription, status: :created, :location => @subscription }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @subscription.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @subscription.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,8 +68,8 @@ class SubscriptionsController < ApplicationController
         format.html { redirect_to @subscription, :notice => t('controller.successfully_updated', :model => t('activerecord.models.subscription')) }
         format.json { head :no_content }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @subscription.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @subscription.errors, status: :unprocessable_entity }
       end
     end
   end

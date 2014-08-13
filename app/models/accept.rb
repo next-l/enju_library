@@ -1,15 +1,15 @@
 class Accept < ActiveRecord::Base
   attr_accessible :item_identifier, :librarian_id, :item_id
-  default_scope :order => 'accepts.id DESC'
+  default_scope order: 'accepts.id DESC'
   belongs_to :basket
   belongs_to :item, touch: true
-  belongs_to :librarian, :class_name => 'User'
+  belongs_to :librarian, class_name: 'User'
 
   validates_uniqueness_of :item_id, :message => I18n.t('accept.already_accepted')
   validates_presence_of :item_id, :message => I18n.t('accept.item_not_found')
   validates_presence_of :basket_id
 
-  before_save :accept!, :on => :create
+  before_save :accept!, on: :create
 
   attr_accessor :item_identifier
 

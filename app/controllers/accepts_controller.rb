@@ -28,7 +28,7 @@ class AcceptsController < InheritedResources::Base
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @accepts }
+      format.json { render json: @accepts }
       format.js { @accept = Accept.new }
       format.txt
     end
@@ -45,7 +45,7 @@ class AcceptsController < InheritedResources::Base
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @accept }
+      format.json { render json: @accept }
     end
   end
 
@@ -70,13 +70,13 @@ class AcceptsController < InheritedResources::Base
       if @accept.save
         flash[:message] << t('accept.successfully_accepted', :model => t('activerecord.models.accept'))
         format.html { redirect_to accepts_url(basket_id: @basket.id) }
-        format.json { render :json => @accept, :status => :created, :location => @accept }
+        format.json { render json: @accept, status: :created, :location => @accept }
         format.js { redirect_to accepts_url(basket_id: @basket.id, :format => :js) }
       else
         @accepts = @basket.accepts.page(params[:page])
-        format.html { render :action => "index" }
-        format.json { render :json => @accept.errors, :status => :unprocessable_entity }
-        format.js { render :action => "index" }
+        format.html { render action: "index" }
+        format.json { render json: @accept.errors, status: :unprocessable_entity }
+        format.js { render action: "index" }
       end
     end
   end

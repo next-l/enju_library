@@ -2,16 +2,16 @@ class Shelf < ActiveRecord::Base
   attr_accessible :name, :display_name, :note, :library_id, :closed
   include MasterModel
   scope :real, where('library_id != 1')
-  belongs_to :library, :validate => true
+  belongs_to :library, validate: true
   has_many :items, :include => [:circulation_status]
-  has_many :picture_files, :as => :picture_attachable, :dependent => :destroy
+  has_many :picture_files, as: :picture_attachable, dependent: :destroy
 
   validates_associated :library
   validates_presence_of :library
-  validates_uniqueness_of :display_name, :scope => :library_id
+  validates_uniqueness_of :display_name, scope: :library_id
   validates :name, :format => {:with => /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
 
-  acts_as_list :scope => :library
+  acts_as_list scope: :library
 
   searchable do
     string :name

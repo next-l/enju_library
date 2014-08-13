@@ -9,7 +9,7 @@ class LibraryGroupsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @library_groups }
+      format.json { render json: @library_groups }
     end
   end
 
@@ -18,7 +18,7 @@ class LibraryGroupsController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @library_group }
+      format.json { render json: @library_group }
     end
   end
 
@@ -37,8 +37,8 @@ class LibraryGroupsController < ApplicationController
         format.json { head :no_content }
       else
         @countries = Country.all
-        format.html { render :action => "edit" }
-        format.json { render :json => @library_group.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @library_group.errors, status: :unprocessable_entity }
       end
     end
   end

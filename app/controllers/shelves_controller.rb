@@ -26,7 +26,7 @@ class ShelvesController < ApplicationController
       page = params[:page] || 1
       library = @library if @library
 
-      search = Shelf.search(:include => [:library]) do
+      search = Shelf.search(include: [:library]) do
         fulltext query if query.present?
         paginate :page => page.to_i, :per_page => Shelf.default_per_page
         if library
@@ -43,18 +43,18 @@ class ShelvesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @shelves }
+      format.json { render json: @shelves }
     end
   end
 
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-    @shelf = Shelf.find(params[:id], :include => :library)
+    @shelf = Shelf.find(params[:id], include: :library)
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @shelf }
+      format.json { render json: @shelf }
       format.mobile
     end
   end
@@ -69,13 +69,13 @@ class ShelvesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @shelf }
+      format.json { render json: @shelf }
     end
   end
 
   # GET /shelves/1/edit
   def edit
-    @shelf = Shelf.find(params[:id], :include => :library)
+    @shelf = Shelf.find(params[:id], include: :library)
   end
 
   # POST /shelves
@@ -91,11 +91,11 @@ class ShelvesController < ApplicationController
     respond_to do |format|
       if @shelf.save
         format.html { redirect_to @shelf, :notice => t('controller.successfully_created', :model => t('activerecord.models.shelf')) }
-        format.json { render :json => @shelf, :status => :created, :location => @shelf }
+        format.json { render json: @shelf, status: :created, :location => @shelf }
       else
         @library = Library.first if @shelf.library.nil?
-        format.html { render :action => "new" }
-        format.json { render :json => @shelf.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @shelf.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -117,8 +117,8 @@ class ShelvesController < ApplicationController
         format.json { head :no_content }
       else
         @library = Library.first if @library.nil?
-        format.html { render :action => "edit" }
-        format.json { render :json => @shelf.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @shelf.errors, status: :unprocessable_entity }
       end
     end
   end

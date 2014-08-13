@@ -16,7 +16,7 @@ class LibrariesController < ApplicationController
     query = @query = params[:query].to_s.strip
     page = params[:page] || 1
 
-    @libraries = Library.search(:include => [:shelves]) do
+    @libraries = Library.search(include: [:shelves]) do
       fulltext query if query.present?
       paginate :page => page.to_i, :per_page => Library.default_per_page
       order_by sort[:sort_by], sort[:order]
@@ -24,7 +24,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @libraries }
+      format.json { render json: @libraries }
     end
   end
 
@@ -45,7 +45,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @library }
+      format.json { render json: @library }
       format.js
     end
   end
@@ -58,7 +58,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @library }
+      format.json { render json: @library }
     end
   end
 
@@ -75,11 +75,11 @@ class LibrariesController < ApplicationController
     respond_to do |format|
       if @library.save
         format.html { redirect_to @library, :notice => t('controller.successfully_created', :model => t('activerecord.models.library')) }
-        format.json { render :json => @library, :status => :created }
+        format.json { render json: @library, status: :created }
       else
         prepare_options
-        format.html { render :action => "new" }
-        format.json { render :json => @library.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @library.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -99,8 +99,8 @@ class LibrariesController < ApplicationController
       else
         @library.name = @library.name_was
         prepare_options
-        format.html { render :action => "edit" }
-        format.json { render :json => @library.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @library.errors, status: :unprocessable_entity }
       end
     end
   end
