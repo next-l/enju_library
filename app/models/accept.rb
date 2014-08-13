@@ -2,7 +2,7 @@ class Accept < ActiveRecord::Base
   attr_accessible :item_identifier, :librarian_id, :item_id
   default_scope :order => 'accepts.id DESC'
   belongs_to :basket
-  belongs_to :item
+  belongs_to :item, touch: true
   belongs_to :librarian, :class_name => 'User'
 
   validates_uniqueness_of :item_id, :message => I18n.t('accept.already_accepted')
@@ -10,7 +10,6 @@ class Accept < ActiveRecord::Base
   validates_presence_of :basket_id
 
   before_save :accept!, :on => :create
-  after_save :expire_manifestation_cache, if: Proc.new{|record| record.item.try(:manifestation).present?}
 
   attr_accessor :item_identifier
 
@@ -23,10 +22,6 @@ class Accept < ActiveRecord::Base
       use_restriction = UseRestriction.where(name: 'Limited Circulation, Normal Loan Period').first
       item.use_restriction = use_restriction if use_restriction
     end
-  end
-
-  def expire_manifestation_cache
-    ExpireFragmentCache.expire_fragment_cache(item.manifestation)
   end
 end
 

@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 class LibraryGroupsController < ApplicationController
   load_and_authorize_resource
-  cache_sweeper :library_group_sweeper, :only => [:update]
 
   # GET /library_groups
   # GET /library_groups.json
