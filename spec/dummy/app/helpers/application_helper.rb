@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include EnjuLeaf::EnjuLeafHelper
   include EnjuBiblio::BiblioHelper
 
   def back_to_index(options = {})
