@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
   load_and_authorize_resource
   before_filter :get_work
-  after_filter :solr_commit, :only => [:create, :update, :destroy]
+  after_filter :solr_commit, only: [:create, :update, :destroy]
 
   # GET /subscriptions
   # GET /subscriptions.json

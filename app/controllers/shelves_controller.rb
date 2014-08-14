@@ -1,7 +1,7 @@
 class ShelvesController < ApplicationController
   load_and_authorize_resource
   before_filter :get_library
-  before_filter :get_libraries, :only => [:new, :edit, :create, :update]
+  before_filter :get_libraries, only: [:new, :edit, :create, :update]
 
   # GET /shelves
   # GET /shelves.json
@@ -12,7 +12,7 @@ class ShelvesController < ApplicationController
       else
         @shelves = Shelf.real
       end
-      render :partial => 'select_form'
+      render partial: 'select_form'
       return
     else
       sort = {:sort_by => 'name', :order => 'asc'}
