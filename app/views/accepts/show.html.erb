@@ -13,7 +13,7 @@
 
 <p>
   <strong><%= t('activerecord.models.user') -%>:</strong>
-  <%= link_to @accept.librarian.username, @accept.librarian if @accept.librarian -%>
+  <%= link_to @accept.librarian.username, @accept.librarian.profile if @accept.librarian.try(:profile) -%>
 </p>
 
 <p>
