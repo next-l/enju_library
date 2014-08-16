@@ -14,7 +14,7 @@ class Subscription < ActiveRecord::Base
     text :title, :note
     time :created_at
     time :updated_at
-    integer :work_ids, :multiple => true
+    integer :work_ids, multiple: true
   end
 
   paginates_per 10

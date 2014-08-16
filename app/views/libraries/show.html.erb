@@ -46,7 +46,7 @@
           <ul>
             <%- @library.users.librarians.each do |librarian| -%>
               <li>
-                <%= link_to librarian.username, librarian -%>
+                <%= link_to librarian.username, librarian.profile -%>
                 <%- unless librarian.note.blank? -%>
                   <br />
                   <%= librarian.note -%>

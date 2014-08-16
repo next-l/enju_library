@@ -27,10 +27,10 @@ class Library < ActiveRecord::Base
   validates_associated :library_group
   validates_presence_of :short_display_name, :library_group
   validates_uniqueness_of :short_display_name, :case_sensitive => false
-  validates_uniqueness_of :isil, :allow_blank => true
-  validates :display_name, :uniqueness => true
-  validates :name, :format => {:with => /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
-  validates :isil, :format => {:with => /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/}, :allow_blank => true
+  validates_uniqueness_of :isil, allow_blank: true
+  validates :display_name, uniqueness: true
+  validates :name, format: {with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
+  validates :isil, format: {with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/}, allow_blank: true
   after_validation :geocode, :if => :address_changed?
   after_create :create_shelf
   after_save :clear_all_cache
@@ -91,7 +91,7 @@ class Library < ActiveRecord::Base
   end
 
   if defined?(EnjuInterLibraryLoan)
-    has_many :inter_library_loans, :foreign_key => 'borrowing_library_id'
+    has_many :inter_library_loans, foreign_key: 'borrowing_library_id'
   end
 end
 

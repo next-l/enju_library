@@ -9,7 +9,7 @@ class Shelf < ActiveRecord::Base
   validates_associated :library
   validates_presence_of :library
   validates_uniqueness_of :display_name, scope: :library_id
-  validates :name, :format => {:with => /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
+  validates :name, format: {with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
 
   acts_as_list scope: :library
 
