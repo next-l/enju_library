@@ -1,5 +1,4 @@
 require 'enju_seed'
-require 'inherited_resources'
 require 'geocoder'
 require 'ipaddr'
 

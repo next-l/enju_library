@@ -1,7 +1,6 @@
-class AcceptsController < InheritedResources::Base
+class AcceptsController < ApplicationController
   load_and_authorize_resource except: :index
   authorize_resource only: :index
-  respond_to :html, :json
   before_filter :get_basket, only: [:index, :create]
 
   # GET /accepts
@@ -34,6 +33,15 @@ class AcceptsController < InheritedResources::Base
     end
   end
 
+  # GET /accepts/1
+  # GET /accepts/1.json
+  def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @accept }
+    end
+  end
+
   # GET /new
   # GET /new.json
   def new
@@ -47,6 +55,11 @@ class AcceptsController < InheritedResources::Base
       format.html # new.html.erb
       format.json { render json: @accept }
     end
+  end
+
+  # GET /accepts/new
+  # GET /accepts/1/edit
+  def edit
   end
 
   # POST /accepts
@@ -78,6 +91,31 @@ class AcceptsController < InheritedResources::Base
         format.json { render json: @accept.errors, status: :unprocessable_entity }
         format.js { render action: "index" }
       end
+    end
+  end
+
+  # PUT /accepts/1
+  # PUT /accepts/1.json
+  def update
+    respond_to do |format|
+      if @accept.update_attributes(params[:accept])
+        format.html { redirect_to @accept, notice:  t('controller.successfully_updated', model:  t('activerecord.models.accept')) }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @accept.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /accepts/1
+  # DELETE /accepts/1.json
+  def destroy
+    @accept.destroy
+
+    respond_to do |format|
+      format.html { redirect_to accepts_url, notice: t('controller.successfully_deleted', model: t('activerecord.models.accept')) }
+      format.json { head :no_content }
     end
   end
 end
