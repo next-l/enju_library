@@ -96,3 +96,9 @@ en:
         additional_param: Additional param
         note: Note
         position: Position
+
+  library:
+    map: "Map"
+    staff: "Staff"
+    number_of_item: "Number of items"
+    address: "Address"
