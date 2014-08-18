@@ -103,4 +103,4 @@ en:
     number_of_item: "Number of items"
     address: "Address"
   shelf:
-    update_display_order: "表示順序を変更する"
+    update_display_order: Update display order
