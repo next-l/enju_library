@@ -102,3 +102,5 @@ ja:
     staff: "職員"
     number_of_item: "所蔵冊数"
     address: "住所"
+  shelf:
+    update_display_order: "表示順序を変更する"
