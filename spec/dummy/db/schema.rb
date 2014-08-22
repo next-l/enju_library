@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140811031145) do
+ActiveRecord::Schema.define(:version => 20140821151023) do
 
   create_table "accepts", :force => true do |t|
     t.integer  "basket_id"
@@ -291,6 +291,17 @@ ActiveRecord::Schema.define(:version => 20140811031145) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
+
+  create_table "colors", :force => true do |t|
+    t.integer  "library_group_id"
+    t.string   "property"
+    t.string   "code"
+    t.integer  "position"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
+  add_index "colors", ["library_group_id"], :name => "index_colors_on_library_group_id"
 
   create_table "content_types", :force => true do |t|
     t.string   "name",         :null => false

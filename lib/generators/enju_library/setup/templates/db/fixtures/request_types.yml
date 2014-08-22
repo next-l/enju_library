@@ -14,11 +14,13 @@ request_type_00002:
 request_type_00003: 
   name: Loan  
   display_name: Loan
+  id: 3
   position: 3
   note: ""
 request_type_00004: 
   name: Non-Returnable Copy  
   display_name: Non-Returnable Copy
+  id: 4
   position: 4
   note: ""
 request_type_00005: 

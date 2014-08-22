@@ -1,15 +1,21 @@
 # -*- encoding: utf-8 -*-
 class LibraryGroup < ActiveRecord::Base
   attr_accessible :name, :display_name, :short_name, :my_networks,
-    :login_banner, :note, :country_id, :admin_networks, :url
+    :login_banner, :note, :country_id, :admin_networks, :url,
+    :colors_attributes
+  if defined?(EnjuBookmark)
+    attr_accessible :allow_bookmark_external_url
+  end
 
   #include Singleton
   include MasterModel
 
   has_many :libraries
+  has_many :colors
   belongs_to :country
 
   validates :url, presence: true, url: true
+  accepts_nested_attributes_for :colors, update_only: true
 
   def self.site_config
     LibraryGroup.find(1)

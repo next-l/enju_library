@@ -53,6 +53,7 @@ en:
         login_banner: Login banner
         post_to_union_catalog: Post to union catalog
         url: URL
+        color: Color
       bookstore:
         name: Name
         zip_code: Zip code

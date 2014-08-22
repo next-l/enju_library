@@ -26,6 +26,20 @@
     <%= f.text_area :login_banner -%>
   </div>
 
+  <div class="field">
+    <%= f.label :color -%><br />
+    <%= f.fields_for :colors do |color_form| %>
+      <%= color_form.text_field :property, disabled: true %>
+      <%= color_form.text_field :code %>
+      <br />
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label t('activerecord.models.country') -%><br />
+    <%= f.select(:country_id, @countries.collect{|c| [c.display_name.localize, c.id]}) -%>
+  </div>
+
   <% if defined?(EnjuBookmark) %>
     <div class="field">
       <%= f.label :allow_bookmark_external_url -%>
@@ -46,11 +60,6 @@
   <div class="field">
     <%= f.label :note -%><br />
     <%= f.text_area :note -%>
-  </div>
-
-  <div class="field">
-    <%= f.label t('activerecord.models.country') -%><br />
-    <%= f.select(:country_id, @countries.collect{|c| [c.display_name.localize, c.id]}) -%>
   </div>
 
   <div class="actions">
