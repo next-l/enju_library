@@ -34,7 +34,7 @@
     <% @library_group.colors.each do |color| %>
       <li>
         <%= color.property %>:
-        <span style="color: transparent; background-color: <%= color.code %>">sample</span>
+        <span style="color: transparent; background-color: #<%= color.code %>">sample</span>
         ( <%= color.code %> )
       </li>
     <% end %>
