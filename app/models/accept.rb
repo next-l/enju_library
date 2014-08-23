@@ -1,6 +1,6 @@
 class Accept < ActiveRecord::Base
   attr_accessible :item_identifier, :librarian_id, :item_id
-  default_scope order: 'accepts.id DESC'
+  default_scope { order('accepts.id DESC') }
   belongs_to :basket
   belongs_to :item, touch: true
   belongs_to :librarian, class_name: 'User'
