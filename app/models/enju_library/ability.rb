@@ -11,11 +11,11 @@ module EnjuLibrary
         end
         can [:read, :create, :update], Library
         can [:delete, :destroy], Library do |library|
-          library.shelves.empty? and !library.web?
+          library.shelves.empty? && !library.web?
         end
         can [:read, :create, :update], Shelf
         can [:delete, :destroy], Shelf do |shelf|
-          shelf.items.empty? and !shelf.web_shelf?
+          shelf.items.empty? && !shelf.web_shelf?
         end
         can :manage, [
           Accept,
@@ -28,7 +28,7 @@ module EnjuLibrary
           LibraryGroup,
           RequestStatusType,
           RequestType
-        ] if LibraryGroup.site_config.network_access_allowed?(ip_address, :network_type => :admin)
+        ] if LibraryGroup.site_config.network_access_allowed?(ip_address, network_type: :admin)
         can :read, [
           LibraryGroup,
           RequestStatusType,

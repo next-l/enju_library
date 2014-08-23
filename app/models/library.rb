@@ -25,13 +25,14 @@ class Library < ActiveRecord::Base
   end
 
   validates_associated :library_group
-  validates_presence_of :short_display_name, :library_group
-  validates_uniqueness_of :short_display_name, :case_sensitive => false
+  validates :short_display_name, presence: true
+  validates :library_group, presence: true
+  validates_uniqueness_of :short_display_name, case_sensitive: false
   validates_uniqueness_of :isil, allow_blank: true
   validates :display_name, uniqueness: true
-  validates :name, format: {with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
-  validates :isil, format: {with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/}, allow_blank: true
-  after_validation :geocode, :if => :address_changed?
+  validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
+  validates :isil, format: { with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/ }, allow_blank: true
+  after_validation :geocode, if: :address_changed?
   after_create :create_shelf
   after_save :clear_all_cache
   after_destroy :clear_all_cache
@@ -40,7 +41,7 @@ class Library < ActiveRecord::Base
 
   def self.all_cache
     if Rails.env == 'production'
-      Rails.cache.fetch('library_all'){Library.all}
+      Rails.cache.fetch('library_all'){ Library.all }
     else
       Library.all
     end
@@ -52,13 +53,13 @@ class Library < ActiveRecord::Base
 
   def create_shelf
     shelf = Shelf.new
-    shelf.name = "#{self.name}_default"
+    shelf.name = "#{name}_default"
     shelf.library = self
     shelf.save!
   end
 
   def web?
-    return true if self.id == 1
+    return true if id == 1
     false
   end
 
@@ -69,16 +70,16 @@ class Library < ActiveRecord::Base
   def address(locale = I18n.locale)
     case locale.to_sym
     when :ja
-      "#{self.region.to_s.localize(locale)}#{self.locality.to_s.localize(locale)}#{self.street.to_s.localize(locale)}"
+      "#{region.to_s.localize(locale)}#{locality.to_s.localize(locale)}#{street.to_s.localize(locale)}"
     else
-      "#{self.street.to_s.localize(locale)} #{self.locality.to_s.localize(locale)} #{self.region.to_s.localize(locale)}"
+      "#{street.to_s.localize(locale)} #{locality.to_s.localize(locale)} #{region.to_s.localize(locale)}"
     end
   rescue
     nil
   end
 
   def address_changed?
-    return true if region_changed? or locality_changed? or street_changed?
+    return true if region_changed? || locality_changed? || street_changed?
     false
   end
 
@@ -86,7 +87,9 @@ class Library < ActiveRecord::Base
     has_many :events, -> { include(:event_category) }
 
     def closed?(date)
-      events.closing_days.collect{|c| c.start_at.beginning_of_day}.include?(date.beginning_of_day)
+      events.closing_days.map{ |c|
+        c.start_at.beginning_of_day
+      }.include?(date.beginning_of_day)
     end
   end
 

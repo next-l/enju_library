@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140821151023) do
+ActiveRecord::Schema.define(:version => 20140823095740) do
 
   create_table "accepts", :force => true do |t|
     t.integer  "basket_id"
@@ -727,7 +727,6 @@ ActiveRecord::Schema.define(:version => 20140821151023) do
     t.string   "access_address"
     t.integer  "language_id",                     :default => 1,     :null => false
     t.integer  "carrier_type_id",                 :default => 1,     :null => false
-    t.integer  "extent_id",                       :default => 1,     :null => false
     t.integer  "start_page"
     t.integer  "end_page"
     t.integer  "height"
@@ -769,8 +768,11 @@ ActiveRecord::Schema.define(:version => 20140821151023) do
     t.integer  "month_of_publication"
     t.boolean  "fulltext_content"
     t.string   "doi"
-    t.boolean  "periodical"
+    t.boolean  "serial"
     t.text     "statement_of_responsibility"
+    t.text     "publication_place"
+    t.text     "extent"
+    t.text     "dimensions"
   end
 
   add_index "manifestations", ["access_address"], :name => "index_manifestations_on_access_address"
@@ -1101,6 +1103,7 @@ ActiveRecord::Schema.define(:version => 20140821151023) do
     t.text     "body"
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
+    t.text     "error_message"
   end
 
   add_index "resource_import_results", ["item_id"], :name => "index_resource_import_results_on_item_id"

@@ -6,7 +6,7 @@ class LibrariesController < ApplicationController
   # GET /libraries
   # GET /libraries.json
   def index
-    sort = {:sort_by => 'position', :order => 'asc'}
+    sort = {sort_by: 'position', order: 'asc'}
     case params[:sort_by]
     when 'name'
       sort[:sort_by] = 'name'
@@ -18,7 +18,7 @@ class LibrariesController < ApplicationController
 
     @libraries = Library.search(include: [:shelves]) do
       fulltext query if query.present?
-      paginate :page => page.to_i, :per_page => Library.default_per_page
+      paginate page: page.to_i, per_page: Library.default_per_page
       order_by sort[:sort_by], sort[:order]
     end.results
 
@@ -117,6 +117,7 @@ class LibrariesController < ApplicationController
   end
 
   private
+
   def prepare_options
     @library_groups = LibraryGroup.all
     @countries = Country.all_cache

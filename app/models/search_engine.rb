@@ -20,9 +20,9 @@ class SearchEngine < ActiveRecord::Base
 
   def search_params(query)
     params = {}
-    if self.additional_param
-      self.additional_param.gsub('{query}', query).to_s.split.each do |param|
-        p = param.split("=")
+    if additional_param
+      additional_param.gsub('{query}', query).to_s.split.each do |param|
+        p = param.split('=')
         params[p[0].to_sym] = p[1]
       end
       return params
