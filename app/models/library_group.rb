@@ -35,13 +35,13 @@ class LibraryGroup < ActiveRecord::Base
   end
 
   def network_access_allowed?(ip_address, options = {})
-    options = {:network_type => :lan}.merge(options)
+    options = { network_type: :lan }.merge(options)
     client_ip = IPAddr.new(ip_address)
     case options[:network_type]
     when :admin
-      allowed_networks = self.admin_networks.to_s.split
+      allowed_networks = admin_networks.to_s.split
     else
-      allowed_networks = self.my_networks.to_s.split
+      allowed_networks = my_networks.to_s.split
     end
     allowed_networks.each do |allowed_network|
       begin

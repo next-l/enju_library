@@ -15,7 +15,7 @@ class ShelvesController < ApplicationController
       render partial: 'select_form'
       return
     else
-      sort = {:sort_by => 'name', :order => 'asc'}
+      sort = {sort_by: 'name', order: 'asc'}
       #case params[:sort_by]
       #when 'name'
       #  sort[:sort_by] = 'name'
@@ -28,7 +28,7 @@ class ShelvesController < ApplicationController
 
       search = Shelf.search(include: [:library]) do
         fulltext query if query.present?
-        paginate :page => page.to_i, :per_page => Shelf.default_per_page
+        paginate page: page.to_i, per_page: Shelf.default_per_page
         if library
           with(:library).equal_to library.name
           order_by :position, :asc

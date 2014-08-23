@@ -3,7 +3,7 @@ VCR.configure do |c|
   c.hook_into                :fakeweb
   c.ignore_localhost         = true
   c.default_cassette_options = {
-    :record => :none,
-    :preserve_exact_body_bytes => true
+    record: :none,
+    preserve_exact_body_bytes: true
   }
 end

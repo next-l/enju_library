@@ -11,11 +11,11 @@ class AcceptsController < ApplicationController
     else
       if params[:accept]
         @query = params[:accept][:item_identifier].to_s.strip
-        item = Item.where(:item_identifier => @query).first if @query.present?
+        item = Item.where(item_identifier: @query).first if @query.present?
       end
 
       if item
-        @accepts = Accept.order('accepts.created_at DESC').where(:item_id => item.id).page(params[:page])
+        @accepts = Accept.order('accepts.created_at DESC').where(item_id: item.id).page(params[:page])
       else
         if @basket
           @accepts = @basket.accepts.page(params[:page])
@@ -75,7 +75,7 @@ class AcceptsController < ApplicationController
     if @accept.item_identifier.blank?
       flash[:message] << t('accept.enter_item_identifier') if @accept.item_identifier.blank?
     else
-      item = Item.where(:item_identifier => @accept.item_identifier.to_s.strip).first
+      item = Item.where(item_identifier: @accept.item_identifier.to_s.strip).first
     end
     @accept.item = item
 

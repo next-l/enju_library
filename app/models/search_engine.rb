@@ -6,9 +6,9 @@ class SearchEngine < ActiveRecord::Base
 
   validates :name, presence: true
   validates :query_param, presence: true
-  validates :http_method, presence: true, :inclusion => %w(get post)
-  validates :url, presence: true, url: true, length: {:maximum => 255}
-  validates :base_url, presence: true, url: true, length: {:maximum => 255}
+  validates :http_method, presence: true, inclusion: %w(get post)
+  validates :url, presence: true, url: true, length: { maximum: 255 }
+  validates :base_url, presence: true, url: true, length: { maximum: 255 }
   after_save :clear_all_cache
   after_destroy :clear_all_cache
 
@@ -20,9 +20,9 @@ class SearchEngine < ActiveRecord::Base
 
   def search_params(query)
     params = {}
-    if self.additional_param
-      self.additional_param.gsub('{query}', query).to_s.split.each do |param|
-        p = param.split("=")
+    if additional_param
+      additional_param.gsub('{query}', query).to_s.split.each do |param|
+        p = param.split('=')
         params[p[0].to_sym] = p[1]
       end
       return params
