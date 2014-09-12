@@ -32,7 +32,6 @@ class LibraryGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @library_group.update_attributes(params[:library_group])
-        expire_page '/page/opensearch'
         format.html { redirect_to @library_group, notice:  t('controller.successfully_updated', model:  t('activerecord.models.library_group')) }
         format.json { head :no_content }
       else
