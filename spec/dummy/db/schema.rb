@@ -1148,7 +1148,7 @@ ActiveRecord::Schema.define(:version => 20140823095740) do
   end
 
   add_index "series_statement_merges", ["series_statement_id"], :name => "index_series_statement_merges_on_series_statement_id"
-  add_index "series_statement_merges", ["series_statement_merge_list_id"], :name => "index_series_statement_merges_on_series_statement_merge_list_id"
+  add_index "series_statement_merges", ["series_statement_merge_list_id"], :name => "index_series_statement_merges_on_list_id"
 
   create_table "series_statements", :force => true do |t|
     t.text     "original_title"
