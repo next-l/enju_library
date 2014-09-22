@@ -50,7 +50,7 @@ class ShelvesController < ApplicationController
   # GET /shelves/1
   # GET /shelves/1.json
   def show
-    @shelf = Shelf.find(params[:id], include: :library)
+    @shelf = Shelf.includes(:library).find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -75,7 +75,7 @@ class ShelvesController < ApplicationController
 
   # GET /shelves/1/edit
   def edit
-    @shelf = Shelf.find(params[:id], include: :library)
+    @shelf = Shelf.includes(:library).find(params[:id])
   end
 
   # POST /shelves

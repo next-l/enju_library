@@ -17,7 +17,7 @@ describe SubscribesController do
 
       it "assigns all subscribes as @subscribes" do
         get :index
-        assigns(:subscribes).should eq(Subscribe.all)
+        assigns(:subscribes).should eq(Subscribe.page(1))
       end
     end
 
@@ -26,7 +26,7 @@ describe SubscribesController do
 
       it "assigns all subscribes as @subscribes" do
         get :index
-        assigns(:subscribes).should eq(Subscribe.all)
+        assigns(:subscribes).should eq(Subscribe.page(1))
       end
     end
 
