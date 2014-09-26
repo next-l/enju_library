@@ -10,7 +10,7 @@ class Library < ActiveRecord::Base
   scope :real, -> { where('id != 1') }
   has_many :shelves
   belongs_to :library_group, validate: true
-  has_many :users
+  has_many :profiles
   belongs_to :country
 
   extend FriendlyId

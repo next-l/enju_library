@@ -42,11 +42,11 @@
         <%= render 'libraries/map', library: @library if @library.latitude and @library.longitude -%>
       </div>
       <div id="tab2">
-        <%- if @library.users.librarians.exists? -%>
+        <%- if @library.profiles.librarians.exists? -%>
           <ul>
-            <%- @library.users.librarians.each do |librarian| -%>
+            <%- @library.profiles.librarians.each do |librarian| -%>
               <li>
-                <%= link_to librarian.username, librarian.profile -%>
+                <%= link_to librarian.user.username, librarian -%>
                 <%- unless librarian.note.blank? -%>
                   <br />
                   <%= librarian.note -%>
