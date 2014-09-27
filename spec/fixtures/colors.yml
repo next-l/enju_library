@@ -23,3 +23,16 @@ color_00004:
   id: 4
   position: 4
   library_group_id: 1
+
+# == Schema Information
+#
+# Table name: colors
+#
+#  id               :integer          not null, primary key
+#  library_group_id :integer
+#  property         :string(255)
+#  code             :string(255)
+#  position         :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
