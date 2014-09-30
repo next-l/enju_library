@@ -1,5 +1,5 @@
 <div id="event_list">
-  (<%= link_to t('page.calendar'), controller: :calendar, action: :index, library_id: @library.name -%>)
+  (<%= link_to t('page.calendar'), events_path(library_id: @library.name, mode: 'calendar') -%>)
   <ul>
     <%- @events.each do |event| -%>
       <li>
