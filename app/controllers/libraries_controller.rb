@@ -33,9 +33,9 @@ class LibrariesController < ApplicationController
   def show
     if defined?(EnjuEvent)
       search = Sunspot.new_search(Event)
-      library = @library.dup
+      library_id = @library.id
       search.build do
-        with(:library_id).equal_to library.id
+        with(:library_id).equal_to library_id
         order_by(:start_at, :desc)
       end
       page = params[:event_page] || 1
