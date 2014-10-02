@@ -2,7 +2,6 @@ source "https://rubygems.org"
 
 gem "rails", "~> 3.2.19"
 gem "jquery-rails"
-gem "mobylette"
 gem "enju_leaf", github: "next-l/enju_leaf", branch: '1.1'
 gem "enju_biblio", github: "next-l/enju_biblio", branch: '1.1'
 gem "enju_circulation", github: "next-l/enju_circulation", branch: '1.1'
