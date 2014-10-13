@@ -1,14 +1,15 @@
 <div data-role="header">
   <a href="javascript:history.back()" data-icon="back" data-iconpos="notext" class="ui-btn-left"><%= t('page.back') %></a>
-  <h1 class="title"><%= t('page.showing', model: t('activerecord.models.shelf')) -%></h1>
+  <h1 class="title"><%= @shelf.display_name.localize -%></h1>
 </div>
 <div data-role="content">
-<% if current_user.try(:has_role?, 'Librarian') %>
-  <p>
-    <strong><%= t('activerecord.attributes.shelf.name') -%>:</strong>
-    <%= @shelf.name %>
-  </p>
-<% end %>
+  <div id="detail">
+  <% if current_user.try(:has_role?, 'Librarian') %>
+    <p>
+      <strong><%= t('activerecord.attributes.shelf.name') -%>:</strong>
+      <%= @shelf.name %>
+    </p>
+  <% end %>
 
 <p>
   <strong><%= t('activerecord.attributes.shelf.closed') -%>:</strong>
