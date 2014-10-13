@@ -1,5 +1,6 @@
 <div data-role="header">
-<h1 class="title"><%= t('page.showing', model: t('activerecord.models.shelf')) -%></h1>
+  <a href="javascript:history.back()" data-icon="back" data-iconpos="notext" class="ui-btn-left"><%= t('page.back') %></a>
+  <h1 class="title"><%= t('page.showing', model: t('activerecord.models.shelf')) -%></h1>
 </div>
 <div data-role="content">
 <% if current_user.try(:has_role?, 'Librarian') %>
