@@ -61,11 +61,26 @@ ActiveRecord::Schema.define(version: 20141014065831) do
   create_table "agent_import_results", force: true do |t|
     t.integer  "agent_import_file_id"
     t.integer  "agent_id"
-    t.integer  "user_id"
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "agent_merge_lists", force: true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "agent_merges", force: true do |t|
+    t.integer  "agent_id",            null: false
+    t.integer  "agent_merge_list_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "agent_merges", ["agent_id"], name: "index_agent_merges_on_agent_id"
+  add_index "agent_merges", ["agent_merge_list_id"], name: "index_agent_merges_on_agent_merge_list_id"
 
   create_table "agent_relationship_types", force: true do |t|
     t.string   "name",         null: false
