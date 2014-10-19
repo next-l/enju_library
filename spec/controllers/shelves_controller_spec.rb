@@ -48,13 +48,13 @@ describe ShelvesController do
 
       it "assigns all shelves as @shelves with library_id" do
         get :index, :library_id => 'kamata'
-        assigns(:shelves).should eq(Library.find('kamata').shelves.page(1))
+        assigns(:shelves).should eq(Library.find('kamata').shelves.order(:position).page(1))
         response.should be_success
       end
 
       it "assigns all shelves as @shelves with select mode" do
         get :index, :mode => 'select'
-        assigns(:shelves).should eq(Shelf.real)
+        assigns(:shelves).should eq(Shelf.real.order(:position))
         response.should be_success
       end
     end
