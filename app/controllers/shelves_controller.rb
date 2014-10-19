@@ -10,7 +10,7 @@ class ShelvesController < ApplicationController
       if @library
         @shelves = @library.shelves
       else
-        @shelves = Shelf.real
+        @shelves = Shelf.real.order(:position)
       end
       render partial: 'select_form'
       return

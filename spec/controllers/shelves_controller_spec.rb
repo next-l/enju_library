@@ -48,7 +48,7 @@ describe ShelvesController do
 
       it "assigns all shelves as @shelves with library_id" do
         get :index, :library_id => 'kamata'
-        assigns(:shelves).should eq(Library.find('kamata').shelves.order(:position).page(1))
+        assigns(:shelves).map(&:id).should eq(Library.find('kamata').shelves.order(:position).page(1).pluck(:id))
         response.should be_success
       end
 
