@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_leaf", "~> 1.1.0.rc15"
   s.add_development_dependency "enju_ndl", "~> 0.1.0.pre34"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.1.0.pre16"
-  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre61"
+  s.add_development_dependency "enju_biblio", "~> 0.1.0.pre63"
   s.add_development_dependency "enju_event", "~> 0.1.17.pre23"
   s.add_development_dependency "enju_circulation", "~> 0.1.0.pre40"
   s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0.pre10"
