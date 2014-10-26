@@ -55,7 +55,6 @@ module Dummy
 end
 
 require 'enju_leaf'
-require 'enju_biblio'
 require 'enju_circulation'
 require "enju_event"
 require "enju_inter_library_loan"
