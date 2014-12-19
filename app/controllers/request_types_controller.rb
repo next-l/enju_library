@@ -80,4 +80,9 @@ class RequestTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def request_type_params
+    params.require(:request_type).permit(:name, :display_name, :note)
+  end
 end

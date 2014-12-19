@@ -118,4 +118,9 @@ class AcceptsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def accept_params
+    params.require(:accept).permit(:item_identifier, :librarian_id, :item_id)
+  end
 end

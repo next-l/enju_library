@@ -80,4 +80,12 @@ class SearchEnginesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def search_engine_params
+    params.require(:search_engine).permit(
+      :name, :display_name, :url, :base_url, :http_method,
+      :query_param, :additional_param, :note
+    )
+  end
 end

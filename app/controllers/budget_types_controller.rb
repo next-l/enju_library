@@ -80,4 +80,9 @@ class BudgetTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def budget_type_params
+    params.require(:budget_type).require(:name, :display_name, :note, :position)
+  end
 end

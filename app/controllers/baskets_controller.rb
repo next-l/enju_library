@@ -102,4 +102,9 @@ class BasketsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def basket_params
+    params.require(:basket).permit(:note, :user_number)
+  end
 end

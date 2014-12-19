@@ -133,4 +133,11 @@ class ShelvesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def shelf_params
+    params.require(:shelf).permit(
+      :name, :display_name, :note, :library_id, :closed
+    )
+  end
 end

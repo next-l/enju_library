@@ -80,4 +80,12 @@ class BookstoresController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def bookstore_params
+    params.require(:bookstore).permit(
+      :name, :zip_code, :address, :note, :telephone_number,
+      :fax_number, :url
+    )
+  end
 end

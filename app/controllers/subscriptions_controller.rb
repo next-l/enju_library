@@ -84,4 +84,11 @@ class SubscriptionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def subscription_params
+    params.require(:subscription).permit(
+      :title, :note, :order_list_id, :user_id
+    )
+  end
 end

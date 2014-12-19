@@ -79,4 +79,11 @@ class SubscribesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def subscribe_params
+    params.require(:subscribe).permit(
+      :subscription_id, :work_id, :start_at, :end_at
+    )
+  end
 end

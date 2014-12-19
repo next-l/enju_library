@@ -41,4 +41,14 @@ class LibraryGroupsController < ApplicationController
       end
     end
   end
+
+  private
+  def library_group_params
+    params.require(:library_group).permit(
+      :name, :display_name, :short_name, :my_networks,
+      :login_banner, :note, :country_id, :admin_networks, :url,
+      :colors_attributes,
+      :allow_bookmark_external_url # EnjuBookmark
+    )
+  end
 end

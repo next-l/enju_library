@@ -80,4 +80,9 @@ class RequestStatusTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+  def request_status_type_params
+    params.require(:request_status_type).permit(:name, :display_name, :note)
+  end
 end
