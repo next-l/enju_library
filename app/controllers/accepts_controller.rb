@@ -81,7 +81,7 @@ class AcceptsController < ApplicationController
 
     respond_to do |format|
       if @accept.save
-        flash[:message] << t('accept.successfully_accepted', model:  t('activerecord.models.accept'))
+        flash[:message] << t('accept.successfully_accepted', model: t('activerecord.models.accept'))
         format.html { redirect_to accepts_url(basket_id: @basket.id) }
         format.json { render json: @accept, status: :created, location:  @accept }
         format.js { redirect_to accepts_url(basket_id: @basket.id, format: :js) }
@@ -99,7 +99,7 @@ class AcceptsController < ApplicationController
   def update
     respond_to do |format|
       if @accept.update_attributes(params[:accept])
-        format.html { redirect_to @accept, notice:  t('controller.successfully_updated', model:  t('activerecord.models.accept')) }
+        format.html { redirect_to @accept, notice: t('controller.successfully_updated', model: t('activerecord.models.accept')) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -38,11 +38,11 @@ class RequestTypesController < ApplicationController
   # POST /request_types
   # POST /request_types.json
   def create
-    @request_type = RequestType.new(params[:request_type])
+    @request_type = RequestType.new(request_type_params)
 
     respond_to do |format|
       if @request_type.save
-        format.html { redirect_to @request_type, notice:  t('controller.successfully_created', model:  t('activerecord.models.request_type')) }
+        format.html { redirect_to @request_type, notice: t('controller.successfully_created', model: t('activerecord.models.request_type')) }
         format.json { render json: @request_type, status: :created, location: @request_type }
       else
         format.html { render action: "new" }
@@ -60,8 +60,8 @@ class RequestTypesController < ApplicationController
     end
 
     respond_to do |format|
-      if @request_type.update_attributes(params[:request_type])
-        format.html { redirect_to @request_type, notice:  t('controller.successfully_updated', model:  t('activerecord.models.request_type')) }
+      if @request_type.update_attributes(request_type_params)
+        format.html { redirect_to @request_type, notice: t('controller.successfully_updated', model: t('activerecord.models.request_type')) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

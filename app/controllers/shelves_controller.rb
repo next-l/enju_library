@@ -81,7 +81,7 @@ class ShelvesController < ApplicationController
   # POST /shelves
   # POST /shelves.json
   def create
-    @shelf = Shelf.new(params[:shelf])
+    @shelf = Shelf.new(shelf_params)
     if @library
       @shelf.library = @library
     else
@@ -90,7 +90,7 @@ class ShelvesController < ApplicationController
 
     respond_to do |format|
       if @shelf.save
-        format.html { redirect_to @shelf, notice:  t('controller.successfully_created', model:  t('activerecord.models.shelf')) }
+        format.html { redirect_to @shelf, notice: t('controller.successfully_created', model: t('activerecord.models.shelf')) }
         format.json { render json: @shelf, status: :created, location:  @shelf }
       else
         @library = Library.first if @shelf.library.nil?
@@ -112,8 +112,8 @@ class ShelvesController < ApplicationController
     end
 
     respond_to do |format|
-      if @shelf.update_attributes(params[:shelf])
-        format.html { redirect_to @shelf, notice:  t('controller.successfully_updated', model:  t('activerecord.models.shelf')) }
+      if @shelf.update_attributes(shelf_params)
+        format.html { redirect_to @shelf, notice: t('controller.successfully_updated', model: t('activerecord.models.shelf')) }
         format.json { head :no_content }
       else
         @library = Library.first if @library.nil?

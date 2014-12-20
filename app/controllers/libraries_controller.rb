@@ -70,11 +70,11 @@ class LibrariesController < ApplicationController
   # POST /libraries
   # POST /libraries.json
   def create
-    @library = Library.new(params[:library])
+    @library = Library.new(library_params)
 
     respond_to do |format|
       if @library.save
-        format.html { redirect_to @library, notice:  t('controller.successfully_created', model:  t('activerecord.models.library')) }
+        format.html { redirect_to @library, notice: t('controller.successfully_created', model: t('activerecord.models.library')) }
         format.json { render json: @library, status: :created }
       else
         prepare_options
@@ -93,8 +93,8 @@ class LibrariesController < ApplicationController
     end
 
     respond_to do |format|
-      if @library.update_attributes(params[:library])
-        format.html { redirect_to @library, notice:  t('controller.successfully_updated', model:  t('activerecord.models.library')) }
+      if @library.update_attributes(library_params)
+        format.html { redirect_to @library, notice: t('controller.successfully_updated', model: t('activerecord.models.library')) }
         format.json { head :no_content }
       else
         @library.name = @library.name_was

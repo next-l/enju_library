@@ -45,12 +45,12 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    @subscription = Subscription.new(params[:subscription])
+    @subscription = Subscription.new(subscription_params)
     @subscription.user = current_user
 
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to @subscription, notice:  t('controller.successfully_created', model:  t('activerecord.models.subscription')) }
+        format.html { redirect_to @subscription, notice: t('controller.successfully_created', model: t('activerecord.models.subscription')) }
         format.json { render json: @subscription, status: :created, location:  @subscription }
       else
         format.html { render action: "new" }
@@ -62,10 +62,10 @@ class SubscriptionsController < ApplicationController
   # PUT /subscriptions/1
   # PUT /subscriptions/1.json
   def update
-    @subscription.assign_attributes(params[:subscription])
+    @subscription.assign_attributes(subscription_params)
     respond_to do |format|
       if @subscription.save
-        format.html { redirect_to @subscription, notice:  t('controller.successfully_updated', model:  t('activerecord.models.subscription')) }
+        format.html { redirect_to @subscription, notice: t('controller.successfully_updated', model: t('activerecord.models.subscription')) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

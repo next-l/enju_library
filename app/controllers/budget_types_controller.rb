@@ -38,11 +38,11 @@ class BudgetTypesController < ApplicationController
   # POST /budget_types
   # POST /budget_types.json
   def create
-    @budget_type = BudgetType.new(params[:budget_type])
+    @budget_type = BudgetType.new(budget_type_params)
 
     respond_to do |format|
       if @budget_type.save
-        format.html { redirect_to @budget_type, notice:  t('controller.successfully_created', model:  t('activerecord.models.budget_type')) }
+        format.html { redirect_to @budget_type, notice: t('controller.successfully_created', model: t('activerecord.models.budget_type')) }
         format.json { render json: @budget_type, status: :created, location: @budget_type }
       else
         format.html { render action: "new" }
@@ -60,8 +60,8 @@ class BudgetTypesController < ApplicationController
     end
 
     respond_to do |format|
-      if @budget_type.update_attributes(params[:budget_type])
-        format.html { redirect_to @budget_type, notice:  t('controller.successfully_updated', model:  t('activerecord.models.budget_type')) }
+      if @budget_type.update_attributes(budget_type_params)
+        format.html { redirect_to @budget_type, notice: t('controller.successfully_updated', model: t('activerecord.models.budget_type')) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -83,6 +83,8 @@ class BudgetTypesController < ApplicationController
 
   private
   def budget_type_params
-    params.require(:budget_type).require(:name, :display_name, :note, :position)
+    params.require(:budget_type).permit(
+      :name, :display_name, :note, :position
+    )
   end
 end

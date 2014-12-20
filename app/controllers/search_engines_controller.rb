@@ -38,11 +38,11 @@ class SearchEnginesController < ApplicationController
   # POST /search_engines
   # POST /search_engines.json
   def create
-    @search_engine = SearchEngine.new(params[:search_engine])
+    @search_engine = SearchEngine.new(search_engine_params)
 
     respond_to do |format|
       if @search_engine.save
-        format.html { redirect_to @search_engine, notice:  t('controller.successfully_created', model:  t('activerecord.models.search_engine')) }
+        format.html { redirect_to @search_engine, notice: t('controller.successfully_created', model: t('activerecord.models.search_engine')) }
         format.json { render json: @search_engine, status: :created, location: @search_engine }
       else
         format.html { render action: "new" }
@@ -60,8 +60,8 @@ class SearchEnginesController < ApplicationController
     end
 
     respond_to do |format|
-      if @search_engine.update_attributes(params[:search_engine])
-        format.html { redirect_to @search_engine, notice:  t('controller.successfully_updated', model:  t('activerecord.models.search_engine')) }
+      if @search_engine.update_attributes(search_engine_params)
+        format.html { redirect_to @search_engine, notice: t('controller.successfully_updated', model: t('activerecord.models.search_engine')) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

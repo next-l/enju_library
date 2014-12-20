@@ -38,11 +38,11 @@ class BookstoresController < ApplicationController
   # POST /bookstores
   # POST /bookstores.json
   def create
-    @bookstore = Bookstore.new(params[:bookstore])
+    @bookstore = Bookstore.new(bookstore_params)
 
     respond_to do |format|
       if @bookstore.save
-        format.html { redirect_to @bookstore, notice:  t('controller.successfully_created', model:  t('activerecord.models.bookstore')) }
+        format.html { redirect_to @bookstore, notice: t('controller.successfully_created', model: t('activerecord.models.bookstore')) }
         format.json { render json: @bookstore, status: :created, location: @bookstore }
       else
         format.html { render action: "new" }
@@ -60,8 +60,8 @@ class BookstoresController < ApplicationController
     end
 
     respond_to do |format|
-      if @bookstore.update_attributes(params[:bookstore])
-        format.html { redirect_to @bookstore, notice:  t('controller.successfully_updated', model:  t('activerecord.models.bookstore')) }
+      if @bookstore.update_attributes(bookstore_params)
+        format.html { redirect_to @bookstore, notice: t('controller.successfully_updated', model: t('activerecord.models.bookstore')) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
