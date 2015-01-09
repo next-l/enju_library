@@ -1,11 +1,14 @@
 class Basket < ActiveRecord::Base
+  default_scope { order('baskets.id DESC') }
   scope :will_expire, lambda {|date| where('created_at < ?', date)}
-  belongs_to :user, :validate => true
+  belongs_to :user, validate: true
   has_many :accepts
 
-  validates_associated :user, :on => :create
+  enju_circulation_basket_model if defined?(EnjuCirculation)
+
+  validates_associated :user, on: :create
   # 貸出完了後にかごのユーザidは破棄する
-  validates_presence_of :user, :on => :create
+  validates_presence_of :user, on: :create
   validate :check_suspended
 
   attr_accessor :user_number
@@ -22,29 +25,6 @@ class Basket < ActiveRecord::Base
     Basket.will_expire(Time.zone.now.beginning_of_day).destroy_all
     logger.info "#{Time.zone.now} baskets expired!"
   end
-
-  if defined?(EnjuCirculation)
-    has_many :checked_items, :dependent => :destroy
-    has_many :items, :through => :checked_items
-    has_many :checkouts
-    has_many :checkins
-
-    def basket_checkout(librarian)
-      return nil if checked_items.size == 0
-      Item.transaction do
-        checked_items.each do |checked_item|
-          checkout = user.checkouts.new
-          checkout.librarian = librarian
-          checkout.item = checked_item.item
-          checkout.basket = self
-          checkout.due_date = checked_item.due_date
-          checked_item.item.checkout!(user)
-          checkout.save!
-        end
-        CheckedItem.destroy_all(:basket_id => id)
-      end
-    end
-  end
 end
 
 # == Schema Information
@@ -55,6 +35,7 @@ end
 #  user_id      :integer
 #  note         :text
 #  lock_version :integer          default(0), not null
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
+

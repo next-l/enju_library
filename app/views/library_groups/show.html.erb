@@ -28,6 +28,19 @@
   <%= markdown_helper(@library_group.login_banner) -%>
 </div>
 
+<div>
+  <strong><%= t('activerecord.attributes.library_group.color') -%>:</strong>
+  <ul>
+    <% @library_group.colors.each do |color| %>
+      <li>
+        <%= color.property %>:
+        <span style="color: transparent; background-color: #<%= color.code %>">sample</span>
+        ( <%= color.code %> )
+      </li>
+    <% end %>
+  </ul>
+</div>
+
 <% if defined?(EnjuBookmark) %>
   <p>
     <strong><%= t('activerecord.attributes.library_group.allow_bookmark_external_url') -%>:</strong>

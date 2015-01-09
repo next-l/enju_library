@@ -4,9 +4,11 @@ class LibraryGroup < ActiveRecord::Base
   include MasterModel
 
   has_many :libraries
+  has_many :colors
   belongs_to :country
 
-  validates :url, :presence => true, :url => true
+  validates :url, presence: true, url: true
+  accepts_nested_attributes_for :colors, update_only: true
 
   def self.site_config
     LibraryGroup.find(1)
@@ -22,17 +24,17 @@ class LibraryGroup < ActiveRecord::Base
 
   def real_libraries
     # 物理的な図書館 = IDが1以外
-    libraries.where('id != 1')
+    libraries.where('id != 1').all
   end
 
   def network_access_allowed?(ip_address, options = {})
-    options = {:network_type => :lan}.merge(options)
+    options = { network_type: :lan }.merge(options)
     client_ip = IPAddr.new(ip_address)
     case options[:network_type]
     when :admin
-      allowed_networks = self.admin_networks.to_s.split
+      allowed_networks = admin_networks.to_s.split
     else
-      allowed_networks = self.my_networks.to_s.split
+      allowed_networks = my_networks.to_s.split
     end
     allowed_networks.each do |allowed_network|
       begin
@@ -63,8 +65,8 @@ end
 #  note           :text
 #  country_id     :integer
 #  position       :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #  admin_networks :text
 #  url            :string(255)      default("http://localhost:3000/")
 #

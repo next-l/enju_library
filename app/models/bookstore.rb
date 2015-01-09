@@ -1,9 +1,10 @@
 class Bookstore < ActiveRecord::Base
+  default_scope { order('bookstores.position') }
   has_many :items
 
   acts_as_list
   validates_presence_of :name
-  validates :url, :url => true, :allow_blank => true, :length => {:maximum => 255}
+  validates :url, url: true, allow_blank: true, length: { maximum: 255 }
 
   paginates_per 10
 
@@ -26,6 +27,7 @@ end
 #  url              :string(255)
 #  position         :integer
 #  deleted_at       :datetime
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
+

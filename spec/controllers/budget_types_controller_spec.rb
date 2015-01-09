@@ -20,7 +20,7 @@ require 'spec_helper'
 
 describe BudgetTypesController do
   fixtures :all
-  login_admin
+  login_fixture_admin
 
   # This should return the minimal set of attributes required to create a valid
   # BudgetType. As you add validations to BudgetType, be sure to
@@ -33,7 +33,7 @@ describe BudgetTypesController do
     it "assigns all budget_types as @budget_types" do
       budget_type = BudgetType.create! valid_attributes
       get :index
-      assigns(:budget_types).should eq(BudgetType.order(:position))
+      assigns(:budget_types).should eq(BudgetType.all)
     end
   end
 
@@ -84,14 +84,14 @@ describe BudgetTypesController do
       it "assigns a newly created but unsaved budget_type as @budget_type" do
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        post :create, :budget_type => {:name => '0'}
+        post :create, :budget_type => { note: 'test' }
         assigns(:budget_type).should be_a_new(BudgetType)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        post :create, :budget_type => {:name => '0'}
+        post :create, :budget_type => { note: 'test' }
         #response.should render_template("new")
       end
     end
@@ -105,8 +105,8 @@ describe BudgetTypesController do
         # specifies that the BudgetType created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        BudgetType.any_instance.should_receive(:update).with({'name' => 'test'})
-        put :update, :id => budget_type.id, :budget_type => {'name' => 'test'}
+        BudgetType.any_instance.should_receive(:update_attributes).with({'note' => 'test'})
+        put :update, :id => budget_type.id, :budget_type => { note: 'test'}
       end
 
       it "assigns the requested budget_type as @budget_type" do
@@ -135,7 +135,7 @@ describe BudgetTypesController do
         budget_type = BudgetType.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        put :update, :id => budget_type.id, :budget_type => {:name => ''}
+        put :update, :id => budget_type.id, :budget_type => { note: 'test' }
         assigns(:budget_type).should eq(budget_type)
       end
 
@@ -143,7 +143,7 @@ describe BudgetTypesController do
         budget_type = BudgetType.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        put :update, :id => budget_type.id, :budget_type => {:name => ''}
+        put :update, :id => budget_type.id, :budget_type => { note: 'test' }
         #response.should render_template("edit")
       end
     end

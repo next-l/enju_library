@@ -1,8 +1,19 @@
 language: ruby
+cache: bundler
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.2
-before_script: "bundle exec rake db:migrate"
+  - 2.1.5
+  - 2.2.0
+before_script:
+  - mysql -e 'create database enju_test'
+  - psql -c 'create database enju_test;' -U postgres
+  - bundle exec rake db:migrate
 services:
-  - elasticsearch
+  - redis-server
+env:
+  - DB=sqlite
+  - DB=mysql
+  - DB=postgresql
+notifications:
+  slack:
+    secure: RiboVJ5+DiKFZVN4kKnSvVmbd3An1/yiHN/PENUWLCo5PNF4ZnDAcd/V/uyawiblXNcINfX7XAN32RjtCVWDNvpNcF/RAynoltg6yc15GA4Io6tGRBNxtDe6qodvFWSsSw4Wzl2eS580vXMihWvB7Rghrt3dC+ub/SP1DkfZnq8=
+sudo: false

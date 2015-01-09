@@ -3,14 +3,13 @@ require 'spec_helper'
 describe LibrariesController do
   fixtures :all
 
-  describe "GET index" do
+  describe "GET index", :solr => true do
     before do
-      Library.__elasticsearch__.create_index!
-      Library.import
+      Library.reindex
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all libraries as @libraries" do
         get :index
@@ -19,7 +18,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns all libraries as @libraries" do
         get :index
@@ -28,7 +27,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns all libraries as @libraries" do
         get :index
@@ -45,14 +44,14 @@ describe LibrariesController do
       it "should get index with query" do
         get :index, :query => 'kamata'
         response.should be_success
-        assigns(:libraries).include?(Library.friendly.find('kamata')).should be_truthy
+        assigns(:libraries).include?(Library.find('kamata')).should be_truthy
       end
     end
   end
 
   describe "GET show", :solr => true do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested library as @library" do
         get :show, :id => 1
@@ -61,7 +60,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested library as @library" do
         get :show, :id => 1
@@ -70,7 +69,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested library as @library" do
         get :show, :id => 1
@@ -88,7 +87,7 @@ describe LibrariesController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested library as @library" do
         get :new
@@ -97,7 +96,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested library as @library" do
         get :new
@@ -106,7 +105,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign the requested library as @library" do
         get :new
@@ -126,7 +125,7 @@ describe LibrariesController do
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested library as @library" do
         library = FactoryGirl.create(:library)
@@ -136,7 +135,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested library as @library" do
         library = FactoryGirl.create(:library)
@@ -146,7 +145,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested library as @library" do
         library = FactoryGirl.create(:library)
@@ -171,7 +170,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "assigns a newly created library as @library" do
@@ -204,7 +203,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "assigns a newly created library as @library" do
@@ -232,7 +231,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "assigns a newly created library as @library" do
@@ -294,7 +293,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested library" do
@@ -321,7 +320,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "updates the requested library" do
@@ -343,7 +342,7 @@ describe LibrariesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "updates the requested library" do
@@ -392,7 +391,7 @@ describe LibrariesController do
       end
 
       describe "When logged in as Administrator" do
-        login_admin
+        login_fixture_admin
 
         it "destroys the requested library" do
           delete :destroy, :id => @library.id
@@ -415,7 +414,7 @@ describe LibrariesController do
       end
 
       describe "When logged in as Librarian" do
-        login_librarian
+        login_fixture_librarian
 
         it "destroys the requested library" do
           delete :destroy, :id => @library.id
@@ -428,7 +427,7 @@ describe LibrariesController do
       end
 
       describe "When logged in as User" do
-        login_user
+        login_fixture_user
 
         it "destroys the requested library" do
           delete :destroy, :id => @library.id
@@ -459,7 +458,7 @@ describe LibrariesController do
       end
 
       describe "When logged in as Administrator" do
-        login_admin
+        login_fixture_admin
 
         it "destroys the requested library" do
           delete :destroy, :id => @library.id
@@ -472,7 +471,7 @@ describe LibrariesController do
       end
 
       describe "When logged in as Librarian" do
-        login_librarian
+        login_fixture_librarian
 
         it "destroys the requested library" do
           delete :destroy, :id => @library.id
@@ -485,7 +484,7 @@ describe LibrariesController do
       end
 
       describe "When logged in as User" do
-        login_user
+        login_fixture_user
 
         it "destroys the requested library" do
           delete :destroy, :id => @library.id

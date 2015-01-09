@@ -5,7 +5,7 @@ describe LibraryGroupsController do
 
   describe "GET index" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all library_groups as @library_groups" do
         get :index
@@ -24,29 +24,11 @@ describe LibraryGroupsController do
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested library_group as @library_group" do
         get :show, :id => 1
         assigns(:library_group).should eq(LibraryGroup.find(1))
-      end
-    end
-
-    describe "When logged in as Librarian" do
-      login_librarian
-      it "assigns the requested library_group as @library_group" do
-        get :show, :id => 1
-        assigns(:library_group).should eq(LibraryGroup.find(1))
-        response.should be_success
-      end
-    end
-
-    describe "When logged in as User" do
-      login_user
-      it "assigns the requested library_group as @library_group" do
-        get :show, :id => 1
-        assigns(:library_group).should eq(LibraryGroup.find(1))
-        response.should be_forbidden
       end
     end
 
@@ -54,14 +36,14 @@ describe LibraryGroupsController do
       it "assigns the requested library_group as @library_group" do
         get :show, :id => 1
         assigns(:library_group).should eq(LibraryGroup.find(1))
-        response.should redirect_to new_user_session_url
+        response.should be_success
       end
     end
   end
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested library_group as @library_group" do
         library_group = LibraryGroup.find(1)
@@ -71,7 +53,7 @@ describe LibraryGroupsController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "should not assign the requested library_group as @library_group" do
         library_group = LibraryGroup.find(1)
@@ -81,7 +63,7 @@ describe LibraryGroupsController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign the requested library_group as @library_group" do
         library_group = LibraryGroup.find(1)
@@ -107,7 +89,7 @@ describe LibraryGroupsController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested library_group" do

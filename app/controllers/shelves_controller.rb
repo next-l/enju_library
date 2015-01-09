@@ -1,23 +1,21 @@
 class ShelvesController < ApplicationController
-  before_action :set_shelf, only: [:show, :edit, :update, :destroy]
-  before_action :get_library
-  before_action :get_libraries, :only => [:new, :edit, :create, :update]
-  after_action :verify_authorized
+  load_and_authorize_resource
+  before_filter :get_library
+  before_filter :get_libraries, only: [:new, :edit, :create, :update]
 
   # GET /shelves
   # GET /shelves.json
   def index
-    authorize Shelf
     if params[:mode] == 'select'
       if @library
         @shelves = @library.shelves
       else
-        @shelves = Shelf.real
+        @shelves = Shelf.real.order(:position)
       end
-      render :partial => 'select_form'
+      render partial: 'select_form'
       return
     else
-      sort = {:sort_by => 'name', :order => 'asc'}
+      sort = {sort_by: 'name', order: 'asc'}
       #case params[:sort_by]
       #when 'name'
       #  sort[:sort_by] = 'name'
@@ -28,9 +26,9 @@ class ShelvesController < ApplicationController
       page = params[:page] || 1
       library = @library if @library
 
-      search = Shelf.search(:include => [:library]) do
+      search = Shelf.search(include: [:library]) do
         fulltext query if query.present?
-        paginate :page => page.to_i, :per_page => Shelf.default_per_page
+        paginate page: page.to_i, per_page: Shelf.default_per_page
         if library
           with(:library).equal_to library.name
           order_by :position, :asc
@@ -45,7 +43,7 @@ class ShelvesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @shelves }
+      format.json { render json: @shelves }
     end
   end
 
@@ -56,8 +54,8 @@ class ShelvesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @shelf }
-      format.html.phone
+      format.json { render json: @shelf }
+      format.mobile
     end
   end
 
@@ -65,14 +63,13 @@ class ShelvesController < ApplicationController
   # GET /shelves/new.json
   def new
     @shelf = Shelf.new
-    authorize @shelf
-    @library = current_user.library unless @library
+    @library = current_user.profile.library unless @library
     @shelf.library = @library
     #@shelf.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @shelf }
+      format.json { render json: @shelf }
     end
   end
 
@@ -85,7 +82,6 @@ class ShelvesController < ApplicationController
   # POST /shelves.json
   def create
     @shelf = Shelf.new(shelf_params)
-    authorize @shelf
     if @library
       @shelf.library = @library
     else
@@ -94,12 +90,12 @@ class ShelvesController < ApplicationController
 
     respond_to do |format|
       if @shelf.save
-        format.html { redirect_to @shelf, :notice => t('controller.successfully_created', :model => t('activerecord.models.shelf')) }
-        format.json { render :json => @shelf, :status => :created, :location => @shelf }
+        format.html { redirect_to @shelf, notice: t('controller.successfully_created', model: t('activerecord.models.shelf')) }
+        format.json { render json: @shelf, status: :created, location:  @shelf }
       else
         @library = Library.first if @shelf.library.nil?
-        format.html { render :action => "new" }
-        format.json { render :json => @shelf.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @shelf.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -117,12 +113,12 @@ class ShelvesController < ApplicationController
 
     respond_to do |format|
       if @shelf.update_attributes(shelf_params)
-        format.html { redirect_to @shelf, :notice => t('controller.successfully_updated', :model => t('activerecord.models.shelf')) }
+        format.html { redirect_to @shelf, notice: t('controller.successfully_updated', model: t('activerecord.models.shelf')) }
         format.json { head :no_content }
       else
         @library = Library.first if @library.nil?
-        format.html { render :action => "edit" }
-        format.json { render :json => @shelf.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @shelf.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -130,8 +126,6 @@ class ShelvesController < ApplicationController
   # DELETE /shelves/1
   # DELETE /shelves/1.json
   def destroy
-    @shelf.picture_files.destroy_all
-    @shelf.reload
     @shelf.destroy
 
     respond_to do |format|
@@ -141,11 +135,6 @@ class ShelvesController < ApplicationController
   end
 
   private
-  def set_shelf
-    @shelf = Shelf.find(params[:id])
-    authorize @shelf
-  end
-
   def shelf_params
     params.require(:shelf).permit(
       :name, :display_name, :note, :library_id, :closed

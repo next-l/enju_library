@@ -1,22 +1,21 @@
 class AcceptsController < ApplicationController
-  before_action :set_accept, only: [:show, :edit, :update, :destroy]
-  before_action :get_basket, :only => [:index, :create]
-  after_action :verify_authorized
-  #after_action :verify_policy_scoped, :only => :index
+  load_and_authorize_resource except: :index
+  authorize_resource only: :index
+  before_filter :get_basket, only: [:index, :create]
 
   # GET /accepts
+  # GET /accepts.json
   def index
-    authorize Accept
     if params[:format] == 'txt'
       @accepts = Accept.order('accepts.created_at DESC').page(params[:page]).per(65534)
     else
       if params[:accept]
         @query = params[:accept][:item_identifier].to_s.strip
-        item = Item.where(:item_identifier => @query).first if @query.present?
+        item = Item.where(item_identifier: @query).first if @query.present?
       end
 
       if item
-        @accepts = Accept.order('accepts.created_at DESC').where(:item_id => item.id).page(params[:page])
+        @accepts = Accept.order('accepts.created_at DESC').where(item_id: item.id).page(params[:page])
       else
         if @basket
           @accepts = @basket.accepts.page(params[:page])
@@ -25,34 +24,50 @@ class AcceptsController < ApplicationController
         end
       end
     end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @accepts }
+      format.js { @accept = Accept.new }
+      format.txt
+    end
   end
 
   # GET /accepts/1
+  # GET /accepts/1.json
   def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @accept }
+    end
   end
 
-  # GET /accepts/new
+  # GET /new
+  # GET /new.json
   def new
-    @accept = Accept.new
-    authorize @accept
     @basket = Basket.new
     @basket.user = current_user
     @basket.save!
+    @accept = Accept.new
     @accepts = []
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @accept }
+    end
   end
 
+  # GET /accepts/new
   # GET /accepts/1/edit
   def edit
   end
 
   # POST /accepts
+  # POST /accepts.json
   def create
-    authorize Accept
     unless @basket
       access_denied; return
     end
-    @accept = Accept.new(accept_params)
-
     @accept.basket = @basket
     @accept.librarian = current_user
 
@@ -60,48 +75,52 @@ class AcceptsController < ApplicationController
     if @accept.item_identifier.blank?
       flash[:message] << t('accept.enter_item_identifier') if @accept.item_identifier.blank?
     else
-      item = Item.where(:item_identifier => @accept.item_identifier.to_s.strip).first
+      item = Item.where(item_identifier: @accept.item_identifier.to_s.strip).first
     end
     @accept.item = item
 
     respond_to do |format|
       if @accept.save
-        format.html { redirect_to accepts_url(basket_id: @basket.id), notice: t('accept.successfully_accepted', :model => t('activerecord.models.accept')) }
-        format.json { render :json => @accept, :status => :created, :location => @accept }
-        format.js { redirect_to accepts_url(basket_id: @basket.id, :format => :js) }
+        flash[:message] << t('accept.successfully_accepted', model: t('activerecord.models.accept'))
+        format.html { redirect_to accepts_url(basket_id: @basket.id) }
+        format.json { render json: @accept, status: :created, location:  @accept }
+        format.js { redirect_to accepts_url(basket_id: @basket.id, format: :js) }
       else
         @accepts = @basket.accepts.page(params[:page])
-        format.html { render :action => "index" }
-        format.json { render :json => @accept.errors, :status => :unprocessable_entity }
-        format.js { render :action => "index" }
+        format.html { render action: "index" }
+        format.json { render json: @accept.errors, status: :unprocessable_entity }
+        format.js { render action: "index" }
       end
     end
   end
 
-  # PATCH/PUT /accepts/1
+  # PUT /accepts/1
+  # PUT /accepts/1.json
   def update
-    if @accept.update(accept_params)
-      redirect_to @accept, notice: 'Accept was successfully updated.'
-    else
-      render action: 'edit'
+    respond_to do |format|
+      if @accept.update_attributes(params[:accept])
+        format.html { redirect_to @accept, notice: t('controller.successfully_updated', model: t('activerecord.models.accept')) }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @accept.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /accepts/1
+  # DELETE /accepts/1.json
   def destroy
     @accept.destroy
-    redirect_to accepts_url, notice: 'Accept was successfully destroyed.'
+
+    respond_to do |format|
+      format.html { redirect_to accepts_url, notice: t('controller.successfully_deleted', model: t('activerecord.models.accept')) }
+      format.json { head :no_content }
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_accept
-      @accept = Accept.find(params[:id])
-      authorize @accept
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def accept_params
-      params.require(:accept).permit(:item_identifier, :librarian_id, :item_id)
-    end
+  def accept_params
+    params.require(:accept).permit(:item_identifier, :librarian_id, :item_id)
+  end
 end

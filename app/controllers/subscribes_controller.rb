@@ -1,18 +1,15 @@
 class SubscribesController < ApplicationController
-  before_action :set_subscribe, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized
-  #after_action :verify_policy_scoped, :only => :index
-  before_action :get_subscription, :get_work
+  load_and_authorize_resource
+  before_filter :get_subscription, :get_work
 
   # GET /subscribes
   # GET /subscribes.json
   def index
-    authorize Subscribe
     @subscribes = Subscribe.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @subscribes }
+      format.json { render json: @subscribes }
     end
   end
 
@@ -21,7 +18,7 @@ class SubscribesController < ApplicationController
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @subscribe }
+      format.json { render json: @subscribe }
     end
   end
 
@@ -29,13 +26,12 @@ class SubscribesController < ApplicationController
   # GET /subscribes/new.json
   def new
     @subscribe = Subscribe.new
-    authorize @subscribe
     @subscribe.subscription = @subscription if @subscription
     @subscribe.work = @work if @work
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @subscribe }
+      format.json { render json: @subscribe }
     end
   end
 
@@ -47,15 +43,14 @@ class SubscribesController < ApplicationController
   # POST /subscribes.json
   def create
     @subscribe = Subscribe.new(subscribe_params)
-    authorize @subscribe
 
     respond_to do |format|
       if @subscribe.save
-        format.html { redirect_to @subscribe, :notice => t('controller.successfully_created', :model => t('activerecord.models.subscribe')) }
-        format.json { render :json => @subscribe, :status => :created, :location => @subscribe }
+        format.html { redirect_to @subscribe, notice: t('controller.successfully_created', model: t('activerecord.models.subscribe')) }
+        format.json { render json: @subscribe, status: :created, location:  @subscribe }
       else
-        format.html { render :action => "new" }
-        format.json { render :json => @subscribe.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @subscribe.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,11 +60,11 @@ class SubscribesController < ApplicationController
   def update
     respond_to do |format|
       if @subscribe.update_attributes(subscribe_params)
-        format.html { redirect_to @subscribe, :notice => t('controller.successfully_updated', :model => t('activerecord.models.subscribe')) }
+        format.html { redirect_to @subscribe, notice: t('controller.successfully_updated', model: t('activerecord.models.subscribe')) }
         format.json { head :no_content }
       else
-        format.html { render :action => "edit" }
-        format.json { render :json => @subscribe.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @subscribe.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -86,11 +81,6 @@ class SubscribesController < ApplicationController
   end
 
   private
-  def set_subscribe
-    @subscribe = Subscribe.find(params[:id])
-    authorize @subscribe
-  end
-
   def subscribe_params
     params.require(:subscribe).permit(
       :subscription_id, :work_id, :start_at, :end_at

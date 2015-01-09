@@ -47,14 +47,14 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <% if policy(Shelf).create? %>
+    <% if can? :create, Shelf %>
       <%- if @library -%>
         <li><%= link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path(library_id: @library.id) -%></li>
       <%- else -%>
         <li><%= link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path -%></li>
       <%- end -%>
     <% end %>
-    <% if policy(@shelf).update? %>
+    <% if can? :update, @shelf %>
       <li><%= link_to t('page.edit'), edit_shelf_path(@shelf) -%></li>
       <li><%= link_to t('page.listing', model: t('activerecord.models.picture_file')), picture_files_path(shelf_id: @shelf.id) -%></li>
     <% end %>

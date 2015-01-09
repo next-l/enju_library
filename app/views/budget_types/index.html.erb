@@ -14,7 +14,7 @@
 <%- @budget_types.each do |budget_type| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if policy(budget_type).update? -%>
+      <%- if can? :update, budget_type -%>
         <%= move_position(budget_type) -%>
       <%- end -%>
     </td>
@@ -22,10 +22,10 @@
     <td><%= link_to budget_type.display_name.localize, budget_type -%></td>
     <td><%= budget_type.note -%></td>
     <td>
-      <%- if policy(budget_type).update? -%>
+      <%- if can? :update, budget_type -%>
         <%= link_to t('page.edit'), edit_budget_type_path(budget_type) -%>
       <% end %>
-      <%- if policy(budget_type).destroy? -%>
+      <%- if can? :delete, budget_type -%>
         <%= link_to t('page.destroy'), budget_type, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>

@@ -1,4 +1,4 @@
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
 # Declare your gem's dependencies in enju_library.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -9,14 +9,15 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
-gem "enju_leaf", github: "next-l/enju_leaf"
-gem "enju_biblio", github: "next-l/enju_biblio"
-gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer"
-gem "enju_ndl", github: "next-l/enju_ndl"
-gem "enju_circulation", github: "next-l/enju_circulation"
-gem "enju_event", github: "next-l/enju_event"
-gem "enju_message", github: "next-l/enju_message"
-gem "enju_inter_library_loan", github: "next-l/enju_inter_library_loan"
+gem "jquery-rails"
+gem "friendly_id", "~> 5.1.0.beta.1"
+gem "coveralls", require: false
+gem "enju_leaf", github: "next-l/enju_leaf", branch: "1.1"
+gem "enju_biblio", github: "next-l/enju_biblio", branch: "1.1"
+gem "enju_event", github: "next-l/enju_event", branch: "1.1"
+gem "enju_circulation", github: "next-l/enju_circulation", branch: "1.1"
+gem "enju_message", github: "next-l/enju_message", branch: "1.1"
+gem "enju_inter_library_loan", github: "next-l/enju_inter_library_loan", branch: "1.1"
 
-# To use debugger
-# gem 'debugger'
+# To use a debugger
+# gem 'byebug', group: [:development, :test]

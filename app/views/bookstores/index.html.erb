@@ -14,7 +14,7 @@
 <%- @bookstores.each_with_index do |bookstore, i| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if policy(bookstore).update? -%>
+      <%- if can? :update, bookstore -%>
         <%= move_position(bookstore) -%>
       <%- end -%>
     </td>
@@ -25,10 +25,10 @@
     <td><%= bookstore.telephone_number -%></td>
     <td><%= bookstore.fax_number -%></td>
     <td>
-      <%- if policy(bookstore).update? -%>
+      <%- if can? :update, bookstore -%>
         <%= link_to t('page.edit'), edit_bookstore_path(bookstore) -%>
       <% end %>
-      <%- if policy(bookstore).destroy? -%>
+      <%- if can? :delete, bookstore -%>
         <%= link_to t('page.destroy'), bookstore, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
@@ -41,7 +41,7 @@
 </div>
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
-  <%- if policy(Bookstore).create? -%>
+  <%- if can? :create, Bookstore -%>
     <ul>
       <li><%= link_to t('page.new', model: t('activerecord.models.bookstore')), new_bookstore_path -%></li>
     </ul>

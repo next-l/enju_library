@@ -1,59 +1,33 @@
 # -*- encoding: utf-8 -*-
 class Library < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
   include MasterModel
-  default_scope {order('libraries.position')}
-  scope :real, -> {where('id != 1')}
-  has_many :shelves, -> {order('shelves.position')}
-  belongs_to :library_group, :validate => true
-  has_many :users
+  default_scope { order('libraries.position') }
+  scope :real, -> { where('id != 1') }
+  has_many :shelves
+  belongs_to :library_group, validate: true
+  has_many :profiles
   belongs_to :country
 
   extend FriendlyId
   friendly_id :name
   geocoded_by :address
 
-  index_name "#{name.downcase.pluralize}-#{Rails.env}"
-
-  after_commit on: :create do
-    index_document
-  end
-
-  after_commit on: :update do
-    update_document
-  end
-
-  after_commit on: :destroy do
-    delete_document
-  end
-
-  settings do
-    mappings dynamic: 'false', _routing: {required: false} do
-      indexes :name
-      indexes :display_name
-      indexes :note
-      indexes :address
-      indexes :created_at
-      indexes :updated_at
-      indexes :position
-    end
-  end
-
-  def as_indexed_json(options={})
-    as_json.merge(
-      address: address
-    )
+  searchable do
+    text :name, :display_name, :note, :address
+    time :created_at
+    time :updated_at
+    integer :position
   end
 
   validates_associated :library_group
-  validates_presence_of :short_display_name, :library_group
-  validates_uniqueness_of :short_display_name, :case_sensitive => false
-  validates_uniqueness_of :isil, :allow_blank => true
-  validates :display_name, :uniqueness => true
-  validates :name, :format => {:with => /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/}
-  validates :isil, :format => {:with => /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/}, :allow_blank => true
-  after_validation :geocode, :if => :address_changed?
+  validates :short_display_name, presence: true
+  validates :library_group, presence: true
+  validates_uniqueness_of :short_display_name, case_sensitive: false
+  validates_uniqueness_of :isil, allow_blank: true
+  validates :display_name, uniqueness: true
+  validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
+  validates :isil, format: { with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/ }, allow_blank: true
+  after_validation :geocode, if: :address_changed?
   after_create :create_shelf
   after_save :clear_all_cache
   after_destroy :clear_all_cache
@@ -62,7 +36,7 @@ class Library < ActiveRecord::Base
 
   def self.all_cache
     if Rails.env == 'production'
-      Rails.cache.fetch('library_all'){Library.all}
+      Rails.cache.fetch('library_all'){ Library.all }
     else
       Library.all
     end
@@ -74,13 +48,13 @@ class Library < ActiveRecord::Base
 
   def create_shelf
     shelf = Shelf.new
-    shelf.name = "#{self.name}_default"
+    shelf.name = "#{name}_default"
     shelf.library = self
     shelf.save!
   end
 
   def web?
-    return true if self.id == 1
+    return true if id == 1
     false
   end
 
@@ -91,29 +65,31 @@ class Library < ActiveRecord::Base
   def address(locale = I18n.locale)
     case locale.to_sym
     when :ja
-      "#{self.region.to_s.localize(locale)}#{self.locality.to_s.localize(locale)}#{self.street.to_s.localize(locale)}"
+      "#{region.to_s.localize(locale)}#{locality.to_s.localize(locale)}#{street.to_s.localize(locale)}"
     else
-      "#{self.street.to_s.localize(locale)} #{self.locality.to_s.localize(locale)} #{self.region.to_s.localize(locale)}"
+      "#{street.to_s.localize(locale)} #{locality.to_s.localize(locale)} #{region.to_s.localize(locale)}"
     end
   rescue
     nil
   end
 
   def address_changed?
-    return true if region_changed? or locality_changed? or street_changed?
+    return true if region_changed? || locality_changed? || street_changed?
     false
   end
 
   if defined?(EnjuEvent)
-    has_many :events, -> {includes(:event_category)}
+    has_many :events
 
     def closed?(date)
-      events.closing_days.collect{|c| c.start_at.beginning_of_day}.include?(date.beginning_of_day)
+      events.closing_days.map{ |c|
+        c.start_at.beginning_of_day
+      }.include?(date.beginning_of_day)
     end
   end
 
   if defined?(EnjuInterLibraryLoan)
-    has_many :inter_library_loans, :foreign_key => 'borrowing_library_id'
+    has_many :inter_library_loans, foreign_key: 'borrowing_library_id'
   end
 end
 
@@ -139,11 +115,12 @@ end
 #  users_count           :integer          default(0), not null
 #  position              :integer
 #  country_id            :integer
-#  created_at            :datetime
-#  updated_at            :datetime
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #  deleted_at            :datetime
 #  opening_hour          :text
 #  isil                  :string(255)
 #  latitude              :float
 #  longitude             :float
 #
+

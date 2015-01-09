@@ -20,6 +20,7 @@ end
 #  order_list_id    :integer
 #  deleted_at       :datetime
 #  subscribes_count :integer          default(0), not null
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #
+

@@ -1,14 +1,8 @@
 Rails.application.routes.draw do
-  resources :libraries do
-    resources :shelves
-  end
-  resources :shelves do
-    resources :picture_files
-  end
+  resources :libraries
+  resources :shelves
 
-  resources :baskets do
-    resources :accepts, :except => [:edit, :update]
-  end
+  resources :baskets
   resources :accepts, :except => [:edit, :update]
 
   resources :bookstores

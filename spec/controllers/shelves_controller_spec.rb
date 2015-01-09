@@ -9,12 +9,11 @@ describe ShelvesController do
 
   describe "GET index", :solr => true do
     before do
-      Shelf.__elasticsearch__.create_index!
-      Shelf.import
+      Shelf.reindex
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns all shelves as @shelves" do
         get :index
@@ -23,7 +22,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns all shelves as @shelves" do
         get :index
@@ -32,7 +31,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns all shelves as @shelves" do
         get :index
@@ -49,13 +48,13 @@ describe ShelvesController do
 
       it "assigns all shelves as @shelves with library_id" do
         get :index, :library_id => 'kamata'
-        assigns(:shelves).should eq(Library.friendly.find('kamata').shelves.page(1))
+        assigns(:shelves).map(&:id).should eq(Library.find('kamata').shelves.order(:position).page(1).pluck(:id))
         response.should be_success
       end
 
       it "assigns all shelves as @shelves with select mode" do
         get :index, :mode => 'select'
-        assigns(:shelves).should eq(Shelf.real)
+        assigns(:shelves).should eq(Shelf.real.order(:position))
         response.should be_success
       end
     end
@@ -63,7 +62,7 @@ describe ShelvesController do
 
   describe "GET show" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested shelf as @shelf" do
         get :show, :id => 1
@@ -81,7 +80,7 @@ describe ShelvesController do
 
   describe "GET new" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested shelf as @shelf" do
         get :new
@@ -90,7 +89,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested shelf as @shelf" do
         get :new
@@ -99,7 +98,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "should not assign the requested shelf as @shelf" do
         get :new
@@ -119,7 +118,7 @@ describe ShelvesController do
 
   describe "GET edit" do
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "assigns the requested shelf as @shelf" do
         shelf = FactoryGirl.create(:shelf)
@@ -129,7 +128,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "assigns the requested shelf as @shelf" do
         shelf = FactoryGirl.create(:shelf)
@@ -139,7 +138,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "assigns the requested shelf as @shelf" do
         shelf = FactoryGirl.create(:shelf)
@@ -164,7 +163,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "assigns a newly created shelf as @shelf" do
@@ -192,7 +191,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "assigns a newly created shelf as @shelf" do
@@ -220,7 +219,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "assigns a newly created shelf as @shelf" do
@@ -282,7 +281,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       describe "with valid params" do
         it "updates the requested shelf" do
@@ -309,7 +308,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       describe "with valid params" do
         it "updates the requested shelf" do
@@ -332,7 +331,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       describe "with valid params" do
         it "updates the requested shelf" do
@@ -381,7 +380,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Administrator" do
-      login_admin
+      login_fixture_admin
 
       it "destroys the requested shelf" do
         delete :destroy, :id => @shelf.id
@@ -399,7 +398,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as Librarian" do
-      login_librarian
+      login_fixture_librarian
 
       it "destroys the requested shelf" do
         delete :destroy, :id => @shelf.id
@@ -412,7 +411,7 @@ describe ShelvesController do
     end
 
     describe "When logged in as User" do
-      login_user
+      login_fixture_user
 
       it "destroys the requested shelf" do
         delete :destroy, :id => @shelf.id

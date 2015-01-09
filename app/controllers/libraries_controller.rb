@@ -1,47 +1,30 @@
 # -*- encoding: utf-8 -*-
 class LibrariesController < ApplicationController
-  before_action :set_library, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized
+  load_and_authorize_resource
+  after_filter :solr_commit, only: [:create, :update, :destroy]
 
   # GET /libraries
   # GET /libraries.json
   def index
-    authorize Library
-    if params[:query].to_s.strip == ''
-      user_query = '*'
-    else
-      user_query = params[:query]
-    end
-    sort = {:sort_by => 'position', :order => 'asc'}
+    sort = {sort_by: 'position', order: 'asc'}
     case params[:sort_by]
     when 'name'
       sort[:sort_by] = 'name'
     end
     sort[:order] = 'desc' if params[:order] == 'desc'
 
-    @query = params[:query]
+    query = @query = params[:query].to_s.strip
     page = params[:page] || 1
 
-    query = {
-      query: {
-        filtered: {
-          query: {
-            query_string: {
-              query: user_query, fields: ['_all']
-            }
-          }
-        }
-      },
-      sort: {
-        :"#{sort[:sort_by]}" => sort[:order]
-      }
-    }
-
-    @libraries = Library.search(query).page(params[:page]).records
+    @libraries = Library.search(include: [:shelves]) do
+      fulltext query if query.present?
+      paginate page: page.to_i, per_page: Library.default_per_page
+      order_by sort[:sort_by], sort[:order]
+    end.results
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @libraries }
+      format.json { render json: @libraries }
     end
   end
 
@@ -49,28 +32,20 @@ class LibrariesController < ApplicationController
   # GET /libraries/1.json
   def show
     if defined?(EnjuEvent)
-      query = {
-        query: {
-          filtered: {
-            filter: {
-              term: {
-                library_id: @library.id
-              }
-            }
-          }
-        },
-        sort: {
-          start_at: 'desc'
-        }
-      }
-
+      search = Sunspot.new_search(Event)
+      library_id = @library.id
+      search.build do
+        with(:library_id).equal_to library_id
+        order_by(:start_at, :desc)
+      end
       page = params[:event_page] || 1
-      @events = Event.search(query).page(page).per(Event.default_per_page)
+      search.query.paginate(page.to_i, Event.default_per_page)
+      @events = search.execute!.results
     end
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render :json => @library }
+      format.json { render json: @library }
       format.js
     end
   end
@@ -78,13 +53,12 @@ class LibrariesController < ApplicationController
   # GET /libraries/new
   def new
     @library = Library.new
-    authorize @library
     @library.country = LibraryGroup.site_config.country
     prepare_options
 
     respond_to do |format|
       format.html # new.html.erb
-      format.json { render :json => @library }
+      format.json { render json: @library }
     end
   end
 
@@ -97,16 +71,15 @@ class LibrariesController < ApplicationController
   # POST /libraries.json
   def create
     @library = Library.new(library_params)
-    authorize @library
 
     respond_to do |format|
       if @library.save
-        format.html { redirect_to @library, :notice => t('controller.successfully_created', :model => t('activerecord.models.library')) }
-        format.json { render :json => @library, :status => :created }
+        format.html { redirect_to @library, notice: t('controller.successfully_created', model: t('activerecord.models.library')) }
+        format.json { render json: @library, status: :created }
       else
         prepare_options
-        format.html { render :action => "new" }
-        format.json { render :json => @library.errors, :status => :unprocessable_entity }
+        format.html { render action: "new" }
+        format.json { render json: @library.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -121,13 +94,13 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       if @library.update_attributes(library_params)
-        format.html { redirect_to @library, :notice => t('controller.successfully_updated', :model => t('activerecord.models.library')) }
+        format.html { redirect_to @library, notice: t('controller.successfully_updated', model: t('activerecord.models.library')) }
         format.json { head :no_content }
       else
         @library.name = @library.name_was
         prepare_options
-        format.html { render :action => "edit" }
-        format.json { render :json => @library.errors, :status => :unprocessable_entity }
+        format.html { render action: "edit" }
+        format.json { render json: @library.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -136,20 +109,14 @@ class LibrariesController < ApplicationController
   # DELETE /libraries/1.json
   def destroy
     @library.destroy
-    redirect_to libraries_url, :notice => t('controller.successfully_destroyed', :model => t('activerecord.models.library'))
+
+    respond_to do |format|
+      format.html { redirect_to libraries_url }
+      format.json { head :no_content }
+    end
   end
 
   private
-  def set_library
-    @library = Library.friendly.find(params[:id])
-    authorize @library
-  end
-
-  def prepare_options
-    @library_groups = LibraryGroup.all
-    @countries = Country.all_cache
-  end
-
   def library_params
     params.require(:library).permit(
       :name, :display_name, :short_display_name, :zip_code, :street,
@@ -157,5 +124,10 @@ class LibrariesController < ApplicationController
       :note, :call_number_rows, :call_number_delimiter, :library_group_id,
       :country_id, :opening_hour, :isil, :position
     )
+  end
+
+  def prepare_options
+    @library_groups = LibraryGroup.all
+    @countries = Country.all_cache
   end
 end

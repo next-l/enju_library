@@ -1,10 +1,14 @@
 <div id="event_list">
-  (<%= link_to t('page.calendar'), controller: :calendar, action: :index, library_id: @library.name -%>)
+  (<%= link_to t('page.calendar'), events_path(library_id: @library.name, mode: 'calendar') -%>)
   <ul>
     <%- @events.each do |event| -%>
       <li>
         <%= link_to event.display_name.localize, event -%>
-        (<%= l(event.start_at) -%> - <%= l(event.end_at) -%>)
+        <% if event.all_day? %>
+          (<%= l(event.start_at, format: :only_date) -%> - <%= l(event.end_at, format: :only_date) -%>)
+        <% else %>
+          (<%= l(event.start_at) -%> - <%= l(event.end_at) -%>)
+        <% end %>
       </li>
     <%- end -%>
   </ul>

@@ -24,7 +24,7 @@ module EnjuLibrary
     end
 
     def get_library
-      @library = Library.friendly.find(params[:library_id]) if params[:library_id]
+      @library = Library.find(params[:library_id]) if params[:library_id]
     end
 
     def get_libraries

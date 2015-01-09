@@ -55,14 +55,6 @@ describe AcceptsController do
         response.should be_forbidden
       end
     end
-
-    describe "When not logged in" do
-      it "should not assign all accepts as @accepts" do
-        get :index
-        assigns(:accepts).should be_nil
-        response.should redirect_to new_user_session_url
-      end
-    end
   end
 
   describe "GET show" do
@@ -157,7 +149,7 @@ describe AcceptsController do
       describe "with valid params" do
         it "assigns a newly created accept as @accept" do
           post :create, :accept => @attrs
-          assigns(:accept).should be_nil
+          assigns(:accept).should_not be_valid
         end
 
         it "should not create a new accept without basket_id" do
@@ -177,7 +169,7 @@ describe AcceptsController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved accept as @accept" do
           post :create, :accept => @invalid_attrs
-          assigns(:accept).should be_nil
+          assigns(:accept).should_not be_valid
         end
 
         it "should be forbidden" do
@@ -199,7 +191,7 @@ describe AcceptsController do
       describe "with valid params" do
         it "assigns a newly created accept as @accept" do
           post :create, :accept => @attrs
-          assigns(:accept).should be_nil
+          assigns(:accept).should_not be_valid
         end
 
         it "should not create a new accept without basket_id" do
@@ -215,7 +207,7 @@ describe AcceptsController do
       describe "with valid params" do
         it "assigns a newly created accept as @accept" do
           post :create, :accept => @attrs
-          assigns(:accept).should be_nil
+          assigns(:accept).should_not be_valid
         end
 
         it "should be forbidden" do

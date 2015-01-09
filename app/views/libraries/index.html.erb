@@ -37,7 +37,7 @@
 <%- @libraries.each_with_index do |library, i| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if policy(library).update? and params[:query].blank? -%>
+      <%- if can?(:update, library) and params[:query].blank? -%>
         <%= library.first? ? image_tag('icons/stop.png', size: '16x16') : link_to(image_tag('icons/arrow_up.png', size: '16x16', alt: t('page.asc')), {action: 'update', move: 'higher', id: library.name}, method: :put) -%>
         <%= library.last? ? image_tag('icons/stop.png', size: '16x16') : link_to(image_tag('icons/arrow_down.png', size: '16x16', alt: t('page.desc')), {action: 'update', move: 'lower', id: library.name}, method: :put) -%>
       <%- end -%>
@@ -63,10 +63,10 @@
       <% end %>
     </td>
     <td>
-      <%- if policy(library).update? -%>
+      <%- if can? :update, library -%>
         <%= link_to t('page.edit'), edit_library_path(library) -%>
       <% end %>
-      <%- if policy(library).destroy? -%>
+      <%- if can? :delete, library -%>
         <%= link_to t('page.destroy'), library, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
@@ -80,7 +80,7 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <%- if policy(Library).create? -%>
+    <%- if can? :create, Library -%>
       <li><%= link_to t('page.new', model: t('activerecord.models.library')), new_library_path -%></li>
     <%- end -%>
   </ul>
