@@ -34,12 +34,6 @@ class Shelf < ActiveRecord::Base
     Shelf.find(1)
   end
 
-  def first?
-    # 必ずposition順に並んでいる
-    return true if library.shelves.first.position == position
-    false
-  end
-
   def localized_display_name
     display_name.localize
   end
