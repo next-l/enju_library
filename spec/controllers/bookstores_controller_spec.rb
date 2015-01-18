@@ -19,7 +19,7 @@ describe BookstoresController do
 
       it "assigns all bookstores as @bookstores" do
         get :index
-        assigns(:bookstores).should eq(Bookstore.page(1))
+        assigns(:bookstores).should eq(Bookstore.order(:position).page(1))
       end
     end
 
@@ -28,7 +28,7 @@ describe BookstoresController do
 
       it "assigns all bookstores as @bookstores" do
         get :index
-        assigns(:bookstores).should eq(Bookstore.page(1))
+        assigns(:bookstores).should eq(Bookstore.order(:position).page(1))
       end
     end
 

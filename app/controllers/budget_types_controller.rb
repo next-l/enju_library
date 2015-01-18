@@ -3,7 +3,7 @@ class BudgetTypesController < ApplicationController
   # GET /budget_types
   # GET /budget_types.json
   def index
-    @budget_types = BudgetType.all
+    @budget_types = BudgetType.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb

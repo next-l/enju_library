@@ -3,7 +3,7 @@ class RequestStatusTypesController < ApplicationController
   # GET /request_status_types
   # GET /request_status_types.json
   def index
-    @request_status_types = RequestStatusType.all
+    @request_status_types = RequestStatusType.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb

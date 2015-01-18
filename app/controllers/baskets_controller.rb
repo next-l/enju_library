@@ -5,7 +5,7 @@ class BasketsController < ApplicationController
   # GET /baskets.json
   def index
     if current_user.has_role?('Librarian')
-     @baskets = Basket.page(params[:page])
+     @baskets = Basket.order(created_at: :desc).page(params[:page])
     else
       redirect_to new_basket_url
       return

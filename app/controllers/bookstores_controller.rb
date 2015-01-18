@@ -3,7 +3,7 @@ class BookstoresController < ApplicationController
   # GET /bookstores
   # GET /bookstores.json
   def index
-    @bookstores = Bookstore.page(params[:page])
+    @bookstores = Bookstore.order(:position).page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

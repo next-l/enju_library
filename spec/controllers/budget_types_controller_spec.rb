@@ -33,7 +33,7 @@ describe BudgetTypesController do
     it "assigns all budget_types as @budget_types" do
       budget_type = BudgetType.create! valid_attributes
       get :index
-      assigns(:budget_types).should eq(BudgetType.all)
+      assigns(:budget_types).should eq(BudgetType.order(:position))
     end
   end
 

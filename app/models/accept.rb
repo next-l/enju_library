@@ -1,5 +1,4 @@
 class Accept < ActiveRecord::Base
-  default_scope { order('accepts.id DESC') }
   belongs_to :basket
   belongs_to :item, touch: true
   belongs_to :librarian, class_name: 'User'

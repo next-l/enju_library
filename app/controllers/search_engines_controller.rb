@@ -3,7 +3,7 @@ class SearchEnginesController < ApplicationController
   # GET /search_engines
   # GET /search_engines.json
   def index
-    @search_engines = SearchEngine.all
+    @search_engines = SearchEngine.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb

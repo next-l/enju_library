@@ -7,11 +7,11 @@ Coveralls.wear!
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../spec/dummy/config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 require 'vcr'
 require 'factory_girl'
 require 'sunspot-rails-tester'
 require 'rspec/active_model/mocks'
+require 'pundit/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

@@ -19,7 +19,7 @@ describe RequestTypesController do
 
       it "assigns all request_types as @request_types" do
         get :index
-        assigns(:request_types).should eq(RequestType.all)
+        assigns(:request_types).should eq(RequestType.order(:position))
       end
     end
 
@@ -28,7 +28,7 @@ describe RequestTypesController do
 
       it "assigns all request_types as @request_types" do
         get :index
-        assigns(:request_types).should eq(RequestType.all)
+        assigns(:request_types).should eq(RequestType.order(:position))
       end
     end
 

@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 class Library < ActiveRecord::Base
   include MasterModel
-  default_scope { order('libraries.position') }
   scope :real, -> { where('id != 1') }
   has_many :shelves
   belongs_to :library_group, validate: true

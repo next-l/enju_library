@@ -1,5 +1,4 @@
 class Bookstore < ActiveRecord::Base
-  default_scope { order('bookstores.position') }
   has_many :items
 
   acts_as_list

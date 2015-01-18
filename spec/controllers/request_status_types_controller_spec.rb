@@ -19,7 +19,7 @@ describe RequestStatusTypesController do
 
       it "assigns all request_status_types as @request_status_types" do
         get :index
-        assigns(:request_status_types).should eq(RequestStatusType.all)
+        assigns(:request_status_types).should eq(RequestStatusType.order(:position))
       end
     end
 
@@ -28,7 +28,7 @@ describe RequestStatusTypesController do
 
       it "assigns all request_status_types as @request_status_types" do
         get :index
-        assigns(:request_status_types).should eq(RequestStatusType.all)
+        assigns(:request_status_types).should eq(RequestStatusType.order(:position))
       end
     end
 
