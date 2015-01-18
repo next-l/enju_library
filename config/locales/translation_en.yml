@@ -1,0 +1,107 @@
+en:
+  activerecord:
+    models:
+      library: Library
+      library_group: Library Group
+      shelf: Shelf
+      accept: Accept
+      budget_type: Budget type
+      bookstore: Bookstore
+      subscribe: Subscribe
+      subscription: Subscription
+      request_status_type: Request status type
+      request_type: Request type
+      search_engine: Search engine
+
+    attributes:
+      library:
+        name: Name
+        display_name: Display name
+        short_display_name: Short display name
+        zip_code: Zip code
+        region: Region
+        locality: Locality
+        street: Street
+        telephone_number_1: Telephone number 1
+        telephone_number_2: Telephone number 2
+        fax_number: Fax number
+        lat: Lat
+        lng: Lng
+        note: Note
+        call_number_rows: Call number rows
+        call_number_delimiter: Call number delimiter
+        position: Position
+        deleted_at: Deleted at
+        opening_hour: Opening hour
+        isil: ISIL
+        address: Address
+      shelf:
+        name: Name
+        display_name: Display name
+        note: Note
+        position: Position
+        deleted_at: Deleted at
+        closed: Closed
+      library_group:
+        name: Name
+        display_name: Display name
+        short_name: Short name
+        email: Email
+        my_networks: My networks
+        admin_networks: Admin networks
+        note: Note
+        login_banner: Login banner
+        post_to_union_catalog: Post to union catalog
+        url: URL
+        color: Color
+      bookstore:
+        name: Name
+        zip_code: Zip code
+        address: Address
+        note: Note
+        telephone_number: Telephone number
+        fax_number: Fax number
+        url: URL
+        position: Position
+        deleted_at: Deleted at
+      budget_type:
+        name: Name
+        display_name: Display name
+        note: Note
+      accept:
+        item_id: Item
+      subscribe:
+        started_on: Start on
+        ended_on: End on
+      subscription:
+        title: Title
+        note: Note
+        deleted_at: Deleted at
+        subscribes_count: Count
+      request_status_type:
+        name: Name
+        display_name: Display name
+        note: Note
+        position: Position
+      request_type:
+        name: Name
+        display_name: Display name
+        note: Note
+        position: Position
+      search_engine:
+        name: Name
+        url: URL
+        base_url: Base URL
+        http_method: HTTP method
+        query_param: Query param
+        additional_param: Additional param
+        note: Note
+        position: Position
+
+  library:
+    map: "Map"
+    staff: "Staff"
+    number_of_item: "Number of items"
+    address: "Address"
+  shelf:
+    update_display_order: Update display order
