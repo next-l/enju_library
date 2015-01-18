@@ -1,5 +1,7 @@
 class RequestTypesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_request_type, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /request_types
   # GET /request_types.json
   def index
@@ -82,6 +84,16 @@ class RequestTypesController < ApplicationController
   end
 
   private
+  def set_request_type
+    @request_type = RequestType.find(params[:id])
+    authorize @request_type
+    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
+  end
+
+  def check_policy
+    authorize RequestType
+  end
+
   def request_type_params
     params.require(:request_type).permit(:name, :display_name, :note)
   end
