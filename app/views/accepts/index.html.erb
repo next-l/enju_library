@@ -29,7 +29,7 @@
         <% end %>
       </td>
       <td>
-        <%- if can? :delete, accept -%>
+        <%- if policy(accept).destroy? -%>
           <%= link_to t('page.destroy'), accept, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
         <%- end -%>
       </td>
@@ -44,6 +44,8 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.new', model: t('activerecord.models.accept')), new_accept_path -%></li>
+    <% if policy(Accept).create? %>
+      <li><%= link_to t('page.new', model: t('activerecord.models.accept')), new_accept_path -%></li>
+    <% end %>
   </ul>
 </div>

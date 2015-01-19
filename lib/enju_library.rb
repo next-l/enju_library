@@ -21,10 +21,12 @@ module EnjuLibrary
 
     def get_shelf
       @shelf = Shelf.includes(:library).find(params[:shelf_id]) if params[:shelf_id]
+      authorize @shelf, :show? if @shelf
     end
 
     def get_library
       @library = Library.find(params[:library_id]) if params[:library_id]
+      authorize @library, :show? if @library
     end
 
     def get_libraries
@@ -33,10 +35,12 @@ module EnjuLibrary
 
     def get_bookstore
       @bookstore = Bookstore.find(params[:bookstore_id]) if params[:bookstore_id]
+      authorize @bookstore, :show? if @bookstore
     end
 
     def get_subscription
       @subscription = Subscription.find(params[:subscription_id]) if params[:subscription_id]
+      authorize @subscription, :show? if @subscription
     end
   end
 end

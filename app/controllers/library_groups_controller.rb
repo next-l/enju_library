@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 class LibraryGroupsController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_library_group, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
 
   # GET /library_groups
   # GET /library_groups.json
@@ -24,7 +25,7 @@ class LibraryGroupsController < ApplicationController
 
   # GET /library_groups/1/edit
   def edit
-    @countries = Country.all
+    @countries = Country.order(:position)
   end
 
   # PUT /library_groups/1
@@ -43,6 +44,16 @@ class LibraryGroupsController < ApplicationController
   end
 
   private
+  def set_library_group
+    @library_group = LibraryGroup.find(params[:id])
+    authorize @library_group
+    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
+  end
+
+  def check_policy
+    authorize LibraryGroup
+  end
+
   def library_group_params
     params.require(:library_group).permit(
       :name, :display_name, :short_name, :my_networks,

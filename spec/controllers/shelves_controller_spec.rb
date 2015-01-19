@@ -93,7 +93,7 @@ describe ShelvesController do
 
       it "assigns the requested shelf as @shelf" do
         get :new
-        assigns(:shelf).should_not be_valid
+        assigns(:shelf).should be_nil
       end
     end
 
@@ -102,7 +102,7 @@ describe ShelvesController do
 
       it "should not assign the requested shelf as @shelf" do
         get :new
-        assigns(:shelf).should_not be_valid
+        assigns(:shelf).should be_nil
         response.should be_forbidden
       end
     end
@@ -110,7 +110,7 @@ describe ShelvesController do
     describe "When not logged in" do
       it "should not assign the requested shelf as @shelf" do
         get :new
-        assigns(:shelf).should_not be_valid
+        assigns(:shelf).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -196,7 +196,7 @@ describe ShelvesController do
       describe "with valid params" do
         it "assigns a newly created shelf as @shelf" do
           post :create, :shelf => @attrs
-          assigns(:shelf).should be_valid
+          assigns(:shelf).should be_nil
         end
 
         it "should be forbidden" do
@@ -208,7 +208,7 @@ describe ShelvesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved shelf as @shelf" do
           post :create, :shelf => @invalid_attrs
-          assigns(:shelf).should_not be_valid
+          assigns(:shelf).should be_nil
         end
 
         it "should be forbidden" do
@@ -224,7 +224,7 @@ describe ShelvesController do
       describe "with valid params" do
         it "assigns a newly created shelf as @shelf" do
           post :create, :shelf => @attrs
-          assigns(:shelf).should be_valid
+          assigns(:shelf).should be_nil
         end
 
         it "should be forbidden" do
@@ -236,7 +236,7 @@ describe ShelvesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved shelf as @shelf" do
           post :create, :shelf => @invalid_attrs
-          assigns(:shelf).should_not be_valid
+          assigns(:shelf).should be_nil
         end
 
         it "should be forbidden" do
@@ -250,7 +250,7 @@ describe ShelvesController do
       describe "with valid params" do
         it "assigns a newly created shelf as @shelf" do
           post :create, :shelf => @attrs
-          assigns(:shelf).should be_valid
+          assigns(:shelf).should be_nil
         end
 
         it "should be forbidden" do
@@ -262,7 +262,7 @@ describe ShelvesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved shelf as @shelf" do
           post :create, :shelf => @invalid_attrs
-          assigns(:shelf).should_not be_valid
+          assigns(:shelf).should be_nil
         end
 
         it "should be forbidden" do

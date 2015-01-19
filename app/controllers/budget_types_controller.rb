@@ -1,5 +1,7 @@
 class BudgetTypesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_budget_type, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /budget_types
   # GET /budget_types.json
   def index
@@ -82,6 +84,16 @@ class BudgetTypesController < ApplicationController
   end
 
   private
+  def set_budget_type
+    @budget_type = BudgetType.find(params[:id])
+    authorize @budget_type
+    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
+  end
+
+  def check_policy
+    authorize BudgetType
+  end
+
   def budget_type_params
     params.require(:budget_type).permit(
       :name, :display_name, :note, :position

@@ -1,5 +1,7 @@
 class BookstoresController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_bookstore, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /bookstores
   # GET /bookstores.json
   def index
@@ -82,6 +84,16 @@ class BookstoresController < ApplicationController
   end
 
   private
+  def set_bookstore
+    @bookstore = Bookstore.find(params[:id])
+    authorize @bookstore
+    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
+  end
+
+  def check_policy
+    authorize Bookstore
+  end
+
   def bookstore_params
     params.require(:bookstore).permit(
       :name, :zip_code, :address, :note, :telephone_number,

@@ -36,14 +36,14 @@ describe SubscriptionsController do
 
       it "assigns all subscriptions as @subscriptions" do
         get :index
-        assigns(:subscriptions).should be_empty
+        assigns(:subscriptions).should be_nil
       end
     end
 
     describe "When not logged in" do
       it "assigns all subscriptions as @subscriptions" do
         get :index
-        assigns(:subscriptions).should be_empty
+        assigns(:subscriptions).should be_nil
       end
     end
   end
@@ -112,7 +112,7 @@ describe SubscriptionsController do
 
       it "should not assign the requested subscription as @subscription" do
         get :new
-        assigns(:subscription).should_not be_valid
+        assigns(:subscription).should be_nil
         response.should be_forbidden
       end
     end
@@ -120,7 +120,7 @@ describe SubscriptionsController do
     describe "When not logged in" do
       it "should not assign the requested subscription as @subscription" do
         get :new
-        assigns(:subscription).should_not be_valid
+        assigns(:subscription).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -234,7 +234,7 @@ describe SubscriptionsController do
       describe "with valid params" do
         it "assigns a newly created subscription as @subscription" do
           post :create, :subscription => @attrs
-          assigns(:subscription).should be_valid
+          assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do
@@ -246,7 +246,7 @@ describe SubscriptionsController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscription as @subscription" do
           post :create, :subscription => @invalid_attrs
-          assigns(:subscription).should_not be_valid
+          assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do
@@ -260,7 +260,7 @@ describe SubscriptionsController do
       describe "with valid params" do
         it "assigns a newly created subscription as @subscription" do
           post :create, :subscription => @attrs
-          assigns(:subscription).should be_valid
+          assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do
@@ -272,7 +272,7 @@ describe SubscriptionsController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscription as @subscription" do
           post :create, :subscription => @invalid_attrs
-          assigns(:subscription).should_not be_valid
+          assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do

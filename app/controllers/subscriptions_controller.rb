@@ -1,7 +1,8 @@
 class SubscriptionsController < ApplicationController
-  load_and_authorize_resource
-  before_filter :get_work
-  after_filter :solr_commit, only: [:create, :update, :destroy]
+  before_action :set_subscription, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  before_action :get_work
+  after_action :solr_commit, only: [:create, :update, :destroy]
 
   # GET /subscriptions
   # GET /subscriptions.json
@@ -86,6 +87,15 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+  def set_subscription
+    @subscription = Subscription.find(params[:id])
+    authorize @subscription
+  end
+
+  def check_policy
+    authorize Subscription
+  end
+
   def subscription_params
     params.require(:subscription).permit(
       :title, :note, :order_list_id, :user_id

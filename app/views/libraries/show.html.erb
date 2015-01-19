@@ -34,7 +34,7 @@
         <% if defined?(EnjuEvent) %>
           <li><a href="#tab4"><em><%= t('activerecord.models.event') -%></em></a></li>
         <% end %>
-        <%- if can? :update, @library -%>
+        <%- if policy(@library).update? -%>
           <li><a href="#tab5"><em><%= t('page.configuration') -%></em></a></li>
         <%- end -%>
       </ul>
@@ -93,7 +93,7 @@
         </div>
       <% end %>
 
-      <%- if can? :update, @library -%>
+      <%- if policy(@library).update? -%>
         <div id="tab5">
           <h3><%= t('page.configuration') -%></h3>
           <p>
@@ -115,15 +115,15 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-  <%- if can? :update, @library -%>
+  <%- if policy(@library).update? -%>
     <li><%= link_to t('page.edit'), edit_library_path(@library) -%></li>
   <%- end -%>
 
-  <%- if can? :create, Shelf and !@library.web? -%>
+  <%- if policy(Shelf).create? and !@library.web? -%>
     <li><%= link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path(library_id: @library.id) -%></li>
   <%- end -%>
   <% if defined?(EnjuEvent) %>
-    <%- if can? :create, Event and !@library.web? -%>
+    <%- if policy(Event).create? and !@library.web? -%>
       <li><%= link_to t('page.new', model: t('activerecord.models.event')), new_event_path(library_id: @library.id) -%></li>
     <%- end -%>
   <%- end -%>

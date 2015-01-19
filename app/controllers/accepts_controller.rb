@@ -1,7 +1,7 @@
 class AcceptsController < ApplicationController
-  load_and_authorize_resource except: :index
-  authorize_resource only: :index
-  before_filter :get_basket, only: [:index, :create]
+  before_action :set_accept, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  before_action :get_basket, only: [:index, :create]
 
   # GET /accepts
   # GET /accepts.json
@@ -68,6 +68,7 @@ class AcceptsController < ApplicationController
     unless @basket
       access_denied; return
     end
+    @accept = Accept.new(accept_params)
     @accept.basket = @basket
     @accept.librarian = current_user
 
@@ -98,7 +99,7 @@ class AcceptsController < ApplicationController
   # PUT /accepts/1.json
   def update
     respond_to do |format|
-      if @accept.update_attributes(params[:accept])
+      if @accept.update_attributes(accept_params)
         format.html { redirect_to @accept, notice: t('controller.successfully_updated', model: t('activerecord.models.accept')) }
         format.json { head :no_content }
       else
@@ -120,6 +121,15 @@ class AcceptsController < ApplicationController
   end
 
   private
+  def set_accept
+    @accept = Accept.find(params[:id])
+    authorize @accept
+  end
+
+  def check_policy
+    authorize Accept
+  end
+
   def accept_params
     params.require(:accept).permit(:item_identifier, :librarian_id, :item_id)
   end

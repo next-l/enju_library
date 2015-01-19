@@ -14,7 +14,7 @@
     <td><%= link_to subscription.title, subscription -%></td>
     <td><%= subscription.works.size -%></td>
     <td>
-      <% if can? :delete, subscription %>
+      <% if policy(subscription).destroy? %>
         <%= link_to t('page.edit'), edit_subscription_path(subscription) -%>
         <%= link_to t('page.destroy'), subscription, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <% end %>
@@ -30,10 +30,12 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <%- if @work -%>
-      <li><%= link_to t('page.add', model: t('activerecord.models.work')), subscriptions_path -%></li>
-    <%- else -%>
-      <li><%= link_to t('page.new', model: t('activerecord.models.subscription')), new_subscription_path -%></li>
+    <% if policy(Subscription).create? %>
+      <%- if @work -%>
+        <li><%= link_to t('page.add', model: t('activerecord.models.work')), subscriptions_path -%></li>
+      <%- else -%>
+        <li><%= link_to t('page.new', model: t('activerecord.models.subscription')), new_subscription_path -%></li>
+      <%- end -%>
     <%- end -%>
   </ul>
 </div>

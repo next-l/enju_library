@@ -1,5 +1,7 @@
 class RequestStatusTypesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_request_status_type, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /request_status_types
   # GET /request_status_types.json
   def index
@@ -82,6 +84,16 @@ class RequestStatusTypesController < ApplicationController
   end
 
   private
+  def set_request_status_type
+    @request_status_type = RequestStatusType.find(params[:id])
+    authorize @request_status_type
+    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
+  end
+
+  def check_policy
+    authorize RequestStatusType
+  end
+
   def request_status_type_params
     params.require(:request_status_type).permit(:name, :display_name, :note)
   end

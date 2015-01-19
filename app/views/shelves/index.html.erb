@@ -29,7 +29,7 @@
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
       <% if @library and params[:query].blank? and params[:order].blank? %>
-        <%- if can? :update, shelf -%>
+        <%- if policy(shelf).update? -%>
           <%= move_position(shelf) -%>
         <%- end -%>
       <% end %>
@@ -48,10 +48,10 @@
       <%= shelf.library.name if current_user.try(:has_role?, 'Librarian') %>
     </td>
     <td>
-      <%- if can? :update, shelf -%>
+      <%- if policy(shelf).update? -%>
         <%= link_to t('page.edit'), edit_shelf_path(shelf) -%>
       <% end %>
-      <%- if can? :delete, shelf -%>
+      <%- if policy(shelf).destroy? -%>
         <%= link_to t('page.destroy'), shelf, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
@@ -66,7 +66,7 @@
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <%= render 'library_facet' %>
   <ul>
-    <%- if can? :create, Shelf -%>
+    <%- if policy(Shelf).create? -%>
       <li><%= link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path -%></li>
     <%- end -%>
   </ul>

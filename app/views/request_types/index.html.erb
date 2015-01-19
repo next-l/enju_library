@@ -13,17 +13,17 @@
 <%- @request_types.each do |request_type| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if can? :update, request_type -%>
+      <%- if policy(request_type).update? -%>
         <%= move_position(request_type) -%>
       <%- end -%>
     </td>
     <td><%= link_to request_type.name, request_type -%></td>
     <td><%= link_to request_type.display_name.localize, request_type -%></td>
     <td>
-      <%- if can? :update, request_type -%>
+      <%- if policy(request_type).update? -%>
         <%= link_to t('page.edit'), edit_request_type_path(request_type) -%>
       <% end %>
-      <%- if can? :delete, request_type -%>
+      <%- if policy(request_type).destroy? -%>
         <%= link_to t('page.destroy'), request_type, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <% end %>
     </td>
@@ -35,6 +35,8 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.new', model: t('activerecord.models.request_type')), new_request_type_path -%></li>
+    <% if policy(RequestType).create? %>
+      <li><%= link_to t('page.new', model: t('activerecord.models.request_type')), new_request_type_path -%></li>
+    <% end %>
   </ul>
 </div>
