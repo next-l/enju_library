@@ -4,7 +4,7 @@ class ShelfPolicy < ApplicationPolicy
   end
 
   def show?
-    true if user.try(:has_role?, 'Librarian')
+    true
   end
 
   def create?
