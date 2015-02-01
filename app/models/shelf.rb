@@ -9,6 +9,7 @@ class Shelf < ActiveRecord::Base
   validates :library, presence: true
   validates_uniqueness_of :display_name, scope: :library_id
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
+  before_update :reset_position
 
   acts_as_list scope: :library
 
@@ -36,6 +37,13 @@ class Shelf < ActiveRecord::Base
 
   def localized_display_name
     display_name.localize
+  end
+
+  # http://stackoverflow.com/a/12437606
+  def reset_position
+    if library_id_changed?
+      self.position = library.shelves.count > 0 ? library.shelves.last.position + 1 : 1
+    end
   end
 end
 
