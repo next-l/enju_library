@@ -10,8 +10,6 @@ class Accept < ActiveRecord::Base
   validates_presence_of :item_id, message:  I18n.t('accept.item_not_found')
   validates_presence_of :basket_id
 
-  before_save :accept!, on: :create
-
   attr_accessor :item_identifier
 
   paginates_per 10
