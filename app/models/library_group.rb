@@ -9,6 +9,7 @@ class LibraryGroup < ActiveRecord::Base
 
   validates :url, presence: true, url: true
   accepts_nested_attributes_for :colors, update_only: true
+  store :settings, coder: JSON
 
   def self.site_config
     LibraryGroup.find(1)
