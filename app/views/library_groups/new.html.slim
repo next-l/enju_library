@@ -1,0 +1,9 @@
+.panel.panel-default
+  .panel-heading
+    = t('page.new', model: t('activerecord.models.library_group'))
+  .panel-body
+    = render 'form'
+#submenu.col-md-3
+  ul
+    li
+      = link_to t('page.back'), library_groups_path

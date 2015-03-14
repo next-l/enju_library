@@ -1,0 +1,27 @@
+.panel.panel-default
+  .panel-heading
+    = t('page.showing', model: t('activerecord.models.budget_type'))
+  .panel-body
+    p#notice
+      = notice
+    p
+      strong
+        = t('activerecord.attributes.budget_type.name')
+        | :
+      = @budget_type.name
+    p
+      strong
+        = t('activerecord.attributes.budget_type.display_name')
+        | :
+      = @budget_type.display_name.localize
+    p
+      strong
+        = t('activerecord.attributes.budget_type.note')
+        | :
+      = @budget_type.note
+#submenu.col-md-3
+  ul
+    li
+      = link_to t('page.edit'), edit_budget_type_path(@budget_type)
+    li
+      = back_to_index(flash[:page_info])

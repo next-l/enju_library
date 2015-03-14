@@ -1,0 +1,81 @@
+.panel.panel-default
+  .panel-heading
+    = t('page.showing', model: t('activerecord.models.library_group'))
+  .panel-body
+    p#notice
+      = notice
+    p
+      strong
+        = t('activerecord.attributes.library_group.name')
+        | :
+      = @library_group.name
+    p
+      strong
+        = t('activerecord.attributes.library_group.display_name')
+        | :
+      = @library_group.display_name.localize
+    p
+      strong
+        = t('activerecord.attributes.library_group.email')
+        | :
+      = @library_group.user.email
+    p
+      strong
+        = t('activerecord.attributes.library_group.url')
+        | :
+      = @library_group.url
+    div
+      strong
+        = t('activerecord.attributes.library_group.login_banner')
+        | :
+      = markdown_helper(@library_group.login_banner)
+    div
+      strong
+        = t('activerecord.attributes.library_group.color')
+        | :
+      ul
+        - @library_group.colors.each do |color|
+          li
+            = color.property
+            | : <span style="color: transparent; background-color: #
+            = color.code
+            | ">sample
+            |  ( 
+            = color.code
+            |  ) 
+    - if defined?(EnjuBookmark)
+      p
+        strong
+          = t('activerecord.attributes.library_group.allow_bookmark_external_url')
+          | :
+        = localized_boolean(@library_group.allow_bookmark_external_url)
+    p
+      strong
+        = t('activerecord.attributes.library_group.my_networks')
+        | :
+      = @library_group.my_networks
+    p
+      strong
+        = t('activerecord.attributes.library_group.admin_networks')
+        | :
+      = @library_group.admin_networks
+    p
+      strong
+        = t('activerecord.attributes.library_group.note')
+        | :
+      = @library_group.note
+    p
+      strong
+        = t('activerecord.models.library')
+        | :
+      br
+    ul
+      - @library_group.real_libraries.each do |library|
+        li
+          = link_to library.display_name.localize, library
+#submenu.col-md-3
+  ul
+    li
+      = link_to t('page.edit'), edit_library_group_path(@library_group)
+    li
+      = back_to_index(flash[:page_info])

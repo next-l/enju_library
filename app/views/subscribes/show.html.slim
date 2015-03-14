@@ -1,0 +1,32 @@
+.panel.panel-default
+  .panel-heading
+    = t('page.showing', model: t('activerecord.models.subscribe'))
+  #content_list
+    p#notice
+      = notice
+    p
+      strong
+        = t('activerecord.models.subscription')
+        | :
+      = link_to @subscribe.subscription.title, @subscribe.subscription
+    p
+      strong
+        = t('activerecord.models.work')
+        | :
+      = link_to @subscribe.work.original_title, @subscribe.work
+    p
+      strong
+        = t('activerecord.attributes.subscribe.start_at')
+        | :
+      =l @subscribe.start_at
+    p
+      strong
+        = t('activerecord.attributes.subscribe.end_at')
+        | :
+      =l @subscribe.end_at
+#submenu.col-md-3
+  ul
+    li
+      = link_to t('page.edit'), edit_subscribe_path(@subscribe)
+    li
+      = bakc_to_index

@@ -1,0 +1,50 @@
+.panel.panel-default
+  .panel-heading
+    = t('page.showing', model: t('activerecord.models.bookstore'))
+  .panel-body
+    p#notice
+      = notice
+    p
+      strong
+        = t('activerecord.attributes.bookstore.name')
+        | :
+      = @bookstore.name
+    p
+      strong
+        = t('activerecord.attributes.bookstore.zip_code')
+        | :
+      = @bookstore.zip_code
+    p
+      strong
+        = t('activerecord.attributes.bookstore.address')
+        | :
+      = @bookstore.address
+    p
+      strong
+        = t('activerecord.attributes.bookstore.telephone_number')
+        | :
+      = @bookstore.telephone_number
+    p
+      strong
+        = t('activerecord.attributes.bookstore.fax_number')
+        | :
+      = @bookstore.fax_number
+    p
+      strong
+        = t('activerecord.attributes.bookstore.url')
+        | :
+      = link_to @bookstore.url, @bookstore.url if @bookstore.url?
+    p
+      strong
+        = t('activerecord.attributes.bookstore.note')
+        | :
+      = @bookstore.note
+#submenu.col-md-3
+  ul
+    li
+      = link_to t('page.edit'), edit_bookstore_path(@bookstore)
+    li
+      = back_to_index(flash[:page_info])
+    - if defined?(EnjuPurchaseRequest)
+      li
+        = link_to t('activerecord.models.order_list'), bookstore_order_lists_path(@bookstore)
