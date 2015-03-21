@@ -12,15 +12,14 @@ end
 #
 #  id               :integer          not null, primary key
 #  name             :text             not null
-#  zip_code         :string(255)
+#  zip_code         :string
 #  address          :text
 #  note             :text
-#  telephone_number :string(255)
-#  fax_number       :string(255)
-#  url              :string(255)
+#  telephone_number :string
+#  fax_number       :string
+#  url              :string
 #  position         :integer
 #  deleted_at       :datetime
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #
-
