@@ -33,7 +33,7 @@
           - if policy(bookstore).destroy?
             = link_to t('page.destroy'), bookstore, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@bookstores)
-#submenu.col-md-3
+  #submenu.col-md-3
   - if policy(Bookstore).create?
     ul
       li

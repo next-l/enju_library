@@ -1,7 +1,7 @@
 .panel.panel-default
   .panel-heading
     = t('page.showing', model: t('activerecord.models.subscribe'))
-  #content_list
+  #content_list.col-md-9
     p#notice
       = notice
     p
@@ -24,7 +24,7 @@
         = t('activerecord.attributes.subscribe.end_at')
         | :
       =l @subscribe.end_at
-#submenu.col-md-3
+  #submenu.col-md-3
   ul
     li
       = link_to t('page.edit'), edit_subscribe_path(@subscribe)

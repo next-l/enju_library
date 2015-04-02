@@ -26,7 +26,7 @@
             = link_to t('page.edit'), edit_request_status_type_path(request_status_type)
           - if policy(request_status_type).destroy?
             = link_to t('page.destroy'), request_status_type, data: {confirm: t('page.are_you_sure')}, method: :delete
-#submenu.col-md-3
+  #submenu.col-md-3
   ul
     - if policy(RequestStatusType).create?
       li

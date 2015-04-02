@@ -22,7 +22,7 @@
             = link_to t('page.edit'), edit_subscription_path(subscription)
             = link_to t('page.destroy'), subscription, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@subscriptions)
-#submenu.col-md-3
+  #submenu.col-md-3
   ul
     - if policy(Subscription).create?
       - if @work

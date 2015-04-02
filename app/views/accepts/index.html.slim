@@ -36,7 +36,7 @@
             = link_to t('page.destroy'), accept, data: {confirm: t('page.are_you_sure')}, method: :delete
     = javascript_tag("$(function(){$('#accept_item_identifier').focus()})")
     = paginate(@accepts)
-#submenu.col-md-3
+  #submenu.col-md-3
   ul
     - if policy(Accept).create?
       li

@@ -22,7 +22,7 @@
         = f.text_field :end_at, value: @subscribe.end_at.try(:strftime, "%Y-%m-%d"), class: 'date_field'
       .actions
         = f.submit
-#submenu.col-md-3
+  #submenu.col-md-3
   ul
     li
       = link_to t('page.show'), @subscribe
