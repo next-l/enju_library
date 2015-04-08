@@ -21,7 +21,7 @@
         br
         = f.text_field :end_at, value: @subscribe.end_at.try(:strftime, "%Y-%m-%d"), class: 'date_field'
       .actions
-        = f.submit
+        = f.submit class: 'btn btn-default'
   #submenu.col-md-3
   ul
     li
