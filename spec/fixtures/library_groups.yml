@@ -12,7 +12,7 @@ one:
   login_banner: "*Next-L Enju*"
   admin_networks: "0.0.0.0/0\r\n\
     ::/0"
-  settings: "{\"max_number\":200}"
+  settings: <% Marshal.dump({max_number: 200}) %>
 
 # == Schema Information
 #
