@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :max_number_of_results -%><br />
+    <%= f.number_field :max_number_of_results -%>
+  </div>
+
+  <div class="field">
     <%= f.label :color -%><br />
     <%= f.fields_for :colors do |color_form| %>
       <%= color_form.text_field :property, disabled: true %>
