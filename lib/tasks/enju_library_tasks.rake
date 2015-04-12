@@ -13,6 +13,9 @@ namespace :enju_library do
   task :upgrade => :environment do
     LibraryGroup.transaction do
       update_color
+      library_group = LibraryGroup.find(1)
+      library_group.settings[:skip_mobile_agents] = ''
+      library_group.save!
     end
     puts 'enju_library: The upgrade completed successfully.'
   end
