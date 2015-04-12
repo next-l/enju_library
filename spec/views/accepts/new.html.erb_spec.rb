@@ -7,7 +7,7 @@ describe "accepts/new" do
     assign(:accept, stub_model(Accept,
       :item_id => 1
     ).as_new_record)
-    assign(:basket, FactoryGirl.create(:basket))
+    assign(:basket, baskets(:basket_00001))
     assign(:accepts, Kaminari::paginate_array([
       stub_model(Accept,
         :item_id => 1,
@@ -18,6 +18,7 @@ describe "accepts/new" do
         :created_at => Time.zone.now
       )
     ]).page(1))
+    view.stub(:current_user).and_return(User.find('enjuadmin'))
   end
 
   it "renders new accept form" do
