@@ -1,59 +1,59 @@
 = simple_form_for(@library_group) do |f|
   = f.error_messages
-  .field
+  .form-group
     = f.label :name
     br
     = f.text_field :name, class: 'short_name'
-  .field
+  .form-group
     = f.label :display_name
     br
     = f.text_area :display_name, class: 'resource_textarea'
-  .field
+  .form-group
     = f.label :email
     br
     = link_to t('page.edit'), edit_profile_path(@library_group.user.profile)
-  .field
+  .form-group
     = f.label :url
     br
     = f.url_field :url, class: 'resource_url'
-  .field
+  .form-group
     = f.label :login_banner
     br
     = f.text_area :login_banner
-  .field
+  .form-group
     = f.label :max_number_of_results
     br
     = f.text_field :max_number_of_results
-  .field
+  .form-group
     = f.label :pub_year_facet_range_interval
     br
     = f.text_field :pub_year_facet_range_interval
-  .field
+  .form-group
     = f.label :color
     br
     = f.fields_for :colors do |color_form|
       = color_form.text_field :property, disabled: true
       = color_form.text_field :code
       br
-  .field
+  .form-group
     = f.label t('activerecord.models.country')
     br
     = f.select(:country_id, @countries.collect{|c| [c.display_name.localize, c.id]})
   - if defined?(EnjuBookmark)
-    .field
+    .form-group
       = f.label :allow_bookmark_external_url
       = f.check_box :allow_bookmark_external_url
-  .field
+  .form-group
     = f.label :my_networks
     br
     = f.text_area :my_networks
-  .field
+  .form-group
     = f.label :admin_networks
     br
     = f.text_area :admin_networks
-  .field
+  .form-group
     = f.label :note
     br
     = f.text_area :note
-  .actions
+  .form-control
     = f.submit class: 'btn btn-default'

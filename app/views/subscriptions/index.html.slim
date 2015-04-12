@@ -23,11 +23,11 @@
             = link_to t('page.destroy'), subscription, data: {confirm: t('page.are_you_sure')}, method: :delete
     = paginate(@subscriptions)
   #submenu.col-md-3
-  ul
-    - if policy(Subscription).create?
-      - if @work
-        li
-          = link_to t('page.add', model: t('activerecord.models.work')), subscriptions_path
-      - else
-        li
-          = link_to t('page.new', model: t('activerecord.models.subscription')), new_subscription_path
+    ul
+      - if policy(Subscription).create?
+        - if @work
+          li
+            = link_to t('page.add', model: t('activerecord.models.work')), subscriptions_path
+        - else
+          li
+            = link_to t('page.new', model: t('activerecord.models.subscription')), new_subscription_path

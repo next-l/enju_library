@@ -1,22 +1,22 @@
 = render 'page/required_field'
 = simple_form_for(@shelf, validate: true) do |f|
   = f.error_messages
-  .field
+  .form-group
     = f.label :name
     br
     = f.text_field :name, class: 'short_name'
-  .field
+  .form-group
     = f.label :display_name
     br
     = f.text_area :display_name, class: 'resource_textarea'
-  .field
+  .form-group
     = f.label :closed
     = f.check_box :closed
-  .field
+  .form-group
     = f.label :note
     br
     = f.text_area :note, class: 'resource_textarea'
-  .field
+  .form-group
     = f.label t('activerecord.models.library')
     br
     select#library_id[name="library_id"]
@@ -27,5 +27,5 @@
         = " selected='selected'" if @shelf.library == library
         | >
         = library.display_name.localize
-  .actions
+  .form-control
     = f.submit class: 'btn btn-default'

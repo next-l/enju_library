@@ -28,10 +28,10 @@
           br
           = agents_list(work.creators.readable_by(current_user))
   #submenu.col-md-3
-  ul
-    li
-      = link_to t('page.edit'), edit_subscription_path(@subscription)
-    li
-      = link_to t('work.add'), subscription_manifestations_path(@subscription)
-    li
-      = back_to_index(flash[:page_info])
+    ul
+      li
+        = link_to t('page.edit'), edit_subscription_path(@subscription)
+      li
+        = link_to t('work.add'), subscription_manifestations_path(@subscription)
+      li
+        = back_to_index(flash[:page_info])

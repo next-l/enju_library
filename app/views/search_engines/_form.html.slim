@@ -8,33 +8,33 @@
         - @search_engine.errors.full_messages.each do |msg|
           li
             = msg
-  .field
+  .form-group
     = f.label :name
     br
     = f.text_field :name
-  .field
+  .form-group
     = f.label :url
     br
     = f.url_field :url, class: 'resource_url'
-  .field
+  .form-group
     = f.label :base_url
     br
     = f.text_area :base_url, class: 'resource_textarea'
-  .field
+  .form-group
     = f.label :http_method
     br
     = f.select :http_method, ['get', 'post']
-  .field
+  .form-group
     = f.label :query_param
     br
     = f.text_field :query_param
-  .field
+  .form-group
     = f.label :additional_param
     br
     = f.text_area :additional_param, class: 'resource_textarea'
-  .field
+  .form-group
     = f.label :note
     br
     = f.text_area :note, class: 'resource_textarea'
-  .actions
+  .form-control
     = f.submit class: 'btn btn-default'
