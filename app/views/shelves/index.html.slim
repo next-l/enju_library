@@ -1,5 +1,13 @@
-#col1.row
-  #search.col-md-9
+.row
+  #submenu.col-md-3
+    .panel.panel-default
+      .panel-body
+        = render 'library_facet'
+        ul
+          - if policy(Shelf).create?
+            li
+              = link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path
+  #content_list.col-md-9
     .panel.panel-default
       .panel-heading
         = t('page.listing', model: t('activerecord.models.shelf'))
@@ -43,15 +51,7 @@
               = shelf.library.name if current_user.try(:has_role?, 'Librarian')
             td
               - if policy(shelf).update?
-                = link_to t('page.edit'), edit_shelf_path(shelf)
+                => link_to t('page.edit'), edit_shelf_path(shelf)
               - if policy(shelf).destroy?
-                = link_to t('page.destroy'), shelf, data: {confirm: t('page.are_you_sure')}, method: :delete
+                => link_to t('page.destroy'), shelf, data: {confirm: t('page.are_you_sure')}, method: :delete
         = paginate(@shelves)
-  #submenu.col-md-3
-    .panel.panel-default
-      .panel-body
-        = render 'library_facet'
-        ul
-          - if policy(Shelf).create?
-            li
-              = link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path

@@ -3,11 +3,11 @@
   .form-group
     = f.label :name
     br
-    = f.text_field :name, class: 'short_name'
+    = f.text_field :name, class: 'form-control'
   .form-group
     = f.label :display_name
     br
-    = f.text_area :display_name, class: 'resource_textarea'
+    = f.text_area :display_name, class: 'form-control'
   .form-group
     = f.label :email
     br
@@ -15,19 +15,19 @@
   .form-group
     = f.label :url
     br
-    = f.url_field :url, class: 'resource_url'
+    = f.url_field :url, class: 'form-control'
   .form-group
     = f.label :login_banner
     br
-    = f.text_area :login_banner
+    = f.text_area :login_banner, class: 'form-control'
   .form-group
     = f.label :max_number_of_results
     br
-    = f.text_field :max_number_of_results
+    = f.number_field :max_number_of_results, class: 'form-control'
   .form-group
     = f.label :pub_year_facet_range_interval
     br
-    = f.text_field :pub_year_facet_range_interval
+    = f.number_field :pub_year_facet_range_interval, class: 'form-control'
   .form-group
     = f.label :color
     br
@@ -46,14 +46,14 @@
   .form-group
     = f.label :my_networks
     br
-    = f.text_area :my_networks
+    = f.text_area :my_networks, class: 'form-control'
   .form-group
     = f.label :admin_networks
     br
-    = f.text_area :admin_networks
+    = f.text_area :admin_networks, class: 'form-control'
   .form-group
     = f.label :note
     br
-    = f.text_area :note
-  .form-control
+    = f.text_area :note, class: 'form-control'
+  .form-group
     = f.submit class: 'btn btn-default'

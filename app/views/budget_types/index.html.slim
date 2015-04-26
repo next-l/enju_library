@@ -1,5 +1,12 @@
 .row
-  .col-md-9
+  #submenu.col-md-3
+    .panel.panel-default
+      .panel-body
+        ul
+          - if policy(BudgetType).create?
+            li
+              = link_to t('page.new', model: t('activerecord.models.budget_type')), new_budget_type_path
+  #content_list.col-md-9
     .panel.panel-default
       .panel-heading
         = t('page.listing', model: t('activerecord.models.budget_type'))
@@ -32,10 +39,3 @@
                 = link_to t('page.edit'), edit_budget_type_path(budget_type)
               - if policy(budget_type).destroy?
                 = link_to t('page.destroy'), budget_type, data: {confirm: t('page.are_you_sure')}, method: :delete
-  #submenu.col-md-3
-    .panel.panel-default
-      .panel-body
-        ul
-          - if policy(BudgetType).create?
-            li
-              = link_to t('page.new', model: t('activerecord.models.budget_type')), new_budget_type_path

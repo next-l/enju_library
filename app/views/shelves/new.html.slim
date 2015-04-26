@@ -1,10 +1,4 @@
-#col1.row
-  #search.col-md-9
-    .panel.panel-default
-      .panel-heading
-        = t('page.new', model: t('activerecord.models.shelf'))
-      .panel-body
-        = render 'form'
+.row
   #submenu.col-md-3
     .panel.panel-default
       .panel-body
@@ -13,4 +7,10 @@
             - if @shelf.library
               = link_to t('page.back'), shelves_path(library_id: @shelf.library_id)
             - else
+  #content_list.col-md-9
+    .panel.panel-default
+      .panel-heading
+        = t('page.new', model: t('activerecord.models.shelf'))
+      .panel-body
+        = render 'form'
               = link_to t('page.back'), shelves_path

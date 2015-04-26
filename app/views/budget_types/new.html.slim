@@ -1,9 +1,11 @@
-.panel.panel-default
-  .panel-heading
-    = t('page.new', model: t('activerecord.models.budget_type'))
-  .panel-body
-    = render 'form'
+.row
   #submenu.col-md-3
-  ul
-    li
-      = link_to t('page.back'), budget_types_path
+    ul
+      li
+        = link_to t('page.back'), budget_types_path
+  #content_list.col-md-9
+    .panel.panel-default
+      .panel-heading
+        = t('page.new', model: t('activerecord.models.budget_type'))
+      .panel-body
+        = render 'form'

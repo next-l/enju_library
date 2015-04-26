@@ -1,4 +1,15 @@
 .row
+  #submenu.col-md-3
+    .panel.panel-default
+      .panel-body
+        ul
+          li
+            = link_to t('page.edit'), edit_bookstore_path(@bookstore)
+          li
+            = back_to_index(flash[:page_info])
+          - if defined?(EnjuPurchaseRequest)
+            li
+              = link_to t('activerecord.models.order_list'), bookstore_order_lists_path(@bookstore)
   .col-md-9
     .panel.panel-default
       .panel-heading
@@ -41,14 +52,3 @@
             = t('activerecord.attributes.bookstore.note')
             | :
           = @bookstore.note
-  #submenu.col-md-3
-    .panel.panel-default
-      .panel-body
-        ul
-          li
-            = link_to t('page.edit'), edit_bookstore_path(@bookstore)
-          li
-            = back_to_index(flash[:page_info])
-          - if defined?(EnjuPurchaseRequest)
-            li
-              = link_to t('activerecord.models.order_list'), bookstore_order_lists_path(@bookstore)

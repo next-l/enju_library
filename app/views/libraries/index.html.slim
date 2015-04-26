@@ -1,4 +1,11 @@
 .row
+  #submenu.col-md-3
+    .panel.panel-default
+      .panel-body
+        ul
+          - if policy(Library).create?
+            li
+              = link_to t('page.new', model: t('activerecord.models.library')), new_library_path
   .col-md-9
     .panel.panel-default
       .panel-heading
@@ -60,14 +67,7 @@
                   = library.fax_number
               td
                 - if policy(library).update?
-                  = link_to t('page.edit'), edit_library_path(library)
+                  => link_to t('page.edit'), edit_library_path(library)
                 - if policy(library).destroy?
-                  = link_to t('page.destroy'), library, data: {confirm: t('page.are_you_sure')}, method: :delete
+                  => link_to t('page.destroy'), library, data: {confirm: t('page.are_you_sure')}, method: :delete
           = paginate(@libraries)
-  #submenu.col-md-3
-    .panel.panel-default
-      .panel-body
-        ul
-          - if policy(Library).create?
-            li
-              = link_to t('page.new', model: t('activerecord.models.library')), new_library_path
