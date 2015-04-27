@@ -1,10 +1,12 @@
-.panel.panel-default
-  .panel-heading
-    = t('page.new', model: t('activerecord.models.accept'))
-  .panel-body
-    #accept_list
-      = render 'list'
+.row
   #submenu.col-md-3
-  ul
-    li
-      = link_to t('page.back'), accepts_path
+    ul
+      li
+        = link_to t('page.back'), accepts_path
+  #content_list.col-md-9
+    .panel.panel-default
+      .panel-heading
+        = t('page.new', model: t('activerecord.models.accept'))
+      .panel-body
+        #accept_list
+          = render 'list'

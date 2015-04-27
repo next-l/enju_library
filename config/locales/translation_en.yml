@@ -70,6 +70,7 @@ en:
         note: Note
       accept:
         item_id: Item
+        item_identifier: Item identifier
       subscribe:
         started_on: Start on
         ended_on: End on

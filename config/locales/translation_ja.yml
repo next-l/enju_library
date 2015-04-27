@@ -70,6 +70,7 @@ ja:
         note: 注記
       accept:
         item_id: 個別資料
+        item_identifier: 個別資料ID
       subscribe:
         started_on: 開始日
         ended_on: 終了日
