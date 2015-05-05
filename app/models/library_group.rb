@@ -8,17 +8,20 @@ class LibraryGroup < ActiveRecord::Base
   belongs_to :country
 
   validates :url, presence: true, url: true
+  validates :max_number_of_results, numericality: {
+      greater_than_or_equal_to: 0, allow_blank: true
+    }
   accepts_nested_attributes_for :colors, update_only: true
   if Rails::VERSION::MAJOR >= 4
     store :settings, accessors: [
       :max_number_of_results, :family_name_first,
-      :pub_year_facet_range_interval,
+      :skip_mobile_agents, :pub_year_facet_range_interval,
       :book_jacket_source, :book_jacket_unknown_resource, :erms_url
     ], coder: JSON
   else
     store :settings, accessors: [
       :max_number_of_results, :family_name_first,
-      :pub_year_facet_range_interval,
+      :skip_mobile_agents, :pub_year_facet_range_interval,
       :book_jacket_source, :book_jacket_unknown_resource, :erms_url
     ]
   end

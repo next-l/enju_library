@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :skip_mobile_agents -%><br />
+    <%= f.text_area :skip_mobile_agents -%>
+  </div>
+
+  <div class="field">
     <%= f.label :color -%><br />
     <%= f.fields_for :colors do |color_form| %>
       <%= color_form.text_field :property, disabled: true %>

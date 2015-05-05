@@ -34,6 +34,11 @@
 </div>
 
 <div>
+  <strong><%= t('activerecord.attributes.library_group.skip_mobile_agents') -%>:</strong>
+  <%= @library_group.skip_mobile_agents -%>
+</div>
+
+<div>
   <strong><%= t('activerecord.attributes.library_group.color') -%>:</strong>
   <ul>
     <% @library_group.colors.each do |color| %>
