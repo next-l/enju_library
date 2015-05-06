@@ -107,3 +107,5 @@ en:
     address: "Address"
   shelf:
     update_display_order: Update display order
+  page:
+    restart_required: "Web server restart required"

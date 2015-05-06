@@ -107,3 +107,5 @@ ja:
     address: "住所"
   shelf:
     update_display_order: "表示順序を変更する"
+  page:
+    restart_required: "Webサーバの再起動が必要です"
