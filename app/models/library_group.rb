@@ -16,13 +16,15 @@ class LibraryGroup < ActiveRecord::Base
     store :settings, accessors: [
       :max_number_of_results, :family_name_first,
       :skip_mobile_agents, :pub_year_facet_range_interval,
-      :book_jacket_source, :book_jacket_unknown_resource, :erms_url
+      :book_jacket_source, :book_jacket_unknown_resource,
+      :screenshot_generator, :erms_url
     ], coder: JSON
   else
     store :settings, accessors: [
       :max_number_of_results, :family_name_first,
       :skip_mobile_agents, :pub_year_facet_range_interval,
-      :book_jacket_source, :book_jacket_unknown_resource, :erms_url
+      :book_jacket_source, :book_jacket_unknown_resource,
+      :screenshot_generator, :erms_url
     ]
   end
 
