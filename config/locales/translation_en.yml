@@ -55,7 +55,6 @@ en:
         url: URL
         color: Color
         max_number_of_results: Max number of results
-        skip_mobile_agents: Do not use mobile UI
       bookstore:
         name: Name
         zip_code: Zip code
