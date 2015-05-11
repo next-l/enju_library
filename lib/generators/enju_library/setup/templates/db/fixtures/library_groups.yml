@@ -10,4 +10,4 @@ library_group_00001:
   login_banner: Next-L Enju, an open-source integrated library system. You can edit this message after logging in as Administrator.
   admin_networks: "0.0.0.0/0\r\n\
     ::/0"
-  settings: "{\"max_number\":200, \"family_name_first\":true}"
+  settings: "{\"max_number_of_results\":200, \"family_name_first\":true}"
