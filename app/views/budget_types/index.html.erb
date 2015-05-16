@@ -38,6 +38,8 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.new', model: t('activerecord.models.budget_type')), new_budget_type_path -%></li>
+    <%- if can? :create, BudgetType -%>
+      <li><%= link_to t('page.new', model: t('activerecord.models.budget_type')), new_budget_type_path -%></li>
+    <%- end -%>
   </ul>
 </div>
