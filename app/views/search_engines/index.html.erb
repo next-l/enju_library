@@ -38,6 +38,8 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.new', model: t('activerecord.models.search_engine')), new_search_engine_path -%></li>
+    <%- if can? :create, SearchEngine -%>
+      <li><%= link_to t('page.new', model: t('activerecord.models.search_engine')), new_search_engine_path -%></li>
+    <%- end -%>
   </ul>
 </div>

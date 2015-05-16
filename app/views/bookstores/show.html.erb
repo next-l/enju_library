@@ -43,7 +43,9 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <li><%= link_to t('page.edit'), edit_bookstore_path(@bookstore) -%></li>
+    <%- if can? :update, @bookstore -%>
+      <li><%= link_to t('page.edit'), edit_bookstore_path(@bookstore) -%></li>
+    <%- end -%>
     <li><%= back_to_index(flash[:page_info]) -%></li>
     <% if defined?(EnjuPurchaseRequest) %>
       <li><%= link_to t('activerecord.models.order_list'), bookstore_order_lists_path(@bookstore) -%></li>
