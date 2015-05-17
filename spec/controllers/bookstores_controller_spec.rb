@@ -46,7 +46,7 @@ describe BookstoresController do
       it "assigns all bookstores as @bookstores" do
         get :index
         assigns(:bookstores).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -126,7 +126,7 @@ describe BookstoresController do
       it "should not assign the requested bookstore as @bookstore" do
         get :new
         assigns(:bookstore).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -166,7 +166,7 @@ describe BookstoresController do
     describe "When not logged in" do
       it "should not assign the requested bookstore as @bookstore" do
         get :edit, :id => @bookstore.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -270,7 +270,7 @@ describe BookstoresController do
 
         it "should be forbidden" do
           post :create, :bookstore => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
@@ -282,7 +282,7 @@ describe BookstoresController do
 
         it "should be forbidden" do
           post :create, :bookstore => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -376,14 +376,14 @@ describe BookstoresController do
 
         it "should be forbidden" do
           put :update, :id => @bookstore.id, :bookstore => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested bookstore as @bookstore" do
           put :update, :id => @bookstore.id, :bookstore => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -440,7 +440,7 @@ describe BookstoresController do
 
       it "should be forbidden" do
         delete :destroy, :id => @bookstore.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end

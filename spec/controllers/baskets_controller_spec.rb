@@ -43,7 +43,7 @@ describe BasketsController do
       it "assigns all baskets as @baskets" do
         get :index, :user_id => users(:user1).username
         assigns(:baskets).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -81,7 +81,7 @@ describe BasketsController do
       it "assigns the requested basket as @basket" do
         get :show, :id => 1, :user_id => users(:admin).username
         assigns(:basket).should eq(Basket.find(1))
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -119,7 +119,7 @@ describe BasketsController do
       it "should not assign the requested basket as @basket" do
         get :new
         assigns(:basket).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -170,7 +170,7 @@ describe BasketsController do
       it "should not assign the requested basket as @basket" do
         get :edit, :id => @basket.id
         assigns(:basket).should eq(@basket)
-        response.should redirect_to new_user_session_url
+        response.should redirect_to new_session_url
       end
     end
   end
@@ -291,11 +291,11 @@ describe BasketsController do
           assigns(:basket).should be_nil
         end
 
-        it "should be redirected to new_user_session_url" do
+        it "should be redirected to new_session_url" do
           post :create, :basket => { note: 'test' }
           assigns(:basket).should be_nil
           assert_response :redirect
-          response.should redirect_to new_user_session_url
+          response.should redirect_to new_session_url
         end
       end
     end
@@ -372,7 +372,7 @@ describe BasketsController do
 
       it "should be forbidden" do
         delete :destroy, :id => @basket.id
-        response.should redirect_to new_user_session_url
+        response.should redirect_to new_session_url
       end
     end
   end

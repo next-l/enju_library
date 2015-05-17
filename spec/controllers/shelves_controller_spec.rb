@@ -111,7 +111,7 @@ describe ShelvesController do
       it "should not assign the requested shelf as @shelf" do
         get :new
         assigns(:shelf).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -151,7 +151,7 @@ describe ShelvesController do
       it "should not assign the requested shelf as @shelf" do
         shelf = FactoryGirl.create(:shelf)
         get :edit, :id => shelf.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -255,7 +255,7 @@ describe ShelvesController do
 
         it "should be forbidden" do
           post :create, :shelf => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
@@ -267,7 +267,7 @@ describe ShelvesController do
 
         it "should be forbidden" do
           post :create, :shelf => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -361,14 +361,14 @@ describe ShelvesController do
 
         it "should be forbidden" do
           put :update, :id => @shelf.id, :shelf => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested shelf as @shelf" do
           put :update, :id => @shelf.id, :shelf => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -430,7 +430,7 @@ describe ShelvesController do
 
       it "should be forbidden" do
         delete :destroy, :id => @shelf.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end

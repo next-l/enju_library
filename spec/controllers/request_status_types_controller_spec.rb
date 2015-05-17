@@ -46,7 +46,7 @@ describe RequestStatusTypesController do
       it "should not assign request_status_types as @request_status_types" do
         get :index
         assigns(:request_status_types).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -126,7 +126,7 @@ describe RequestStatusTypesController do
       it "should not assign the requested request_status_type as @request_status_type" do
         get :new
         assigns(:request_status_type).should be_nil
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -166,7 +166,7 @@ describe RequestStatusTypesController do
     describe "When not logged in" do
       it "should not assign the requested request_status_type as @request_status_type" do
         get :edit, :id => @request_status_type.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end
@@ -270,7 +270,7 @@ describe RequestStatusTypesController do
 
         it "should be forbidden" do
           post :create, :request_status_type => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
@@ -282,7 +282,7 @@ describe RequestStatusTypesController do
 
         it "should be forbidden" do
           post :create, :request_status_type => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -376,14 +376,14 @@ describe RequestStatusTypesController do
 
         it "should be forbidden" do
           put :update, :id => @request_status_type.id, :request_status_type => @attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested request_status_type as @request_status_type" do
           put :update, :id => @request_status_type.id, :request_status_type => @invalid_attrs
-          response.should redirect_to(new_user_session_url)
+          response.should redirect_to(new_session_url)
         end
       end
     end
@@ -440,7 +440,7 @@ describe RequestStatusTypesController do
 
       it "should be forbidden" do
         delete :destroy, :id => @request_status_type.id
-        response.should redirect_to(new_user_session_url)
+        response.should redirect_to(new_session_url)
       end
     end
   end

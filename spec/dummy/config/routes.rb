@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  resque_web_constraint = lambda {|request| request.remote_ip == '127.0.0.1'}
+constraints resque_web_constraint do
+    mount Resque::Server.new, at: "/resque", as: :resque
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

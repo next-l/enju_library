@@ -17,6 +17,7 @@ describe "accepts/index" do
     basket = FactoryGirl.create(:basket)
     assign(:basket, basket)
     assign(:accept, basket.accepts.new)
+    view.stub(:current_user).and_return(User.find('enjuadmin'))
   end
 
   it "renders a list of accepts" do
