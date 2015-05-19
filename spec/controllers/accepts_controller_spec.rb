@@ -94,7 +94,7 @@ describe AcceptsController do
         accept = FactoryGirl.create(:accept)
         get :show, :id => accept.id
         assigns(:accept).should eq(accept)
-        response.should redirect_to new_session_url
+        response.should redirect_to new_user_session_url
       end
     end
   end
@@ -132,7 +132,7 @@ describe AcceptsController do
       it "should not assign the requested accept as @accept" do
         get :new
         assigns(:accept).should be_nil
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -230,7 +230,7 @@ describe AcceptsController do
 
         it "should redirect to new session url" do
           post :create, :accept => @attrs
-          response.should redirect_to new_session_url
+          response.should redirect_to new_user_session_url
         end
       end
     end
@@ -287,7 +287,7 @@ describe AcceptsController do
 
       it "should be forbidden" do
         delete :destroy, :id => @accept.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end

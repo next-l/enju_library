@@ -121,7 +121,7 @@ describe SubscriptionsController do
       it "should not assign the requested subscription as @subscription" do
         get :new
         assigns(:subscription).should be_nil
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -161,7 +161,7 @@ describe SubscriptionsController do
       it "should not assign the requested subscription as @subscription" do
         subscription = FactoryGirl.create(:subscription)
         get :edit, :id => subscription.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -265,7 +265,7 @@ describe SubscriptionsController do
 
         it "should be forbidden" do
           post :create, :subscription => @attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
 
@@ -277,7 +277,7 @@ describe SubscriptionsController do
 
         it "should be forbidden" do
           post :create, :subscription => @invalid_attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
@@ -371,14 +371,14 @@ describe SubscriptionsController do
 
         it "should be forbidden" do
           put :update, :id => @subscription.id, :subscription => @attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested subscription as @subscription" do
           put :update, :id => @subscription.id, :subscription => @invalid_attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
@@ -435,7 +435,7 @@ describe SubscriptionsController do
 
       it "should be forbidden" do
         delete :destroy, :id => @subscription.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end

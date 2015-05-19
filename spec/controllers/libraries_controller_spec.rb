@@ -118,7 +118,7 @@ describe LibrariesController do
       it "should not assign the requested library as @library" do
         get :new
         assigns(:library).should be_nil
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -158,7 +158,7 @@ describe LibrariesController do
       it "should not assign the requested library as @library" do
         library = FactoryGirl.create(:library)
         get :edit, :id => library.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -267,7 +267,7 @@ describe LibrariesController do
 
         it "should be redirected to new session url" do
           post :create, :library => @attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
 
@@ -279,7 +279,7 @@ describe LibrariesController do
 
         it "should be redirected to new session url" do
           post :create, :library => @invalid_attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
@@ -371,14 +371,14 @@ describe LibrariesController do
 
         it "should be forbidden" do
           put :update, :id => @library.id, :library => @attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested library as @library" do
           put :update, :id => @library.id, :library => @invalid_attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
@@ -446,7 +446,7 @@ describe LibrariesController do
 
         it "should be forbidden" do
           delete :destroy, :id => @library.id
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
@@ -503,7 +503,7 @@ describe LibrariesController do
 
         it "should be forbidden" do
           delete :destroy, :id => @library.id
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end

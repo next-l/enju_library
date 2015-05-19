@@ -44,7 +44,7 @@ describe SubscribesController do
       it "assigns all subscribes as @subscribes" do
         get :index
         assigns(:subscribes).should be_nil
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -124,7 +124,7 @@ describe SubscribesController do
       it "should not assign the requested subscribe as @subscribe" do
         get :new
         assigns(:subscribe).should be_nil
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -164,7 +164,7 @@ describe SubscribesController do
       it "should not assign the requested subscribe as @subscribe" do
         subscribe = FactoryGirl.create(:subscribe)
         get :edit, :id => subscribe.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -268,7 +268,7 @@ describe SubscribesController do
 
         it "should be forbidden" do
           post :create, :subscribe => @attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
 
@@ -280,7 +280,7 @@ describe SubscribesController do
 
         it "should be forbidden" do
           post :create, :subscribe => @invalid_attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
@@ -370,14 +370,14 @@ describe SubscribesController do
 
         it "should be forbidden" do
           put :update, :id => @subscribe.id, :subscribe => @attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested subscribe as @subscribe" do
           put :update, :id => @subscribe.id, :subscribe => @invalid_attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
@@ -434,7 +434,7 @@ describe SubscribesController do
 
       it "should be forbidden" do
         delete :destroy, :id => @subscribe.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end

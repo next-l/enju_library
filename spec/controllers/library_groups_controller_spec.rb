@@ -76,7 +76,7 @@ describe LibraryGroupsController do
       it "should not assign the requested library_group as @library_group" do
         library_group = LibraryGroup.find(1)
         get :edit, :id => library_group.id
-        response.should redirect_to(new_session_url)
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -118,14 +118,14 @@ describe LibraryGroupsController do
 
         it "should be forbidden" do
           put :update, :id => @library_group.id, :library_group => @attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested library_group as @library_group" do
           put :update, :id => @library_group.id, :library_group => @invalid_attrs
-          response.should redirect_to(new_session_url)
+          response.should redirect_to(new_user_session_url)
         end
       end
     end
