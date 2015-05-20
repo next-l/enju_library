@@ -1,22 +1,24 @@
 .row
   #submenu.col-md-3
     .panel.panel-default
-      .panel-body
-        ul
-          - if policy(Shelf).create?
-            - if @library
-              li
-                = link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path(library_id: @library.id)
-            - else
-              li
-                = link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path
-            - if policy(@shelf).update?
-              li
-                = link_to t('page.edit'), edit_shelf_path(@shelf)
-              li
-                = link_to t('page.listing', model: t('activerecord.models.picture_file')), picture_files_path(shelf_id: @shelf.id)
-            li
-              = back_to_index(flash[:page_info])
+      .panel-heading
+        h2.panel-title
+          = t('activerecord.models.shelf')
+      ul.list-group
+        - if policy(Shelf).create?
+          - if @library
+            li.list-group-item
+              = link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path(library_id: @library.id)
+          - else
+            li.list-group-item
+              = link_to t('page.new', model: t('activerecord.models.shelf')), new_shelf_path
+          - if policy(@shelf).update?
+            li.list-group-item
+              = link_to t('page.edit'), edit_shelf_path(@shelf)
+            li.list-group-item
+              = link_to t('page.listing', model: t('activerecord.models.picture_file')), picture_files_path(shelf_id: @shelf.id)
+          li.list-group-item
+            = back_to_index(flash[:page_info])
   #content_list.col-md-9
     .panel.panel-default
       .panel-heading
@@ -25,8 +27,8 @@
         p#notice
           = notice
         h2.resource_title
-          = link_to @shelf.library.display_name.localize, @shelf.library
-          = @shelf.display_name.localize
+          => link_to @shelf.library.display_name.localize, @shelf.library
+          => @shelf.display_name.localize
         - if current_user.try(:has_role?, 'Librarian')
           p
             strong

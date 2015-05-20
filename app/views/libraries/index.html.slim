@@ -1,11 +1,13 @@
 .row
   #submenu.col-md-3
     .panel.panel-default
-      .panel-body
-        ul
-          - if policy(Library).create?
-            li
-              = link_to t('page.new', model: t('activerecord.models.library')), new_library_path
+      .panel-heading
+        h2.panel-title
+          = t('activerecord.models.library')
+      ul.list-group
+        - if policy(Library).create?
+          li.list-group-item
+            = link_to t('page.new', model: t('activerecord.models.library')), new_library_path
   .col-md-9
     .panel.panel-default
       .panel-heading
