@@ -1,11 +1,13 @@
 .row
   #submenu.col-md-3
     .panel.panel-default
-      .panel-body
-        ul
-          - if policy(BudgetType).create?
-            li
-              = link_to t('page.new', model: t('activerecord.models.budget_type')), new_budget_type_path
+      .panel-heading
+        h2.panel-title
+          = t('activerecord.models.budget_type')
+      ul.list-group
+        - if policy(BudgetType).create?
+          li.list-group-item
+            = link_to t('page.new', model: t('activerecord.models.budget_type')), new_budget_type_path
   #content_list.col-md-9
     .panel.panel-default
       .panel-heading
@@ -36,6 +38,6 @@
               = budget_type.note
             td
               - if policy(budget_type).update?
-                = link_to t('page.edit'), edit_budget_type_path(budget_type)
+                => link_to t('page.edit'), edit_budget_type_path(budget_type)
               - if policy(budget_type).destroy?
-                = link_to t('page.destroy'), budget_type, data: {confirm: t('page.are_you_sure')}, method: :delete
+                => link_to t('page.destroy'), budget_type, data: {confirm: t('page.are_you_sure')}, method: :delete

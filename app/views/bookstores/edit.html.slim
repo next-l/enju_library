@@ -1,12 +1,14 @@
 .row
   #submenu.col-md-3
     .panel.panel-default
-      .panel-body
-        ul
-          li
-            = link_to t('page.show'), @bookstore
-          li
-            = link_to t('page.back'), bookstores_path
+      .panel-heading
+        h2.panel-title
+          = t('activerecord.models.bookstore')
+      ul.list-group
+        li.list-group-item
+          = link_to t('page.show'), @bookstore
+        li.list-group-item
+          = link_to t('page.back'), bookstores_path
   .col-md-9
     .panel.panel-default
       .panel-heading

@@ -1,12 +1,14 @@
 .row
   #submenu.col-md-3
     .panel.panel-default
-      .panel-body
-        ul
-          li
-            = link_to t('activerecord.models.checkin'), new_checkin_path
-          li
-            = link_to t('page.search_resource', model: t('activerecord.models.profile')), profiles_path
+      .panel-heading
+        h2.panel-title
+          = t('activerecord.models.basket')
+      ul.list-group
+        li.list-group-item
+          = link_to t('activerecord.models.checkin'), new_checkin_path
+        li.list-group-item
+          = link_to t('page.search_resource', model: t('activerecord.models.profile')), profiles_path
   .col-md-9
     .panel.panel-default
       .panel-heading

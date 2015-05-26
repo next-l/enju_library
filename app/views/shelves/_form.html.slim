@@ -10,8 +10,9 @@
     br
     = f.text_area :display_name, class: 'form-control'
   .form-group
-    = f.label :closed
-    = f.check_box :closed
+    .checkbox-inline
+      = f.check_box :closed
+      = f.label :closed
   .form-group
     = f.label :note
     br
