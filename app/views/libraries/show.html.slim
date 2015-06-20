@@ -20,7 +20,8 @@
   .col-md-9
     .panel.panel-default
       .panel-heading
-        = @library.display_name.localize
+        h1.panel-title
+          = @library.display_name.localize
       .panel-body
         p#notice
           = notice
