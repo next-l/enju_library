@@ -11,7 +11,9 @@ module EnjuLibrary
         end
         can [:read, :create, :update], Library
         can [:delete, :destroy], Library do |library|
-          library.shelves.empty? && !library.web?
+          if library.profiles.empty?
+            true if library.shelves.empty? && !library.web?
+          end
         end
         can [:read, :create, :update], Shelf
         can [:delete, :destroy], Shelf do |shelf|
