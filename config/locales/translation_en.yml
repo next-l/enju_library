@@ -108,3 +108,9 @@ en:
     update_display_order: Update display order
   page:
     restart_required: "Web server restart required"
+  accept:
+    item_not_found: "Item not found."
+    enter_item_identifier: "Enter item identifier."
+    already_accepted: "This item is already accepted."
+    accept: "Accept!"
+    successfully_accepted: "This items was successfully accepted."

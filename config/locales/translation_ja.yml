@@ -108,3 +108,9 @@ ja:
     update_display_order: "表示順序を変更する"
   page:
     restart_required: "Webサーバの再起動が必要です"
+  accept:
+    item_not_found: "資料が見つかりません。"
+    enter_item_identifier: "所蔵情報番号を入力してください。"
+    already_accepted: "この資料はすでに検収されています。"
+    accept: "検収"
+    successfully_accepted: "この資料は正常に検収されました。"
