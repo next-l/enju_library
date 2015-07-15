@@ -17,7 +17,7 @@ class LibraryPolicy < ApplicationPolicy
 
   def destroy?
     if user.try(:has_role?, 'Administrator')
-      if library.profiles.empty?
+      if record.profiles.empty?
         true if record.shelves.empty? && !record.web?
       end
     end
