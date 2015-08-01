@@ -17,9 +17,7 @@ class ShelfPolicy < ApplicationPolicy
 
   def destroy?
     if user.try(:has_role?, 'Administrator')
-      if record.library.shelves.count >= 2
-        true if record.items.empty? && !record.web_shelf?
-      end
+      true if record.items.empty? && !record.web_shelf?
     end
   end
 end
