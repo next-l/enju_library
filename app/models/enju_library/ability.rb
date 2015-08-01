@@ -17,9 +17,7 @@ module EnjuLibrary
         end
         can [:read, :create, :update], Shelf
         can [:delete, :destroy], Shelf do |shelf|
-          if shelf.library.shelves.count >= 2
-            shelf.items.empty? && !shelf.web_shelf?
-          end
+          shelf.items.empty? && !shelf.web_shelf?
         end
         can :manage, [
           Accept,
