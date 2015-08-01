@@ -108,3 +108,9 @@ en:
     address: "Address"
   shelf:
     update_display_order: Update display order
+  accept:
+    item_not_found: " not found."
+    enter_item_identifier: "Enter item identifier."
+    already_accepted: " is already accepted."
+    accept: "Accept!"
+    successfully_accepted: "This items was successfully accepted."
