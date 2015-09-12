@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :book_jacket_source -%>
+    <%= f.select :book_jacket_source, [['Google', 'google'], ['Amazon', 'amazon']] -%><br />
+  </div>
+
+  <div class="field">
     <%= f.label :color -%><br />
     <%= f.fields_for :colors do |color_form| %>
       <%= color_form.text_field :property, disabled: true %>

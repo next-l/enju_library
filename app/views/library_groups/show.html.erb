@@ -23,15 +23,20 @@
   <%= @library_group.url -%>
 </p>
 
-<div>
+<p>
   <strong><%= t('activerecord.attributes.library_group.login_banner') -%>:</strong>
   <%= markdown_helper(@library_group.login_banner) -%>
-</div>
+</p>
 
-<div>
+<p>
   <strong><%= t('activerecord.attributes.library_group.max_number_of_results') -%>:</strong>
   <%= @library_group.max_number_of_results -%>
-</div>
+</p>
+
+<p>
+  <strong><%= t('activerecord.attributes.library_group.book_jacket_source') -%>:</strong>
+  <%= @library_group.book_jacket_source -%>
+</p>
 
 <div>
   <strong><%= t('activerecord.attributes.library_group.color') -%>:</strong>

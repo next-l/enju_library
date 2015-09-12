@@ -55,6 +55,7 @@ en:
         url: URL
         color: Color
         max_number_of_results: Max number of results
+        book_jacket_source: Book jacket source
       bookstore:
         name: Name
         zip_code: Zip code
