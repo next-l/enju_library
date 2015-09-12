@@ -43,6 +43,16 @@
           = markdown_helper(@library_group.login_banner)
         div
           strong
+            = t('activerecord.attributes.library_group.max_number_of_results')
+            | :
+          = @library_group.max_number_of_results
+        div
+          strong
+            = t('activerecord.attributes.library_group.book_jacket_source')
+            | :
+          = @library_group.book_jacket_source
+        div
+          strong
             = t('activerecord.attributes.library_group.color')
             | :
         ul

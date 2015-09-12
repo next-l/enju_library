@@ -25,6 +25,10 @@
     br
     = f.number_field :max_number_of_results, class: 'form-control'
   .form-group
+    = f.label :book_jacket_source
+    br
+    = f.select :book_jacket_source, [['Google', 'google'], ['Amazon', 'amazon']], class: 'form-control'
+  .form-group
     = f.label :pub_year_facet_range_interval
     br
     = f.number_field :pub_year_facet_range_interval, class: 'form-control'
