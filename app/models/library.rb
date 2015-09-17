@@ -69,7 +69,7 @@ class Library < ActiveRecord::Base
     else
       "#{street.to_s.localize(locale)} #{locality.to_s.localize(locale)} #{region.to_s.localize(locale)}"
     end
-  rescue
+  rescue Psych::SyntaxError
     nil
   end
 
