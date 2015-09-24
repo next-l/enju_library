@@ -11,3 +11,15 @@ class Withdraw < ActiveRecord::Base
 
   paginates_per 10
 end
+
+# == Schema Information
+#
+# Table name: withdraws
+#
+#  id           :integer          not null, primary key
+#  basket_id    :integer
+#  item_id      :integer
+#  librarian_id :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
