@@ -24,7 +24,8 @@ module EnjuLibrary
           BudgetType,
           SearchEngine,
           Subscribe,
-          Subscription
+          Subscription,
+          Withdraw
         ]
         can :update, [
           LibraryGroup,
@@ -40,7 +41,8 @@ module EnjuLibrary
         can :manage, [
           Accept,
           Subscribe,
-          Subscription
+          Subscription,
+          Withdraw
         ]
         can :read, [
           Bookstore,

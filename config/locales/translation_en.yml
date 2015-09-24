@@ -12,6 +12,7 @@ en:
       request_status_type: Request status type
       request_type: Request type
       search_engine: Search engine
+      withdraw: Withdraw
 
     attributes:
       library:
@@ -99,6 +100,8 @@ en:
         additional_param: Additional param
         note: Note
         position: Position
+      withdraw:
+        item_id: Item
 
   library:
     map: "Map"
@@ -115,3 +118,9 @@ en:
     already_accepted: " is already accepted."
     accept: "Accept!"
     successfully_accepted: "This items was successfully accepted."
+  withdraw:
+    item_not_found: " not found."
+    enter_item_identifier: "Enter item identifier."
+    already_withdrawn: " is already withdrawn."
+    withdraw: "Withdraw!"
+    successfully_withdrawn: "This items was successfully withdrawn."

@@ -12,6 +12,7 @@ ja:
       request_status_type: 依頼の状態の種類
       request_type: 依頼の種類
       search_engine: 検索エンジン
+      withdraw: 除籍
 
     attributes:
       library:
@@ -99,6 +100,8 @@ ja:
         additional_param: 追加のパラメータ
         note: 注記
         position: 位置
+      withdraw:
+        item_id: 個別資料
 
   library:
     map: "地図"
@@ -115,3 +118,9 @@ ja:
     already_accepted: "はすでに検収されています。"
     accept: "検収"
     successfully_accepted: "この資料は正常に検収されました。"
+  withdraw:
+    item_not_found: "が見つかりません。"
+    enter_item_identifier: "所蔵情報番号を入力してください。"
+    already_withdrawn: "はすでに除籍されています。"
+    withdraw: "除籍"
+    successfully_withdrawn: "この資料は正常に除籍されました。"
