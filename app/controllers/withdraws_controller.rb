@@ -1,7 +1,7 @@
 class WithdrawsController < ApplicationController
-  load_and_authorize_resource except: :index
-  authorize_resource only: :index
   before_action :set_withdraw, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  before_action :get_basket, only: [:index, :create]
 
   # GET /withdraws
   def index
@@ -57,5 +57,9 @@ class WithdrawsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def withdraw_params
       params.require(:withdraw).permit(:basket_id, :item_id, :librarian_id)
+    end
+
+    def check_policy
+      authorize Withdraw
     end
 end

@@ -9,6 +9,7 @@ RSpec.describe "withdraws/index", type: :view do
   end
 
   it "renders a list of withdraws" do
+    allow(view).to receive(:policy).and_return double(create?: true, update?: true, destroy?: true)
     render
   end
 end
