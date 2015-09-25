@@ -1,6 +1,7 @@
 = EnjuLibrary
 {<img src="https://travis-ci.org/next-l/enju_library.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/next-l/enju_library]
-{<img src="https://img.shields.io/coveralls/next-l/enju_library.svg" alt="Coverage Status" />}[https://coveralls.io/r/next-l/enju_library?branch=master]
+{<img src="https://codeclimate.com/github/next-l/enju_library/badges/gpa.svg" />}[https://codeclimate.com/github/next-l/enju_library]
+{<img src="https://codeclimate.com/github/next-l/enju_library/badges/coverage.svg" />}[https://codeclimate.com/github/next-l/enju_library/coverage]
 {<img src="https://hakiri.io/github/next-l/enju_library/master.svg" alt="security" />}[https://hakiri.io/github/next-l/enju_library/master]
 
 This project rocks and uses MIT-LICENSE.
