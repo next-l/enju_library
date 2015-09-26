@@ -6,4 +6,5 @@ VCR.configure do |c|
     record: :none,
     preserve_exact_body_bytes: true
   }
+  config.ignore_hosts 'codeclimate.com'
 end
