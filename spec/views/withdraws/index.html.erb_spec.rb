@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "withdraws/index", type: :view do
   before(:each) do
     assign(:withdraws, [
-      Withdraw.create!(),
-      Withdraw.create!()
+      FactoryGirl.create(:withdraw),
+      FactoryGirl.create(:withdraw)
     ])
   end
 
