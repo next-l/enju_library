@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "withdraws/edit", type: :view do
   before(:each) do
-    @withdraw = assign(:withdraw, Withdraw.create!())
+    @withdraw = assign(:withdraw, FactoryGirl.create(:withdraw))
   end
 
   it "renders the edit withdraw form" do

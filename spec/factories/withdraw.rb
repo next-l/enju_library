@@ -1,9 +1,10 @@
-require 'rails_helper'
+# Read about factories at https://github.com/thoughtbot/factory_girl
 
-RSpec.describe Withdraw, type: :model do
-  it "should change circulation_status" do
-    withdraw = FactoryGirl.create(:withdraw)
-    withdraw.item.circulation_status.name.should eq 'Removed'
+FactoryGirl.define do
+  factory :withdraw do
+    basket_id{FactoryGirl.create(:basket).id}
+    item_id{FactoryGirl.create(:item).id}
+    librarian_id{FactoryGirl.create(:librarian).id}
   end
 end
 

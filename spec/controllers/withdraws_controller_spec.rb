@@ -19,16 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe WithdrawsController, type: :controller do
+  fixtures :all
 
   # This should return the minimal set of attributes required to create a valid
   # Withdraw. As you add validations to Withdraw, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.build(:withdraw).attributes
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { item_id: nil }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -37,25 +38,35 @@ RSpec.describe WithdrawsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all withdraws as @withdraws" do
-      withdraw = Withdraw.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:withdraws)).to eq([withdraw])
+    describe "When logged in as Administrator" do
+      login_fixture_admin
+      it "assigns all withdraws as @withdraws" do
+        withdraw = Withdraw.create! valid_attributes
+        get :index, {}, valid_session
+        expect(assigns(:withdraws)).to eq([withdraw])
+      end
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested withdraw as @withdraw" do
-      withdraw = Withdraw.create! valid_attributes
-      get :show, {:id => withdraw.to_param}, valid_session
-      expect(assigns(:withdraw)).to eq(withdraw)
+    describe "When logged in as Administrator" do
+      login_fixture_admin
+      it "assigns the requested withdraw as @withdraw" do
+        withdraw = Withdraw.create! valid_attributes
+        get :show, {:id => withdraw.to_param}, valid_session
+        expect(assigns(:withdraw)).to eq(withdraw)
+        response.should be_success
+      end
     end
   end
 
   describe "GET #new" do
-    it "assigns a new withdraw as @withdraw" do
-      get :new, {}, valid_session
-      expect(assigns(:withdraw)).to be_a_new(Withdraw)
+    describe "When logged in as Administrator" do
+      login_fixture_admin
+      it "assigns a new withdraw as @withdraw" do
+        get :new, {}, valid_session
+        expect(assigns(:withdraw)).to be_a_new(Withdraw)
+      end
     end
   end
 
@@ -68,91 +79,100 @@ RSpec.describe WithdrawsController, type: :controller do
   end
 
   describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Withdraw" do
-        expect {
+    describe "When logged in as Administrator" do
+      login_fixture_admin
+      context "with valid params" do
+        it "creates a new Withdraw" do
+          expect {
+            post :create, {:withdraw => valid_attributes}, valid_session
+          }.to change(Withdraw, :count).by(1)
+        end
+
+        it "assigns a newly created withdraw as @withdraw" do
           post :create, {:withdraw => valid_attributes}, valid_session
-        }.to change(Withdraw, :count).by(1)
+          expect(assigns(:withdraw)).to be_a(Withdraw)
+          expect(assigns(:withdraw)).to be_persisted
+        end
+
+        it "redirects to the created withdraw" do
+          post :create, {:withdraw => valid_attributes}, valid_session
+          expect(response).to redirect_to(Withdraw.last)
+        end
       end
 
-      it "assigns a newly created withdraw as @withdraw" do
-        post :create, {:withdraw => valid_attributes}, valid_session
-        expect(assigns(:withdraw)).to be_a(Withdraw)
-        expect(assigns(:withdraw)).to be_persisted
-      end
+      context "with invalid params" do
+        it "assigns a newly created but unsaved withdraw as @withdraw" do
+          post :create, {:withdraw => invalid_attributes}, valid_session
+          expect(assigns(:withdraw)).to be_a_new(Withdraw)
+        end
 
-      it "redirects to the created withdraw" do
-        post :create, {:withdraw => valid_attributes}, valid_session
-        expect(response).to redirect_to(Withdraw.last)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns a newly created but unsaved withdraw as @withdraw" do
-        post :create, {:withdraw => invalid_attributes}, valid_session
-        expect(assigns(:withdraw)).to be_a_new(Withdraw)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:withdraw => invalid_attributes}, valid_session
-        expect(response).to render_template("new")
+        it "re-renders the 'new' template" do
+          post :create, {:withdraw => invalid_attributes}, valid_session
+          expect(response).to render_template("new")
+        end
       end
     end
   end
 
   describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+    describe "When logged in as Administrator" do
+      login_fixture_admin
+      context "with valid params" do
+        let(:new_attributes) {
+          {item_id: FactoryGirl.create(:item).id}
+        }
 
-      it "updates the requested withdraw" do
-        withdraw = Withdraw.create! valid_attributes
-        put :update, {:id => withdraw.to_param, :withdraw => new_attributes}, valid_session
-        withdraw.reload
-        skip("Add assertions for updated state")
+        it "updates the requested withdraw" do
+          withdraw = Withdraw.create! valid_attributes
+          put :update, {:id => withdraw.to_param, :withdraw => new_attributes}, valid_session
+          withdraw.reload
+          response.should redirect_to(assigns(:withdraw))
+        end
+
+        it "assigns the requested withdraw as @withdraw" do
+          withdraw = Withdraw.create! valid_attributes
+          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}, valid_session
+          expect(assigns(:withdraw)).to eq(withdraw)
+        end
+
+        it "redirects to the withdraw" do
+          withdraw = Withdraw.create! valid_attributes
+          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}, valid_session
+          expect(response).to redirect_to(withdraw)
+        end
       end
 
-      it "assigns the requested withdraw as @withdraw" do
-        withdraw = Withdraw.create! valid_attributes
-        put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}, valid_session
-        expect(assigns(:withdraw)).to eq(withdraw)
-      end
+      context "with invalid params" do
+        it "assigns the withdraw as @withdraw" do
+          withdraw = Withdraw.create! valid_attributes
+          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}, valid_session
+          expect(assigns(:withdraw)).to eq(withdraw)
+        end
 
-      it "redirects to the withdraw" do
-        withdraw = Withdraw.create! valid_attributes
-        put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}, valid_session
-        expect(response).to redirect_to(withdraw)
-      end
-    end
-
-    context "with invalid params" do
-      it "assigns the withdraw as @withdraw" do
-        withdraw = Withdraw.create! valid_attributes
-        put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}, valid_session
-        expect(assigns(:withdraw)).to eq(withdraw)
-      end
-
-      it "re-renders the 'edit' template" do
-        withdraw = Withdraw.create! valid_attributes
-        put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}, valid_session
-        expect(response).to render_template("edit")
+        it "re-renders the 'edit' template" do
+          withdraw = Withdraw.create! valid_attributes
+          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}, valid_session
+          expect(response).to render_template("edit")
+        end
       end
     end
   end
 
   describe "DELETE #destroy" do
-    it "destroys the requested withdraw" do
-      withdraw = Withdraw.create! valid_attributes
-      expect {
-        delete :destroy, {:id => withdraw.to_param}, valid_session
-      }.to change(Withdraw, :count).by(-1)
-    end
+    describe "When logged in as Administrator" do
+      login_fixture_admin
+      it "destroys the requested withdraw" do
+        withdraw = Withdraw.create! valid_attributes
+        expect {
+          delete :destroy, {:id => withdraw.to_param}, valid_session
+        }.to change(Withdraw, :count).by(-1)
+      end
 
-    it "redirects to the withdraws list" do
-      withdraw = Withdraw.create! valid_attributes
-      delete :destroy, {:id => withdraw.to_param}, valid_session
-      expect(response).to redirect_to(withdraws_url)
+      it "redirects to the withdraws list" do
+        withdraw = Withdraw.create! valid_attributes
+        delete :destroy, {:id => withdraw.to_param}, valid_session
+        expect(response).to redirect_to(withdraws_url)
+      end
     end
   end
 
