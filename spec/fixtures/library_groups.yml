@@ -17,21 +17,23 @@ one:
   <% else %>
     "---\n:max_number_of_results: 200\n:family_name_first: true\n"
   <% end %>
+
 # == Schema Information
 #
 # Table name: library_groups
 #
 #  id             :integer          not null, primary key
-#  name           :string(255)      not null
+#  name           :string           not null
 #  display_name   :text
-#  short_name     :string(255)      not null
+#  short_name     :string           not null
 #  my_networks    :text
 #  login_banner   :text
 #  note           :text
 #  country_id     :integer
 #  position       :integer
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  created_at     :datetime
+#  updated_at     :datetime
 #  admin_networks :text
-#  url            :string(255)      default("http://localhost:3000/")
+#  url            :string           default("http://localhost:3000/")
+#  settings       :text
 #

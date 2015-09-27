@@ -42,7 +42,7 @@ RSpec.describe WithdrawsController, type: :controller do
       login_fixture_admin
       it "assigns all withdraws as @withdraws" do
         withdraw = Withdraw.create! valid_attributes
-        get :index, {}, valid_session
+        get :index, {}
         expect(assigns(:withdraws)).to eq([withdraw])
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe WithdrawsController, type: :controller do
       login_fixture_admin
       it "assigns the requested withdraw as @withdraw" do
         withdraw = Withdraw.create! valid_attributes
-        get :show, {:id => withdraw.to_param}, valid_session
+        get :show, {:id => withdraw.to_param}
         expect(assigns(:withdraw)).to eq(withdraw)
         response.should be_success
       end
@@ -64,7 +64,7 @@ RSpec.describe WithdrawsController, type: :controller do
     describe "When logged in as Administrator" do
       login_fixture_admin
       it "assigns a new withdraw as @withdraw" do
-        get :new, {}, valid_session
+        get :new, {}
         expect(assigns(:withdraw)).to be_a_new(Withdraw)
       end
     end
@@ -73,7 +73,7 @@ RSpec.describe WithdrawsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested withdraw as @withdraw" do
       withdraw = Withdraw.create! valid_attributes
-      get :edit, {:id => withdraw.to_param}, valid_session
+      get :edit, {:id => withdraw.to_param}
       expect(assigns(:withdraw)).to eq(withdraw)
     end
   end
@@ -84,30 +84,30 @@ RSpec.describe WithdrawsController, type: :controller do
       context "with valid params" do
         it "creates a new Withdraw" do
           expect {
-            post :create, {:withdraw => valid_attributes}, valid_session
+            post :create, {:withdraw => valid_attributes}
           }.to change(Withdraw, :count).by(1)
         end
 
         it "assigns a newly created withdraw as @withdraw" do
-          post :create, {:withdraw => valid_attributes}, valid_session
+          post :create, {:withdraw => valid_attributes}
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(assigns(:withdraw)).to be_persisted
         end
 
         it "redirects to the created withdraw" do
-          post :create, {:withdraw => valid_attributes}, valid_session
+          post :create, {:withdraw => valid_attributes}
           expect(response).to redirect_to(Withdraw.last)
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved withdraw as @withdraw" do
-          post :create, {:withdraw => invalid_attributes}, valid_session
+          post :create, {:withdraw => invalid_attributes}
           expect(assigns(:withdraw)).to be_a_new(Withdraw)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {:withdraw => invalid_attributes}, valid_session
+          post :create, {:withdraw => invalid_attributes}
           expect(response).to render_template("new")
         end
       end
@@ -124,20 +124,20 @@ RSpec.describe WithdrawsController, type: :controller do
 
         it "updates the requested withdraw" do
           withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => new_attributes}, valid_session
+          put :update, {:id => withdraw.to_param, :withdraw => new_attributes}
           withdraw.reload
           response.should redirect_to(assigns(:withdraw))
         end
 
         it "assigns the requested withdraw as @withdraw" do
           withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}, valid_session
+          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}
           expect(assigns(:withdraw)).to eq(withdraw)
         end
 
         it "redirects to the withdraw" do
           withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}, valid_session
+          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}
           expect(response).to redirect_to(withdraw)
         end
       end
@@ -145,13 +145,13 @@ RSpec.describe WithdrawsController, type: :controller do
       context "with invalid params" do
         it "assigns the withdraw as @withdraw" do
           withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}, valid_session
+          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}
           expect(assigns(:withdraw)).to eq(withdraw)
         end
 
         it "re-renders the 'edit' template" do
           withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}, valid_session
+          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}
           expect(response).to render_template("edit")
         end
       end
@@ -164,13 +164,13 @@ RSpec.describe WithdrawsController, type: :controller do
       it "destroys the requested withdraw" do
         withdraw = Withdraw.create! valid_attributes
         expect {
-          delete :destroy, {:id => withdraw.to_param}, valid_session
+          delete :destroy, {:id => withdraw.to_param}
         }.to change(Withdraw, :count).by(-1)
       end
 
       it "redirects to the withdraws list" do
         withdraw = Withdraw.create! valid_attributes
-        delete :destroy, {:id => withdraw.to_param}, valid_session
+        delete :destroy, {:id => withdraw.to_param}
         expect(response).to redirect_to(withdraws_url)
       end
     end
