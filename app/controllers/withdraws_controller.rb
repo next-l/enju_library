@@ -5,7 +5,31 @@ class WithdrawsController < ApplicationController
 
   # GET /withdraws
   def index
-    @withdraws = Withdraw.page(params[:page])
+    if params[:format] == 'txt'
+      @withdraws = Withdraw.order('withdraws.created_at DESC').page(params[:page]).per(65534)
+    else
+      if params[:withdraw]
+        @query = params[:withdraw][:item_identifier].to_s.strip
+        item = Item.where(item_identifier: @query).first if @query.present?
+      end
+
+      if item
+        @withdraws = Withdraw.order('withdraws.created_at DESC').where(item_id: item.id).page(params[:page])
+      else
+        if @basket
+          @withdraws = @basket.withdraws.page(params[:page])
+        else
+          @withdraws = Withdraw.page(params[:page])
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @withdraws }
+      format.js { @withdraw = Withdraw.new }
+      format.txt
+    end
   end
 
   # GET /withdraws/1

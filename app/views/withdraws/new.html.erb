@@ -1,5 +1,14 @@
-<h1>New Withdraw</h1>
+<div id="content_detail" class="ui-corner-all ui-widget-content">
+<h1 class="title"><%= t('page.new', model: t('activerecord.models.withdraw')) -%></h1>
+<div id="content_list">
+  <div id="withdraw_list">
+    <%= render 'list' -%>
+  </div>
+</div>
+</div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', withdraws_path %>
+<div id="submenu" class="ui-corner-all ui-widget-content">
+  <ul>
+    <li><%= link_to t('page.back'), withdraws_path -%></li>
+  </ul>
+</div>

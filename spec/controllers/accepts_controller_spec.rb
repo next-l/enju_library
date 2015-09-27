@@ -22,7 +22,7 @@ describe AcceptsController do
       describe "When basket_id is specified" do
         it "assigns all accepts as @accepts" do
           get :index, :basket_id => 10
-          assigns(:accepts).should eq Basket.find(10).accepts.page(1)
+          assigns(:accepts).should eq baskets(:basket_00010).accepts.order('accepts.created_at DESC').page(1)
           response.should be_success
         end
       end
@@ -40,7 +40,7 @@ describe AcceptsController do
       describe "When basket_id is specified" do
         it "assigns all accepts as @accepts" do
           get :index, :basket_id => 9
-          assigns(:accepts).should eq Basket.find(9).accepts.page(1)
+          assigns(:accepts).should eq baskets(:basket_00009).accepts.order('accepts.created_at DESC').page(1)
           response.should be_success
         end
       end
