@@ -82,7 +82,7 @@ class WithdrawsController < ApplicationController
 
     respond_to do |format|
       if @withdraw.save
-        flash[:message] << t('withdraw.successfully_withdrawed', model: t('activerecord.models.withdraw'))
+        flash[:message] << t('withdraw.successfully_withdrawn', model: t('activerecord.models.withdraw'))
         format.html { redirect_to withdraws_url(basket_id: @basket.id) }
         format.json { render json: @withdraw, status: :created, location:  @withdraw }
         format.js { redirect_to withdraws_url(basket_id: @basket.id, format: :js) }
