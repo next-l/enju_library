@@ -62,7 +62,7 @@ class WithdrawsController < ApplicationController
 
   # PATCH/PUT /withdraws/1
   def update
-    if @withdraw.update(withdraw_params)
+    if @withdraw.update_attributes(withdraw_params)
       redirect_to @withdraw, notice: 'Withdraw was successfully updated.'
     else
       render :edit
