@@ -38,7 +38,11 @@ class WithdrawsController < ApplicationController
 
   # GET /withdraws/new
   def new
+    @basket = Basket.new
+    @basket.user = current_user
+    @basket.save!
     @withdraw = Withdraw.new
+    @withdraws = []
   end
 
   # GET /withdraws/1/edit
