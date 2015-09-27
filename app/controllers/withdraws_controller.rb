@@ -4,6 +4,7 @@ class WithdrawsController < ApplicationController
   before_filter :get_basket, only: [:index, :create]
 
   # GET /withdraws
+  # GET /withdraws.json
   def index
     if params[:format] == 'txt'
       @withdraws = Withdraw.order('withdraws.created_at DESC').page(params[:page]).per(65534)
@@ -33,56 +34,93 @@ class WithdrawsController < ApplicationController
   end
 
   # GET /withdraws/1
+  # GET /withdraws/1.json
   def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @withdraw }
+    end
   end
 
-  # GET /withdraws/new
+  # GET /new
+  # GET /new.json
   def new
     @basket = Basket.new
     @basket.user = current_user
     @basket.save!
     @withdraw = Withdraw.new
     @withdraws = []
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @withdraw }
+    end
   end
 
+  # GET /withdraws/new
   # GET /withdraws/1/edit
   def edit
   end
 
   # POST /withdraws
+  # POST /withdraws.json
   def create
-    @withdraw = Withdraw.new(withdraw_params)
+    unless @basket
+      access_denied; return
+    end
+    @withdraw.basket = @basket
+    @withdraw.librarian = current_user
 
-    if @withdraw.save
-      redirect_to @withdraw, notice: 'Withdraw was successfully created.'
+    flash[:message] = ''
+    if @withdraw.item_identifier.blank?
+      flash[:message] << t('withdraw.enter_item_identifier') if @withdraw.item_identifier.blank?
     else
-      render :new
+      item = Item.where(item_identifier: @withdraw.item_identifier.to_s.strip).first
+    end
+    @withdraw.item = item
+
+    respond_to do |format|
+      if @withdraw.save
+        flash[:message] << t('withdraw.successfully_withdrawed', model: t('activerecord.models.withdraw'))
+        format.html { redirect_to withdraws_url(basket_id: @basket.id) }
+        format.json { render json: @withdraw, status: :created, location:  @withdraw }
+        format.js { redirect_to withdraws_url(basket_id: @basket.id, format: :js) }
+      else
+        @withdraws = @basket.withdraws.page(params[:page])
+        format.html { render action: "index" }
+        format.json { render json: @withdraw.errors, status: :unprocessable_entity }
+        format.js { render action: "index" }
+      end
     end
   end
 
-  # PATCH/PUT /withdraws/1
+  # PUT /withdraws/1
+  # PUT /withdraws/1.json
   def update
-    if @withdraw.update_attributes(withdraw_params)
-      redirect_to @withdraw, notice: 'Withdraw was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @withdraw.update_attributes(withdraw_params)
+        format.html { redirect_to @withdraw, notice: t('controller.successfully_updated', model: t('activerecord.models.withdraw')) }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @withdraw.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # DELETE /withdraws/1
+  # DELETE /withdraws/1.json
   def destroy
     @withdraw.destroy
-    redirect_to withdraws_url, notice: 'Withdraw was successfully destroyed.'
+
+    respond_to do |format|
+      format.html { redirect_to withdraws_url, notice: t('controller.successfully_deleted', model: t('activerecord.models.withdraw')) }
+      format.json { head :no_content }
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_withdraw
-      @withdraw = Withdraw.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
-    def withdraw_params
-      params.require(:withdraw).permit(:basket_id, :item_id, :librarian_id)
-    end
+  def withdraw_params
+    params.require(:withdraw).permit(:item_identifier, :librarian_id, :item_id)
+  end
 end
