@@ -1,7 +1,7 @@
 class WithdrawsController < ApplicationController
   load_and_authorize_resource except: :index
   authorize_resource only: :index
-  before_action :get_basket, only: [:index, :create]
+  before_filter :get_basket, only: [:index, :create]
 
   # GET /withdraws
   def index
