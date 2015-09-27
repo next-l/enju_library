@@ -2,6 +2,7 @@ class Basket < ActiveRecord::Base
   scope :will_expire, lambda {|date| where('created_at < ?', date)}
   belongs_to :user, validate: true
   has_many :accepts
+  has_many :withdraws
 
   enju_circulation_basket_model if defined?(EnjuCirculation)
 

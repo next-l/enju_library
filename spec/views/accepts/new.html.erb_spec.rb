@@ -18,7 +18,7 @@ describe "accepts/new" do
         :created_at => Time.zone.now
       )
     ]).page(1))
-    view.stub(:current_user).and_return(User.find('enjuadmin'))
+    view.stub(:current_user).and_return(User.where(username: 'enjuadmin').first)
   end
 
   it "renders new accept form" do

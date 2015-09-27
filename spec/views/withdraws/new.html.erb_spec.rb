@@ -1,14 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe "withdraws/new", type: :view do
+  fixtures :all
+
   before(:each) do
-    assign(:withdraw, Withdraw.new())
+    assign(:withdraw, stub_model(Withdraw,
+      :item_id => 1
+    ).as_new_record)
+    assign(:basket, baskets(:basket_00001))
+    assign(:withdraws, Kaminari::paginate_array([
+      stub_model(Withdraw,
+        :item_id => 1,
+        :created_at => Time.zone.now
+      ),
+      stub_model(Withdraw,
+        :item_id => 1,
+        :created_at => Time.zone.now
+      )
+    ]).page(1))
+    view.stub(:current_user).and_return(User.where(username: 'enjuadmin').first)
   end
 
   it "renders new withdraw form" do
     render
 
-    assert_select "form[action=?][method=?]", withdraws_path, "post" do
+    assert_select "form", :action => withdraws_path, :method => "post" do
+      assert_select "input#withdraw_item_identifier", :name => "withdraw[item_identifier]"
     end
   end
 end
