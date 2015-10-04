@@ -42,18 +42,20 @@
         <%= render 'libraries/map', library: @library if @library.latitude and @library.longitude -%>
       </div>
       <div id="tab2">
-        <%- if @library.profiles.librarians.exists? -%>
-          <ul>
-            <%- @library.profiles.librarians.each do |librarian| -%>
-              <li>
-                <%= link_to librarian.user.username, librarian -%>
-                <%- unless librarian.note.blank? -%>
-                  <br />
-                  <%= librarian.note -%>
-                <%- end -%>
-              </li>
-            <%- end -%>
-          </ul>
+        <% if current_user %>
+          <%- if @library.profiles.librarians.exists? -%>
+            <ul>
+              <%- @library.profiles.librarians.each do |librarian| -%>
+                <li>
+                  <%= link_to librarian.user.username, librarian -%>
+                  <%- unless librarian.note.blank? -%>
+                    <br />
+                    <%= librarian.note -%>
+                  <%- end -%>
+                </li>
+              <%- end -%>
+            </ul>
+          <%- end -%>
         <%- end -%>
       </div>
       <div id="tab3">
