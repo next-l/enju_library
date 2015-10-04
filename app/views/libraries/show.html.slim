@@ -81,14 +81,15 @@
           #tab1
             = render 'libraries/map', library: @library if @library.latitude and @library.longitude
           #tab2
-            - if @library.profiles.librarians.exists?
-              ul
-                - @library.profiles.librarians.each do |librarian|
-                  li
-                    = link_to librarian.user.username, librarian
-                    - unless librarian.note.blank?
-                      br
-                      = librarian.note
+            - if current_user
+              - if @library.profiles.librarians.exists?
+                ul
+                  - @library.profiles.librarians.each do |librarian|
+                    li
+                      = link_to librarian.user.username, librarian
+                      - unless librarian.note.blank?
+                        br
+                        = librarian.note
           #tab3
             p
               = link_to t('shelf.update_display_order'), shelves_path(library_id: @library.name)
