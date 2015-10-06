@@ -29,7 +29,9 @@
   <div id="tabs">
       <ul>
         <li title="active" class="selected"><a href="#tab1"><em><%= t('library.map') -%></em></a></li>
-        <li><a href="#tab2"><em><%= t('library.staff') -%></em></a></li>
+      	<% if current_user.try(:has_role?, 'Librarian') %>
+       	  <li><a href="#tab2"><em><%= t('library.staff') -%></em></a></li>
+        <% end %>
         <li><a href="#tab3"><em><%= t('activerecord.models.shelf') -%></em></a></li>
         <% if defined?(EnjuEvent) %>
           <li><a href="#tab4"><em><%= t('activerecord.models.event') -%></em></a></li>
@@ -41,8 +43,8 @@
       <div id="tab1">
         <%= render 'libraries/map', library: @library if @library.latitude and @library.longitude -%>
       </div>
-      <div id="tab2">
-        <% if current_user %>
+      <% if current_user.try(:has_role?, 'Librarian') %>
+      	<div id="tab2">
           <%- if @library.profiles.librarians.exists? -%>
             <ul>
               <%- @library.profiles.librarians.each do |librarian| -%>
@@ -56,8 +58,8 @@
               <%- end -%>
             </ul>
           <%- end -%>
-        <%- end -%>
-      </div>
+        </div>
+      <%- end -%>
       <div id="tab3">
         <p><%= link_to t('shelf.update_display_order'), shelves_path(library_id: @library.name) %>
         <table class="table table-striped index">
