@@ -60,10 +60,11 @@
               a[href="#tab1"]
                 em
                   = t('library.map')
-            li
-              a[href="#tab2"]
-                em
-                  = t('library.staff')
+            - if current_user.try(:has_role?, 'Librarian')
+              li
+                a[href="#tab2"]
+                  em
+                    = t('library.staff')
             li
               a[href="#tab3"]
                 em
@@ -80,8 +81,8 @@
                     = t('page.configuration')
           #tab1
             = render 'libraries/map', library: @library if @library.latitude and @library.longitude
-          #tab2
-            - if current_user
+          - if current_user.try(:has_role?, 'Librarian')
+            #tab2
               - if @library.profiles.librarians.exists?
                 ul
                   - @library.profiles.librarians.each do |librarian|
