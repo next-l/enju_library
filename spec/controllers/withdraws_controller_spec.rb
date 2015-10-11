@@ -25,11 +25,15 @@ RSpec.describe WithdrawsController, type: :controller do
   # Withdraw. As you add validations to Withdraw, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.build(:withdraw).attributes
+    FactoryGirl.build(:withdraw).attributes.with_indifferent_access
   }
-
   let(:invalid_attributes) {
     { item_id: nil }
+  }
+  let(:valid_create_attributes) {
+    { basket_id: Basket.find(valid_attributes[:basket_id]).id,
+      withdraw: { item_identifier: Item.find(valid_attributes[:item_id]).item_identifier }
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -84,31 +88,32 @@ RSpec.describe WithdrawsController, type: :controller do
       context "with valid params" do
         it "creates a new Withdraw" do
           expect {
-            post :create, {:withdraw => valid_attributes}
+            post :create, valid_create_attributes
           }.to change(Withdraw, :count).by(1)
+          expect(assigns(:withdraw)).to be_persisted
         end
 
         it "assigns a newly created withdraw as @withdraw" do
-          post :create, {:withdraw => valid_attributes}
+          post :create, valid_create_attributes
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(assigns(:withdraw)).to be_persisted
         end
 
         it "redirects to the created withdraw" do
-          post :create, {:withdraw => valid_attributes}
-          expect(response).to redirect_to(Withdraw.last)
+          post :create, valid_create_attributes
+          expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved withdraw as @withdraw" do
-          post :create, {:withdraw => invalid_attributes}
+          post :create, {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
           expect(assigns(:withdraw)).to be_a_new(Withdraw)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {:withdraw => invalid_attributes}
-          expect(response).to render_template("new")
+          post :create, {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
+          expect(response).to render_template("index")
         end
       end
     end

@@ -2,9 +2,9 @@
 
 FactoryGirl.define do
   factory :withdraw do
-    basket_id{FactoryGirl.create(:basket).id}
     item_id{FactoryGirl.create(:item).id}
     librarian_id{FactoryGirl.create(:librarian).id}
+    basket_id{FactoryGirl.create(:basket, user_id: librarian_id).id}
   end
 end
 
