@@ -12,7 +12,7 @@ ja:
       request_status_type: 依頼の状態の種類
       request_type: 依頼の種類
       search_engine: 検索エンジン
-      withdraw: 除籍
+      withdraw: 連続除籍
 
     attributes:
       library:
