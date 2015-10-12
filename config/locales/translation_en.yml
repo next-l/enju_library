@@ -12,7 +12,7 @@ en:
       request_status_type: Request status type
       request_type: Request type
       search_engine: Search engine
-      withdraw: Withdraw
+      withdraw: Bulk Withdraw
 
     attributes:
       library:
