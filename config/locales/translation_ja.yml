@@ -102,6 +102,7 @@ ja:
         position: 位置
       withdraw:
         item_id: 個別資料
+        removed_items: "%{status}の"
 
   library:
     map: "地図"
