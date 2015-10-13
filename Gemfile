@@ -10,6 +10,7 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '1.1'
+gem 'enju_circulation', github: 'next-l/enju_circulation', branch: '1.1'
 
 # To use debugger
 # gem 'debugger'
