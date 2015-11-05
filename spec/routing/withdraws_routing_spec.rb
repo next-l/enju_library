@@ -15,20 +15,8 @@ RSpec.describe WithdrawsController, type: :routing do
       expect(:get => "/withdraws/1").to route_to("withdraws#show", :id => "1")
     end
 
-    it "routes to #edit" do
-      expect(:get => "/withdraws/1/edit").to route_to("withdraws#edit", :id => "1")
-    end
-
     it "routes to #create" do
       expect(:post => "/withdraws").to route_to("withdraws#create")
-    end
-
-    it "routes to #update via PUT" do
-      expect(:put => "/withdraws/1").to route_to("withdraws#update", :id => "1")
-    end
-
-    it "routes to #update via PATCH" do
-      expect(:patch => "/withdraws/1").to route_to("withdraws#update", :id => "1")
     end
 
     it "routes to #destroy" do
