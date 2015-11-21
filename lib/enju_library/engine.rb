@@ -1,3 +1,4 @@
+require 'enju_biblio'
 require 'geocoder'
 require 'ipaddr'
 

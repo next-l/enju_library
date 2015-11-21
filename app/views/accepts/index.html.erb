@@ -29,7 +29,7 @@
         <% end %>
       </td>
       <td>
-        <%- if can? :delete, accept -%>
+        <%- if policy(accept).destroy? -%>
           <%= link_to t('page.destroy'), accept, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
         <%- end -%>
       </td>

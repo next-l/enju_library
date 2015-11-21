@@ -1,9 +1,11 @@
 class BudgetTypesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_budget_type, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /budget_types
   # GET /budget_types.json
   def index
-    @budget_types = BudgetType.all
+    @budget_types = BudgetType.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,6 +84,15 @@ class BudgetTypesController < ApplicationController
   end
 
   private
+  def set_budget_type
+    @budget_type = BudgetType.find(params[:id])
+    authorize @budget_type
+  end
+
+  def check_policy
+    authorize BudgetType
+  end
+
   def budget_type_params
     params.require(:budget_type).permit(
       :name, :display_name, :note, :position

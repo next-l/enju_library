@@ -1,5 +1,6 @@
 class BasketsController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_basket, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
 
   # GET /baskets
   # GET /baskets.json
@@ -104,6 +105,15 @@ class BasketsController < ApplicationController
   end
 
   private
+  def set_basket
+    @basket = Basket.find(params[:id])
+    authorize @basket
+  end
+
+  def check_policy
+    authorize Basket
+  end
+
   def basket_params
     params.require(:basket).permit(:note, :user_number)
   end

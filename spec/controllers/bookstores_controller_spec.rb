@@ -37,7 +37,7 @@ describe BookstoresController do
 
       it "assigns all bookstores as @bookstores" do
         get :index
-        assigns(:bookstores).should be_empty
+        assigns(:bookstores).should be_nil
         response.should be_forbidden
       end
     end
@@ -45,7 +45,7 @@ describe BookstoresController do
     describe "When not logged in" do
       it "assigns all bookstores as @bookstores" do
         get :index
-        assigns(:bookstores).should be_empty
+        assigns(:bookstores).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -107,7 +107,7 @@ describe BookstoresController do
 
       it "should not assign the requested bookstore as @bookstore" do
         get :new
-        assigns(:bookstore).should_not be_valid
+        assigns(:bookstore).should be_nil
         response.should be_forbidden
       end
     end
@@ -117,7 +117,7 @@ describe BookstoresController do
 
       it "should not assign the requested bookstore as @bookstore" do
         get :new
-        assigns(:bookstore).should_not be_valid
+        assigns(:bookstore).should be_nil
         response.should be_forbidden
       end
     end
@@ -125,7 +125,7 @@ describe BookstoresController do
     describe "When not logged in" do
       it "should not assign the requested bookstore as @bookstore" do
         get :new
-        assigns(:bookstore).should_not be_valid
+        assigns(:bookstore).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -211,7 +211,7 @@ describe BookstoresController do
       describe "with valid params" do
         it "assigns a newly created bookstore as @bookstore" do
           post :create, :bookstore => @attrs
-          assigns(:bookstore).should be_valid
+          assigns(:bookstore).should be_nil
         end
 
         it "should be forbidden" do
@@ -223,7 +223,7 @@ describe BookstoresController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved bookstore as @bookstore" do
           post :create, :bookstore => @invalid_attrs
-          assigns(:bookstore).should_not be_valid
+          assigns(:bookstore).should be_nil
         end
 
         it "should be forbidden" do
@@ -239,7 +239,7 @@ describe BookstoresController do
       describe "with valid params" do
         it "assigns a newly created bookstore as @bookstore" do
           post :create, :bookstore => @attrs
-          assigns(:bookstore).should be_valid
+          assigns(:bookstore).should be_nil
         end
 
         it "should be forbidden" do
@@ -251,7 +251,7 @@ describe BookstoresController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved bookstore as @bookstore" do
           post :create, :bookstore => @invalid_attrs
-          assigns(:bookstore).should_not be_valid
+          assigns(:bookstore).should be_nil
         end
 
         it "should be forbidden" do
@@ -265,7 +265,7 @@ describe BookstoresController do
       describe "with valid params" do
         it "assigns a newly created bookstore as @bookstore" do
           post :create, :bookstore => @attrs
-          assigns(:bookstore).should be_valid
+          assigns(:bookstore).should be_nil
         end
 
         it "should be forbidden" do
@@ -277,7 +277,7 @@ describe BookstoresController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved bookstore as @bookstore" do
           post :create, :bookstore => @invalid_attrs
-          assigns(:bookstore).should_not be_valid
+          assigns(:bookstore).should be_nil
         end
 
         it "should be forbidden" do

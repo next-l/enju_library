@@ -16,7 +16,7 @@
     <td><%= library_group.name -%></td>
     <td><%= library_group.user.email -%></td>
     <td>
-      <%= link_to t('page.edit'), edit_library_group_path(library_group) if can?(:update, library_group) -%>
+      <%= link_to t('page.edit'), edit_library_group_path(library_group) if policy(library_group).update? -%>
     </td>
   </tr>
 <%- end -%>

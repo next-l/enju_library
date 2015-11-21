@@ -1,5 +1,4 @@
 class SearchEngine < ActiveRecord::Base
-  default_scope { order('search_engines.position') }
   acts_as_list
 
   validates :name, presence: true

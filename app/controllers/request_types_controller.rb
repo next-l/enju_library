@@ -1,9 +1,11 @@
 class RequestTypesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_request_type, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /request_types
   # GET /request_types.json
   def index
-    @request_types = RequestType.all
+    @request_types = RequestType.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,6 +84,15 @@ class RequestTypesController < ApplicationController
   end
 
   private
+  def set_request_type
+    @request_type = RequestType.find(params[:id])
+    authorize @request_type
+  end
+
+  def check_policy
+    authorize RequestType
+  end
+
   def request_type_params
     params.require(:request_type).permit(:name, :display_name, :note)
   end

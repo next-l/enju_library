@@ -1,9 +1,11 @@
 class SearchEnginesController < ApplicationController
-  load_and_authorize_resource
+  before_action :set_search_engine, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+
   # GET /search_engines
   # GET /search_engines.json
   def index
-    @search_engines = SearchEngine.all
+    @search_engines = SearchEngine.order(:position)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -82,6 +84,15 @@ class SearchEnginesController < ApplicationController
   end
 
   private
+  def set_search_engine
+    @search_engine = SearchEngine.find(params[:id])
+    authorize @search_engine
+  end
+
+  def check_policy
+    authorize SearchEngine
+  end
+
   def search_engine_params
     params.require(:search_engine).permit(
       :name, :display_name, :url, :base_url, :http_method,

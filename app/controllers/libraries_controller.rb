@@ -1,7 +1,7 @@
-# -*- encoding: utf-8 -*-
 class LibrariesController < ApplicationController
-  load_and_authorize_resource
-  after_filter :solr_commit, only: [:create, :update, :destroy]
+  before_action :set_library, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  after_action :solr_commit, only: [:create, :update, :destroy]
 
   # GET /libraries
   # GET /libraries.json
@@ -117,6 +117,15 @@ class LibrariesController < ApplicationController
   end
 
   private
+  def set_library
+    @library = Library.find(params[:id])
+    authorize @library
+  end
+
+  def check_policy
+    authorize Library
+  end
+
   def library_params
     params.require(:library).permit(
       :name, :display_name, :short_display_name, :zip_code, :street,
@@ -128,6 +137,6 @@ class LibrariesController < ApplicationController
 
   def prepare_options
     @library_groups = LibraryGroup.all
-    @countries = Country.all_cache
+    @countries = Country.order(:position)
   end
 end

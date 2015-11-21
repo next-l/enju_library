@@ -14,7 +14,7 @@
 <%- @search_engines.each do |search_engine| -%>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%- if can? :update, search_engine -%>
+      <%- if policy(search_engine).update? -%>
         <%= move_position(search_engine) -%>
       <%- end -%>
     </td>
@@ -22,10 +22,10 @@
     <td><%= search_engine.note -%></td>
     <td><%= link_to t('page.show'), search_engine -%></td>
     <td>
-      <%- if can? :update, search_engine -%>
+      <%- if policy(search_engine).update? -%>
         <%= link_to t('page.edit'), edit_search_engine_path(search_engine) -%>
       <% end %>
-      <%- if can? :delete, search_engine -%>
+      <%- if policy(search_engine).destroy? -%>
         <%= link_to t('page.destroy'), search_engine, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
       <%- end -%>
     </td>
@@ -38,7 +38,7 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <%- if can? :create, SearchEngine -%>
+    <%- if policy(SearchEngine).create? -%>
       <li><%= link_to t('page.new', model: t('activerecord.models.search_engine')), new_search_engine_path -%></li>
     <%- end -%>
   </ul>

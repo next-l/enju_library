@@ -1,7 +1,7 @@
 class WithdrawsController < ApplicationController
-  load_and_authorize_resource except: :index
-  authorize_resource only: :index
-  before_filter :get_basket, only: [:index, :create]
+  before_action :set_withdraw, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  before_action :get_basket, only: [:index, :create]
 
   # GET /withdraws
   # GET /withdraws.json
@@ -68,6 +68,7 @@ class WithdrawsController < ApplicationController
     unless @basket
       access_denied; return
     end
+    @withdraw = Withdraw.new(withdraw_params)
     @withdraw.basket = @basket
     @withdraw.librarian = current_user
 
@@ -120,6 +121,15 @@ class WithdrawsController < ApplicationController
   end
 
   private
+  def set_withdraw
+    @withdraw = Withdraw.find(params[:id])
+    authorize @withdraw
+  end
+
+  def check_policy
+    authorize Withdraw
+  end
+
   def withdraw_params
     params.require(:withdraw).permit(:item_identifier, :librarian_id, :item_id)
   end

@@ -43,7 +43,7 @@
 
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
-    <%- if can? :update, @bookstore -%>
+    <%- if policy(@bookstore).update? -%>
       <li><%= link_to t('page.edit'), edit_bookstore_path(@bookstore) -%></li>
     <%- end -%>
     <li><%= back_to_index(flash[:page_info]) -%></li>

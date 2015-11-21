@@ -29,7 +29,7 @@
         <% end %>
       </td>
       <td>
-        <%- if can? :delete, withdraw -%>
+        <%- if policy(withdraw).destroy? -%>
           <%= link_to t('page.destroy'), withdraw, data: {confirm: t('page.are_you_sure')}, method: :delete -%>
         <%- end -%>
       </td>

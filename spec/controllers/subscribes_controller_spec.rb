@@ -35,7 +35,7 @@ describe SubscribesController do
 
       it "should be forbidden" do
         get :index
-        assigns(:subscribes).should be_empty
+        assigns(:subscribes).should be_nil
         response.should be_forbidden
       end
     end
@@ -43,7 +43,7 @@ describe SubscribesController do
     describe "When not logged in" do
       it "assigns all subscribes as @subscribes" do
         get :index
-        assigns(:subscribes).should be_empty
+        assigns(:subscribes).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -115,7 +115,7 @@ describe SubscribesController do
 
       it "should not assign the requested subscribe as @subscribe" do
         get :new
-        assigns(:subscribe).should_not be_valid
+        assigns(:subscribe).should be_nil
         response.should be_forbidden
       end
     end
@@ -123,7 +123,7 @@ describe SubscribesController do
     describe "When not logged in" do
       it "should not assign the requested subscribe as @subscribe" do
         get :new
-        assigns(:subscribe).should_not be_valid
+        assigns(:subscribe).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -237,7 +237,7 @@ describe SubscribesController do
       describe "with valid params" do
         it "assigns a newly created subscribe as @subscribe" do
           post :create, :subscribe => @attrs
-          assigns(:subscribe).should be_valid
+          assigns(:subscribe).should be_nil
         end
 
         it "should be forbidden" do
@@ -249,7 +249,7 @@ describe SubscribesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscribe as @subscribe" do
           post :create, :subscribe => @invalid_attrs
-          assigns(:subscribe).should_not be_valid
+          assigns(:subscribe).should be_nil
         end
 
         it "should be forbidden" do
@@ -263,7 +263,7 @@ describe SubscribesController do
       describe "with valid params" do
         it "assigns a newly created subscribe as @subscribe" do
           post :create, :subscribe => @attrs
-          assigns(:subscribe).should be_valid
+          assigns(:subscribe).should be_nil
         end
 
         it "should be forbidden" do
@@ -275,7 +275,7 @@ describe SubscribesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscribe as @subscribe" do
           post :create, :subscribe => @invalid_attrs
-          assigns(:subscribe).should_not be_valid
+          assigns(:subscribe).should be_nil
         end
 
         it "should be forbidden" do

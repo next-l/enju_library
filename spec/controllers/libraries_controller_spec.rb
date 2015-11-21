@@ -100,7 +100,7 @@ describe LibrariesController do
 
       it "assigns the requested library as @library" do
         get :new
-        assigns(:library).should_not be_valid
+        assigns(:library).should be_nil
       end
     end
 
@@ -109,7 +109,7 @@ describe LibrariesController do
 
       it "should not assign the requested library as @library" do
         get :new
-        assigns(:library).should_not be_valid
+        assigns(:library).should be_nil
         response.should be_forbidden
       end
     end
@@ -117,7 +117,7 @@ describe LibrariesController do
     describe "When not logged in" do
       it "should not assign the requested library as @library" do
         get :new
-        assigns(:library).should_not be_valid
+        assigns(:library).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -208,7 +208,7 @@ describe LibrariesController do
       describe "with valid params" do
         it "assigns a newly created library as @library" do
           post :create, :library => @attrs
-          assigns(:library).should be_valid
+          assigns(:library).should be_nil
         end
 
         it "should be forbidden" do
@@ -220,7 +220,7 @@ describe LibrariesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved library as @library" do
           post :create, :library => @invalid_attrs
-          assigns(:library).should_not be_valid
+          assigns(:library).should be_nil
         end
 
         it "should be forbidden" do
@@ -236,7 +236,7 @@ describe LibrariesController do
       describe "with valid params" do
         it "assigns a newly created library as @library" do
           post :create, :library => @attrs
-          assigns(:library).should be_valid
+          assigns(:library).should be_nil
         end
 
         it "should be forbidden" do
@@ -248,7 +248,7 @@ describe LibrariesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved library as @library" do
           post :create, :library => @invalid_attrs
-          assigns(:library).should_not be_valid
+          assigns(:library).should be_nil
         end
 
         it "should be forbidden" do
@@ -262,7 +262,7 @@ describe LibrariesController do
       describe "with valid params" do
         it "assigns a newly created library as @library" do
           post :create, :library => @attrs
-          assigns(:library).should be_valid
+          assigns(:library).should be_nil
         end
 
         it "should be redirected to new session url" do
@@ -274,7 +274,7 @@ describe LibrariesController do
       describe "with invalid params" do
         it "assigns a newly created but unsaved library as @library" do
           post :create, :library => @invalid_attrs
-          assigns(:library).should_not be_valid
+          assigns(:library).should be_nil
         end
 
         it "should be redirected to new session url" do

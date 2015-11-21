@@ -1,7 +1,8 @@
 class ShelvesController < ApplicationController
-  load_and_authorize_resource
-  before_filter :get_library
-  before_filter :get_libraries, only: [:new, :edit, :create, :update]
+  before_action :set_shelf, only: [:show, :edit, :update, :destroy]
+  before_action :check_policy, only: [:index, :new, :create]
+  before_action :get_library
+  before_action :get_libraries, only: [:new, :edit, :create, :update]
 
   # GET /shelves
   # GET /shelves.json
@@ -55,7 +56,7 @@ class ShelvesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @shelf }
-      format.mobile
+      format.html.phone
     end
   end
 
@@ -135,6 +136,15 @@ class ShelvesController < ApplicationController
   end
 
   private
+  def set_shelf
+    @shelf = Shelf.find(params[:id])
+    authorize @shelf
+  end
+
+  def check_policy
+    authorize Shelf
+  end
+
   def shelf_params
     params.require(:shelf).permit(
       :name, :display_name, :note, :library_id, :closed

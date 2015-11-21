@@ -34,7 +34,7 @@ describe BasketsController do
 
       it "assigns all baskets as @baskets" do
         get :index, :user_id => users(:user1).username
-        assigns(:baskets).should be_empty
+        assigns(:baskets).should be_nil
         response.should be_forbidden
       end
     end
@@ -42,7 +42,7 @@ describe BasketsController do
     describe "When not logged in" do
       it "assigns all baskets as @baskets" do
         get :index, :user_id => users(:user1).username
-        assigns(:baskets).should be_empty
+        assigns(:baskets).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -110,7 +110,7 @@ describe BasketsController do
 
       it "should not assign the requested basket as @basket" do
         get :new
-        assigns(:basket).should_not be_valid
+        assigns(:basket).should be_nil
         response.should be_forbidden
       end
     end
@@ -118,7 +118,7 @@ describe BasketsController do
     describe "When not logged in" do
       it "should not assign the requested basket as @basket" do
         get :new
-        assigns(:basket).should_not be_valid
+        assigns(:basket).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -269,7 +269,7 @@ describe BasketsController do
       describe "with valid params" do
         it "assigns a newly created basket as @basket" do
           post :create, :basket => {:user_number => users(:user1).profile.user_number }
-          assigns(:basket).should_not be_valid
+          assigns(:basket).should be_nil
         end
 
         it "should be forbidden" do
@@ -288,12 +288,12 @@ describe BasketsController do
       describe "with blank params" do
         it "assigns a newly created basket as @basket" do
           post :create, :basket => { note: 'test' }
-          assigns(:basket).should_not be_valid
+          assigns(:basket).should be_nil
         end
 
         it "should be redirected to new_user_session_url" do
           post :create, :basket => { note: 'test' }
-          assigns(:basket).should_not be_valid
+          assigns(:basket).should be_nil
           assert_response :redirect
           response.should redirect_to new_user_session_url
         end
