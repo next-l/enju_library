@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_event", "~> 0.1.17"
   s.add_development_dependency "enju_circulation", "~> 0.1.0"
   s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0"
-  s.add_development_dependency "sunspot_solr", "~> 2.2"
+  s.add_development_dependency "sunspot_solr", "2.2.0"
   s.add_development_dependency "annotate"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "kramdown"
