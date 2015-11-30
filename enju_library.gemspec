@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids,default,development,test}/*"] - Dir["spec/dummy/tmp/*"]
 
   s.add_dependency "geocoder"
+  s.add_dependency "cocoon"
   s.add_dependency "enju_biblio", "~> 0.1.1"
 
   s.add_development_dependency "sqlite3"
@@ -31,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_event", "~> 0.1.17"
   s.add_development_dependency "enju_circulation", "~> 0.1.0"
   s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0"
-  s.add_development_dependency "sunspot_solr", "~> 2.2.1"
+  s.add_development_dependency "sunspot_solr", "~> 2.2.2"
   s.add_development_dependency "annotate"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "kramdown"

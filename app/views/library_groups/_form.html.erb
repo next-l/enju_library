@@ -39,10 +39,11 @@
   <div class="field">
     <%= f.label :color -%><br />
     <%= f.fields_for :colors do |color_form| %>
-      <%= color_form.text_field :property, disabled: true %>
-      <%= color_form.text_field :code %>
-      <br />
+      <%= render 'color_fields', f: color_form %>
     <% end %>
+    <div class="links">
+      <p><%= link_to_add_association t('page.add'), f, :colors %></p>
+    </div>
   </div>
 
   <div class="field">
