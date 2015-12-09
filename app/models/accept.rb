@@ -4,8 +4,6 @@ class Accept < ActiveRecord::Base
   belongs_to :item, touch: true
   belongs_to :librarian, class_name: 'User'
 
-  enju_circulation_accept_model if defined?(EnjuCirculation)
-
   validates_uniqueness_of :item_id, message:  I18n.t('accept.already_accepted')
   validates_presence_of :item_id, message:  I18n.t('accept.item_not_found')
   validates_presence_of :basket_id
