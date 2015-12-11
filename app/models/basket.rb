@@ -4,8 +4,6 @@ class Basket < ActiveRecord::Base
   has_many :accepts
   has_many :withdraws
 
-  enju_circulation_basket_model if defined?(EnjuCirculation)
-
   validates_associated :user, on: :create
   # 貸出完了後にかごのユーザidは破棄する
   validates_presence_of :user, on: :create
