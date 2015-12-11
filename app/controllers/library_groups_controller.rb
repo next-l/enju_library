@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 class LibraryGroupsController < ApplicationController
   before_action :set_library_group, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
@@ -36,7 +35,7 @@ class LibraryGroupsController < ApplicationController
         format.html { redirect_to @library_group, notice: t('controller.successfully_updated', model: t('activerecord.models.library_group')) }
         format.json { head :no_content }
       else
-        @countries = Country.all
+        @countries = Country.order(:position)
         format.html { render action: "edit" }
         format.json { render json: @library_group.errors, status: :unprocessable_entity }
       end

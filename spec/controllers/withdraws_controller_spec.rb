@@ -25,11 +25,15 @@ RSpec.describe WithdrawsController, type: :controller do
   # Withdraw. As you add validations to Withdraw, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    FactoryGirl.build(:withdraw).attributes
+    FactoryGirl.build(:withdraw).attributes.with_indifferent_access
   }
-
   let(:invalid_attributes) {
     { item_id: nil }
+  }
+  let(:valid_create_attributes) {
+    { basket_id: Basket.find(valid_attributes[:basket_id]).id,
+      withdraw: { item_identifier: Item.find(valid_attributes[:item_id]).item_identifier }
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -70,89 +74,38 @@ RSpec.describe WithdrawsController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
-    it "assigns the requested withdraw as @withdraw" do
-      withdraw = Withdraw.create! valid_attributes
-      get :edit, {:id => withdraw.to_param}
-      expect(assigns(:withdraw)).to eq(withdraw)
-    end
-  end
-
   describe "POST #create" do
     describe "When logged in as Administrator" do
       login_fixture_admin
       context "with valid params" do
         it "creates a new Withdraw" do
           expect {
-            post :create, {:withdraw => valid_attributes}
+            post :create, valid_create_attributes
           }.to change(Withdraw, :count).by(1)
+          expect(assigns(:withdraw)).to be_persisted
         end
 
         it "assigns a newly created withdraw as @withdraw" do
-          post :create, {:withdraw => valid_attributes}
+          post :create, valid_create_attributes
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(assigns(:withdraw)).to be_persisted
         end
 
         it "redirects to the created withdraw" do
-          post :create, {:withdraw => valid_attributes}
-          expect(response).to redirect_to(Withdraw.last)
+          post :create, valid_create_attributes
+          expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
         end
       end
 
       context "with invalid params" do
         it "assigns a newly created but unsaved withdraw as @withdraw" do
-          post :create, {:withdraw => invalid_attributes}
+          post :create, {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
           expect(assigns(:withdraw)).to be_a_new(Withdraw)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {:withdraw => invalid_attributes}
-          expect(response).to render_template("new")
-        end
-      end
-    end
-  end
-
-  describe "PUT #update" do
-    describe "When logged in as Administrator" do
-      login_fixture_admin
-      context "with valid params" do
-        let(:new_attributes) {
-          {item_id: FactoryGirl.create(:item).id}
-        }
-
-        it "updates the requested withdraw" do
-          withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => new_attributes}
-          withdraw.reload
-          response.should redirect_to(assigns(:withdraw))
-        end
-
-        it "assigns the requested withdraw as @withdraw" do
-          withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}
-          expect(assigns(:withdraw)).to eq(withdraw)
-        end
-
-        it "redirects to the withdraw" do
-          withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => valid_attributes}
-          expect(response).to redirect_to(withdraw)
-        end
-      end
-
-      context "with invalid params" do
-        it "assigns the withdraw as @withdraw" do
-          withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}
-          expect(assigns(:withdraw)).to eq(withdraw)
-        end
-
-        it "re-renders the 'edit' template" do
-          withdraw = Withdraw.create! valid_attributes
-          put :update, {:id => withdraw.to_param, :withdraw => invalid_attributes}
-          expect(response).to render_template("edit")
+          post :create, {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
+          expect(response).to render_template("index")
         end
       end
     end
