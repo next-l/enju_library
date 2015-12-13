@@ -1,4 +1,5 @@
 require 'geocoder'
+require 'globalize'
 require 'ipaddr'
 
 module EnjuLibrary

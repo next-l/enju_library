@@ -52,6 +52,7 @@ ja:
         admin_networks: 管理用として扱うネットワーク
         note: 注記
         login_banner: ログイン画面でのメッセージ
+        footer_banner: フッターのメッセージ
         post_to_union_catalog: 総合目録に登録する
         url: URL
         color: 色

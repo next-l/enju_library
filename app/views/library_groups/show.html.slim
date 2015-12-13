@@ -43,6 +43,11 @@
           = markdown_helper(@library_group.login_banner)
         div
           strong
+            = t('activerecord.attributes.library_group.footer_banner')
+            | :
+          = markdown_helper(@library_group.footer_banner)
+        div
+          strong
             = t('activerecord.attributes.library_group.max_number_of_results')
             | :
           = @library_group.max_number_of_results

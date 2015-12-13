@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 class LibraryGroup < ActiveRecord::Base
   #include Singleton
   include MasterModel
@@ -12,11 +11,14 @@ class LibraryGroup < ActiveRecord::Base
       greater_than_or_equal_to: 0
     }
   accepts_nested_attributes_for :colors, update_only: true
-  store :settings, coder: JSON, accessors: [
+  store :settings, accessors: [
     :max_number_of_results, :family_name_first,
-    :skip_mobile_agents, :pub_year_facet_range_interval,
-    :book_jacket_source, :book_jacket_unknown_resource, :erms_url
-  ]
+    :pub_year_facet_range_interval,
+    :book_jacket_source, :book_jacket_unknown_resource,
+    :screenshot_generator, :erms_url
+  ], coder: JSON
+
+  translates :login_banner, :footer_banner
 
   def self.site_config
     LibraryGroup.find(1)
