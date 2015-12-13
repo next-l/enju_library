@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
