@@ -52,6 +52,7 @@ en:
         admin_networks: Admin networks
         note: Note
         login_banner: Login banner
+        footer_banner: Footer banner
         post_to_union_catalog: Post to union catalog
         url: URL
         color: Color
