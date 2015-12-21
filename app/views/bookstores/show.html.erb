@@ -46,7 +46,7 @@
     <%- if policy(@bookstore).update? -%>
       <li><%= link_to t('page.edit'), edit_bookstore_path(@bookstore) -%></li>
     <%- end -%>
-    <li><%= back_to_index(flash[:page_info]) -%></li>
+    <li><%= link_to t('page.back'), :back -%></li>
     <% if defined?(EnjuPurchaseRequest) %>
       <li><%= link_to t('activerecord.models.order_list'), bookstore_order_lists_path(@bookstore) -%></li>
     <% end %>

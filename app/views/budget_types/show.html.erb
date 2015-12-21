@@ -26,6 +26,6 @@
     <%- if policy(@budget_type).update? -%>
       <li><%= link_to t('page.edit'), edit_budget_type_path(@budget_type) -%></li>
     <%- end -%>
-    <li><%= back_to_index(flash[:page_info]) -%></li>
+    <li><%= link_to t('page.back'), :back -%></li>
   </ul>
 </div>

@@ -96,6 +96,6 @@
     <%- if policy(@library_group).update? -%>
       <li><%= link_to t('page.edit'), edit_library_group_path(@library_group) -%></li>
     <%- end -%>
-    <li><%= back_to_index(flash[:page_info]) -%></li>
+    <li><%= link_to t('page.back'), :back -%></li>
   </ul>
 </div>
