@@ -2,7 +2,7 @@ en:
   activerecord:
     models:
       library: Library
-      library_group: Library Group
+      library_group: System configuration
       shelf: Shelf
       accept: Accept
       budget_type: Budget type
