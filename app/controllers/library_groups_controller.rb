@@ -61,7 +61,8 @@ class LibraryGroupsController < ApplicationController
       :allow_bookmark_external_url, # EnjuBookmark
       {
         :colors_attributes =>  [:id, :property, :code]
-      }
+      },
+      *LibraryGroup.globalize_attribute_names,
     )
   end
 end

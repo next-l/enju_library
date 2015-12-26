@@ -19,6 +19,7 @@ class LibraryGroup < ActiveRecord::Base
   ], coder: JSON
 
   translates :login_banner, :footer_banner
+  globalize_accessors
 
   def self.site_config
     LibraryGroup.find(1)
