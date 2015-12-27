@@ -1,10 +1,10 @@
 class LibraryGroupPolicy < ApplicationPolicy
   def index?
-    true
+    true if user.try(:has_role?, 'Librarian')
   end
 
   def show?
-    true
+    true if user.try(:has_role?, 'Librarian')
   end
 
   def create?
