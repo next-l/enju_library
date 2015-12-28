@@ -16,8 +16,8 @@ describe LibraryGroupsController do
     describe "When not logged in" do
       it "assigns all library_groups as @library_groups" do
         get :index
-        assigns(:library_groups).should_not be_empty
-        response.should be_success
+        assigns(:library_groups).should be_nil
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -36,7 +36,7 @@ describe LibraryGroupsController do
       it "assigns the requested library_group as @library_group" do
         get :show, :id => 1
         assigns(:library_group).should eq(LibraryGroup.find(1))
-        response.should be_success
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
