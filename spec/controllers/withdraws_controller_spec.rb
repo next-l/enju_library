@@ -99,8 +99,9 @@ RSpec.describe WithdrawsController, type: :controller do
         it "should not withdraw a checked-out item" do
           post :create, {basket_id: valid_create_attributes[:basket_id],
             withdraw: { item_identifier: '00001' }
+          }
           expect(assigns(:withdraw)).to be_a(Withdraw)
-          expect(response).to be_forbidden
+          expect(response).to be_success
         end
       end
 
