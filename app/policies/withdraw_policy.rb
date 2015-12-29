@@ -8,7 +8,9 @@ class WithdrawPolicy < ApplicationPolicy
   end
 
   def create?
-    true if user.try(:has_role?, 'Librarian')
+    return false unless user.try(:has_role?, 'Librarian')
+    return false if record.item.rent?
+    true
   end
 
   def update?
