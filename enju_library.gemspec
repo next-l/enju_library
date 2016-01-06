@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "geocoder"
   s.add_dependency "cocoon"
-  s.add_dependency "globalize", "~> 5.0.0"
+  s.add_dependency "globalize", "~> 5.0.1"
   s.add_dependency "globalize-accessors"
   #s.add_dependency "enju_biblio", "~> 0.1.1"
 
