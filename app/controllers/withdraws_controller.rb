@@ -49,6 +49,7 @@ class WithdrawsController < ApplicationController
     @basket.user = current_user
     @basket.save!
     @withdraw = Withdraw.new
+    authorize @withdraw, :new?
     @withdraws = []
 
     respond_to do |format|
