@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: withdraws
+#
+#  id           :integer          not null, primary key
+#  basket_id    :integer
+#  item_id      :integer
+#  librarian_id :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#
+
 class WithdrawsController < ApplicationController
   before_action :set_withdraw, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

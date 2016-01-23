@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: budget_types
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  display_name :text
+#  note         :text
+#  position     :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 require "spec_helper"
 
 describe BudgetTypesController do

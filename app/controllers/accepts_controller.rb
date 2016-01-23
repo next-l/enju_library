@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: accepts
+#
+#  id           :integer          not null, primary key
+#  basket_id    :integer
+#  item_id      :integer
+#  librarian_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class AcceptsController < ApplicationController
   before_action :set_accept, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

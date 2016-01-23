@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: search_engines
+#
+#  id               :integer          not null, primary key
+#  name             :string           not null
+#  display_name     :text
+#  url              :string           not null
+#  base_url         :text             not null
+#  http_method      :text             not null
+#  query_param      :text             not null
+#  additional_param :text
+#  note             :text
+#  position         :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 require 'spec_helper'
 require 'sunspot/rails/spec_helper'
 

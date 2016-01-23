@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: bookstores
+#
+#  id               :integer          not null, primary key
+#  name             :text             not null
+#  zip_code         :string
+#  address          :text
+#  note             :text
+#  telephone_number :string
+#  fax_number       :string
+#  url              :string
+#  position         :integer
+#  deleted_at       :datetime
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class BookstoresController < ApplicationController
   before_action :set_bookstore, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
