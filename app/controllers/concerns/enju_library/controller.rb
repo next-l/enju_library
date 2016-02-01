@@ -17,7 +17,7 @@ module EnjuLibrary
 
     def get_library
       if params[:library_id]
-        @library = Library.find(params[:library_id])
+        @library = Library.friendly.find(params[:library_id])
         authorize @library, :show?
       end
     end
