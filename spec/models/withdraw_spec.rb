@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Withdraw, type: :model do
+  fixtures :all
+
   it "should change circulation_status" do
     withdraw = FactoryGirl.create(:withdraw)
     withdraw.item.circulation_status.name.should eq 'Removed'
