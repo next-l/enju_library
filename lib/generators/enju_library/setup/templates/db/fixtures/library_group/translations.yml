@@ -1,0 +1,10 @@
+library_group_00001_translations_ja:
+  locale: ja
+  footer_banner: "[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), オープンソース統合図書館システム | [このシステムについて](/page/about) | [不具合を報告する](https://github.com/next-l/enju_leaf/issues) | [マニュアル](http://next-l.github.io/manual/1.2/)<br/>\r\n\
+    Developed by [Kosuke Tanabe](https://github.com/nabeta) and [Project Next-L](http://next-l.jp)."
+  library_group_id: 1
+library_group_00001_translations_en:
+  locale: en
+  footer_banner: "[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), an open source integrated library system | [About this system](/page/about) | [Report bugs](https://github.com/next-l/enju_leaf/issues) | [Manual](http://next-l.github.io/manual/1.2/)<br/>\r\n\
+    Developed by [Kosuke Tanabe](https://github.com/nabeta) and [Project Next-L](http://next-l.jp)."
+  library_group_id: 1

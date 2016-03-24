@@ -4,8 +4,12 @@ require 'tasks/color'
 desc "create initial records for enju_library"
 namespace :enju_library do
   task :setup => :environment do
-    Dir.glob(Rails.root.to_s + '/db/fixtures/enju_library/*.yml').sort.each do |file|
-      ActiveRecord::FixtureSet.create_fixtures('db/fixtures/enju_library', File.basename(file, '.*'))
+    Dir.glob(Rails.root.to_s + '/db/fixtures/enju_library/**/*.yml').each do |file|
+      dirname = File.basename(File.dirname file)
+      dirname = nil if dirname == "enju_library"
+      basename = [ dirname, File.basename(file, ".*") ].compact
+      basename = File.join(*basename)
+      ActiveRecord::FixtureSet.create_fixtures('db/fixtures/enju_library', basename)
     end
   end
 
