@@ -12,10 +12,11 @@
         - if defined?(EnjuPurchaseRequest)
           li.list-group-item
             = link_to t('activerecord.models.order_list'), bookstore_order_lists_path(@bookstore)
-  .col-md-9
+  #content_list.col-md-9
     .panel.panel-default
       .panel-heading
-        = t('page.showing', model: t('activerecord.models.bookstore'))
+        h1.panel-title
+          = t('page.showing', model: t('activerecord.models.bookstore'))
       .panel-body
         p#notice
           = notice

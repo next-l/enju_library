@@ -1,5 +1,6 @@
 class Bookstore < ActiveRecord::Base
   has_many :items
+  belongs_to :bookstore_type
 
   acts_as_list
   validates_presence_of :name
