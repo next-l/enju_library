@@ -7,7 +7,7 @@
       ul.list-group
         - if defined?(EnjuCirculation)
           li.list-group-item
-            = link_to t('page.new'), model: t('activerecord.models.checkin')), new_checkin_path
+            = link_to t('page.new', model: t('activerecord.models.checkin')), new_checkin_path
         li.list-group-item
           = link_to t('page.search_resource', model: t('activerecord.models.profile')), profiles_path
   .col-md-9
