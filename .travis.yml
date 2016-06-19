@@ -23,10 +23,10 @@ matrix:
   - rvm: 2.0.0
     gemfile: gemfiles/rails_3.2.gemfile
   - rvm: 2.0.0
-    gemfile: gemfiles/rails_4.2.gemfile
-  - rvm: 2.1.8
+    gemfile: gemfiles/rails_4.1.gemfile
+  - rvm: 2.1.9
     gemfile: gemfiles/rails_3.2.gemfile
-  - rvm: 2.2.4
+  - rvm: 2.2.5
     gemfile: gemfiles/rails_3.2.gemfile
 notifications:
   slack:
