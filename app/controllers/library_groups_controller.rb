@@ -79,6 +79,7 @@ class LibraryGroupsController < ApplicationController
       :login_banner, :note, :country_id, :admin_networks, :url,
       :max_number_of_results, :footer_banner,
       :book_jacket_source, :screenshot_generator, :erms_url,
+      :html_snippet,
       :allow_bookmark_external_url, # EnjuBookmark
       {
         :colors_attributes =>  [:id, :property, :code]

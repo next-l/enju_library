@@ -59,6 +59,7 @@ en:
         max_number_of_results: Max number of results
         skip_mobile_agents: Do not use mobile UI
         book_jacket_source: Book jacket source
+        html_snippet: HTML snippet
       bookstore:
         name: Name
         zip_code: Zip code
