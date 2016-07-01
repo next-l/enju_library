@@ -16,6 +16,7 @@ gem "enju_circulation", github: "next-l/enju_circulation", branch: "master"
 gem "enju_message", github: "next-l/enju_message", branch: "master"
 gem "enju_inter_library_loan", github: "next-l/enju_inter_library_loan", branch: "master"
 gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer", branch: "master"
+gem "globalize", github: "globalize/globalize"
 gem "codeclimate-test-reporter", group: :test, require: false
 gem "jquery-rails"
 
