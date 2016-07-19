@@ -32,7 +32,6 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  after_action :solr_commit, only: [:create, :update, :destroy]
 
   # GET /libraries
   # GET /libraries.json

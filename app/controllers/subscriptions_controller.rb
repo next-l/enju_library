@@ -17,7 +17,6 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
   before_action :get_work
-  after_action :solr_commit, only: [:create, :update, :destroy]
 
   # GET /subscriptions
   # GET /subscriptions.json
