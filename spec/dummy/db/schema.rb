@@ -176,6 +176,54 @@ ActiveRecord::Schema.define(version: 20160703190209) do
 
   add_index "baskets", ["user_id"], name: "index_baskets_on_user_id"
 
+  create_table "bookmark_stat_has_manifestations", force: :cascade do |t|
+    t.integer  "bookmark_stat_id", null: false
+    t.integer  "manifestation_id", null: false
+    t.integer  "bookmarks_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bookmark_stat_has_manifestations", ["bookmark_stat_id"], name: "index_bookmark_stat_has_manifestations_on_bookmark_stat_id"
+  add_index "bookmark_stat_has_manifestations", ["manifestation_id"], name: "index_bookmark_stat_has_manifestations_on_manifestation_id"
+
+  create_table "bookmark_stat_transitions", force: :cascade do |t|
+    t.string   "to_state"
+    t.text     "metadata",         default: "{}"
+    t.integer  "sort_key"
+    t.integer  "bookmark_stat_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bookmark_stat_transitions", ["bookmark_stat_id"], name: "index_bookmark_stat_transitions_on_bookmark_stat_id"
+  add_index "bookmark_stat_transitions", ["sort_key", "bookmark_stat_id"], name: "index_bookmark_stat_transitions_on_sort_key_and_stat_id", unique: true
+
+  create_table "bookmark_stats", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer  "user_id",          null: false
+    t.integer  "manifestation_id"
+    t.text     "title"
+    t.string   "url"
+    t.text     "note"
+    t.boolean  "shared"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "bookmarks", ["manifestation_id"], name: "index_bookmarks_on_manifestation_id"
+  add_index "bookmarks", ["url"], name: "index_bookmarks_on_url"
+  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
+
   create_table "bookstores", force: :cascade do |t|
     t.text     "name",             null: false
     t.string   "zip_code"
@@ -698,9 +746,9 @@ ActiveRecord::Schema.define(version: 20160703190209) do
   add_index "library_group_translations", ["locale"], name: "index_library_group_translations_on_locale"
 
   create_table "library_groups", force: :cascade do |t|
-    t.string   "name",                                              null: false
+    t.string   "name",                                                           null: false
     t.text     "display_name"
-    t.string   "short_name",                                        null: false
+    t.string   "short_name",                                                     null: false
     t.text     "my_networks"
     t.text     "login_banner"
     t.text     "note"
@@ -709,9 +757,10 @@ ActiveRecord::Schema.define(version: 20160703190209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "admin_networks"
-    t.string   "url",            default: "http://localhost:3000/"
+    t.string   "url",                         default: "http://localhost:3000/"
     t.text     "settings"
     t.text     "html_snippet"
+    t.boolean  "allow_bookmark_external_url", default: false,                    null: false
   end
 
   add_index "library_groups", ["short_name"], name: "index_library_groups_on_short_name"
@@ -1019,8 +1068,10 @@ ActiveRecord::Schema.define(version: 20160703190209) do
     t.string   "checkout_icalendar_token"
     t.boolean  "save_checkout_history",    default: false, null: false
     t.datetime "expired_at"
+    t.boolean  "save_search_history"
     t.text     "full_name_transcription"
     t.datetime "date_of_birth"
+    t.boolean  "share_bookmarks"
   end
 
   add_index "profiles", ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
@@ -1222,6 +1273,32 @@ ActiveRecord::Schema.define(version: 20160703190209) do
     t.datetime "updated_at"
   end
 
+  create_table "search_histories", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "operation",                      default: "searchRetrieve"
+    t.float    "sru_version",                    default: 1.2
+    t.string   "query"
+    t.integer  "start_record"
+    t.integer  "maximum_records"
+    t.string   "record_packing"
+    t.string   "record_schema"
+    t.integer  "result_set_ttl"
+    t.string   "stylesheet"
+    t.string   "extra_request_data"
+    t.integer  "number_of_records",              default: 0
+    t.string   "result_set_id"
+    t.integer  "result_set_idle_time"
+    t.text     "records"
+    t.integer  "next_record_position"
+    t.text     "diagnostics"
+    t.text     "extra_response_data"
+    t.text     "echoed_search_retrieve_request"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "search_histories", ["user_id"], name: "index_search_histories_on_user_id"
+
   create_table "series_statement_merge_lists", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -1303,6 +1380,26 @@ ActiveRecord::Schema.define(version: 20160703190209) do
 
   add_index "subscriptions", ["order_list_id"], name: "index_subscriptions_on_order_list_id"
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+
+  create_table "tags", force: :cascade do |t|
+    t.string   "name"
+    t.string   "name_transcription"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "use_restrictions", force: :cascade do |t|
     t.string   "name",         null: false
@@ -1489,6 +1586,7 @@ ActiveRecord::Schema.define(version: 20160703190209) do
     t.datetime "updated_at"
     t.boolean  "save_checkout_history",    default: false, null: false
     t.string   "checkout_icalendar_token"
+    t.boolean  "save_search_history",      default: false, null: false
     t.string   "username"
     t.datetime "deleted_at"
     t.datetime "expired_at"

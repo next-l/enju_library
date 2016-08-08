@@ -1,0 +1,8 @@
+username	full_name	full_name_transcription	email	user_number	role	user_group	library	locale	locked	required_role	created_at	updated_at	expired_at	keyword_list	note	checkout_icalendar_token	save_checkout_history	save_search_history
+enjuadmin			tanabe@kamata.lib.teu.ac.jp	00001	Administrator	user	kamata	ja	false	Administrator	2007-11-19 07:58:32 UTC	2008-05-31 04:16:30 UTC					false	
+librarian1			librarian1@kamata.lib.teu.ac.jp	00002	Librarian	not_specified	web	ja	false	Guest	2007-11-19 07:58:33 UTC	2008-05-31 03:41:16 UTC					false	
+user1			user1@kamata.lib.teu.ac.jp	00003	User	not_specified	kamata	ja	false	Librarian	2007-11-19 07:58:34 UTC	2008-05-31 04:02:25 UTC					false	
+librarian2			librarian2@library.example.jp	00004	Librarian	not_specified	kamata	ja	false	Guest	2008-01-18 03:24:04 UTC	2008-05-31 03:42:23 UTC					false	
+user2			user2@library.example.jp		User	not_specified	web	ja	false	User	2008-01-18 04:29:06 UTC	2008-05-31 03:42:44 UTC					false	
+user3			user3@kamata.lib.teu.ac.jp	00006	User	not_specified	kamata	ja	false	Librarian	2007-11-19 07:58:34 UTC	2008-05-31 04:02:25 UTC					false	
+user4			user4@kamata.lib.teu.ac.jp	00007	User	not_specified	kamata	ja	true	Librarian	2007-11-19 07:58:34 UTC	2008-05-31 04:02:25 UTC					false	
