@@ -73,7 +73,7 @@ describe UserImportFile do
       @file.executed_at.should be_truthy
 
       @file.reload
-      @file.error_message.should eq "次の列は無視されました。 invalid\nline 8: パスワードは6文字以上で入力してください。\nline 9: 利用者番号は不正な値です。\nline 10: 利用者番号はすでに存在します。"
+      @file.error_message.should eq "次の列は無視されました。 save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください。\nline 9: 利用者番号は不正な値です。\nline 10: 利用者番号はすでに存在します。"
       @file.current_state.should eq 'failed'
     end
 
