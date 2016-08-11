@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/log/*"] - Dir["spec/dummy/solr/{data,pids,default,development,test}/*"] - Dir["spec/dummy/tmp/*"]
 
+  s.add_dependency "enju_seed", "~> 0.2.0.beta.1"
   s.add_dependency "geocoder"
   s.add_dependency "cocoon"
   s.add_dependency "globalize", "~> 5.0.1"
@@ -28,12 +29,11 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 3.4"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "paperclip", "~> 4.3"
-  s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.1"
   s.add_development_dependency "enju_ndl", "~> 0.2.0.beta.1"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0.beta.1"
   s.add_development_dependency "enju_event", "~> 0.2.0.beta.1"
   s.add_development_dependency "enju_circulation", "~> 0.2.0.beta.1"
-  #s.add_development_dependency "enju_inter_library_loan", "~> 0.1.0"
+  s.add_development_dependency "enju_inter_library_loan", "~> 0.2.0.beta.1"
   s.add_development_dependency "sunspot_solr", "2.2.0"
   s.add_development_dependency "annotate"
   s.add_development_dependency "simplecov"
