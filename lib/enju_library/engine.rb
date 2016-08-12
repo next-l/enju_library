@@ -1,4 +1,6 @@
 require 'enju_seed'
+require 'paperclip'
+require 'statesman'
 require 'geocoder'
 require 'globalize'
 require 'globalize-accessors'
