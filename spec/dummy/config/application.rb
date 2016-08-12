@@ -5,6 +5,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 require 'enju_circulation'
 require 'enju_event'
+require 'enju_biblio'
 require 'enju_library'
 
 module Dummy
