@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 describe UserExportFilesController do
   fixtures :all
@@ -18,7 +18,7 @@ describe UserExportFilesController do
 
       it "assigns empty as @user_export_files" do
         get :index
-        assigns(:user_export_files).should be_nil
+        assigns(:user_export_files).should be_empty
       end
     end
 
@@ -27,7 +27,7 @@ describe UserExportFilesController do
 
       it "assigns empty as @user_export_files" do
         get :index
-        assigns(:user_export_files).should be_nil
+        assigns(:user_export_files).should be_empty
         expect(response).to be_forbidden
       end
     end
@@ -35,7 +35,7 @@ describe UserExportFilesController do
     describe "When not logged in" do
       it "assigns empty as @user_export_files" do
         get :index
-        assigns(:user_export_files).should be_nil
+        assigns(:user_export_files).should be_empty
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -97,7 +97,7 @@ describe UserExportFilesController do
 
       it "should not assign the requested user_export_file as @user_export_file" do
         get :new
-        assigns(:user_export_file).should be_nil
+        assigns(:user_export_file).should_not be_valid
         expect(response).to be_forbidden
       end
     end
@@ -107,7 +107,7 @@ describe UserExportFilesController do
 
       it "should not assign the requested user_export_file as @user_export_file" do
         get :new
-        assigns(:user_export_file).should be_nil
+        assigns(:user_export_file).should_not be_valid
         expect(response).to be_forbidden
       end
     end
@@ -115,7 +115,7 @@ describe UserExportFilesController do
     describe "When not logged in" do
       it "should not assign the requested user_export_file as @user_export_file" do
         get :new
-        assigns(:user_export_file).should be_nil
+        assigns(:user_export_file).should_not be_valid
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -138,7 +138,8 @@ describe UserExportFilesController do
 
       it "should create agent_export_file" do
         post :create, user_export_file: {mode: 'export'}
-        assigns(:user_export_file).should be_nil
+        assigns(:user_export_file).should_not be_valid
+        assigns(:user_export_file).user.should be_nil
         expect(response).to be_forbidden
       end
     end
@@ -148,7 +149,7 @@ describe UserExportFilesController do
 
       it "should be forbidden" do
         post :create, user_export_file: {mode: 'export'}
-        assigns(:user_export_file).should be_nil
+        assigns(:user_export_file).user.should be_nil
         expect(response).to be_forbidden
       end
     end
@@ -156,7 +157,7 @@ describe UserExportFilesController do
     describe "When not logged in" do
       it "should be redirected to new session url" do
         post :create, user_export_file: {mode: 'export'}
-        assigns(:user_export_file).should be_nil
+        assigns(:user_export_file).user.should be_nil
         expect(response).to redirect_to new_user_session_url
       end
     end
