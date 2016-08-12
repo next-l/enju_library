@@ -19,16 +19,13 @@ describe UserImportResultsController do
           @file.default_user_group = UserGroup.find(2)
           @file.default_library = Library.find(3)
           @file.save
-          result = @file.import_start
+          @file.import_start
         end
         render_views
         it "should assign all user_import_results for the user_import_file with a page parameter" do
           get :index, user_import_file_id: @file.id
           results = assigns(:user_import_results)
           results.should_not be_empty
-          get :index, user_import_file_id: @file.id, page: 2
-          results2 = assigns(:user_import_results)
-          results2.first.should_not eq results.first
           response.body.should match /<td>11<\/td>/
         end
       end
@@ -48,7 +45,7 @@ describe UserImportResultsController do
 
       it "assigns empty as @user_import_results" do
         get :index
-        assigns(:user_import_results).should be_empty
+        assigns(:user_import_results).should be_nil
         response.should be_forbidden
       end
     end
@@ -56,7 +53,7 @@ describe UserImportResultsController do
     describe "When not logged in" do
       it "assigns empty as @user_import_results" do
         get :index
-        assigns(:user_import_results).should be_empty
+        assigns(:user_import_results).should be_nil
         response.should redirect_to(new_user_session_url)
       end
     end

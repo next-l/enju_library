@@ -757,10 +757,10 @@ ActiveRecord::Schema.define(version: 20160703190209) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "admin_networks"
+    t.boolean  "allow_bookmark_external_url", default: false,                    null: false
     t.string   "url",                         default: "http://localhost:3000/"
     t.text     "settings"
     t.text     "html_snippet"
-    t.boolean  "allow_bookmark_external_url", default: false,                    null: false
   end
 
   add_index "library_groups", ["short_name"], name: "index_library_groups_on_short_name"
@@ -1069,9 +1069,9 @@ ActiveRecord::Schema.define(version: 20160703190209) do
     t.boolean  "save_checkout_history",    default: false, null: false
     t.datetime "expired_at"
     t.boolean  "save_search_history"
+    t.boolean  "share_bookmarks"
     t.text     "full_name_transcription"
     t.datetime "date_of_birth"
-    t.boolean  "share_bookmarks"
   end
 
   add_index "profiles", ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
