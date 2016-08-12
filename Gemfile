@@ -9,6 +9,7 @@ gemspec
 # your gemspec. These might include edge Rails or gems from your path or
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
+gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '1.2'
 gem 'enju_seed', github: 'next-l/enju_seed', branch: '1.2'
 gem 'enju_biblio', github: 'next-l/enju_biblio', branch: '1.2'
 gem 'enju_inter_library_loan', github: 'next-l/enju_inter_library_loan', branch: '1.2'
