@@ -1,4 +1,4 @@
-#require 'enju_biblio'
+require 'enju_seed'
 require 'geocoder'
 require 'globalize'
 require 'globalize-accessors'
