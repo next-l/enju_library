@@ -38,10 +38,12 @@
   <%= @library_group.max_number_of_results -%>
 </p>
 
-<p>
-  <strong><%= t('activerecord.attributes.library_group.book_jacket_source') -%>:</strong>
-  <%= @library_group.book_jacket_source -%>
-</p>
+<% if defined?(EnjuManifestationViewer) %>
+  <p>
+    <strong><%= t('activerecord.attributes.library_group.book_jacket_source') -%>:</strong>
+    <%= @library_group.book_jacket_source -%>
+  </p>
+<% end %>
 
 <div>
   <strong><%= t('activerecord.attributes.library_group.color') -%>:</strong>

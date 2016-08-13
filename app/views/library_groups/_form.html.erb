@@ -40,10 +40,12 @@
     <%= f.number_field :max_number_of_results -%>
   </div>
 
-  <div class="field">
-    <%= f.label :book_jacket_source -%>
-    <%= f.select :book_jacket_source, [['Google', 'google']] -%><br />
-  </div>
+  <% if defined?(EnjuManifestationViewer) %>
+    <div class="field">
+      <%= f.label :book_jacket_source -%>
+      <%= f.select :book_jacket_source, [['Google', 'google']] -%><br />
+    </div>
+  <% end %>
 
   <div class="field">
     <%= f.label :color -%><br />
