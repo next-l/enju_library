@@ -15,6 +15,7 @@ one:
   settings: 
     "{\"max_number_of_results\":200,\"family_name_first\":true}"
   user_id: 1
+  pub_year_facet_range_interval: 10
 
 # == Schema Information
 #
