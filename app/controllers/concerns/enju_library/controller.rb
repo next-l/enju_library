@@ -219,7 +219,7 @@ module EnjuLibrary
     end
 
     def store_current_location
-      store_location_for(:user, request.url)
+      store_location_for(:user, request.url) unless request.xhr?
     end
 
     def get_library_group
