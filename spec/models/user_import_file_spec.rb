@@ -215,6 +215,4 @@ end
 #  user_encoding            :string
 #  default_library_id       :integer
 #  default_user_group_id    :integer
-#  user_import_id           :string
-#  user_import_size         :integer
 #

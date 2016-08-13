@@ -19,10 +19,10 @@ class LibraryGroup < ActiveRecord::Base
   ], coder: JSON
 
   translates :login_banner, :footer_banner
-  globalize_accessors
+  globalize_accessors if defined?(Globalize::Accessors)
 
   def self.site_config
-    LibraryGroup.find(1)
+    LibraryGroup.order(:created_at).first
   end
 
   def self.system_name(locale = I18n.locale)
@@ -34,8 +34,7 @@ class LibraryGroup < ActiveRecord::Base
   end
 
   def real_libraries
-    # 物理的な図書館 = IDが1以外
-    libraries.where('id != 1').all
+    libraries.where.not(name: 'web')
   end
 
   def network_access_allowed?(ip_address, options = {})
@@ -57,28 +56,27 @@ class LibraryGroup < ActiveRecord::Base
     end
     return false
   end
-
-  def user
-    User.find(1)
-  end
 end
 
 # == Schema Information
 #
 # Table name: library_groups
 #
-#  id             :integer          not null, primary key
-#  name           :string           not null
-#  display_name   :text
-#  short_name     :string           not null
-#  my_networks    :text
-#  login_banner   :text
-#  note           :text
-#  country_id     :integer
-#  position       :integer
-#  created_at     :datetime
-#  updated_at     :datetime
-#  admin_networks :text
-#  url            :string           default("http://localhost:3000/")
-#  settings       :text
+#  id                          :integer          not null, primary key
+#  name                        :string           not null
+#  display_name                :text
+#  short_name                  :string           not null
+#  my_networks                 :text
+#  login_banner                :text
+#  note                        :text
+#  country_id                  :integer
+#  position                    :integer
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  admin_networks              :text
+#  allow_bookmark_external_url :boolean          default(FALSE), not null
+#  url                         :string           default("http://localhost:3000/")
+#  settings                    :text
+#  html_snippet                :text
+#  email                       :string
 #
