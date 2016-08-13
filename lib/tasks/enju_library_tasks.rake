@@ -27,11 +27,11 @@ Next-L Enju, an open-source integrated library system. You can edit this message
 EOS
     footer_ja = <<"EOS"
 [Next-L Enju Leaf #{EnjuLeaf::VERSION}](https://github.com/next-l/enju_leaf), オープンソース統合図書館システム  
-Developed by Kosuke Tanabe and [Project Next-L](http://www.next-l.jp) \| [不具合を報告する](https://github.com/next-l/enju_leaf/issues) \| [マニュアル](https://next-l.github.com/manual/)
+Developed by Kosuke Tanabe and [Project Next-L](http://www.next-l.jp) \| [不具合を報告する](https://github.com/next-l/enju_leaf/issues) \| [マニュアル](https://next-l.github.com/manual/1.2/)
 EOS
     footer_en = <<"EOS"
 [Next-L Enju Leaf #{EnjuLeaf::VERSION}](https://github.com/next-l/enju_leaf), an open source integrated library system  
-Developed by Kosuke Tanabe and [Project Next-L](http://www.next-l.jp) \| [Report bugs](https://github.com/next-l/enju_leaf/issues) \| [Manual](https://next-l.github.com/manual/)
+Developed by Kosuke Tanabe and [Project Next-L](http://www.next-l.jp) \| [Report bugs](https://github.com/next-l/enju_leaf/issues) \| [Manual](https://next-l.github.com/manual/1.2/)
 EOS
     library_group.login_banner_ja = login_ja if library_group.login_banner_ja.blank?
     library_group.login_banner_en = login_en if library_group.login_banner_en.blank?
