@@ -17,6 +17,9 @@ namespace :enju_library do
   task :upgrade => :environment do
     Rake::Task['statesman:backfill_most_recent'].invoke('UserExportFile')
     Rake::Task['statesman:backfill_most_recent'].invoke('UserImportFile')
+    library_group = LibraryGroup.site_config
+    library_group.email = User.find(1).try(:email)
+    library_group.save
     puts 'enju_library: The upgrade completed successfully.'
   end
 end
