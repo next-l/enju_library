@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, #, :validatable
     :lockable, :lock_strategy => :none, :unlock_strategy => :none
 
-  include EnjuLeaf::EnjuUser
+  include EnjuSeed::EnjuUser
   include EnjuCirculation::EnjuUser
 end
 
