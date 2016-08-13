@@ -5,17 +5,17 @@ class LibraryGroup < ActiveRecord::Base
   has_many :libraries
   has_many :colors
   belongs_to :country
+  belongs_to :user
 
   validates :url, presence: true, url: true
   validates :max_number_of_results, numericality: {
-      greater_than_or_equal_to: 0
+      greater_than_or_equal_to: 1
     }
   accepts_nested_attributes_for :colors, update_only: true
+  accepts_nested_attributes_for :user, update_only: true
   store :settings, accessors: [
-    :max_number_of_results, :family_name_first,
-    :pub_year_facet_range_interval,
-    :book_jacket_source, :book_jacket_unknown_resource,
-    :screenshot_generator, :erms_url
+    :book_jacket_unknown_resource,
+    :erms_url
   ], coder: JSON
 
   translates :login_banner, :footer_banner
@@ -78,5 +78,5 @@ end
 #  url                         :string           default("http://localhost:3000/")
 #  settings                    :text
 #  html_snippet                :text
-#  email                       :string
+#  user_id                     :integer
 #

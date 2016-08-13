@@ -35,5 +35,5 @@ end
 #  url                         :string           default("http://localhost:3000/")
 #  settings                    :text
 #  html_snippet                :text
-#  email                       :string
+#  user_id                     :integer
 #

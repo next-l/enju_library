@@ -62,6 +62,9 @@ class LibraryGroupsController < ApplicationController
       {
         :colors_attributes =>  [:id, :property, :code]
       },
+      {
+        :user_attributes => [:email]
+      },
       *LibraryGroup.globalize_attribute_names,
     )
   end
