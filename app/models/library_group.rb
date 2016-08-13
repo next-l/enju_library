@@ -12,10 +12,9 @@ class LibraryGroup < ActiveRecord::Base
     }
   accepts_nested_attributes_for :colors, update_only: true
   store :settings, accessors: [
-    :max_number_of_results, :family_name_first,
     :pub_year_facet_range_interval,
-    :book_jacket_source, :book_jacket_unknown_resource,
-    :screenshot_generator, :erms_url
+    :book_jacket_unknown_resource,
+    :erms_url
   ], coder: JSON
 
   translates :login_banner, :footer_banner
