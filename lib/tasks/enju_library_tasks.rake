@@ -37,6 +37,8 @@ EOS
     library_group.login_banner_en = login_en if library_group.login_banner_en.blank?
     library_group.footer_banner_ja = footer_ja if library_group.footer_banner_ja.blank?
     library_group.footer_banner_en = footer_en if library_group.footer_banner_en.blank?
+    library_group.book_jacket_source = 'google'
+    library_group.screenshot_generator = 'mozshot'
     library_group.save
     puts 'enju_library: The upgrade completed successfully.'
   end
