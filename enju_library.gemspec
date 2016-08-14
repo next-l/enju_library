@@ -22,8 +22,8 @@ Gem::Specification.new do |s|
   s.add_dependency "statesman", "~> 1.3"
   s.add_dependency "paperclip"
 
-  #s.add_development_dependency "globalize", "~> 5.0.1"
-  #s.add_development_dependency "globalize-accessors"
+  s.add_development_dependency "globalize", "~> 5.0.1"
+  s.add_development_dependency "globalize-accessors"
   s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.2"
   s.add_development_dependency "enju_biblio", "~> 0.2.0.beta.3"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0.beta.2"
