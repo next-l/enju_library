@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "enju_seed", "~> 0.2.0.beta.6"
   s.add_dependency "paper_trail", "~> 5.2"
   s.add_dependency "geocoder"
-  s.add_dependency "statesman", "~> 1.3"
+  s.add_dependency "statesman"
   s.add_dependency "paperclip"
 
   s.add_development_dependency "globalize", "~> 5.0.1"

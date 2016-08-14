@@ -131,7 +131,7 @@ describe UserImportFile do
       @file = UserImportFile.create user_import: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"), user: users(:admin)
       result = @file.modify
       result.should have_key(:user_updated)
-      user001 = User.find('user001')
+      user001 = User.friendly.find('user001')
       user001.email.should eq 'user001@example.jp'
       user001.profile.user_number.should eq '001'
       user001.profile.full_name.should eq 'User 001'

@@ -1,15 +1,16 @@
 # -*- encoding: utf-8 -*-
-require 'spec_helper'
+require 'rails_helper'
   
 describe UserExportFile do
   fixtures :all
   
-  it "should export in background" do
+  it "should export users" do
     message_count = Message.count
     file = UserExportFile.new
     file.user = users(:admin)
     file.save
-    UserExportFileJob.perform_later(file).should be_truthy
+    file.export!
+    #UserExportFileJob.perform_later(file).should be_truthy
     Message.count.should eq message_count + 1
     Message.order(:id).last.subject.should eq 'エクスポートが完了しました'
   end
