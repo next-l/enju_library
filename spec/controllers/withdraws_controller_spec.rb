@@ -57,7 +57,7 @@ RSpec.describe WithdrawsController, type: :controller do
       login_fixture_admin
       it "assigns the requested withdraw as @withdraw" do
         withdraw = Withdraw.create! valid_attributes
-        get :show, {:id => withdraw.to_param}
+        get :show, params: withdraw.to_param
         expect(assigns(:withdraw)).to eq(withdraw)
         response.should be_success
       end
@@ -97,7 +97,7 @@ RSpec.describe WithdrawsController, type: :controller do
         end
 
         it "should not withdraw a checked-out item" do
-          post :create, {basket_id: valid_create_attributes[:basket_id],
+          post :create, params: {basket_id: valid_create_attributes[:basket_id],
             withdraw: { item_identifier: '00001' }
           }
           expect(assigns(:withdraw)).to be_a(Withdraw)
@@ -125,13 +125,13 @@ RSpec.describe WithdrawsController, type: :controller do
       it "destroys the requested withdraw" do
         withdraw = Withdraw.create! valid_attributes
         expect {
-          delete :destroy, {:id => withdraw.to_param}
+          delete :destroy, params: withdraw.to_param
         }.to change(Withdraw, :count).by(-1)
       end
 
       it "redirects to the withdraws list" do
         withdraw = Withdraw.create! valid_attributes
-        delete :destroy, {:id => withdraw.to_param}
+        delete :destroy, params: withdraw.to_param
         expect(response).to redirect_to(withdraws_url)
       end
     end

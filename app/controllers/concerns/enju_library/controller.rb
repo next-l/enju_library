@@ -235,13 +235,13 @@ module EnjuLibrary
 
     def get_library
       if params[:library_id]
-        @library = Library.find(params[:library_id])
+        @library = Library.friendly.find(params[:library_id])
         authorize @library, :show?
       end
     end
 
     def get_libraries
-      @libraries = Library.all_cache
+      @libraries = Library.order(:position)
     end
 
     def get_bookstore

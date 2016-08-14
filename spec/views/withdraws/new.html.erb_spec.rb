@@ -18,7 +18,7 @@ RSpec.describe "withdraws/new", type: :view do
         :created_at => Time.zone.now
       )
     ]).page(1))
-    view.stub(:current_user).and_return(User.where(username: 'enjuadmin').first)
+    view.stub(:current_user).and_return(User.friendly.find('enjuadmin').first)
   end
 
   it "renders new withdraw form" do
