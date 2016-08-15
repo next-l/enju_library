@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160814165332) do
 
   add_index "accepts", ["basket_id"], name: "index_accepts_on_basket_id"
   add_index "accepts", ["item_id"], name: "index_accepts_on_item_id"
+  add_index "accepts", ["librarian_id"], name: "index_accepts_on_librarian_id"
 
   create_table "agent_import_file_transitions", force: :cascade do |t|
     t.string   "to_state"
