@@ -1469,6 +1469,8 @@ ActiveRecord::Schema.define(version: 20160814165332) do
     t.datetime "updated_at"
   end
 
+  add_index "user_export_files", ["user_id"], name: "index_user_export_files_on_user_id"
+
   create_table "user_group_has_checkout_types", force: :cascade do |t|
     t.integer  "user_group_id",                                   null: false
     t.integer  "checkout_type_id",                                null: false
@@ -1545,6 +1547,8 @@ ActiveRecord::Schema.define(version: 20160814165332) do
     t.integer  "default_user_group_id"
   end
 
+  add_index "user_import_files", ["user_id"], name: "index_user_import_files_on_user_id"
+
   create_table "user_import_results", force: :cascade do |t|
     t.integer  "user_import_file_id"
     t.integer  "user_id"
@@ -1553,6 +1557,9 @@ ActiveRecord::Schema.define(version: 20160814165332) do
     t.datetime "updated_at"
     t.text     "error_message"
   end
+
+  add_index "user_import_results", ["user_id"], name: "index_user_import_results_on_user_id"
+  add_index "user_import_results", ["user_import_file_id"], name: "index_user_import_results_on_user_import_file_id"
 
   create_table "user_reserve_stat_transitions", force: :cascade do |t|
     t.string   "to_state"
@@ -1632,5 +1639,6 @@ ActiveRecord::Schema.define(version: 20160814165332) do
 
   add_index "withdraws", ["basket_id"], name: "index_withdraws_on_basket_id"
   add_index "withdraws", ["item_id"], name: "index_withdraws_on_item_id"
+  add_index "withdraws", ["librarian_id"], name: "index_withdraws_on_librarian_id"
 
 end
