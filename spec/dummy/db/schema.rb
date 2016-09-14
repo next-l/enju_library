@@ -718,7 +718,7 @@ ActiveRecord::Schema.define(version: 20160814165332) do
     t.text     "note"
     t.integer  "call_number_rows",      default: 1,   null: false
     t.string   "call_number_delimiter", default: "|", null: false
-    t.integer  "library_group_id",      default: 1,   null: false
+    t.integer  "library_group_id",                    null: false
     t.integer  "users_count",           default: 0,   null: false
     t.integer  "position"
     t.integer  "country_id"
@@ -732,7 +732,7 @@ ActiveRecord::Schema.define(version: 20160814165332) do
   end
 
   add_index "libraries", ["library_group_id"], name: "index_libraries_on_library_group_id"
-  add_index "libraries", ["name"], name: "index_libraries_on_name", unique: true
+  add_index "libraries", ["name"], name: "index_libraries_on_name"
 
   create_table "library_group_translations", force: :cascade do |t|
     t.integer  "library_group_id", null: false
@@ -1354,7 +1354,7 @@ ActiveRecord::Schema.define(version: 20160814165332) do
     t.string   "name",                         null: false
     t.text     "display_name"
     t.text     "note"
-    t.integer  "library_id",   default: 1,     null: false
+    t.integer  "library_id",                   null: false
     t.integer  "items_count",  default: 0,     null: false
     t.integer  "position"
     t.datetime "created_at"
@@ -1458,6 +1458,7 @@ ActiveRecord::Schema.define(version: 20160814165332) do
 
   add_index "user_export_file_transitions", ["sort_key", "user_export_file_id"], name: "index_user_export_file_transitions_on_sort_key_and_file_id", unique: true
   add_index "user_export_file_transitions", ["user_export_file_id"], name: "index_user_export_file_transitions_on_file_id"
+  add_index "user_export_file_transitions", ["user_export_file_id"], name: "index_user_export_file_transitions_on_user_export_file_id"
 
   create_table "user_export_files", force: :cascade do |t|
     t.integer  "user_id"

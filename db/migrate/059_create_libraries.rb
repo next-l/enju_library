@@ -1,7 +1,7 @@
 class CreateLibraries < ActiveRecord::Migration
   def change
     create_table :libraries do |t|
-      t.string :name, null: false
+      t.string :name, index: true, null: false
       t.text :display_name
       t.string :short_display_name, null: false
       t.string :zip_code
@@ -14,7 +14,7 @@ class CreateLibraries < ActiveRecord::Migration
       t.text :note
       t.integer :call_number_rows, default: 1, null: false
       t.string :call_number_delimiter, default: "|", null: false
-      t.integer :library_group_id, default: 1, null: false
+      t.references :library_group, index: true, null: false
       t.integer :users_count, default: 0, null: false
       t.integer :position
       t.references :country
@@ -22,7 +22,5 @@ class CreateLibraries < ActiveRecord::Migration
       t.timestamps
       t.datetime :deleted_at
     end
-    add_index :libraries, :library_group_id
-    add_index :libraries, :name, unique: true
   end
 end

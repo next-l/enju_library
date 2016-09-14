@@ -18,8 +18,14 @@ class LibraryGroup < ActiveRecord::Base
     :erms_url
   ], coder: JSON
 
-  translates :login_banner, :footer_banner
-  globalize_accessors if defined?(Globalize::Accessors)
+  if defined?(Globalize::Accessors)
+    translates :login_banner, :footer_banner
+    globalize_accessors
+  end
+
+  if defined?(AwesomeHstoreTranslate)
+    translates :login_banner, :footer_banner, accessors: I18n.available_locales
+  end
 
   def self.site_config
     LibraryGroup.order(:created_at).first
