@@ -126,7 +126,8 @@ describe BudgetTypesController do
         position = budget_type.position
         put :update, :id => budget_type.id, :move => 'higher'
         response.should redirect_to budget_types_url
-        assigns(:budget_type).position.should eq position - 1
+        budget_type.reload
+        budget_type.position.should eq position - 1
       end
     end
 
