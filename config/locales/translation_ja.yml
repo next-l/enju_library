@@ -126,3 +126,6 @@ ja:
     already_withdrawn: "はすでに除籍されています。"
     withdraw: "除籍"
     successfully_withdrawn: "この資料は正常に除籍されました。"
+  book_jacket:
+    google: Googleブックス
+    hanmotocom: 版元ドットコム

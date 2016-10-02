@@ -126,3 +126,6 @@ en:
     already_withdrawn: " is already withdrawn."
     withdraw: "Withdraw!"
     successfully_withdrawn: "This items was successfully withdrawn."
+  book_jacket:
+    google: Google Books
+    hanmotocom: Hanmoto.com
