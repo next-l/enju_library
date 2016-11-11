@@ -5,23 +5,22 @@ class LibraryGroup < ActiveRecord::Base
   has_many :libraries
   has_many :colors
   belongs_to :country
+  belongs_to :user
 
   validates :url, presence: true, url: true
   validates :max_number_of_results, numericality: {
       greater_than_or_equal_to: 0
     }
   accepts_nested_attributes_for :colors, update_only: true
+  accepts_nested_attributes_for :user, update_only: true
   store :settings, accessors: [
-    :max_number_of_results, :family_name_first,
-    :pub_year_facet_range_interval,
-    :book_jacket_source, :book_jacket_unknown_resource,
-    :screenshot_generator, :erms_url
+    :max_number_of_results,
+    :book_jacket_unknown_resource,
+    :erms_url
   ], coder: JSON
 
-  translates :login_banner, :footer_banner
-
   def self.site_config
-    LibraryGroup.find(1)
+    LibraryGroup.order(:created_at).first
   end
 
   def self.system_name(locale = I18n.locale)
@@ -33,8 +32,7 @@ class LibraryGroup < ActiveRecord::Base
   end
 
   def real_libraries
-    # 物理的な図書館 = IDが1以外
-    libraries.where('id != 1').all
+    libraries.where.not(name: 'web')
   end
 
   def network_access_allowed?(ip_address, options = {})
@@ -56,28 +54,27 @@ class LibraryGroup < ActiveRecord::Base
     end
     return false
   end
-
-  def user
-    User.find(1)
-  end
 end
 
 # == Schema Information
 #
 # Table name: library_groups
 #
-#  id             :integer          not null, primary key
-#  name           :string           not null
-#  display_name   :text
-#  short_name     :string           not null
-#  my_networks    :text
-#  login_banner   :text
-#  note           :text
-#  country_id     :integer
-#  position       :integer
-#  created_at     :datetime
-#  updated_at     :datetime
-#  admin_networks :text
-#  url            :string           default("http://localhost:3000/")
-#  settings       :text
+#  id                          :integer          not null, primary key
+#  name                        :string           not null
+#  display_name                :text
+#  short_name                  :string           not null
+#  my_networks                 :text
+#  login_banner                :text
+#  note                        :text
+#  country_id                  :integer
+#  position                    :integer
+#  created_at                  :datetime
+#  updated_at                  :datetime
+#  admin_networks              :text
+#  allow_bookmark_external_url :boolean          default(FALSE), not null
+#  url                         :string           default("http://localhost:3000/")
+#  settings                    :text
+#  html_snippet                :text
+#  user_id                     :integer
 #

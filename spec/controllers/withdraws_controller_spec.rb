@@ -111,12 +111,12 @@ RSpec.describe WithdrawsController, type: :controller do
 
       context "with invalid params" do
         it "assigns a newly created but unsaved withdraw as @withdraw" do
-          post :create, {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
+          post :create, params: {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
           expect(assigns(:withdraw)).to be_a_new(Withdraw)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
+          post :create, params: {:basket_id => valid_create_attributes[:basket_id], :withdraw => {item_id: nil}}
           expect(response).to render_template("index")
         end
       end
@@ -129,13 +129,14 @@ RSpec.describe WithdrawsController, type: :controller do
       it "destroys the requested withdraw" do
         withdraw = Withdraw.create! valid_attributes
         expect {
-          delete :destroy, {:id => withdraw.to_param}
+          delete :destroy, params: {:id => withdraw.to_param}
         }.to change(Withdraw, :count).by(-1)
       end
 
       it "redirects to the withdraws list" do
         withdraw = Withdraw.create! valid_attributes
-        delete :destroy, {:id => withdraw.to_param}
+        delete :destroy, params: {:id => withdraw.to_param}
+
         expect(response).to redirect_to(withdraws_url)
       end
     end

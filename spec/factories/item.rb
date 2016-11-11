@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 FactoryGirl.define do
   factory :item do |f|
     f.sequence(:item_identifier){|n| "item_#{n}"}
