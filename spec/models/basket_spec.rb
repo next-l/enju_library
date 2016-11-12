@@ -4,7 +4,7 @@ require 'spec_helper'
 describe Basket do
   fixtures :all
 
-  it "should not create basket when user is not active" do
+  it 'should not create basket when user is not active' do
     basket = Basket.new
     basket.user = users(:user4)
     basket.should_not be_valid
