@@ -68,7 +68,7 @@ describe SubscribesController do
 
       it "assigns the requested subscribe as @subscribe" do
         subscribe = FactoryGirl.create(:subscribe)
-        get :show, :id => subscribe.id
+        get :show, params: {:id => subscribe.id}
         assigns(:subscribe).should eq(subscribe)
       end
     end
@@ -78,7 +78,7 @@ describe SubscribesController do
 
       it "assigns the requested subscribe as @subscribe" do
         subscribe = FactoryGirl.create(:subscribe)
-        get :show, :id => subscribe.id
+        get :show, params: {:id => subscribe.id}
         assigns(:subscribe).should eq(subscribe)
       end
     end
@@ -88,7 +88,7 @@ describe SubscribesController do
 
       it "assigns the requested subscribe as @subscribe" do
         subscribe = FactoryGirl.create(:subscribe)
-        get :show, :id => subscribe.id
+        get :show, params: {:id => subscribe.id}
         assigns(:subscribe).should eq(subscribe)
       end
     end
@@ -96,7 +96,7 @@ describe SubscribesController do
     describe "When not logged in" do
       it "assigns the requested subscribe as @subscribe" do
         subscribe = FactoryGirl.create(:subscribe)
-        get :show, :id => subscribe.id
+        get :show, params: {:id => subscribe.id}
         assigns(:subscribe).should eq(subscribe)
       end
     end
@@ -311,11 +311,11 @@ describe SubscribesController do
 
       describe "with valid params" do
         it "updates the requested subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
         end
 
         it "assigns the requested subscribe as @subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
           assigns(:subscribe).should eq(@subscribe)
           response.should redirect_to(@subscribe)
         end
@@ -323,7 +323,7 @@ describe SubscribesController do
 
       describe "with invalid params" do
         it "assigns the requested subscribe as @subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @invalid_attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @invalid_attrs}
           response.should render_template("edit")
         end
       end
@@ -334,11 +334,11 @@ describe SubscribesController do
 
       describe "with valid params" do
         it "updates the requested subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
         end
 
         it "assigns the requested subscribe as @subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
           assigns(:subscribe).should eq(@subscribe)
           response.should redirect_to(@subscribe)
         end
@@ -346,7 +346,7 @@ describe SubscribesController do
 
       describe "with invalid params" do
         it "assigns the requested subscribe as @subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @invalid_attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @invalid_attrs}
           response.should render_template("edit")
         end
       end
@@ -357,11 +357,11 @@ describe SubscribesController do
 
       describe "with valid params" do
         it "updates the requested subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
         end
 
         it "assigns the requested subscribe as @subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
           assigns(:subscribe).should eq(@subscribe)
           response.should be_forbidden
         end
@@ -369,7 +369,7 @@ describe SubscribesController do
 
       describe "with invalid params" do
         it "assigns the requested subscribe as @subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @invalid_attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -378,18 +378,18 @@ describe SubscribesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "updates the requested subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
         end
 
         it "should be forbidden" do
-          put :update, :id => @subscribe.id, :subscribe => @attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested subscribe as @subscribe" do
-          put :update, :id => @subscribe.id, :subscribe => @invalid_attrs
+          put :update, params: {:id => @subscribe.id, :subscribe => @invalid_attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -405,11 +405,11 @@ describe SubscribesController do
       login_fixture_admin
 
       it "destroys the requested subscribe" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
       end
 
       it "redirects to the subscribes list" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
         response.should redirect_to(subscribes_url)
       end
     end
@@ -418,11 +418,11 @@ describe SubscribesController do
       login_fixture_librarian
 
       it "destroys the requested subscribe" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
       end
 
       it "redirects to the subscribes list" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
         response.should redirect_to(subscribes_url)
       end
     end
@@ -431,22 +431,22 @@ describe SubscribesController do
       login_fixture_user
 
       it "destroys the requested subscribe" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested subscribe" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @subscribe.id
+        delete :destroy, params: {id: @subscribe.id}
         response.should redirect_to(new_user_session_url)
       end
     end

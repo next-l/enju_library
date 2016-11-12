@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.integer  "user_id"
     t.text     "note"
     t.datetime "executed_at"
-    t.string   "agent_import_filename"
+    t.string   "agent_import_file_name"
     t.string   "agent_import_content_type"
     t.integer  "agent_import_size"
     t.datetime "agent_import_updated_at"
@@ -230,16 +230,12 @@ ActiveRecord::Schema.define(version: 20161111193346) do
   end
 
   create_table "carrier_types", force: :cascade do |t|
-    t.string   "name",                    null: false
+    t.string   "name",            null: false
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "attachment_id"
-    t.string   "attachment_filename"
-    t.integer  "attachment_size"
-    t.string   "attachment_content_type"
     t.jsonb    "attachment_data"
   end
 
@@ -339,16 +335,12 @@ ActiveRecord::Schema.define(version: 20161111193346) do
   end
 
   create_table "content_types", force: :cascade do |t|
-    t.string   "name",                    null: false
+    t.string   "name",            null: false
     t.text     "display_name"
     t.text     "note"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "attachment_id"
-    t.string   "attachment_filename"
-    t.integer  "attachment_size"
-    t.string   "attachment_content_type"
     t.jsonb    "attachment_data"
   end
 
@@ -451,7 +443,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.integer  "user_id"
     t.text     "note"
     t.datetime "executed_at"
-    t.string   "event_import_filename"
+    t.string   "event_import_file_name"
     t.string   "event_import_content_type"
     t.integer  "event_import_file_size"
     t.datetime "event_import_updated_at"
@@ -695,9 +687,9 @@ ActiveRecord::Schema.define(version: 20161111193346) do
   end
 
   create_table "library_groups", force: :cascade do |t|
-    t.string   "name",                                              null: false
+    t.string   "name",                                                             null: false
     t.text     "display_name"
-    t.string   "short_name",                                        null: false
+    t.string   "short_name",                                                       null: false
     t.text     "my_networks"
     t.text     "login_banner"
     t.text     "note"
@@ -706,11 +698,16 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "admin_networks"
-    t.string   "url",            default: "http://localhost:3000/"
+    t.string   "url",                           default: "http://localhost:3000/"
     t.jsonb    "settings"
     t.jsonb    "footer_banner"
     t.text     "html_snippet"
+    t.integer  "max_number_of_results",         default: 500
+    t.boolean  "family_name_first",             default: true
+    t.integer  "pub_year_facet_range_interval", default: 10
+    t.integer  "user_id"
     t.index ["short_name"], name: "index_library_groups_on_short_name", using: :btree
+    t.index ["user_id"], name: "index_library_groups_on_user_id", using: :btree
   end
 
   create_table "licenses", force: :cascade do |t|
@@ -820,7 +817,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.integer  "required_score",                  default: 0,     null: false
     t.integer  "frequency_id",                    default: 1,     null: false
     t.boolean  "subscription_master",             default: false, null: false
-    t.string   "attachment_filename"
+    t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_size"
     t.datetime "attachment_updated_at"
@@ -969,7 +966,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "picture_filename"
+    t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_size"
     t.datetime "picture_updated_at"
@@ -1132,7 +1129,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.datetime "updated_at"
     t.string   "resource_export_id"
     t.integer  "resource_export_size"
-    t.string   "resource_export_filename"
+    t.string   "resource_export_file_name"
     t.index ["resource_export_id"], name: "index_resource_export_files_on_resource_export_id", using: :btree
   end
 
@@ -1155,7 +1152,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.integer  "user_id"
     t.text     "note"
     t.datetime "executed_at"
-    t.string   "resource_import_filename"
+    t.string   "resource_import_file_name"
     t.string   "resource_import_content_type"
     t.integer  "resource_import_size"
     t.datetime "resource_import_updated_at"
@@ -1394,7 +1391,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
     t.integer  "user_id"
     t.text     "note"
     t.datetime "executed_at"
-    t.string   "user_import_filename"
+    t.string   "user_import_file_name"
     t.string   "user_import_content_type"
     t.string   "user_import_file_size"
     t.datetime "user_import_updated_at"
@@ -1491,6 +1488,7 @@ ActiveRecord::Schema.define(version: 20161111193346) do
   add_foreign_key "isbn_records", "manifestations"
   add_foreign_key "items", "manifestations"
   add_foreign_key "items", "shelves"
+  add_foreign_key "library_groups", "users"
   add_foreign_key "periodicals", "manifestations"
   add_foreign_key "shelves", "libraries"
 end

@@ -14,7 +14,6 @@ class LibraryGroup < ActiveRecord::Base
   accepts_nested_attributes_for :colors, update_only: true
   accepts_nested_attributes_for :user, update_only: true
   store :settings, accessors: [
-    :max_number_of_results,
     :book_jacket_unknown_resource,
     :erms_url
   ], coder: JSON

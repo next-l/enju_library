@@ -160,18 +160,18 @@ describe AcceptsController do
 
       describe "with valid params" do
         it "assigns a newly created accept as @accept" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
           assigns(:accept).should be_nil
         end
 
         it "should not create a new accept without basket_id" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
           response.should be_forbidden
         end
 
         describe "When basket_id is specified" do
           it "redirects to the created accept" do
-            post :create, :accept => @attrs, :basket_id => 9
+            post :create, params: {:accept => @attrs}, :basket_id => 9
             response.should redirect_to(accepts_url(basket_id: assigns(:accept).basket.id))
             assigns(:accept).item.circulation_status.name.should eq 'Available On Shelf'
           end
@@ -202,12 +202,12 @@ describe AcceptsController do
 
       describe "with valid params" do
         it "assigns a newly created accept as @accept" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
           assigns(:accept).should be_nil
         end
 
         it "should not create a new accept without basket_id" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
           response.should be_forbidden
         end
       end
@@ -218,12 +218,12 @@ describe AcceptsController do
 
       describe "with valid params" do
         it "assigns a newly created accept as @accept" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
           assigns(:accept).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
           response.should be_forbidden
         end
       end
@@ -237,11 +237,11 @@ describe AcceptsController do
 
       describe "with valid params" do
         it "assigns a newly created accept as @accept" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
         end
 
         it "should redirect to new session url" do
-          post :create, :accept => @attrs
+          post :create, params: {:accept => @attrs}
           response.should redirect_to new_user_session_url
         end
       end
@@ -257,11 +257,11 @@ describe AcceptsController do
       login_fixture_admin
 
       it "destroys the requested accept" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
       end
 
       it "redirects to the accepts list" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
         response.should redirect_to(accepts_url)
       end
     end
@@ -270,11 +270,11 @@ describe AcceptsController do
       login_fixture_librarian
 
       it "destroys the requested accept" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
       end
 
       it "redirects to the accepts list" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
         response.should redirect_to(accepts_url)
       end
     end
@@ -283,22 +283,22 @@ describe AcceptsController do
       login_fixture_user
 
       it "destroys the requested accept" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested accept" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @accept.id
+        delete :destroy, params: {:id => @accept.id}
         response.should redirect_to(new_user_session_url)
       end
     end

@@ -1,37 +1,16 @@
 class UserImportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
-  default_scope {order('user_import_files.id DESC')}
+  include AttachmentUploader[:attachment]
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 
-  if ENV['ENJU_STORAGE'] == 's3'
-    has_attached_file :user_import, storage: :s3,
-      s3_credentials: {
-        access_key: ENV['AWS_ACCESS_KEY_ID'],
-        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-        bucket: ENV['S3_BUCKET_NAME'],
-        s3_host_name: ENV['S3_HOST_NAME']
-      },
-      s3_permissions: :private
-  else
-    has_attached_file :user_import,
-      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
-  end
-  validates_attachment_content_type :user_import, content_type: [
-    'text/csv',
-    'text/plain',
-    'text/tab-separated-values',
-    'application/octet-stream',
-    'application/vnd.ms-excel'
-  ]
-  validates_attachment_presence :user_import
   belongs_to :user, validate: true
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
   has_many :user_import_results
-
   has_many :user_import_file_transitions
+  validates :attachment, presence: true
 
   attr_accessor :mode
 

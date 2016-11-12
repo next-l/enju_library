@@ -148,7 +148,7 @@ class LibrariesController < ApplicationController
 
   private
   def set_library
-    @library = Library.find(params[:id])
+    @library = Library.friendly.find(params[:id])
     authorize @library
     access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end

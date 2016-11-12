@@ -1,21 +1,7 @@
 class UserExportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
-
-  if ENV['ENJU_STORAGE'] == 's3'
-    has_attached_file :user_export, storage: :s3,
-      s3_credentials: {
-        access_key: ENV['AWS_ACCESS_KEY_ID'],
-        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-        bucket: ENV['S3_BUCKET_NAME'],
-        s3_host_name: ENV['S3_HOST_NAME']
-      },
-      s3_permissions: :private
-  else
-    has_attached_file :user_export,
-      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
-  end
-  validates_attachment_content_type :user_export, content_type: /\Atext\/plain\Z/
+  include AttachmentUploader[:attachment]
 
   has_many :user_export_file_transitions
 

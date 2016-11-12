@@ -2,7 +2,7 @@ en:
   activerecord:
     models:
       library: Library
-      library_group: Library Group
+      library_group: System configuration
       shelf: Shelf
       accept: Accept
       budget_type: Budget type
@@ -12,7 +12,7 @@ en:
       request_status_type: Request status type
       request_type: Request type
       search_engine: Search engine
-      withdraw: Withdraw
+      withdraw: Bulk Withdraw
 
     attributes:
       library:
@@ -57,9 +57,7 @@ en:
         url: URL
         color: Color
         max_number_of_results: Max number of results
-        skip_mobile_agents: Do not use mobile UI
         book_jacket_source: Book jacket source
-        html_snippet: HTML snippet
       bookstore:
         name: Name
         zip_code: Zip code
@@ -76,7 +74,6 @@ en:
         note: Note
       accept:
         item_id: Item
-        item_identifier: Item identifier
       subscribe:
         started_on: Start on
         ended_on: End on
@@ -106,6 +103,7 @@ en:
         position: Position
       withdraw:
         item_id: Item
+        removed_items: "%{status} "
 
   library:
     map: "Map"
@@ -114,6 +112,8 @@ en:
     address: "Address"
   shelf:
     update_display_order: Update display order
+  page:
+    restart_required: "Web server restart required"
   accept:
     item_not_found: " not found."
     enter_item_identifier: "Enter item identifier."
@@ -126,3 +126,6 @@ en:
     already_withdrawn: " is already withdrawn."
     withdraw: "Withdraw!"
     successfully_withdrawn: "This items was successfully withdrawn."
+  book_jacket:
+    google: Google Books
+    hanmotocom: Hanmoto.com

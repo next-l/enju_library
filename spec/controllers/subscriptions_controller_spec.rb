@@ -184,7 +184,7 @@ describe SubscriptionsController do
   describe "POST create" do
     before(:each) do
       @attrs = valid_attributes
-      @invalid_attrs = {:title => ''}
+      @invalid_attrs = {title: ''}
     end
 
     describe "When logged in as Administrator" do
@@ -192,24 +192,24 @@ describe SubscriptionsController do
 
       describe "with valid params" do
         it "assigns a newly created subscription as @subscription" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           assigns(:subscription).should be_valid
         end
 
         it "redirects to the created subscription" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           response.should redirect_to(subscription_url(assigns(:subscription)))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscription as @subscription" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           assigns(:subscription).should_not be_valid
         end
 
         it "re-renders the 'new' template" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           response.should render_template("new")
         end
       end
@@ -220,24 +220,24 @@ describe SubscriptionsController do
 
       describe "with valid params" do
         it "assigns a newly created subscription as @subscription" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           assigns(:subscription).should be_valid
         end
 
         it "redirects to the created subscription" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           response.should redirect_to(subscription_url(assigns(:subscription)))
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscription as @subscription" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           assigns(:subscription).should_not be_valid
         end
 
         it "re-renders the 'new' template" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           response.should render_template("new")
         end
       end
@@ -248,24 +248,24 @@ describe SubscriptionsController do
 
       describe "with valid params" do
         it "assigns a newly created subscription as @subscription" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           response.should be_forbidden
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscription as @subscription" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -274,24 +274,24 @@ describe SubscriptionsController do
     describe "When not logged in" do
       describe "with valid params" do
         it "assigns a newly created subscription as @subscription" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :subscription => @attrs
+          post :create, params: {:subscription => @attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved subscription as @subscription" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           assigns(:subscription).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :subscription => @invalid_attrs
+          post :create, params: {:subscription => @invalid_attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -302,7 +302,7 @@ describe SubscriptionsController do
     before(:each) do
       @subscription = FactoryGirl.create(:subscription)
       @attrs = valid_attributes
-      @invalid_attrs = {:title => ''}
+      @invalid_attrs = {title: ''}
     end
 
     describe "When logged in as Administrator" do
@@ -310,18 +310,18 @@ describe SubscriptionsController do
 
       describe "with valid params" do
         it "updates the requested subscription" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
         end
 
         it "assigns the requested subscription as @subscription" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
           assigns(:subscription).should eq(@subscription)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested subscription as @subscription" do
-          put :update, :id => @subscription.id, :subscription => @invalid_attrs
+          put :update, params: {id: @subscription.id, :subscription => @invalid_attrs}
           response.should render_template("edit")
         end
       end
@@ -332,11 +332,11 @@ describe SubscriptionsController do
 
       describe "with valid params" do
         it "updates the requested subscription" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
         end
 
         it "assigns the requested subscription as @subscription" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
           assigns(:subscription).should eq(@subscription)
           response.should redirect_to(@subscription)
         end
@@ -344,12 +344,12 @@ describe SubscriptionsController do
 
       describe "with invalid params" do
         it "assigns the subscription as @subscription" do
-          put :update, :id => @subscription, :subscription => @invalid_attrs
+          put :update, params: {id: @subscription, :subscription => @invalid_attrs}
           assigns(:subscription).should_not be_valid
         end
 
         it "re-renders the 'edit' template" do
-          put :update, :id => @subscription, :subscription => @invalid_attrs
+          put :update, params: {id: @subscription, :subscription => @invalid_attrs}
           response.should render_template("edit")
         end
       end
@@ -360,11 +360,11 @@ describe SubscriptionsController do
 
       describe "with valid params" do
         it "updates the requested subscription" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
         end
 
         it "assigns the requested subscription as @subscription" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
           assigns(:subscription).should eq(@subscription)
           response.should be_forbidden
         end
@@ -372,7 +372,7 @@ describe SubscriptionsController do
 
       describe "with invalid params" do
         it "assigns the requested subscription as @subscription" do
-          put :update, :id => @subscription.id, :subscription => @invalid_attrs
+          put :update, params: {id: @subscription.id, :subscription => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -381,18 +381,18 @@ describe SubscriptionsController do
     describe "When not logged in" do
       describe "with valid params" do
         it "updates the requested subscription" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
         end
 
         it "should be forbidden" do
-          put :update, :id => @subscription.id, :subscription => @attrs
+          put :update, params: {id: @subscription.id, :subscription => @attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested subscription as @subscription" do
-          put :update, :id => @subscription.id, :subscription => @invalid_attrs
+          put :update, params: {id: @subscription.id, :subscription => @invalid_attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -408,11 +408,11 @@ describe SubscriptionsController do
       login_fixture_admin
 
       it "destroys the requested subscription" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
       end
 
       it "redirects to the subscriptions list" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
         response.should redirect_to(subscriptions_url)
       end
     end
@@ -421,11 +421,11 @@ describe SubscriptionsController do
       login_fixture_librarian
 
       it "destroys the requested subscription" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
         response.should redirect_to(subscriptions_url)
       end
     end
@@ -434,22 +434,22 @@ describe SubscriptionsController do
       login_fixture_user
 
       it "destroys the requested subscription" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested subscription" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @subscription.id
+        delete :destroy, params: {id: @subscription.id}
         response.should redirect_to(new_user_session_url)
       end
     end

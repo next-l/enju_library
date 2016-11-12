@@ -73,7 +73,7 @@ describe RequestStatusTypesController do
       login_fixture_admin
 
       it "assigns the requested request_status_type as @request_status_type" do
-        get :show, :id => @request_status_type.id
+        get :show, params: {:id => @request_status_type.id}
         assigns(:request_status_type).should eq(@request_status_type)
       end
     end
@@ -82,7 +82,7 @@ describe RequestStatusTypesController do
       login_fixture_librarian
 
       it "assigns the requested request_status_type as @request_status_type" do
-        get :show, :id => @request_status_type.id
+        get :show, params: {:id => @request_status_type.id}
         assigns(:request_status_type).should eq(@request_status_type)
       end
     end
@@ -91,14 +91,14 @@ describe RequestStatusTypesController do
       login_fixture_user
 
       it "assigns the requested request_status_type as @request_status_type" do
-        get :show, :id => @request_status_type.id
+        get :show, params: {:id => @request_status_type.id}
         assigns(:request_status_type).should eq(@request_status_type)
       end
     end
 
     describe "When not logged in" do
       it "assigns the requested request_status_type as @request_status_type" do
-        get :show, :id => @request_status_type.id
+        get :show, params: {:id => @request_status_type.id}
         assigns(:request_status_type).should eq(@request_status_type)
       end
     end
@@ -195,24 +195,24 @@ describe RequestStatusTypesController do
 
       describe "with valid params" do
         it "assigns a newly created request_status_type as @request_status_type" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           response.should be_forbidden
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved request_status_type as @request_status_type" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -223,24 +223,24 @@ describe RequestStatusTypesController do
 
       describe "with valid params" do
         it "assigns a newly created request_status_type as @request_status_type" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           response.should be_forbidden
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved request_status_type as @request_status_type" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -251,24 +251,24 @@ describe RequestStatusTypesController do
 
       describe "with valid params" do
         it "assigns a newly created request_status_type as @request_status_type" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           response.should be_forbidden
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved request_status_type as @request_status_type" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -277,24 +277,24 @@ describe RequestStatusTypesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "assigns a newly created request_status_type as @request_status_type" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @attrs
+          post :create, params: {:request_status_type => @attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns a newly created but unsaved request_status_type as @request_status_type" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           assigns(:request_status_type).should be_nil
         end
 
         it "should be forbidden" do
-          post :create, :request_status_type => @invalid_attrs
+          post :create, params: {:request_status_type => @invalid_attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -313,23 +313,23 @@ describe RequestStatusTypesController do
 
       describe "with valid params" do
         it "updates the requested request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
         end
 
         it "assigns the requested request_status_type as @request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
           assigns(:request_status_type).should eq(@request_status_type)
         end
 
         it "moves its position when specified" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs, :move => 'lower'
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}, :move => 'lower'
           response.should redirect_to(request_status_types_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested request_status_type as @request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @invalid_attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @invalid_attrs}
           response.should render_template("edit")
         end
       end
@@ -340,11 +340,11 @@ describe RequestStatusTypesController do
 
       describe "with valid params" do
         it "updates the requested request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
         end
 
         it "assigns the requested request_status_type as @request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
           assigns(:request_status_type).should eq(@request_status_type)
           response.should be_forbidden
         end
@@ -352,7 +352,7 @@ describe RequestStatusTypesController do
 
       describe "with invalid params" do
         it "assigns the requested request_status_type as @request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @invalid_attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -363,11 +363,11 @@ describe RequestStatusTypesController do
 
       describe "with valid params" do
         it "updates the requested request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
         end
 
         it "assigns the requested request_status_type as @request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
           assigns(:request_status_type).should eq(@request_status_type)
           response.should be_forbidden
         end
@@ -375,7 +375,7 @@ describe RequestStatusTypesController do
 
       describe "with invalid params" do
         it "assigns the requested request_status_type as @request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @invalid_attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @invalid_attrs}
           response.should be_forbidden
         end
       end
@@ -384,18 +384,18 @@ describe RequestStatusTypesController do
     describe "When not logged in" do
       describe "with valid params" do
         it "updates the requested request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
         end
 
         it "should be forbidden" do
-          put :update, :id => @request_status_type.id, :request_status_type => @attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe "with invalid params" do
         it "assigns the requested request_status_type as @request_status_type" do
-          put :update, :id => @request_status_type.id, :request_status_type => @invalid_attrs
+          put :update, params: {:id => @request_status_type.id, :request_status_type => @invalid_attrs}
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -411,11 +411,11 @@ describe RequestStatusTypesController do
       login_fixture_admin
 
       it "destroys the requested request_status_type" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
         response.should be_forbidden
       end
     end
@@ -424,11 +424,11 @@ describe RequestStatusTypesController do
       login_fixture_librarian
 
       it "destroys the requested request_status_type" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
         response.should be_forbidden
       end
     end
@@ -437,22 +437,22 @@ describe RequestStatusTypesController do
       login_fixture_user
 
       it "destroys the requested request_status_type" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
         response.should be_forbidden
       end
     end
 
     describe "When not logged in" do
       it "destroys the requested request_status_type" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
       end
 
       it "should be forbidden" do
-        delete :destroy, :id => @request_status_type.id
+        delete :destroy, params: {:id => @request_status_type.id}
         response.should redirect_to(new_user_session_url)
       end
     end
