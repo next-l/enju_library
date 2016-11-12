@@ -3,8 +3,6 @@ cache: bundler
 rvm:
   - 2.2.5
   - 2.3.1
-addons:
-  postgresql: "9.4"
 before_script:
   - psql -c 'create database dummy_test;' -U postgres
   - bundle exec rake db:migrate
@@ -17,5 +15,6 @@ notifications:
     secure: RiboVJ5+DiKFZVN4kKnSvVmbd3An1/yiHN/PENUWLCo5PNF4ZnDAcd/V/uyawiblXNcINfX7XAN32RjtCVWDNvpNcF/RAynoltg6yc15GA4Io6tGRBNxtDe6qodvFWSsSw4Wzl2eS580vXMihWvB7Rghrt3dC+ub/SP1DkfZnq8=
 sudo: false
 addons:
+  postgresql: "9.4"
   code_climate:
     repo_token: d0b171c39cff01a0f9d757a66524d3ad7f7867812e2e8a58e994829ac4adf4ce
