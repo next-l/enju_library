@@ -24,117 +24,114 @@ RSpec.describe WithdrawsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Withdraw. As you add validations to Withdraw, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     FactoryGirl.build(:withdraw).attributes.with_indifferent_access
-  }
-  let(:invalid_attributes) {
+  end
+  let(:invalid_attributes) do
     { item_id: nil }
-  }
-  let(:valid_create_attributes) {
+  end
+  let(:valid_create_attributes) do
     { basket_id: Basket.find(valid_attributes[:basket_id]).id,
-      withdraw: { item_identifier: Item.find(valid_attributes[:item_id]).item_identifier }
-    }
-  }
+      withdraw: { item_identifier: Item.find(valid_attributes[:item_id]).item_identifier }}
+  end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # WithdrawsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    describe "When logged in as Administrator" do
+  describe 'GET #index' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
-      it "assigns all withdraws as @withdraws" do
+      it 'assigns all withdraws as @withdraws' do
         withdraw = Withdraw.create! valid_attributes
-        get :index, basket_id: 1
+        get :index, params: { basket_id: 1 }
         expect(assigns(:withdraws)).to eq baskets(:basket_00001).withdraws.order('withdraws.created_at DESC').page(1)
       end
     end
   end
 
-  describe "GET #show" do
-    describe "When logged in as Administrator" do
+  describe 'GET #show' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
-      it "assigns the requested withdraw as @withdraw" do
+      it 'assigns the requested withdraw as @withdraw' do
         withdraw = Withdraw.create! valid_attributes
-        get :show, {:id => withdraw.to_param}
+        get :show, id: withdraw.to_param
         expect(assigns(:withdraw)).to eq(withdraw)
         response.should be_success
       end
     end
   end
 
-  describe "GET #new" do
-    describe "When logged in as Administrator" do
+  describe 'GET #new' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
-      it "assigns a new withdraw as @withdraw" do
-        get :new, {}
+      it 'assigns a new withdraw as @withdraw' do
+        get :new
         expect(assigns(:withdraw)).to be_a_new(Withdraw)
       end
     end
   end
 
-  describe "POST #create" do
-    describe "When logged in as Administrator" do
+  describe 'POST #create' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
-      context "with valid params" do
-        it "creates a new Withdraw" do
-          expect {
-            post :create, valid_create_attributes
-          }.to change(Withdraw, :count).by(1)
+      context 'with valid params' do
+        it 'creates a new Withdraw' do
+          expect do
+            post :create, params: valid_create_attributes
+          end.to change(Withdraw, :count).by(1)
           expect(assigns(:withdraw)).to be_persisted
         end
 
-        it "assigns a newly created withdraw as @withdraw" do
-          post :create, valid_create_attributes
+        it 'assigns a newly created withdraw as @withdraw' do
+          post :create, params: valid_create_attributes
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(assigns(:withdraw)).to be_persisted
         end
 
-        it "redirects to the created withdraw" do
-          post :create, valid_create_attributes
+        it 'redirects to the created withdraw' do
+          post :create, params: valid_create_attributes
           expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
         end
 
-        it "should not withdraw a checked-out item" do
-          post :create, {basket_id: valid_create_attributes[:basket_id],
-            withdraw: { item_identifier: '00001' }
-          }
+        it 'should not withdraw a checked-out item' do
+          post :create, basket_id: valid_create_attributes[:basket_id],
+                         withdraw: { item_identifier: '00001' }}
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(response).to be_success
         end
       end
 
-      context "with invalid params" do
-        it "assigns a newly created but unsaved withdraw as @withdraw" do
-          post :create, {basket_id: valid_create_attributes[:basket_id], withdraw: {item_id: nil}}
+      context 'with invalid params' do
+        it 'assigns a newly created but unsaved withdraw as @withdraw' do
+          post :create, basket_id: valid_create_attributes[:basket_id], withdraw: { item_id: nil }
           expect(assigns(:withdraw)).to be_a_new(Withdraw)
         end
 
         it "re-renders the 'new' template" do
-          post :create, {basket_id: valid_create_attributes[:basket_id], withdraw: {item_id: nil}}
-          expect(response).to render_template("index")
+          post :create, basket_id: valid_create_attributes[:basket_id], withdraw: { item_id: nil }
+          expect(response).to render_template('index')
         end
       end
     end
   end
 
-  describe "DELETE #destroy" do
-    describe "When logged in as Administrator" do
+  describe 'DELETE #destroy' do
+    describe 'When logged in as Administrator' do
       login_fixture_admin
-      it "destroys the requested withdraw" do
+      it 'destroys the requested withdraw' do
         withdraw = Withdraw.create! valid_attributes
-        expect {
-          delete :destroy, {:id => withdraw.to_param}
-        }.to change(Withdraw, :count).by(-1)
+        expect do
+          delete :destroy, id: withdraw.to_param
+        end.to change(Withdraw, :count).by(-1)
       end
 
-      it "redirects to the withdraws list" do
+      it 'redirects to the withdraws list' do
         withdraw = Withdraw.create! valid_attributes
-        delete :destroy, {:id => withdraw.to_param}
+        delete :destroy, id: withdraw.to_param
         expect(response).to redirect_to(withdraws_url)
       end
     end
   end
-
 end
