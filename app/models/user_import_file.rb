@@ -316,7 +316,7 @@ end
 #  executed_at              :datetime
 #  user_import_file_name    :string
 #  user_import_content_type :string
-#  user_import_file_size    :integer
+#  user_import_file_size    :string
 #  user_import_updated_at   :datetime
 #  user_import_fingerprint  :string
 #  edit_mode                :string
@@ -326,4 +326,5 @@ end
 #  user_encoding            :string
 #  default_library_id       :integer
 #  default_user_group_id    :integer
+#  attachment_data          :jsonb
 #
