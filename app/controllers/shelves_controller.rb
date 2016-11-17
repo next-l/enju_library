@@ -18,8 +18,8 @@
 class ShelvesController < ApplicationController
   before_action :set_shelf, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :get_library
-  before_action :get_libraries, only: [:new, :edit, :create, :update]
+  before_action :set_library
+  before_action :set_libraries, only: [:new, :edit, :create, :update]
 
   # GET /shelves
   # GET /shelves.json

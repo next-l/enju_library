@@ -3,12 +3,13 @@ module EnjuLibrary
     extend ActiveSupport::Concern
 
     included do
-      before_action :get_library_group, :set_locale, :set_available_languages, :set_mobile_request
+      before_action :set_library_group, :set_locale, :set_available_languages, :set_mobile_request
       before_action :store_current_location, unless: :devise_controller?
       rescue_from Pundit::NotAuthorizedError, with: :render_403
       #rescue_from ActiveRecord::RecordNotFound, with: :render_404
       rescue_from Errno::ECONNREFUSED, with: :render_500_nosolr
       #rescue_from ActionView::MissingTemplate, with: :render_404_invalid_format
+      helper_method :filtered_params
     end
 
     private
@@ -125,12 +126,12 @@ module EnjuLibrary
       raise Pundit::NotAuthorizedError
     end
 
-    def get_user
+    def set_user
       @user = User.where(username: params[:user_id]).first if params[:user_id]
       #authorize! :show, @user if @user
     end
 
-    def get_user_group
+    def set_user_group
       @user_group = UserGroup.find(params[:user_group_id]) if params[:user_group_id]
     end
 
@@ -164,7 +165,7 @@ module EnjuLibrary
       end
     end
 
-    def get_version
+    def set_version
       @version = params[:version_id].to_i if params[:version_id]
       @version = nil if @version == 0
     end
@@ -180,7 +181,7 @@ module EnjuLibrary
       true unless params[:format].nil? or params[:format] == 'html'
     end
 
-    def get_top_page_content
+    def set_top_page_content
       if defined?(EnjuNews)
         @news_feeds = Rails.cache.fetch('news_feed_all'){NewsFeed.order(:position)}
         @news_posts = NewsPost.limit(LibraryGroup.site_config.settings[:news_post_number_top_page] || 10)
@@ -222,40 +223,44 @@ module EnjuLibrary
       store_location_for(:user, request.url) unless request.xhr?
     end
 
-    def get_library_group
+    def set_library_group
       @library_group = LibraryGroup.site_config
     end
 
-    def get_shelf
+    def set_shelf
       if params[:shelf_id]
         @shelf = Shelf.includes(:library).find(params[:shelf_id])
         authorize @shelf, :show?
       end
     end
 
-    def get_library
+    def set_library
       if params[:library_id]
         @library = Library.friendly.find(params[:library_id])
         authorize @library, :show?
       end
     end
 
-    def get_libraries
+    def set_libraries
       @libraries = Library.order(:position)
     end
 
-    def get_bookstore
+    def set_bookstore
       if params[:bookstore_id]
         @bookstore = Bookstore.find(params[:bookstore_id])
         authorize @bookstore, :show?
       end
     end
 
-    def get_subscription
+    def set_subscription
       if params[:subscription_id]
         @subscription = Subscription.find(params[:subscription_id])
         authorize @subscription, :show?
       end
+    end
+
+    def filtered_params
+      params.permit([:view, :format, :page, :order, :sort_by, :per_page])
     end
   end
 end
