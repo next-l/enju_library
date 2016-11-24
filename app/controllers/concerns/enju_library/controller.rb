@@ -9,6 +9,7 @@ module EnjuLibrary
       #rescue_from ActiveRecord::RecordNotFound, with: :render_404
       rescue_from Errno::ECONNREFUSED, with: :render_500_nosolr
       #rescue_from ActionView::MissingTemplate, with: :render_404_invalid_format
+      helper_method :filtered_params
     end
 
     private
@@ -226,6 +227,13 @@ module EnjuLibrary
       @library_group = LibraryGroup.site_config
     end
 
+    def set_basket
+      if params[:basket_id]
+        @basket = Basket.find(params[:basket_id])
+        authorize @basket, :show?
+      end
+    end
+
     def set_shelf
       if params[:shelf_id]
         @shelf = Shelf.includes(:library).find(params[:shelf_id])
@@ -256,6 +264,10 @@ module EnjuLibrary
         @subscription = Subscription.find(params[:subscription_id])
         authorize @subscription, :show?
       end
+    end
+
+    def filtered_params
+      params.permit([:view, :format, :page, :order, :sort_by, :per_page])
     end
   end
 end

@@ -1,6 +1,6 @@
-class CreateReserveTransitions < ActiveRecord::Migration
+class CreateItemTransitions < ActiveRecord::Migration
   def change
-    create_table :reserve_transitions do |t|
+    create_table :item_transitions do |t|
       t.string :to_state
       if ActiveRecord::Base.configurations[Rails.env]['adapter'].try(:match, /mysql/)
         t.text :metadata
@@ -8,11 +8,11 @@ class CreateReserveTransitions < ActiveRecord::Migration
         t.text :metadata, default: '{}'
       end
       t.integer :sort_key
-      t.integer :reserve_id
+      t.integer :item_id
       t.timestamps
     end
 
-    add_index :reserve_transitions, :reserve_id
-    add_index :reserve_transitions, [:sort_key, :reserve_id], unique: true
+    add_index :item_transitions, :item_id
+    add_index :item_transitions, [:sort_key, :item_id], unique: true
   end
 end

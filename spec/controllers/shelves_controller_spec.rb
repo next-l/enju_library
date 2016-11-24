@@ -15,7 +15,7 @@
 #  closed       :boolean          default(FALSE), not null
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe ShelvesController do
   fixtures :all

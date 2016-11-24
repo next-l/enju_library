@@ -18,7 +18,7 @@
 #  settings       :text
 #
 
-require 'spec_helper'
+require 'rails_helper'
 
 describe LibraryGroupsController do
   fixtures :all

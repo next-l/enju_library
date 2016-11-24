@@ -12,7 +12,7 @@
 
 require 'rails_helper'
 
-describe AcceptsController do
+RSpec.describe AcceptsController, type: :controller do
   fixtures :all
 
   def mock_user(stubs = {})

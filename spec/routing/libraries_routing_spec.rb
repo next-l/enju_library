@@ -29,7 +29,7 @@
 #  longitude             :float
 #
 
-require "spec_helper"
+require "rails_helper"
 
 describe LibrariesController do
   describe "routing" do
