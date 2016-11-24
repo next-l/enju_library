@@ -3,9 +3,8 @@ class Accept < ActiveRecord::Base
   belongs_to :item, touch: true
   belongs_to :librarian, class_name: 'User'
 
-  validates_uniqueness_of :item_id, message:  I18n.t('accept.already_accepted')
-  validates_presence_of :item_id, message:  I18n.t('accept.item_not_found')
-  validates_presence_of :basket_id
+  validates :item_id, uniqueness: true, presence: true #, message:  I18n.t('accept.already_accepted')
+  validates :basket_id, presence: true
 
   attr_accessor :item_identifier
 
