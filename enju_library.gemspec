@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  s.add_dependency "enju_seed", "~> 0.2.0.beta.6"
+  s.add_dependency "enju_seed", "~> 0.2.0"
   s.add_dependency "paper_trail", "~> 5.2"
   s.add_dependency "geocoder"
   s.add_dependency "statesman"
@@ -24,12 +24,12 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency "globalize", "~> 5.0.1"
   s.add_development_dependency "globalize-accessors"
-  s.add_development_dependency "enju_leaf", "~> 1.2.0.beta.2"
-  s.add_development_dependency "enju_biblio", "~> 0.2.0.beta.3"
-  s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0.beta.2"
-  s.add_development_dependency "enju_ndl", "~> 0.2.0.beta.2"
-  s.add_development_dependency "enju_event", "~> 0.2.0.beta.3"
-  s.add_development_dependency "enju_circulation", "~> 0.2.0.beta.2"
+  s.add_development_dependency "enju_leaf", "~> 1.2.0"
+  s.add_development_dependency "enju_biblio", "~> 0.2.0"
+  s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0.beta.3"
+  s.add_development_dependency "enju_ndl", "~> 0.2.0"
+  s.add_development_dependency "enju_event", "~> 0.2.0"
+  s.add_development_dependency "enju_circulation", "~> 0.2.0"
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "mysql2"
   s.add_development_dependency "pg"

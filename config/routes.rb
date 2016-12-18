@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_groups
   resources :withdraws, except: [:edit, :update]
   resources :libraries
   resources :shelves
