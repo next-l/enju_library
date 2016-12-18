@@ -26,11 +26,11 @@ EOS
 Next-L Enju, an open-source integrated library system. You can edit this message after logging in as Administrator.
 EOS
     footer_ja = <<"EOS"
-[Next-L Enju Leaf #{EnjuLeaf::VERSION}](https://github.com/next-l/enju_leaf), オープンソース統合図書館システム  
+[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), オープンソース統合図書館システム  
 Developed by [Kosuke Tanabe](https://github.com/nabeta) and [Project Next-L](http://www.next-l.jp) \| [このシステムについて](/page/about) \| [不具合を報告する](https://github.com/next-l/enju_leaf/issues) \| [マニュアル](https://next-l.github.com/manual/1.2/)
 EOS
     footer_en = <<"EOS"
-[Next-L Enju Leaf #{EnjuLeaf::VERSION}](https://github.com/next-l/enju_leaf), an open source integrated library system  
+[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), an open source integrated library system  
 Developed by [Kosuke Tanabe](https://github.com/nabeta) and [Project Next-L](http://www.next-l.jp) \| [About this system](/page/about) \| [Report bugs](https://github.com/next-l/enju_leaf/issues) \| [Manual](https://next-l.github.com/manual/1.2/)
 EOS
     library_group.login_banner_ja = login_ja if library_group.login_banner_ja.blank?
