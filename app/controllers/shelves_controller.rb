@@ -50,8 +50,9 @@ class ShelvesController < ApplicationController
         if library
           with(:library).equal_to library.name
           order_by :position, :asc
+        else
+          order_by sort[:sort_by], sort[:order]
         end
-        order_by sort[:sort_by], sort[:order]
         facet :library
       end
       @shelves = search.results
