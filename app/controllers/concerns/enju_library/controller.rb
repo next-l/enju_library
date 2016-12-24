@@ -220,7 +220,7 @@ module EnjuLibrary
     end
 
     def store_current_location
-      store_location_for(:user, request.url) unless request.xhr?
+      store_location_for(:user, request.url) if request.format == 'text/html'
     end
 
     def get_library_group
