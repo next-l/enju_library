@@ -712,14 +712,14 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.string   "name",                                                             null: false
     t.text     "display_name"
     t.string   "short_name",                                                       null: false
-    t.text     "my_networks"
+    t.cidr     "my_networks"
     t.text     "login_banner"
     t.text     "note"
     t.integer  "country_id"
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "admin_networks"
+    t.cidr     "admin_networks"
     t.string   "url",                           default: "http://localhost:3000/"
     t.jsonb    "settings"
     t.jsonb    "footer_banner"
