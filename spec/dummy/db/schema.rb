@@ -728,6 +728,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.boolean  "family_name_first",             default: true
     t.integer  "pub_year_facet_range_interval", default: 10
     t.integer  "user_id"
+    t.string   "book_jacket_source"
+    t.string   "screenshot_generator"
     t.index ["short_name"], name: "index_library_groups_on_short_name", using: :btree
     t.index ["user_id"], name: "index_library_groups_on_user_id", using: :btree
   end

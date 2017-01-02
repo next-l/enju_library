@@ -105,8 +105,9 @@ describe BudgetTypesController do
         # specifies that the BudgetType created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        BudgetType.any_instance.should_receive(:update_attributes).with('note' => 'test')
         put :update, params: { id: budget_type.id, budget_type: { note: 'test' } }
+        budget_type.reload
+        expect(budget_type.note).to eq 'test'
       end
 
       it 'assigns the requested budget_type as @budget_type' do

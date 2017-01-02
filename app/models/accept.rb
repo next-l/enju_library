@@ -5,6 +5,7 @@ class Accept < ActiveRecord::Base
 
   validates :item_id, uniqueness: true, presence: true #, message:  I18n.t('accept.already_accepted')
   validates :basket_id, presence: true
+#  validates :item_id, presence: true
 
   attr_accessor :item_identifier
 

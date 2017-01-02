@@ -337,7 +337,7 @@ describe LibrariesController do
         end
 
         it 'moves its position when specified' do
-          put :update, params: { id: @library.id, library: @attrs }, move: 'lower'
+          put :update, params: { id: @library.id, library: @attrs, move: 'lower' }
           response.should redirect_to(libraries_url)
         end
       end
