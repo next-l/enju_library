@@ -221,7 +221,7 @@ module EnjuLibrary
     end
 
     def store_current_location
-      store_location_for(:user, request.url) unless request.xhr?
+      store_location_for(:user, request.url) if request.format == 'text/html'
     end
 
     def get_library_group
@@ -261,7 +261,7 @@ module EnjuLibrary
     end
 
     def filtered_params
-      params.permit([:q, :query, :view, :format, :sort_by, :per_page])
+      params.permit([:q, :query, :view, :format, :order, :sort_by, :page, :per_page])
     end
 
     class InvalidLocaleError < StandardError
