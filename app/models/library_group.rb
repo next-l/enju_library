@@ -13,10 +13,6 @@ class LibraryGroup < ActiveRecord::Base
     }
   accepts_nested_attributes_for :colors, update_only: true
   accepts_nested_attributes_for :user, update_only: true
-  store :settings, accessors: [
-    :book_jacket_unknown_resource,
-    :erms_url
-  ], coder: JSON
 
   def self.site_config
     LibraryGroup.order(:created_at).first

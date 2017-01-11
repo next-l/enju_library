@@ -83,7 +83,7 @@ module EnjuLibrary
     def set_locale
       if params[:locale]
         unless I18n.available_locales.include?(params[:locale].to_s.intern)
-          raise InvalidLocaleError
+          raise EnjuLeaf::InvalidLocaleError
         end
       end
       if user_signed_in?
@@ -96,7 +96,7 @@ module EnjuLibrary
       else
         I18n.locale = @locale = session[:locale] = I18n.default_locale
       end
-    rescue InvalidLocaleError
+    rescue EnjuLeaf::InvalidLocaleError
       @locale = I18n.default_locale
     end
 
