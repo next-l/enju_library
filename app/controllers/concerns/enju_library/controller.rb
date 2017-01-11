@@ -97,6 +97,7 @@ module EnjuLibrary
         I18n.locale = @locale = session[:locale] = I18n.default_locale
       end
     rescue InvalidLocaleError
+      reset_session
       @locale = I18n.default_locale
     end
 
@@ -260,7 +261,10 @@ module EnjuLibrary
     end
 
     def filtered_params
-      params.permit([:view, :format, :page, :order, :sort_by, :per_page])
+      params.permit([:q, :query, :view, :format, :order, :sort_by, :page, :per_page])
+    end
+
+    class InvalidLocaleError < StandardError
     end
   end
 end
