@@ -9,6 +9,7 @@ module EnjuLibrary
       #rescue_from ActiveRecord::RecordNotFound, with: :render_404
       rescue_from Errno::ECONNREFUSED, with: :render_500_nosolr
       #rescue_from ActionView::MissingTemplate, with: :render_404_invalid_format
+      helper_method :filtered_params
     end
 
     private
@@ -96,6 +97,7 @@ module EnjuLibrary
         I18n.locale = @locale = session[:locale] = I18n.default_locale
       end
     rescue InvalidLocaleError
+      reset_session
       @locale = I18n.default_locale
     end
 
@@ -256,6 +258,13 @@ module EnjuLibrary
         @subscription = Subscription.find(params[:subscription_id])
         authorize @subscription, :show?
       end
+    end
+
+    def filtered_params
+      params.permit([:q, :query, :view, :format, :sort_by, :per_page])
+    end
+
+    class InvalidLocaleError < StandardError
     end
   end
 end
