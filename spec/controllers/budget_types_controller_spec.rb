@@ -19,6 +19,7 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 describe BudgetTypesController do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
   login_fixture_admin
 

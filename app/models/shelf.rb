@@ -7,7 +7,7 @@ class Shelf < ActiveRecord::Base
 
   validates_associated :library
   validates :library, presence: true
-  validates_uniqueness_of :display_name, scope: :library_id
+  #validates_uniqueness_of :display_name, scope: :library_id
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
   before_update :reset_position
 
@@ -20,7 +20,7 @@ class Shelf < ActiveRecord::Base
       library.name
     end
     text :name do
-      [name, library.name, display_name, library.display_name]
+      [name, display_name_translations, library.name, library.display_name]
     end
     integer :position
   end
@@ -34,10 +34,6 @@ class Shelf < ActiveRecord::Base
 
   def self.web
     Shelf.find(1)
-  end
-
-  def localized_display_name
-    display_name.localize
   end
 
   # http://stackoverflow.com/a/12437606

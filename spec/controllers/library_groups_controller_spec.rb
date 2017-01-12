@@ -21,6 +21,7 @@
 require 'rails_helper'
 
 describe LibraryGroupsController do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   describe 'GET index' do

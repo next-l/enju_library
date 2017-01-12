@@ -17,6 +17,7 @@ require 'rails_helper'
 require 'sunspot/rails/spec_helper'
 
 describe SubscriptionsController do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   def valid_attributes

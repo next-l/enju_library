@@ -31,6 +31,7 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe WithdrawsController, type: :controller do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   # This should return the minimal set of attributes required to create a valid

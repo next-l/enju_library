@@ -32,6 +32,7 @@
 require 'rails_helper'
 
 describe LibrariesController do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   describe 'GET index', solr: true do

@@ -13,6 +13,7 @@
 require 'rails_helper'
 
 describe BasketsController do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   describe 'GET index' do

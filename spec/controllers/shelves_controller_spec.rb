@@ -18,6 +18,7 @@
 require 'rails_helper'
 
 describe ShelvesController do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   def valid_attributes

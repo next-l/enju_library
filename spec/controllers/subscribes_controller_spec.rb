@@ -14,6 +14,7 @@
 require 'rails_helper'
 
 describe SubscribesController do
+  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   def valid_attributes

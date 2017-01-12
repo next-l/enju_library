@@ -20,6 +20,7 @@ require 'rails_helper'
 require 'sunspot/rails/spec_helper'
 
 describe BookstoresController do
+  fixtures :users, :profiles, :manifestations, :libraries, :items
   fixtures :all
   disconnect_sunspot
 
