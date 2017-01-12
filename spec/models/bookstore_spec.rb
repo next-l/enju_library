@@ -9,8 +9,8 @@ end
 #
 # Table name: bookstores
 #
-#  id               :integer          not null, primary key
-#  name             :text             not null
+#  id               :uuid             not null, primary key
+#  name             :string           not null
 #  zip_code         :string
 #  address          :text
 #  note             :text
@@ -19,6 +19,6 @@ end
 #  url              :string
 #  position         :integer
 #  deleted_at       :datetime
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #

@@ -21,6 +21,7 @@ gem "jquery-rails"
 gem "mini_magick"
 gem "sinatra", "~> 2.0.0.beta2"
 gem "rails-controller-testing"
+gem "json_translate"
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]

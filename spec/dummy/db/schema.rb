@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
-    t.integer  "item_id"
+    t.uuid     "item_id"
     t.integer  "librarian_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.index ["basket_id"], name: "index_accepts_on_basket_id", using: :btree
     t.index ["item_id"], name: "index_accepts_on_item_id", using: :btree
   end
@@ -197,8 +197,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.index ["user_id"], name: "index_baskets_on_user_id", using: :btree
   end
 
-  create_table "bookstores", force: :cascade do |t|
-    t.text     "name",             null: false
+  create_table "bookstores", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string   "name",             null: false
     t.string   "zip_code"
     t.text     "address"
     t.text     "note"
@@ -207,8 +207,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.string   "url"
     t.integer  "position"
     t.datetime "deleted_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "budget_types", force: :cascade do |t|
@@ -689,10 +689,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.index ["item_id", "user_group_id"], name: "index_lending_policies_on_item_id_and_user_group_id", unique: true, using: :btree
   end
 
-  create_table "libraries", force: :cascade do |t|
-    t.string   "name",                                null: false
-    t.text     "display_name"
-    t.string   "short_display_name",                  null: false
+  create_table "libraries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string   "name",                                    null: false
+    t.jsonb    "display_name_translations"
+    t.jsonb    "short_display_name"
     t.string   "zip_code"
     t.text     "street"
     t.text     "locality"
@@ -701,14 +701,14 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.string   "telephone_number_2"
     t.string   "fax_number"
     t.text     "note"
-    t.integer  "call_number_rows",      default: 1,   null: false
-    t.string   "call_number_delimiter", default: "|", null: false
-    t.integer  "library_group_id",      default: 1,   null: false
-    t.integer  "users_count",           default: 0,   null: false
+    t.integer  "call_number_rows",          default: 1,   null: false
+    t.string   "call_number_delimiter",     default: "|", null: false
+    t.integer  "library_group_id",          default: 1,   null: false
+    t.integer  "users_count",               default: 0,   null: false
     t.integer  "position"
     t.integer  "country_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.datetime "deleted_at"
     t.text     "opening_hour"
     t.string   "isil"
@@ -1288,16 +1288,16 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "shelves", force: :cascade do |t|
-    t.string   "name",                         null: false
-    t.text     "display_name"
+    t.string   "name",                                      null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
-    t.integer  "library_id",   default: 1,     null: false
-    t.integer  "items_count",  default: 0,     null: false
+    t.uuid     "library_id",                                null: false
+    t.integer  "items_count",               default: 0,     null: false
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.datetime "deleted_at"
-    t.boolean  "closed",       default: false, null: false
+    t.boolean  "closed",                    default: false, null: false
     t.index ["library_id"], name: "index_shelves_on_library_id", using: :btree
   end
 
@@ -1396,13 +1396,13 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.index ["user_group_id"], name: "index_user_group_has_checkout_types_on_user_group_id", using: :btree
   end
 
-  create_table "user_groups", force: :cascade do |t|
+  create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string   "name"
-    t.text     "display_name"
+    t.jsonb    "display_name_translations"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.datetime "deleted_at"
     t.integer  "valid_period_for_new_user",        default: 0, null: false
     t.datetime "expired_at"
@@ -1531,9 +1531,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.index ["item_id"], name: "index_withdraws_on_item_id", using: :btree
   end
 
+  add_foreign_key "accepts", "baskets"
+  add_foreign_key "accepts", "items"
   add_foreign_key "isbn_records", "manifestations"
   add_foreign_key "items", "manifestations"
-  add_foreign_key "items", "shelves"
   add_foreign_key "library_groups", "users"
   add_foreign_key "periodicals", "manifestations"
   add_foreign_key "shelves", "libraries"

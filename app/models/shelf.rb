@@ -12,6 +12,7 @@ class Shelf < ActiveRecord::Base
   before_update :reset_position
 
   acts_as_list scope: :library
+  translates :display_name
 
   searchable do
     string :name
@@ -51,15 +52,15 @@ end
 #
 # Table name: shelves
 #
-#  id           :integer          not null, primary key
-#  name         :string           not null
-#  display_name :text
-#  note         :text
-#  library_id   :integer          default(1), not null
-#  items_count  :integer          default(0), not null
-#  position     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  deleted_at   :datetime
-#  closed       :boolean          default(FALSE), not null
+#  id                        :integer          not null, primary key
+#  name                      :string           not null
+#  display_name_translations :jsonb
+#  note                      :text
+#  library_id                :uuid             not null
+#  items_count               :integer          default(0), not null
+#  position                  :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  deleted_at                :datetime
+#  closed                    :boolean          default(FALSE), not null
 #
