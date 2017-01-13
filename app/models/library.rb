@@ -1,6 +1,6 @@
 class Library < ActiveRecord::Base
   include MasterModel
-  scope :real, -> { where('id != 1') }
+  #scope :real, -> { where('id != 1') }
   has_many :shelves
   belongs_to :library_group, validate: true
   has_many :profiles
@@ -20,7 +20,7 @@ class Library < ActiveRecord::Base
   end
 
   validates_associated :library_group
-  validates :short_display_name_translations, presence: true
+  validates :short_display_name, presence: true
   validates :library_group, presence: true
   #validates_uniqueness_of :short_display_name, case_sensitive: false
   validates_uniqueness_of :isil, allow_blank: true
@@ -59,7 +59,7 @@ class Library < ActiveRecord::Base
   end
 
   def self.web
-    Library.find(1)
+    Shelf.find_by(name: 'web').library
   end
 
   def address(locale = I18n.locale)

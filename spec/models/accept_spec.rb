@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 describe Accept do
+  fixtures :users, :manifestations, :items, :baskets, :subscriptions,
+    :user_groups
   fixtures :all
 
   it 'should change circulation_status' do

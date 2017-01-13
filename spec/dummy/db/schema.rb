@@ -746,7 +746,6 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.datetime "updated_at"
     t.cidr     "admin_networks"
     t.string   "url",                           default: "http://localhost:3000/"
-    t.jsonb    "settings"
     t.jsonb    "footer_banner"
     t.text     "html_snippet"
     t.string   "book_jacket_source"
@@ -1544,10 +1543,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.index ["item_id"], name: "index_withdraws_on_item_id", using: :btree
   end
 
-  add_foreign_key "accepts", "baskets"
+  add_foreign_key "accepts", "baskets", on_delete: :nullify
   add_foreign_key "accepts", "items"
   add_foreign_key "baskets", "users"
-  add_foreign_key "checked_items", "baskets"
+  add_foreign_key "checked_items", "baskets", on_delete: :nullify
   add_foreign_key "checked_items", "items"
   add_foreign_key "checkouts", "checkins"
   add_foreign_key "checkouts", "items"
@@ -1571,6 +1570,6 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
-  add_foreign_key "withdraws", "baskets"
+  add_foreign_key "withdraws", "baskets", on_delete: :nullify
   add_foreign_key "withdraws", "items"
 end

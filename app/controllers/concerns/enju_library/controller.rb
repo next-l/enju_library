@@ -186,7 +186,7 @@ module EnjuLibrary
         @news_feeds = Rails.cache.fetch('news_feed_all'){NewsFeed.order(:position)}
         @news_posts = NewsPost.limit(LibraryGroup.site_config.settings[:news_post_number_top_page] || 10)
       end
-      @libraries = Library.real
+      @libraries = Library.order(:position)
     end
 
     def set_mobile_request

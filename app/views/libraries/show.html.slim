@@ -21,7 +21,7 @@
     .panel.panel-default
       .panel-heading
         h1.panel-title
-          = @library.display_name.localize
+          = @library.display_name
       .panel-body
         p#notice
           = notice
@@ -105,7 +105,7 @@
               - @library.shelves.each do |shelf|
                 tr
                   td
-                    = link_to shelf.display_name.localize, shelf_path(shelf, library_id: @library.name)
+                    = link_to shelf.display_name, shelf_path(shelf, library_id: @library.name)
                     - shelf.picture_files.each do |picture_file|
                       = link_to image_tag('icons/picture.png', size: '16x16', alt: t('page.picture')), picture_file_path(picture_file, format: :download), rel: "shelf_#{h(shelf.id)}"
                       script[type="text/javascript"]

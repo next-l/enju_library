@@ -1,8 +1,8 @@
 --- 
 library_00001: 
   name: web
-  short_display_name: Web
-  display_name: World Wide Web
+  short_display_name: {"en": "web", "ja": "web"}
+  display_name: {"en": "World Wide Web", "ja": "ウェブ"}
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 
@@ -13,8 +13,8 @@ library_00001:
   position: 1
 library_00002: 
   name: yours
-  short_display_name: your_library
-  display_name: Your Library
+  short_display_name: {"en": "enju_library"}
+  display_name: {"en": "Enju Library", "ja": "えんじゅ図書館"}
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 

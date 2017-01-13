@@ -27,8 +27,8 @@
         p#notice
           = notice
         h2.resource_title
-          => link_to @shelf.library.display_name.localize, @shelf.library
-          => @shelf.display_name.localize
+          => link_to @shelf.library.display_name, @shelf.library
+          => @shelf.display_name
         - if current_user.try(:has_role?, 'Librarian')
           p
             strong

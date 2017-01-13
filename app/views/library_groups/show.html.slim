@@ -25,7 +25,7 @@
           strong
             = t('activerecord.attributes.library_group.display_name')
             | :
-          = @library_group.display_name.localize
+          = @library_group.display_name
         p
           strong
             = t('activerecord.attributes.library_group.email')
@@ -99,4 +99,4 @@
         ul
           - @library_group.real_libraries.each do |library|
             li
-              = link_to library.display_name.localize, library
+              = link_to library.display_name, library

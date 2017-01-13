@@ -39,7 +39,7 @@
   .form-group
     = f.label t('activerecord.models.country')
     br
-    = f.select(:country_id, @countries.collect{|c| [c.display_name.localize, c.id]})
+    = f.select(:country_id, @countries.collect{|c| [c.display_name, c.id]})
   - if defined?(EnjuBookmark)
     .form-group
       = f.label :allow_bookmark_external_url

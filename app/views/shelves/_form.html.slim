@@ -27,6 +27,6 @@
         | "
         = " selected='selected'" if @shelf.library == library
         | >
-        = library.display_name.localize
+        = library.display_name
   .form-group
     = f.submit class: 'btn btn-default'
