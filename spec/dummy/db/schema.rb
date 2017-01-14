@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161115184756) do
+ActiveRecord::Schema.define(version: 20170114174536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -1050,7 +1050,6 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer  "user_id"
     t.uuid     "user_group_id"
     t.uuid     "library_id"
     t.string   "locale"
@@ -1069,7 +1068,6 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.index ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true, using: :btree
     t.index ["library_id"], name: "index_profiles_on_library_id", using: :btree
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id", using: :btree
-    t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
     t.index ["user_number"], name: "index_profiles_on_user_number", unique: true, using: :btree
   end
 
@@ -1518,8 +1516,10 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
+    t.uuid     "profile_id"
     t.index ["checkout_icalendar_token"], name: "index_users_on_checkout_icalendar_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["profile_id"], name: "index_users_on_profile_id", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
@@ -1563,7 +1563,6 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   add_foreign_key "lending_policies", "user_groups"
   add_foreign_key "library_groups", "users"
   add_foreign_key "periodicals", "manifestations"
-  add_foreign_key "profiles", "users"
   add_foreign_key "reserves", "items"
   add_foreign_key "reserves", "manifestations"
   add_foreign_key "reserves", "users"
@@ -1574,6 +1573,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   add_foreign_key "user_group_has_checkout_types", "user_groups"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
+  add_foreign_key "users", "profiles", on_delete: :nullify
   add_foreign_key "withdraws", "baskets", on_delete: :nullify
   add_foreign_key "withdraws", "items"
 end
