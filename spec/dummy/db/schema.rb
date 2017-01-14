@@ -289,13 +289,13 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "checkout_types", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.text     "display_name"
+    t.string   "name",                      null: false
+    t.jsonb    "display_name_translations"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["name"], name: "index_checkout_types_on_name", using: :btree
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["name"], name: "index_checkout_types_on_name", unique: true, using: :btree
   end
 
   create_table "checkouts", force: :cascade do |t|
@@ -328,6 +328,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.integer  "position"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["name"], name: "index_circulation_statuses_on_name", unique: true, using: :btree
   end
 
   create_table "colors", force: :cascade do |t|
@@ -1344,6 +1345,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.integer  "position"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.index ["name"], name: "index_use_restrictions_on_name", unique: true, using: :btree
   end
 
   create_table "user_checkout_stat_transitions", force: :cascade do |t|
@@ -1390,7 +1392,7 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   end
 
   create_table "user_group_has_checkout_types", force: :cascade do |t|
-    t.integer  "user_group_id",                                   null: false
+    t.uuid     "user_group_id",                                   null: false
     t.integer  "checkout_type_id",                                null: false
     t.integer  "checkout_limit",                  default: 0,     null: false
     t.integer  "checkout_period",                 default: 0,     null: false
@@ -1401,8 +1403,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
     t.datetime "fixed_due_date"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "current_checkout_count"
     t.index ["checkout_type_id"], name: "index_user_group_has_checkout_types_on_checkout_type_id", using: :btree
     t.index ["user_group_id"], name: "index_user_group_has_checkout_types_on_user_group_id", using: :btree
@@ -1568,6 +1570,8 @@ ActiveRecord::Schema.define(version: 20161115184756) do
   add_foreign_key "shelves", "libraries"
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "user_group_has_checkout_types", "checkout_types"
+  add_foreign_key "user_group_has_checkout_types", "user_groups"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
   add_foreign_key "withdraws", "baskets", on_delete: :nullify
