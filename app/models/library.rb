@@ -2,7 +2,7 @@ class Library < ActiveRecord::Base
   include MasterModel
   #scope :real, -> { where('id != 1') }
   has_many :shelves
-  belongs_to :library_group, validate: true
+  belongs_to :library_group
   has_many :profiles
   belongs_to :country
 

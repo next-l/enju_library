@@ -5,7 +5,7 @@ class UserImportFile < ActiveRecord::Base
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 
-  belongs_to :user, validate: true
+  belongs_to :user
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
   has_many :user_import_results
