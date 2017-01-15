@@ -21,18 +21,18 @@ end
 #
 #  id                            :integer          not null, primary key
 #  name                          :string           not null
-#  display_name                  :text
+#  display_name_translations     :jsonb
 #  short_name                    :string           not null
 #  my_networks                   :cidr
-#  login_banner                  :text
+#  login_banner_translations     :jsonb
 #  note                          :text
 #  country_id                    :integer
 #  position                      :integer
-#  created_at                    :datetime
-#  updated_at                    :datetime
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
 #  admin_networks                :cidr
 #  url                           :string           default("http://localhost:3000/")
-#  footer_banner                 :jsonb
+#  footer_banner_translations    :jsonb
 #  html_snippet                  :text
 #  book_jacket_source            :string
 #  max_number_of_results         :integer          default(500)
