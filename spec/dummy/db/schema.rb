@@ -1575,8 +1575,8 @@ ActiveRecord::Schema.define(version: 20170114174536) do
   add_foreign_key "user_group_has_checkout_types", "checkout_types"
   add_foreign_key "user_group_has_checkout_types", "user_groups"
   add_foreign_key "user_has_roles", "roles"
-  add_foreign_key "user_has_roles", "users"
-  add_foreign_key "users", "profiles"
+  add_foreign_key "user_has_roles", "users", on_delete: :cascade
+  add_foreign_key "users", "profiles", on_delete: :cascade
   add_foreign_key "withdraws", "baskets", on_delete: :nullify
   add_foreign_key "withdraws", "items"
 end
