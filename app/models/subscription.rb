@@ -1,9 +1,9 @@
 class Subscription < ActiveRecord::Base
   has_many :subscribes, dependent: :destroy
   has_many :works, through: :subscribes
-  belongs_to :user, validate: true
+  belongs_to :user
   if defined?(EnjuPurchasRequest)
-    belongs_to :order_list, validate: true
+    belongs_to :order_list
   end
 
   validates_presence_of :title, :user
