@@ -1,6 +1,6 @@
 class Basket < ActiveRecord::Base
   scope :will_expire, lambda {|date| where('created_at < ?', date)}
-  belongs_to :user, validate: true
+  belongs_to :user
   has_many :accepts
   has_many :withdraws
 

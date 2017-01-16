@@ -23,6 +23,5 @@ end
 #  position                  :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  deleted_at                :datetime
 #  closed                    :boolean          default(FALSE), not null
 #

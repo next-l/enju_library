@@ -6,14 +6,9 @@ class SearchEngine < ActiveRecord::Base
   validates :http_method, presence: true, inclusion: %w(get post)
   validates :url, presence: true, url: true, length: { maximum: 255 }
   validates :base_url, presence: true, url: true, length: { maximum: 255 }
-  after_save :clear_all_cache
-  after_destroy :clear_all_cache
 
   paginates_per 10
-
-  def clear_all_cache
-    Rails.cache.delete('search_engine_all')
-  end
+  translates :display_name
 
   def search_params(query)
     params = {}
@@ -31,16 +26,16 @@ end
 #
 # Table name: search_engines
 #
-#  id               :integer          not null, primary key
-#  name             :string           not null
-#  display_name     :text
-#  url              :string           not null
-#  base_url         :text             not null
-#  http_method      :text             not null
-#  query_param      :text             not null
-#  additional_param :text
-#  note             :text
-#  position         :integer
-#  created_at       :datetime
-#  updated_at       :datetime
+#  id                        :integer          not null, primary key
+#  name                      :string           not null
+#  display_name_translations :jsonb
+#  url                       :string           not null
+#  base_url                  :text             not null
+#  http_method               :text             not null
+#  query_param               :text             not null
+#  additional_param          :text
+#  note                      :text
+#  position                  :integer
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #

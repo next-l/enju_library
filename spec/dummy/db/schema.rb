@@ -207,7 +207,6 @@ ActiveRecord::Schema.define(version: 20170116005550) do
     t.string   "fax_number"
     t.string   "url"
     t.integer  "position"
-    t.datetime "deleted_at"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
@@ -732,7 +731,6 @@ ActiveRecord::Schema.define(version: 20170116005550) do
     t.integer  "country_id"
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.datetime "deleted_at"
     t.text     "opening_hour"
     t.string   "isil"
     t.float    "latitude"
@@ -1272,17 +1270,18 @@ ActiveRecord::Schema.define(version: 20170116005550) do
   end
 
   create_table "search_engines", force: :cascade do |t|
-    t.string   "name",             null: false
-    t.text     "display_name"
-    t.string   "url",              null: false
-    t.text     "base_url",         null: false
-    t.text     "http_method",      null: false
-    t.text     "query_param",      null: false
+    t.string   "name",                      null: false
+    t.jsonb    "display_name_translations"
+    t.string   "url",                       null: false
+    t.text     "base_url",                  null: false
+    t.text     "http_method",               null: false
+    t.text     "query_param",               null: false
     t.text     "additional_param"
     t.text     "note"
     t.integer  "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["name"], name: "index_search_engines_on_name", unique: true, using: :btree
   end
 
   create_table "series_statement_merge_lists", force: :cascade do |t|
@@ -1333,9 +1332,9 @@ ActiveRecord::Schema.define(version: 20170116005550) do
     t.integer  "position"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
-    t.datetime "deleted_at"
     t.boolean  "closed",                    default: false, null: false
     t.index ["library_id"], name: "index_shelves_on_library_id", using: :btree
+    t.index ["name"], name: "index_shelves_on_name", unique: true, using: :btree
   end
 
   create_table "subscribes", force: :cascade do |t|
@@ -1354,7 +1353,6 @@ ActiveRecord::Schema.define(version: 20170116005550) do
     t.text     "note"
     t.integer  "user_id"
     t.integer  "order_list_id"
-    t.datetime "deleted_at"
     t.integer  "subscribes_count", default: 0, null: false
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
@@ -1441,12 +1439,12 @@ ActiveRecord::Schema.define(version: 20170116005550) do
     t.integer  "position"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
-    t.datetime "deleted_at"
     t.integer  "valid_period_for_new_user",        default: 0, null: false
     t.datetime "expired_at"
     t.integer  "number_of_day_to_notify_overdue",  default: 1, null: false
     t.integer  "number_of_day_to_notify_due_date", default: 7, null: false
     t.integer  "number_of_time_to_notify_overdue", default: 3, null: false
+    t.index ["name"], name: "index_user_groups_on_name", unique: true, using: :btree
   end
 
   create_table "user_has_roles", force: :cascade do |t|

@@ -33,7 +33,6 @@ end
 #  note             :text
 #  user_id          :integer
 #  order_list_id    :integer
-#  deleted_at       :datetime
 #  subscribes_count :integer          default(0), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
