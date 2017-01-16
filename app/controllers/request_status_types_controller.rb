@@ -1,16 +1,3 @@
-# == Schema Information
-#
-# Table name: request_status_types
-#
-#  id           :integer          not null, primary key
-#  name         :string           not null
-#  display_name :text
-#  note         :text
-#  position     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 class RequestStatusTypesController < ApplicationController
   before_action :set_request_status_type, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

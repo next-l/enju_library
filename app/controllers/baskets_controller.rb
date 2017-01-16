@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: baskets
-#
-#  id           :integer          not null, primary key
-#  user_id      :integer
-#  note         :text
-#  lock_version :integer          default(0), not null
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 class BasketsController < ApplicationController
   before_action :set_basket, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

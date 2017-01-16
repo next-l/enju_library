@@ -43,4 +43,5 @@ end
 #  isil                            :string
 #  latitude                        :float
 #  longitude                       :float
+#  in_use                          :boolean          default(FALSE), not null
 #

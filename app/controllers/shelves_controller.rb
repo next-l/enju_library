@@ -1,20 +1,3 @@
-# == Schema Information
-#
-# Table name: shelves
-#
-#  id           :integer          not null, primary key
-#  name         :string           not null
-#  display_name :text
-#  note         :text
-#  library_id   :integer          default(1), not null
-#  items_count  :integer          default(0), not null
-#  position     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  deleted_at   :datetime
-#  closed       :boolean          default(FALSE), not null
-#
-
 class ShelvesController < ApplicationController
   before_action :set_shelf, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]

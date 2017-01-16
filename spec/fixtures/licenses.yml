@@ -1,15 +1,22 @@
-# -*- encoding: utf-8 -*-
-require 'rails_helper'
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-describe BudgetType do
-  it 'should create budget_type' do
-    FactoryGirl.create(:budget_type)
-  end
-end
+one:
+  id: 1
+  name: unknown
+  display_name_translations: {"en": "unknown"}
+  note: unknown
+  position: 1
+
+two:
+  id: 2
+  name: mit
+  display_name_translations: {"en": "MIT"}
+  note: MIT
+  position: 2
 
 # == Schema Information
 #
-# Table name: budget_types
+# Table name: licenses
 #
 #  id                        :integer          not null, primary key
 #  name                      :string           not null

@@ -1,6 +1,6 @@
 class Library < ActiveRecord::Base
   include MasterModel
-  #scope :real, -> { where('id != 1') }
+  scope :real, -> { where(in_use: false) }
   has_many :shelves
   belongs_to :library_group
   has_many :profiles
@@ -19,7 +19,6 @@ class Library < ActiveRecord::Base
     integer :position
   end
 
-  validates_associated :library_group
   validates :short_display_name, presence: true
   validates :library_group, presence: true
   #validates_uniqueness_of :short_display_name, case_sensitive: false
@@ -122,4 +121,5 @@ end
 #  isil                            :string
 #  latitude                        :float
 #  longitude                       :float
+#  in_use                          :boolean          default(FALSE), not null
 #
