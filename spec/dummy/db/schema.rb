@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20170116152012) do
   enable_extension "pgcrypto"
 
   create_table "accepts", force: :cascade do |t|
-    t.integer  "basket_id"
+    t.uuid     "basket_id"
     t.uuid     "item_id"
     t.integer  "librarian_id", null: false
     t.datetime "created_at",   null: false
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 20170116152012) do
     t.index ["profile_id"], name: "index_agents_on_profile_id", using: :btree
   end
 
-  create_table "baskets", force: :cascade do |t|
+  create_table "baskets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer  "user_id"
     t.text     "note"
     t.integer  "lock_version", default: 0, null: false
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 20170116152012) do
 
   create_table "checked_items", force: :cascade do |t|
     t.uuid     "item_id",      null: false
-    t.integer  "basket_id",    null: false
+    t.uuid     "basket_id",    null: false
     t.datetime "due_date",     null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -1327,7 +1327,7 @@ ActiveRecord::Schema.define(version: 20170116152012) do
     t.index ["series_statement_identifier"], name: "index_series_statements_on_series_statement_identifier", using: :btree
   end
 
-  create_table "shelves", force: :cascade do |t|
+  create_table "shelves", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string   "name",                                      null: false
     t.jsonb    "display_name_translations"
     t.text     "note"
@@ -1549,7 +1549,7 @@ ActiveRecord::Schema.define(version: 20170116152012) do
   end
 
   create_table "withdraws", force: :cascade do |t|
-    t.integer  "basket_id"
+    t.uuid     "basket_id"
     t.uuid     "item_id"
     t.integer  "librarian_id", null: false
     t.datetime "created_at",   null: false

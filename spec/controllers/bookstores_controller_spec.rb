@@ -1,26 +1,7 @@
-# == Schema Information
-#
-# Table name: bookstores
-#
-#  id               :integer          not null, primary key
-#  name             :text             not null
-#  zip_code         :string
-#  address          :text
-#  note             :text
-#  telephone_number :string
-#  fax_number       :string
-#  url              :string
-#  position         :integer
-#  deleted_at       :datetime
-#  created_at       :datetime
-#  updated_at       :datetime
-#
-
 require 'rails_helper'
 require 'sunspot/rails/spec_helper'
 
 describe BookstoresController do
-  fixtures :users, :profiles, :manifestations, :libraries, :items
   fixtures :all
   disconnect_sunspot
 

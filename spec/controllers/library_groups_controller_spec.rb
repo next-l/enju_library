@@ -1,27 +1,6 @@
-# == Schema Information
-#
-# Table name: library_groups
-#
-#  id             :integer          not null, primary key
-#  name           :string           not null
-#  display_name   :text
-#  short_name     :string           not null
-#  my_networks    :text
-#  login_banner   :text
-#  note           :text
-#  country_id     :integer
-#  position       :integer
-#  created_at     :datetime
-#  updated_at     :datetime
-#  admin_networks :text
-#  url            :string           default("http://localhost:3000/")
-#  settings       :text
-#
-
 require 'rails_helper'
 
 describe LibraryGroupsController do
-  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   describe 'GET index' do

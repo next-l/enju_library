@@ -23,7 +23,7 @@ end
 # Table name: withdraws
 #
 #  id           :integer          not null, primary key
-#  basket_id    :integer
+#  basket_id    :uuid
 #  item_id      :uuid
 #  librarian_id :integer          not null
 #  created_at   :datetime         not null

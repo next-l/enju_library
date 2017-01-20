@@ -1,21 +1,7 @@
-# == Schema Information
-#
-# Table name: request_types
-#
-#  id           :integer          not null, primary key
-#  name         :string           not null
-#  display_name :text
-#  note         :text
-#  position     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 require 'rails_helper'
 require 'sunspot/rails/spec_helper'
 
 describe RequestTypesController do
-  fixtures :users, :profiles, :manifestations
   fixtures :all
   disconnect_sunspot
 

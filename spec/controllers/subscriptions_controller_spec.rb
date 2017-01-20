@@ -1,23 +1,7 @@
-# == Schema Information
-#
-# Table name: subscriptions
-#
-#  id               :integer          not null, primary key
-#  title            :text             not null
-#  note             :text
-#  user_id          :integer
-#  order_list_id    :integer
-#  deleted_at       :datetime
-#  subscribes_count :integer          default(0), not null
-#  created_at       :datetime
-#  updated_at       :datetime
-#
-
 require 'rails_helper'
 require 'sunspot/rails/spec_helper'
 
 describe SubscriptionsController do
-  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   def valid_attributes

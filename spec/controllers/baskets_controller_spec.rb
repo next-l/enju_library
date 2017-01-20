@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: baskets
-#
-#  id           :integer          not null, primary key
-#  user_id      :integer
-#  note         :text
-#  lock_version :integer          default(0), not null
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
 require 'rails_helper'
 
 describe BasketsController do
@@ -66,8 +54,8 @@ describe BasketsController do
       login_fixture_admin
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
       end
     end
 
@@ -75,8 +63,8 @@ describe BasketsController do
       login_fixture_librarian
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
       end
     end
 
@@ -84,16 +72,16 @@ describe BasketsController do
       login_fixture_user
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
         response.should be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -324,11 +312,11 @@ describe BasketsController do
 
       describe 'with valid params' do
         it 'updates the requested basket' do
-          put :update, params: { id: 8, basket: @attrs }
+          put :update, params: { id: baskets(:basket_00008).id, basket: @attrs }
         end
 
         it 'assigns the requested basket as @basket' do
-          put :update, params: { id: 8, basket: @attrs }
+          put :update, params: { id: baskets(:basket_00008).id, basket: @attrs }
           assigns(:basket).checkouts.order('created_at DESC').first.item.circulation_status.name.should eq 'On Loan'
           response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
         end
@@ -345,12 +333,12 @@ describe BasketsController do
       login_fixture_admin
 
       it 'should destroy basket without user_id' do
-        delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
+        delete :destroy, params: { id: baskets(:basket_00001).id, basket: { user_id: nil }, user_id: users(:user1).username }
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
 
       it 'should destroy basket' do
-        delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
+        delete :destroy, params: { id: baskets(:basket_00001).id, basket: {}, user_id: users(:user1).username }
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
     end
@@ -359,12 +347,12 @@ describe BasketsController do
       login_fixture_librarian
 
       it 'should destroy basket without user_id' do
-        delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
+        delete :destroy, params: { id: baskets(:basket_00001).id, basket: { user_id: nil }, user_id: users(:user1).username }
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
 
       it 'should destroy basket' do
-        delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
+        delete :destroy, params: { id: baskets(:basket_00001).id, basket: {}, user_id: users(:user1).username }
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
     end
@@ -373,7 +361,7 @@ describe BasketsController do
       login_fixture_user
 
       it 'should not destroy basket' do
-        delete :destroy, params: { id: 3, user_id: users(:user1).username }
+        delete :destroy, params: { id: baskets(:basket_00003).id, user_id: users(:user1).username }
         response.should be_forbidden
       end
     end

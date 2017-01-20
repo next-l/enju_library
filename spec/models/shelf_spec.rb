@@ -14,7 +14,7 @@ end
 #
 # Table name: shelves
 #
-#  id                        :integer          not null, primary key
+#  id                        :uuid             not null, primary key
 #  name                      :string           not null
 #  display_name_translations :jsonb
 #  note                      :text

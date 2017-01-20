@@ -1,6 +1,6 @@
 class CreateShelves < ActiveRecord::Migration[5.0]
   def change
-    create_table :shelves do |t|
+    create_table :shelves, id: :uuid, default: 'gen_random_uuid()' do |t|
       t.string :name, index: {unique: true}, null: false
       t.jsonb :display_name_translations
       t.text :note
