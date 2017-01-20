@@ -310,21 +310,15 @@ end
 #
 # Table name: user_import_files
 #
-#  id                       :integer          not null, primary key
-#  user_id                  :integer
-#  note                     :text
-#  executed_at              :datetime
-#  user_import_file_name    :string
-#  user_import_content_type :string
-#  user_import_file_size    :string
-#  user_import_updated_at   :datetime
-#  user_import_fingerprint  :string
-#  edit_mode                :string
-#  error_message            :text
-#  created_at               :datetime
-#  updated_at               :datetime
-#  user_encoding            :string
-#  default_library_id       :integer
-#  default_user_group_id    :integer
-#  attachment_data          :jsonb
+#  id                    :integer          not null, primary key
+#  user_id               :integer          not null
+#  note                  :text
+#  edit_mode             :string
+#  error_message         :text
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  user_encoding         :string
+#  default_library_id    :integer
+#  default_user_group_id :integer
+#  attachment_data       :jsonb
 #

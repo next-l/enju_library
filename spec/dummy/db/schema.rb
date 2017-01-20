@@ -19,11 +19,12 @@ ActiveRecord::Schema.define(version: 20170116152012) do
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
     t.uuid     "item_id"
-    t.integer  "librarian_id"
+    t.integer  "librarian_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["basket_id"], name: "index_accepts_on_basket_id", using: :btree
     t.index ["item_id"], name: "index_accepts_on_item_id", using: :btree
+    t.index ["librarian_id"], name: "index_accepts_on_librarian_id", using: :btree
   end
 
   create_table "agent_import_file_transitions", force: :cascade do |t|
@@ -1409,11 +1410,12 @@ ActiveRecord::Schema.define(version: 20170116152012) do
   end
 
   create_table "user_export_files", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",         null: false
     t.datetime "executed_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.jsonb    "attachment_data"
+    t.index ["user_id"], name: "index_user_export_files_on_user_id", using: :btree
   end
 
   create_table "user_group_has_checkout_types", force: :cascade do |t|
@@ -1471,30 +1473,27 @@ ActiveRecord::Schema.define(version: 20170116152012) do
   end
 
   create_table "user_import_files", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",               null: false
     t.text     "note"
-    t.datetime "executed_at"
-    t.string   "user_import_file_name"
-    t.string   "user_import_content_type"
-    t.string   "user_import_file_size"
-    t.datetime "user_import_updated_at"
-    t.string   "user_import_fingerprint"
     t.string   "edit_mode"
     t.text     "error_message"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.string   "user_encoding"
     t.integer  "default_library_id"
     t.integer  "default_user_group_id"
     t.jsonb    "attachment_data"
+    t.index ["user_id"], name: "index_user_import_files_on_user_id", using: :btree
   end
 
   create_table "user_import_results", force: :cascade do |t|
-    t.integer  "user_import_file_id"
-    t.integer  "user_id"
+    t.integer  "user_import_file_id", null: false
+    t.integer  "user_id",             null: false
     t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["user_id"], name: "index_user_import_results_on_user_id", using: :btree
+    t.index ["user_import_file_id"], name: "index_user_import_results_on_user_import_file_id", using: :btree
   end
 
   create_table "user_reserve_stat_transitions", force: :cascade do |t|
@@ -1552,15 +1551,17 @@ ActiveRecord::Schema.define(version: 20170116152012) do
   create_table "withdraws", force: :cascade do |t|
     t.integer  "basket_id"
     t.uuid     "item_id"
-    t.integer  "librarian_id"
+    t.integer  "librarian_id", null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.index ["basket_id"], name: "index_withdraws_on_basket_id", using: :btree
     t.index ["item_id"], name: "index_withdraws_on_item_id", using: :btree
+    t.index ["librarian_id"], name: "index_withdraws_on_librarian_id", using: :btree
   end
 
   add_foreign_key "accepts", "baskets", on_delete: :nullify
   add_foreign_key "accepts", "items"
+  add_foreign_key "accepts", "users", column: "librarian_id"
   add_foreign_key "agent_import_files", "users"
   add_foreign_key "baskets", "users"
   add_foreign_key "carrier_type_has_checkout_types", "carrier_types"
@@ -1608,11 +1609,16 @@ ActiveRecord::Schema.define(version: 20170116152012) do
   add_foreign_key "shelves", "libraries"
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "user_export_files", "users"
   add_foreign_key "user_group_has_checkout_types", "checkout_types"
   add_foreign_key "user_group_has_checkout_types", "user_groups"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users", on_delete: :cascade
+  add_foreign_key "user_import_files", "users"
+  add_foreign_key "user_import_results", "user_import_files"
+  add_foreign_key "user_import_results", "users"
   add_foreign_key "users", "profiles", on_delete: :cascade
   add_foreign_key "withdraws", "baskets", on_delete: :nullify
   add_foreign_key "withdraws", "items"
+  add_foreign_key "withdraws", "users", column: "librarian_id"
 end

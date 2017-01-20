@@ -43,9 +43,9 @@ end
 # Table name: user_export_files
 #
 #  id              :integer          not null, primary key
-#  user_id         :integer
+#  user_id         :integer          not null
 #  executed_at     :datetime
-#  created_at      :datetime
-#  updated_at      :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #  attachment_data :jsonb
 #
