@@ -46,7 +46,7 @@ RSpec.describe WithdrawsController, type: :controller do
       login_fixture_admin
       it 'assigns all withdraws as @withdraws' do
         withdraw = Withdraw.create! valid_attributes
-        get :index, params: { basket_id: 1 }
+        get :index, params: { basket_id: baskets(:basket_00001).id }
         expect(assigns(:withdraws)).to eq baskets(:basket_00001).withdraws.order('withdraws.created_at DESC').page(1)
       end
     end

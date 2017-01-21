@@ -317,7 +317,7 @@ describe BasketsController do
 
         it 'assigns the requested basket as @basket' do
           put :update, params: { id: baskets(:basket_00008).id, basket: @attrs }
-          assigns(:basket).checkouts.order('created_at DESC').first.item.circulation_status.name.should eq 'On Loan'
+          assigns(:basket).user.checkouts.order('created_at DESC').first.item.circulation_status.name.should eq 'On Loan'
           response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
         end
       end
