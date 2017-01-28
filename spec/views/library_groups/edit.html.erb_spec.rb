@@ -12,6 +12,7 @@ describe "library_groups/edit" do
     expect(rendered).to have_css "select#library_group_book_jacket_source"
     expect(rendered).to have_css "select#library_group_book_jacket_source option", minimum: 2
     expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="google"]'
+    expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="openbd"]'
     expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="hanmotocom"]'
   end
 end
