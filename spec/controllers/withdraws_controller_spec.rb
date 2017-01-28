@@ -79,25 +79,25 @@ RSpec.describe WithdrawsController, type: :controller do
       context 'with valid params' do
         it 'creates a new Withdraw' do
           expect do
-            post :create, params: valid_create_attributes
+            post :create, valid_create_attributes
           end.to change(Withdraw, :count).by(1)
           expect(assigns(:withdraw)).to be_persisted
         end
 
         it 'assigns a newly created withdraw as @withdraw' do
-          post :create, params: valid_create_attributes
+          post :create, valid_create_attributes
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(assigns(:withdraw)).to be_persisted
         end
 
         it 'redirects to the created withdraw' do
-          post :create, params: valid_create_attributes
+          post :create, valid_create_attributes
           expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
         end
 
         it 'should not withdraw a checked-out item' do
           post :create, basket_id: valid_create_attributes[:basket_id],
-                         withdraw: { item_identifier: '00001' }
+            withdraw: { item_identifier: '00001' }
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(response).to be_success
         end
