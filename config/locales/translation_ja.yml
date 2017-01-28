@@ -128,4 +128,5 @@ ja:
     successfully_withdrawn: "この資料は正常に除籍されました。"
   book_jacket:
     google: Googleブックス
+    openbd: openBD
     hanmotocom: 版元ドットコム
