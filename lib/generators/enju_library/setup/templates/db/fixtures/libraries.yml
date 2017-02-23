@@ -1,24 +1,22 @@
 --- 
 library_00001: 
   name: web
-  short_display_name: {"en": "web", "ja": "web"}
-  display_name: {"en": "World Wide Web", "ja": "ウェブ"}
+  short_display_name_translations: {"en": "web", "ja": "web"}
+  display_name_translations: {"en": "World Wide Web", "ja": "ウェブ"}
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 
-  id: 1
   region: 
   library_group_id: 1
   call_number_delimiter: "|"
   position: 1
 library_00002: 
   name: yours
-  short_display_name: {"en": "enju_library"}
-  display_name: {"en": "Enju Library", "ja": "えんじゅ図書館"}
+  short_display_name_translations: {"en": "enju_library"}
+  display_name_translations: {"en": "Enju Library", "ja": "えんじゅ図書館"}
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 
-  id: 2
   region: Ibaraki
   locality: Tsukuba
   library_group_id: 1

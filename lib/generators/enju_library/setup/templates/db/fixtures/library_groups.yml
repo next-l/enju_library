@@ -5,5 +5,5 @@ library_group_00001:
   short_name: enju
   note: 
   my_networks: "0.0.0.0/0"
-  login_banner: Next-L Enju, an open-source integrated library system. You can edit this message after logging in as Administrator.
+  login_banner_translations: Next-L Enju, an open-source integrated library system. You can edit this message after logging in as Administrator.
   admin_networks: "0.0.0.0/0"
