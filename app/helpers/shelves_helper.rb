@@ -1,23 +1,6 @@
-# == Schema Information
-#
-# Table name: shelves
-#
-#  id           :integer          not null, primary key
-#  name         :string           not null
-#  display_name :text
-#  note         :text
-#  library_id   :integer          default(1), not null
-#  items_count  :integer          default(0), not null
-#  position     :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  deleted_at   :datetime
-#  closed       :boolean          default(FALSE), not null
-#
-
 module ShelvesHelper
   def library_shelf_facet(current_library, facet)
-    library = Library.where(name: facet.value).select([:name, :display_name]).first
+    library = Library.where(name: facet.value).select([:name, :display_name_translations]).first
     return nil unless library
     current = true if current_library.try(:name) == library.name
     content_tag :li do
