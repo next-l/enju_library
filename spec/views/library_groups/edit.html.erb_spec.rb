@@ -15,4 +15,11 @@ describe "library_groups/edit" do
     expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="openbd"]'
     expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="hanmotocom"]'
   end
+
+  it "renders color forms." do
+    render
+    expect(rendered).to have_css "input#library_group_colors_attributes_0_code"
+    expect(rendered).not_to have_css "input#library_group_colors_attributes_0__destroy", visible: false
+    expect(rendered).not_to have_xpath '//a[@data-association="color" and @class="add_fields"]'
+  end
 end

@@ -54,9 +54,6 @@
     <%= f.fields_for :colors do |color_form| %>
       <%= render 'color_fields', f: color_form %>
     <% end %>
-    <div class="links">
-      <p><%= link_to_add_association t('page.add'), f, :colors %></p>
-    </div>
   </div>
 
   <div class="field">
