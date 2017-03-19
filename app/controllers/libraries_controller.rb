@@ -53,6 +53,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/new
   def new
     @library = Library.new
+    @library.library_group = LibraryGroup.first
     @library.country = LibraryGroup.site_config.country
     prepare_options
 
