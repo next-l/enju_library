@@ -17,12 +17,12 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
   s.add_dependency "enju_seed", "~> 0.2.0"
-  s.add_dependency "paper_trail", "~> 6.0"
+  s.add_dependency "paper_trail", "~> 7.0"
   s.add_dependency "geocoder"
   s.add_dependency "statesman"
   s.add_dependency "paperclip"
 
-  s.add_development_dependency "globalize", "~> 5.0.1"
+  s.add_development_dependency "globalize", "~> 5.1.0.beta1"
   s.add_development_dependency "globalize-accessors"
   s.add_development_dependency "enju_leaf", "~> 1.2.0"
   s.add_development_dependency "enju_biblio", "~> 0.2.0"
