@@ -9,4 +9,5 @@ appraise "rails-5.0" do
   gem 'activemodel-serializers-xml'
   gem 'rails-controller-testing'
   gem 'sinatra', '~> 2.0.0.rc2'
+  gem 'globalize', '~> 5.1.0.beta1'
 end

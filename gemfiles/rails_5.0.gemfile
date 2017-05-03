@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 
 gem "jquery-rails"
+gem "globalize", "~> 5.1.0.beta1"
 gem "rails", "~> 5.0.2"
 gem "statesman", "~> 2.0"
 gem "activemodel-serializers-xml"

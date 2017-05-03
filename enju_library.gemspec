@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  s.add_dependency "enju_seed", "~> 0.2.0"
+  s.add_dependency "enju_seed", "~> 0.2.1"
   s.add_dependency "paper_trail", "~> 7.0"
   s.add_dependency "geocoder"
   s.add_dependency "statesman"
@@ -43,4 +43,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "coveralls"
   s.add_development_dependency "appraisal"
   s.add_development_dependency "capybara"
+  s.add_development_dependency "annotate"
 end
