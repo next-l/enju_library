@@ -40,7 +40,7 @@ describe BudgetTypesController do
   describe 'GET show' do
     it 'assigns the requested budget_type as @budget_type' do
       budget_type = BudgetType.create! valid_attributes
-      get :show, params: { id: budget_type.id }
+      get :show, id: budget_type.id
       assigns(:budget_type).should eq(budget_type)
     end
   end
@@ -55,7 +55,7 @@ describe BudgetTypesController do
   describe 'GET edit' do
     it 'assigns the requested budget_type as @budget_type' do
       budget_type = BudgetType.create! valid_attributes
-      get :edit, params: { id: budget_type.id }
+      get :edit, id: budget_type.id
       assigns(:budget_type).should eq(budget_type)
     end
   end
@@ -64,18 +64,18 @@ describe BudgetTypesController do
     describe 'with valid params' do
       it 'creates a new BudgetType' do
         expect do
-          post :create, params: { budget_type: valid_attributes }
+          post :create, budget_type: valid_attributes
         end.to change(BudgetType, :count).by(1)
       end
 
       it 'assigns a newly created budget_type as @budget_type' do
-        post :create, params: { budget_type: valid_attributes }
+        post :create, budget_type: valid_attributes
         assigns(:budget_type).should be_a(BudgetType)
         assigns(:budget_type).should be_persisted
       end
 
       it 'redirects to the created budget_type' do
-        post :create, params: { budget_type: valid_attributes }
+        post :create, budget_type: valid_attributes
         response.should redirect_to(BudgetType.last)
       end
     end
@@ -84,14 +84,14 @@ describe BudgetTypesController do
       it 'assigns a newly created but unsaved budget_type as @budget_type' do
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        post :create, params: { budget_type: { note: 'test' } }
+        post :create, budget_type: { note: 'test' }
         assigns(:budget_type).should be_a_new(BudgetType)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        post :create, params: { budget_type: { note: 'test' } }
+        post :create, budget_type: { note: 'test' }
         # response.should render_template("new")
       end
     end
@@ -106,25 +106,25 @@ describe BudgetTypesController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         BudgetType.any_instance.should_receive(:update_attributes).with('note' => 'test')
-        put :update, params: { id: budget_type.id, budget_type: { note: 'test' } }
+        put :update, id: budget_type.id, budget_type: { note: 'test' }
       end
 
       it 'assigns the requested budget_type as @budget_type' do
         budget_type = BudgetType.create! valid_attributes
-        put :update, params: { id: budget_type.id, budget_type: valid_attributes }
+        put :update, id: budget_type.id, budget_type: valid_attributes
         assigns(:budget_type).should eq(budget_type)
       end
 
       it 'redirects to the budget_type' do
         budget_type = BudgetType.create! valid_attributes
-        put :update, params: { id: budget_type.id, budget_type: valid_attributes }
+        put :update, id: budget_type.id, budget_type: valid_attributes
         response.should redirect_to(budget_type)
       end
 
       it 'moves its position when specified' do
         budget_type = BudgetType.create! valid_attributes
         position = budget_type.position
-        put :update, params: { id: budget_type.id, move: 'higher' }
+        put :update, id: budget_type.id, move: 'higher'
         response.should redirect_to budget_types_url
         budget_type.reload
         budget_type.position.should eq position - 1
@@ -136,7 +136,7 @@ describe BudgetTypesController do
         budget_type = BudgetType.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        put :update, params: { id: budget_type.id, budget_type: { note: 'test' } }
+        put :update, id: budget_type.id, budget_type: { note: 'test' }
         assigns(:budget_type).should eq(budget_type)
       end
 
@@ -144,7 +144,7 @@ describe BudgetTypesController do
         budget_type = BudgetType.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         BudgetType.any_instance.stub(:save).and_return(false)
-        put :update, params: { id: budget_type.id, budget_type: { note: 'test' } }
+        put :update, id: budget_type.id, budget_type: { note: 'test' }
         # response.should render_template("edit")
       end
     end
@@ -154,13 +154,13 @@ describe BudgetTypesController do
     it 'destroys the requested budget_type' do
       budget_type = BudgetType.create! valid_attributes
       expect do
-        delete :destroy, params: { id: budget_type.id }
+        delete :destroy, id: budget_type.id
       end.to change(BudgetType, :count).by(-1)
     end
 
     it 'redirects to the budget_types list' do
       budget_type = BudgetType.create! valid_attributes
-      delete :destroy, params: { id: budget_type.id }
+      delete :destroy, id: budget_type.id
       response.should redirect_to(budget_types_url)
     end
   end

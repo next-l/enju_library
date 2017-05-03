@@ -8,7 +8,7 @@ describe BasketsController do
       login_fixture_admin
 
       it 'assigns all baskets as @baskets' do
-        get :index, params: { user_id: users(:user1).username }
+        get :index, user_id: users(:user1).username
         assigns(:baskets).should_not be_empty
         response.should be_success
       end
@@ -23,7 +23,7 @@ describe BasketsController do
       login_fixture_librarian
 
       it 'assigns all baskets as @baskets' do
-        get :index, params: { user_id: users(:user1).username }
+        get :index, user_id: users(:user1).username
         assigns(:baskets).should_not be_empty
         response.should be_success
       end
@@ -33,7 +33,7 @@ describe BasketsController do
       login_fixture_user
 
       it 'assigns all baskets as @baskets' do
-        get :index, params: { user_id: users(:user1).username }
+        get :index, user_id: users(:user1).username
         assigns(:baskets).should be_nil
         response.should be_forbidden
       end
@@ -41,7 +41,7 @@ describe BasketsController do
 
     describe 'When not logged in' do
       it 'assigns all baskets as @baskets' do
-        get :index, params: { user_id: users(:user1).username }
+        get :index, user_id: users(:user1).username
         assigns(:baskets).should be_nil
         response.should redirect_to(new_user_session_url)
       end
@@ -53,7 +53,7 @@ describe BasketsController do
       login_fixture_admin
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
+        get :show, id: 1, user_id: users(:admin).username
         assigns(:basket).should eq(Basket.find(1))
       end
     end
@@ -62,7 +62,7 @@ describe BasketsController do
       login_fixture_librarian
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
+        get :show, id: 1, user_id: users(:admin).username
         assigns(:basket).should eq(Basket.find(1))
       end
     end
@@ -71,7 +71,7 @@ describe BasketsController do
       login_fixture_user
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
+        get :show, id: 1, user_id: users(:admin).username
         assigns(:basket).should eq(Basket.find(1))
         response.should be_forbidden
       end
@@ -79,7 +79,7 @@ describe BasketsController do
 
     describe 'When not logged in' do
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
+        get :show, id: 1, user_id: users(:admin).username
         assigns(:basket).should eq(Basket.find(1))
         response.should redirect_to(new_user_session_url)
       end
@@ -132,7 +132,7 @@ describe BasketsController do
       end
 
       it 'assigns the requested basket as @basket' do
-        get :edit, params: { id: @basket.id }
+        get :edit, id: @basket.id
         assigns(:basket).should eq(@basket)
       end
     end
@@ -144,7 +144,7 @@ describe BasketsController do
       end
 
       it 'assigns the requested basket as @basket' do
-        get :edit, params: { id: @basket.id }
+        get :edit, id: @basket.id
         assigns(:basket).should eq(@basket)
       end
     end
@@ -156,7 +156,7 @@ describe BasketsController do
       end
 
       it 'should not assign the requested basket as @basket' do
-        get :edit, params: { id: @basket.id }
+        get :edit, id: @basket.id
         assigns(:basket).should eq(@basket)
         response.should be_forbidden
       end
@@ -168,7 +168,7 @@ describe BasketsController do
       end
 
       it 'should not assign the requested basket as @basket' do
-        get :edit, params: { id: @basket.id }
+        get :edit, id: @basket.id
         assigns(:basket).should eq(@basket)
         response.should redirect_to new_user_session_url
       end
@@ -186,21 +186,21 @@ describe BasketsController do
 
       describe 'with valid params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: { user_number: users(:user1).profile.user_number } }
+          post :create, basket: { user_number: users(:user1).profile.user_number }
           assigns(:basket).should be_valid
         end
       end
 
       describe 'with blank params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: { note: 'test' } }
+          post :create, basket: { note: 'test' }
           assigns(:basket).should_not be_valid
         end
       end
 
       describe 'with invalid params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: @invalid_attrs }
+          post :create, basket: @invalid_attrs
           assigns(:basket).should_not be_valid
         end
       end
@@ -211,53 +211,53 @@ describe BasketsController do
 
       describe 'with valid params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: { user_number: users(:user1).profile.user_number } }
+          post :create, basket: { user_number: users(:user1).profile.user_number }
           assigns(:basket).should be_valid
         end
       end
 
       describe 'with blank params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: { note: 'test' } }
+          post :create, basket: { note: 'test' }
           assigns(:basket).should_not be_valid
         end
       end
 
       describe 'with invalid params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: @invalid_attrs }
+          post :create, basket: @invalid_attrs
           assigns(:basket).should_not be_valid
         end
       end
 
       it 'should not create basket when user is suspended' do
-        post :create, params: { basket: { user_number: users(:user4).profile.user_number } }
+        post :create, basket: { user_number: users(:user4).profile.user_number }
         assigns(:basket).should_not be_valid
         assigns(:basket).errors['base'].include?(I18n.t('basket.this_account_is_suspended')).should be_truthy
         response.should be_success
       end
 
       it 'should not create basket when user is not found' do
-        post :create, params: { basket: { user_number: 'not found' } }
+        post :create, basket: { user_number: 'not found' }
         assigns(:basket).should_not be_valid
         assigns(:basket).errors['base'].include?(I18n.t('user.not_found')).should be_truthy
         response.should be_success
       end
 
       it 'should not create basket without user_number' do
-        post :create, params: { basket: { note: 'test' } }
+        post :create, basket: { note: 'test' }
         assigns(:basket).should_not be_valid
         response.should be_success
       end
 
       it 'should create basket' do
-        post :create, params: { basket: { user_number: users(:user1).profile.user_number } }
+        post :create, basket: { user_number: users(:user1).profile.user_number }
         assigns(:basket).should be_valid
         response.should redirect_to new_checked_item_url(basket_id: assigns(:basket).id)
       end
 
       it 'should not create basket without user_number' do
-        post :create, params: { basket: { note: 'test' } }
+        post :create, basket: { note: 'test' }
         assigns(:basket).should_not be_valid
         response.should be_success
       end
@@ -268,18 +268,18 @@ describe BasketsController do
 
       describe 'with valid params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: { user_number: users(:user1).profile.user_number } }
+          post :create, basket: { user_number: users(:user1).profile.user_number }
           assigns(:basket).should be_nil
         end
 
         it 'should be forbidden' do
-          post :create, params: { basket: { user_number: users(:user1).profile.user_number } }
+          post :create, basket: { user_number: users(:user1).profile.user_number }
           response.should be_forbidden
         end
       end
 
       it 'should not create basket' do
-        post :create, params: { basket: { user_number: users(:user1).profile.user_number } }
+        post :create, basket: { user_number: users(:user1).profile.user_number }
         response.should be_forbidden
       end
     end
@@ -287,12 +287,12 @@ describe BasketsController do
     describe 'When not logged in' do
       describe 'with blank params' do
         it 'assigns a newly created basket as @basket' do
-          post :create, params: { basket: { note: 'test' } }
+          post :create, basket: { note: 'test' }
           assigns(:basket).should be_nil
         end
 
         it 'should be redirected to new_user_session_url' do
-          post :create, params: { basket: { note: 'test' } }
+          post :create, basket: { note: 'test' }
           assigns(:basket).should be_nil
           assert_response :redirect
           response.should redirect_to new_user_session_url
@@ -311,11 +311,11 @@ describe BasketsController do
 
       describe 'with valid params' do
         it 'updates the requested basket' do
-          put :update, params: { id: 8, basket: @attrs }
+          put :update, id: 8, basket: @attrs
         end
 
         it 'assigns the requested basket as @basket' do
-          put :update, params: { id: 8, basket: @attrs }
+          put :update, id: 8, basket: @attrs
           assigns(:basket).checkouts.order('created_at DESC').first.item.circulation_status.name.should eq 'On Loan'
           response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
         end
@@ -332,12 +332,12 @@ describe BasketsController do
       login_fixture_admin
 
       it 'should destroy basket without user_id' do
-        delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
+        delete :destroy, id: 1, basket: { user_id: nil }, user_id: users(:user1).username
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
 
       it 'should destroy basket' do
-        delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
+        delete :destroy, id: 1, basket: {}, user_id: users(:user1).username
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
     end
@@ -346,12 +346,12 @@ describe BasketsController do
       login_fixture_librarian
 
       it 'should destroy basket without user_id' do
-        delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
+        delete :destroy, id: 1, basket: { user_id: nil }, user_id: users(:user1).username
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
 
       it 'should destroy basket' do
-        delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
+        delete :destroy, id: 1, basket: {}, user_id: users(:user1).username
         response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
       end
     end
@@ -360,18 +360,18 @@ describe BasketsController do
       login_fixture_user
 
       it 'should not destroy basket' do
-        delete :destroy, params: { id: 3, user_id: users(:user1).username }
+        delete :destroy, id: 3, user_id: users(:user1).username
         response.should be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'destroys the requested basket' do
-        delete :destroy, params: { id: @basket.id }
+        delete :destroy, id: @basket.id
       end
 
       it 'should be forbidden' do
-        delete :destroy, params: { id: @basket.id }
+        delete :destroy, id: @basket.id
         response.should redirect_to new_user_session_url
       end
     end

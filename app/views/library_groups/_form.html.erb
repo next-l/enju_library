@@ -45,7 +45,7 @@
   <% if defined?(EnjuManifestationViewer) %>
     <div class="field">
       <%= f.label :book_jacket_source -%>
-      <%= f.select :book_jacket_source, [[t('book_jacket.google'), 'google'], [t('book_jacket.hanmotocom'), 'hanmotocom']] -%><br />
+      <%= f.select :book_jacket_source, [[t('book_jacket.google'), 'google'], [t('book_jacket.openbd'), 'openbd'], [t('book_jacket.hanmotocom'), 'hanmotocom']] -%><br />
     </div>
   <% end %>
 
@@ -54,9 +54,6 @@
     <%= f.fields_for :colors do |color_form| %>
       <%= render 'color_fields', f: color_form %>
     <% end %>
-    <div class="links">
-      <p><%= link_to_add_association t('page.add'), f, :colors %></p>
-    </div>
   </div>
 
   <div class="field">

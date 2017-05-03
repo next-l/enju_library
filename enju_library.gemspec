@@ -17,16 +17,16 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
   s.add_dependency "enju_seed", "~> 0.2.0"
-  s.add_dependency "paper_trail", "~> 5.2"
+  s.add_dependency "paper_trail", "~> 7.0"
   s.add_dependency "geocoder"
   s.add_dependency "statesman"
   s.add_dependency "paperclip"
 
-  s.add_development_dependency "globalize", "~> 5.0.1"
+  s.add_development_dependency "globalize", "~> 5.1.0.beta1"
   s.add_development_dependency "globalize-accessors"
   s.add_development_dependency "enju_leaf", "~> 1.2.0"
-  s.add_development_dependency "enju_biblio", "~> 0.2.0"
-  s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0.beta.3"
+  s.add_development_dependency "enju_biblio", "~> 0.2.1"
+  s.add_development_dependency "enju_manifestation_viewer", "~> 0.2.0"
   s.add_development_dependency "enju_ndl", "~> 0.2.0"
   s.add_development_dependency "enju_event", "~> 0.2.0"
   s.add_development_dependency "enju_circulation", "~> 0.2.0"
@@ -36,7 +36,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rspec-rails", "~> 3.5"
   s.add_development_dependency "factory_girl_rails"
   s.add_development_dependency "sunspot_solr", "2.2.0"
-  s.add_development_dependency "annotate"
   s.add_development_dependency "simplecov"
   s.add_development_dependency "kramdown"
   s.add_development_dependency "sunspot-rails-tester"
