@@ -1,9 +1,0 @@
-= form_for @withdraw, html: {method: :post, class: 'form-inline'}, url: withdraws_path(basket_id: @basket.id), remote: true do |f|
-  = f.error_messages
-  .form-group
-    => f.label :item_identifier
-    => f.text_field :item_identifier, class: 'form-control'
-  .form-group
-    => f.submit class: 'btn btn-default'
-  = javascript_tag("$(function(){$('#withdraw_item_identifier').focus().select()})")
-
