@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170121173222) do
+ActiveRecord::Schema.define(version: 20170305064014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -766,6 +766,7 @@ ActiveRecord::Schema.define(version: 20170121173222) do
     t.string   "screenshot_generator"
     t.integer  "pub_year_facet_range_interval", default: 10
     t.integer  "user_id"
+    t.boolean  "csv_charset_conversion",        default: false,                    null: false
     t.index ["name"], name: "index_library_groups_on_name", unique: true, using: :btree
     t.index ["short_name"], name: "index_library_groups_on_short_name", unique: true, using: :btree
     t.index ["user_id"], name: "index_library_groups_on_user_id", using: :btree
