@@ -8,6 +8,7 @@ describe "budget_types/show" do
       :note => "MyText",
       :position => 1
     ))
+    allow(view).to receive(:policy).and_return double(create?: true, update?: true, destroy?: true)
   end
 
   it "renders attributes in <p>" do

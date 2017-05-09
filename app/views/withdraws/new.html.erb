@@ -10,6 +10,6 @@
 <div id="submenu" class="ui-corner-all ui-widget-content">
   <ul>
     <li><%= link_to t('page.listing', model: t('activerecord.models.withdraw')), withdraws_path -%></li>
-    <li><%= link_to t('page.listing', model: t('activerecord.attributes.withdraw.removed_items', status: CirculationStatus.where(name: 'Removed').first.display_name.localize) + t('activerecord.models.item')), items_path(circulation_status: 'Removed')  -%></li>
+    <li><%= link_to t('page.listing', model: t('activerecord.attributes.withdraw.removed_items', status: CirculationStatus.where(name: 'Removed').first.display_name) + t('activerecord.models.item')), items_path(circulation_status: 'Removed')  -%></li>
   </ul>
 </div>

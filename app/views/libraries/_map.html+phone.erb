@@ -12,10 +12,10 @@
     var marker = new google.maps.Marker({
 position: latlng,
       map: map,
-      title: '<%= library.display_name.localize %>'
+      title: '<%= library.display_name %>'
     });
     var infowindow = new google.maps.InfoWindow({
-      content: '<%= library.display_name.localize %>'
+      content: '<%= library.display_name %>'
     });
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(map,marker);
