@@ -107,7 +107,7 @@ module EnjuLibrary
     def set_available_languages
       if Rails.env == 'production'
         @available_languages = Rails.cache.fetch('available_languages'){
-          Language.where(iso_639_1: I18n.available_locales.map{|l| l.to_s}).select([:id, :iso_639_1, :name, :native_name, :display_name_translations, :position]).all
+          Language.where(iso_639_1: I18n.available_locales.map{|l| l.to_s})
         }
       else
         @available_languages = Language.where(iso_639_1: I18n.available_locales.map{|l| l.to_s})
