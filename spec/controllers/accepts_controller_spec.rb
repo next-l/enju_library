@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AcceptsController, type: :controller do
   fixtures :users, :profiles, :manifestations, :libraries, :items, :baskets,
-    :user_groups, :subscriptions
+           :user_groups, :subscriptions
   fixtures :all
 
   def mock_user(stubs = {})
