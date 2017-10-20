@@ -53,7 +53,7 @@ class Library < ActiveRecord::Base
   end
 
   def web?
-    return true if id == 1
+    return true if name == 'web'
     false
   end
 
