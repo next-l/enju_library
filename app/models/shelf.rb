@@ -1,6 +1,6 @@
 class Shelf < ActiveRecord::Base
   #include MasterModel
-  scope :real, -> { where('library_id != 1') }
+  scope :real, -> { where(library: Library.real) }
   belongs_to :library
   has_many :items
   has_many :picture_files, as: :picture_attachable, dependent: :destroy
