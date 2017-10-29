@@ -77,4 +77,6 @@ end
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
 #  user_id                       :integer
+#  csv_charset_conversion        :boolean          default(FALSE), not null
+#  header_logo_data              :jsonb
 #
