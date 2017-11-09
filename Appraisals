@@ -1,12 +1,12 @@
 appraise "rails-4.2" do
-  gem "rails", "~> 4.2.8"
+  gem "rails", "~> 4.2.10"
   gem 'statesman', '~> 1.3'
 end
 
 appraise "rails-5.0" do
-  gem "rails", "~> 5.0.2"
+  gem "rails", "~> 5.0.6"
   gem 'statesman', '~> 2.0'
   gem 'activemodel-serializers-xml'
   gem 'rails-controller-testing'
-  gem 'globalize', '~> 5.1.0.beta1'
+  gem 'globalize', '~> 5.1.0.beta2'
 end
