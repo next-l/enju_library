@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820004638) do
+ActiveRecord::Schema.define(version: 20171014084528) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
@@ -776,6 +776,11 @@ ActiveRecord::Schema.define(version: 20160820004638) do
     t.string   "screenshot_generator"
     t.integer  "pub_year_facet_range_interval", default: 10
     t.integer  "user_id"
+    t.boolean  "csv_charset_conversion",        default: false,                    null: false
+    t.string   "header_logo_file_name"
+    t.string   "header_logo_content_type"
+    t.integer  "header_logo_file_size"
+    t.datetime "header_logo_updated_at"
   end
 
   add_index "library_groups", ["short_name"], name: "index_library_groups_on_short_name"
