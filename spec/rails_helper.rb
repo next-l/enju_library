@@ -70,6 +70,7 @@ RSpec.configure do |config|
   config.before :each, :solr => true do
     Sunspot::Rails::Tester.start_original_sunspot_session
     Sunspot.session = $original_sunspot_session
+    Sunspot.config.solr.url = 'http://127.0.0.1:8981/solr/test'
     Sunspot.remove_all!
   end
 end
