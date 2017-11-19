@@ -6,12 +6,12 @@ describe BookstoresController do
   disconnect_sunspot
 
   def valid_attributes
-    FactoryGirl.attributes_for(:bookstore)
+    FactoryBot.attributes_for(:bookstore)
   end
 
   describe 'GET index' do
     before(:each) do
-      FactoryGirl.create(:bookstore)
+      FactoryBot.create(:bookstore)
     end
 
     describe 'When logged in as Administrator' do
@@ -53,7 +53,7 @@ describe BookstoresController do
 
   describe 'GET show' do
     before(:each) do
-      @bookstore = FactoryGirl.create(:bookstore)
+      @bookstore = FactoryBot.create(:bookstore)
     end
 
     describe 'When logged in as Administrator' do
@@ -133,7 +133,7 @@ describe BookstoresController do
 
   describe 'GET edit' do
     before(:each) do
-      @bookstore = FactoryGirl.create(:bookstore)
+      @bookstore = FactoryBot.create(:bookstore)
     end
 
     describe 'When logged in as Administrator' do
@@ -290,7 +290,7 @@ describe BookstoresController do
 
   describe 'PUT update' do
     before(:each) do
-      @bookstore = FactoryGirl.create(:bookstore)
+      @bookstore = FactoryBot.create(:bookstore)
       @attrs = valid_attributes
       @invalid_attrs = { name: '' }
     end
@@ -391,7 +391,7 @@ describe BookstoresController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @bookstore = FactoryGirl.create(:bookstore)
+      @bookstore = FactoryBot.create(:bookstore)
     end
 
     describe 'When logged in as Administrator' do

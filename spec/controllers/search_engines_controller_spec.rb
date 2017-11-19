@@ -6,12 +6,12 @@ describe SearchEnginesController do
   disconnect_sunspot
 
   def valid_attributes
-    FactoryGirl.attributes_for(:search_engine)
+    FactoryBot.attributes_for(:search_engine)
   end
 
   describe 'GET index' do
     before(:each) do
-      FactoryGirl.create(:search_engine)
+      FactoryBot.create(:search_engine)
     end
 
     describe 'When logged in as Administrator' do
@@ -56,7 +56,7 @@ describe SearchEnginesController do
       login_fixture_admin
 
       it 'assigns the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :show, params: { id: search_engine.id }
         assigns(:search_engine).should eq(search_engine)
       end
@@ -66,7 +66,7 @@ describe SearchEnginesController do
       login_fixture_librarian
 
       it 'assigns the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :show, params: { id: search_engine.id }
         assigns(:search_engine).should eq(search_engine)
       end
@@ -76,7 +76,7 @@ describe SearchEnginesController do
       login_fixture_user
 
       it 'assigns the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :show, params: { id: search_engine.id }
         assigns(:search_engine).should eq(search_engine)
       end
@@ -84,7 +84,7 @@ describe SearchEnginesController do
 
     describe 'When not logged in' do
       it 'assigns the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :show, params: { id: search_engine.id }
         assigns(:search_engine).should eq(search_engine)
       end
@@ -136,7 +136,7 @@ describe SearchEnginesController do
       login_fixture_admin
 
       it 'assigns the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :edit, params: { id: search_engine.id }
         assigns(:search_engine).should eq(search_engine)
       end
@@ -146,7 +146,7 @@ describe SearchEnginesController do
       login_fixture_librarian
 
       it 'assigns the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :edit, params: { id: search_engine.id }
         response.should be_forbidden
       end
@@ -156,7 +156,7 @@ describe SearchEnginesController do
       login_fixture_user
 
       it 'assigns the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :edit, params: { id: search_engine.id }
         response.should be_forbidden
       end
@@ -164,7 +164,7 @@ describe SearchEnginesController do
 
     describe 'When not logged in' do
       it 'should not assign the requested search_engine as @search_engine' do
-        search_engine = FactoryGirl.create(:search_engine)
+        search_engine = FactoryBot.create(:search_engine)
         get :edit, params: { id: search_engine.id }
         response.should redirect_to(new_user_session_url)
       end
@@ -290,7 +290,7 @@ describe SearchEnginesController do
 
   describe 'PUT update' do
     before(:each) do
-      @search_engine = FactoryGirl.create(:search_engine)
+      @search_engine = FactoryBot.create(:search_engine)
       @attrs = valid_attributes
       @invalid_attrs = { name: '' }
     end
@@ -391,7 +391,7 @@ describe SearchEnginesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @search_engine = FactoryGirl.create(:search_engine)
+      @search_engine = FactoryBot.create(:search_engine)
     end
 
     describe 'When logged in as Administrator' do

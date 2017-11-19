@@ -14,7 +14,7 @@ describe "accepts/index" do
         :created_at => Time.zone.now
       )
     ]).page(1))
-    basket = FactoryGirl.create(:basket)
+    basket = FactoryBot.create(:basket)
     assign(:basket, basket)
     assign(:accept, basket.accepts.new)
   end

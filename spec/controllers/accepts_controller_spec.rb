@@ -64,7 +64,7 @@ RSpec.describe AcceptsController, type: :controller do
       login_fixture_admin
 
       it 'assigns the requested accept as @accept' do
-        accept = FactoryGirl.create(:accept)
+        accept = FactoryBot.create(:accept)
         get :show, params: { id: accept.id }
         assigns(:accept).should eq(accept)
       end
@@ -74,7 +74,7 @@ RSpec.describe AcceptsController, type: :controller do
       login_fixture_librarian
 
       it 'assigns the requested accept as @accept' do
-        accept = FactoryGirl.create(:accept)
+        accept = FactoryBot.create(:accept)
         get :show, params: { id: accept.id }
         assigns(:accept).should eq(accept)
       end
@@ -84,7 +84,7 @@ RSpec.describe AcceptsController, type: :controller do
       login_fixture_user
 
       it 'assigns the requested accept as @accept' do
-        accept = FactoryGirl.create(:accept)
+        accept = FactoryBot.create(:accept)
         get :show, params: { id: accept.id }
         assigns(:accept).should eq(accept)
         response.should be_forbidden
@@ -93,7 +93,7 @@ RSpec.describe AcceptsController, type: :controller do
 
     describe 'When not logged in' do
       it 'assigns the requested accept as @accept' do
-        accept = FactoryGirl.create(:accept)
+        accept = FactoryBot.create(:accept)
         get :show, params: { id: accept.id }
         assigns(:accept).should eq(accept)
         response.should redirect_to new_user_session_url
@@ -240,7 +240,7 @@ RSpec.describe AcceptsController, type: :controller do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @accept = FactoryGirl.create(:accept)
+      @accept = FactoryBot.create(:accept)
     end
 
     describe 'When logged in as Administrator' do

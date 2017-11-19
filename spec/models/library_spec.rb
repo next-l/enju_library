@@ -5,7 +5,7 @@ describe Library do
   fixtures :all
 
   before(:each) do
-    @library = FactoryGirl.create(:library)
+    @library = FactoryBot.create(:library)
   end
 
   it 'should should create default shelf' do

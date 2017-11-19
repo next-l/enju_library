@@ -326,7 +326,7 @@ describe BasketsController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @basket = FactoryGirl.create(:basket)
+      @basket = FactoryBot.create(:basket)
     end
 
     describe 'When logged in as Administrator' do

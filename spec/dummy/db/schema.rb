@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20171014141921) do
 
   create_table "accepts", force: :cascade do |t|
     t.uuid "basket_id"
-    t.uuid "item_id"
+    t.uuid "item_id", null: false
     t.bigint "librarian_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -3,7 +3,7 @@ require 'rails_helper'
 
 describe BudgetType do
   it 'should create budget_type' do
-    FactoryGirl.create(:budget_type)
+    FactoryBot.create(:budget_type)
   end
 end
 

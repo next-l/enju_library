@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Withdraw, type: :model do
   it 'should change circulation_status' do
-    withdraw = FactoryGirl.create(:withdraw)
+    withdraw = FactoryBot.create(:withdraw)
     withdraw.item.circulation_status.name.should eq 'Removed'
     withdraw.item.use_restriction.name.should eq 'Not For Loan'
   end

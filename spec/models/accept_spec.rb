@@ -6,7 +6,7 @@ describe Accept do
   fixtures :all
 
   it 'should change circulation_status' do
-    accept = FactoryGirl.create(:accept)
+    accept = FactoryBot.create(:accept)
     accept.item.circulation_status.name.should eq 'Available On Shelf'
     accept.item.use_restriction.name.should eq 'Limited Circulation, Normal Loan Period'
   end
@@ -18,7 +18,7 @@ end
 #
 #  id           :integer          not null, primary key
 #  basket_id    :uuid
-#  item_id      :uuid
+#  item_id      :uuid             not null
 #  librarian_id :integer          not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

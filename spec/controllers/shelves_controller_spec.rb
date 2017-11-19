@@ -5,7 +5,7 @@ describe ShelvesController do
   fixtures :all
 
   def valid_attributes
-    FactoryGirl.attributes_for(:shelf)
+    FactoryBot.attributes_for(:shelf)
   end
 
   describe 'GET index', solr: true do
@@ -122,7 +122,7 @@ describe ShelvesController do
       login_fixture_admin
 
       it 'assigns the requested shelf as @shelf' do
-        shelf = FactoryGirl.create(:shelf)
+        shelf = FactoryBot.create(:shelf)
         get :edit, params: { id: shelf.id }
         assigns(:shelf).should eq(shelf)
       end
@@ -132,7 +132,7 @@ describe ShelvesController do
       login_fixture_librarian
 
       it 'assigns the requested shelf as @shelf' do
-        shelf = FactoryGirl.create(:shelf)
+        shelf = FactoryBot.create(:shelf)
         get :edit, params: { id: shelf.id }
         assigns(:shelf).should eq(shelf)
       end
@@ -142,7 +142,7 @@ describe ShelvesController do
       login_fixture_user
 
       it 'assigns the requested shelf as @shelf' do
-        shelf = FactoryGirl.create(:shelf)
+        shelf = FactoryBot.create(:shelf)
         get :edit, params: { id: shelf.id }
         response.should be_forbidden
       end
@@ -150,7 +150,7 @@ describe ShelvesController do
 
     describe 'When not logged in' do
       it 'should not assign the requested shelf as @shelf' do
-        shelf = FactoryGirl.create(:shelf)
+        shelf = FactoryBot.create(:shelf)
         get :edit, params: { id: shelf.id }
         response.should redirect_to(new_user_session_url)
       end
@@ -276,7 +276,7 @@ describe ShelvesController do
 
   describe 'PUT update' do
     before(:each) do
-      @shelf = FactoryGirl.create(:shelf)
+      @shelf = FactoryBot.create(:shelf)
       @attrs = valid_attributes
       @invalid_attrs = { name: '' }
     end
@@ -377,7 +377,7 @@ describe ShelvesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @shelf = FactoryGirl.create(:shelf)
+      @shelf = FactoryBot.create(:shelf)
     end
 
     describe 'When logged in as Administrator' do

@@ -26,7 +26,7 @@ RSpec.describe WithdrawsController, type: :controller do
   # Withdraw. As you add validations to Withdraw, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    FactoryGirl.build(:withdraw).attributes.with_indifferent_access
+    FactoryBot.build(:withdraw).attributes.with_indifferent_access
   end
   let(:invalid_attributes) do
     { item_id: nil }

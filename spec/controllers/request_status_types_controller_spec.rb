@@ -6,12 +6,12 @@ describe RequestStatusTypesController do
   disconnect_sunspot
 
   def valid_attributes
-    FactoryGirl.attributes_for(:request_status_type)
+    FactoryBot.attributes_for(:request_status_type)
   end
 
   describe 'GET index' do
     before(:each) do
-      FactoryGirl.create(:request_status_type)
+      FactoryBot.create(:request_status_type)
     end
 
     describe 'When logged in as Administrator' do
@@ -53,7 +53,7 @@ describe RequestStatusTypesController do
 
   describe 'GET show' do
     before(:each) do
-      @request_status_type = FactoryGirl.create(:request_status_type)
+      @request_status_type = FactoryBot.create(:request_status_type)
     end
 
     describe 'When logged in as Administrator' do
@@ -133,7 +133,7 @@ describe RequestStatusTypesController do
 
   describe 'GET edit' do
     before(:each) do
-      @request_status_type = FactoryGirl.create(:request_status_type)
+      @request_status_type = FactoryBot.create(:request_status_type)
     end
 
     describe 'When logged in as Administrator' do
@@ -290,7 +290,7 @@ describe RequestStatusTypesController do
 
   describe 'PUT update' do
     before(:each) do
-      @request_status_type = FactoryGirl.create(:request_status_type)
+      @request_status_type = FactoryBot.create(:request_status_type)
       @attrs = valid_attributes
       @invalid_attrs = { name: '' }
     end
@@ -391,7 +391,7 @@ describe RequestStatusTypesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @request_status_type = FactoryGirl.create(:request_status_type)
+      @request_status_type = FactoryBot.create(:request_status_type)
     end
 
     describe 'When logged in as Administrator' do

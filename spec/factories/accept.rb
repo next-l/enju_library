@@ -1,10 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :accept do
-    basket{FactoryGirl.create(:basket)}
-    item{FactoryGirl.create(:item)}
-    librarian{FactoryGirl.create(:librarian)}
+    basket{FactoryBot.create(:basket)}
+    item{FactoryBot.create(:item)}
+    librarian{FactoryBot.create(:librarian)}
   end
 end
 

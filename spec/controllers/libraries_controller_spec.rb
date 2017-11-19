@@ -129,7 +129,7 @@ describe LibrariesController do
       login_fixture_admin
 
       it 'assigns the requested library as @library' do
-        library = FactoryGirl.create(:library)
+        library = FactoryBot.create(:library)
         get :edit, params: { id: library.id }
         assigns(:library).should eq(library)
       end
@@ -139,7 +139,7 @@ describe LibrariesController do
       login_fixture_librarian
 
       it 'assigns the requested library as @library' do
-        library = FactoryGirl.create(:library)
+        library = FactoryBot.create(:library)
         get :edit, params: { id: library.id }
         response.should be_forbidden
       end
@@ -149,7 +149,7 @@ describe LibrariesController do
       login_fixture_user
 
       it 'assigns the requested library as @library' do
-        library = FactoryGirl.create(:library)
+        library = FactoryBot.create(:library)
         get :edit, params: { id: library.id }
         response.should be_forbidden
       end
@@ -157,7 +157,7 @@ describe LibrariesController do
 
     describe 'When not logged in' do
       it 'should not assign the requested library as @library' do
-        library = FactoryGirl.create(:library)
+        library = FactoryBot.create(:library)
         get :edit, params: { id: library.id }
         response.should redirect_to(new_user_session_url)
       end
@@ -166,7 +166,7 @@ describe LibrariesController do
 
   describe 'POST create' do
     before(:each) do
-      @attrs = FactoryGirl.attributes_for(:library)
+      @attrs = FactoryBot.attributes_for(:library)
       @invalid_attrs = { name: '' }
     end
 
@@ -454,7 +454,7 @@ describe LibrariesController do
 
     describe 'Library' do
       before(:each) do
-        @library = FactoryGirl.create(:library)
+        @library = FactoryBot.create(:library)
         @library.shelves.first.destroy
       end
 
