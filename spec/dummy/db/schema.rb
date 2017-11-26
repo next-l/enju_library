@@ -316,9 +316,9 @@ ActiveRecord::Schema.define(version: 20171014141921) do
   end
 
   create_table "colors", force: :cascade do |t|
-    t.integer "library_group_id"
-    t.string "property"
-    t.string "code"
+    t.bigint "library_group_id"
+    t.string "property", null: false
+    t.string "code", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -765,7 +765,7 @@ ActiveRecord::Schema.define(version: 20171014141921) do
     t.boolean "family_name_first", default: true
     t.string "screenshot_generator"
     t.integer "pub_year_facet_range_interval", default: 10
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.boolean "csv_charset_conversion", default: false, null: false
     t.jsonb "header_logo_data"
     t.index ["name"], name: "index_library_groups_on_name", unique: true
