@@ -14,7 +14,7 @@ RSpec.describe "withdraws/index", type: :view do
         :created_at => Time.zone.now
       )
     ]).page(1))
-    basket = FactoryGirl.create(:basket)
+    basket = FactoryBot.create(:basket)
     assign(:basket, basket)
     assign(:withdraw, basket.withdraws.new)
     view.stub(:current_user).and_return(User.friendly.find('enjuadmin'))

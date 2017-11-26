@@ -97,9 +97,9 @@ describe UserImportFile do
 
   describe "when its mode is 'update'" do
     before(:each) do
-      FactoryGirl.create(:user,
+      FactoryBot.create(:user,
         username: 'user001',
-        profile: FactoryGirl.create(:profile)
+        profile: FactoryBot.create(:profile)
       )
     end
     it "should update users" do
@@ -119,7 +119,7 @@ describe UserImportFile do
 
     it "should not overwrite with null value" do
       user = User.where(username: 'user001').first
-      user.profile = FactoryGirl.create(:profile,
+      user.profile = FactoryBot.create(:profile,
         user_number: '001',
         full_name: 'User 001',
         full_name_transcription: 'User 001',
@@ -175,7 +175,7 @@ describe UserImportFile do
 
     it "should not remove users if there are checkouts" do
       user001 = User.where(username: 'user001').first
-      FactoryGirl.create(:checkout, user: user001, item: FactoryGirl.create(:item))
+      FactoryBot.create(:checkout, user: user001, item: FactoryBot.create(:item))
       old_count = User.count
       @file = UserImportFile.create user_import: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"), user: users(:admin)
       @file.remove

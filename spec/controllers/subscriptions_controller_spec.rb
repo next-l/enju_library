@@ -5,7 +5,7 @@ describe SubscriptionsController do
   fixtures :all
 
   def valid_attributes
-    FactoryGirl.attributes_for(:subscription)
+    FactoryBot.attributes_for(:subscription)
   end
 
   describe 'GET index', solr: true do
@@ -53,7 +53,7 @@ describe SubscriptionsController do
       login_fixture_admin
 
       it 'assigns the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :show, id: subscription.id
         assigns(:subscription).should eq(subscription)
       end
@@ -63,7 +63,7 @@ describe SubscriptionsController do
       login_fixture_librarian
 
       it 'assigns the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :show, id: subscription.id
         assigns(:subscription).should eq(subscription)
       end
@@ -73,7 +73,7 @@ describe SubscriptionsController do
       login_fixture_user
 
       it 'assigns the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :show, id: subscription.id
         assigns(:subscription).should eq(subscription)
       end
@@ -81,7 +81,7 @@ describe SubscriptionsController do
 
     describe 'When not logged in' do
       it 'assigns the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :show, id: subscription.id
         assigns(:subscription).should eq(subscription)
       end
@@ -131,7 +131,7 @@ describe SubscriptionsController do
       login_fixture_admin
 
       it 'assigns the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :edit, id: subscription.id
         assigns(:subscription).should eq(subscription)
       end
@@ -141,7 +141,7 @@ describe SubscriptionsController do
       login_fixture_librarian
 
       it 'assigns the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :edit, id: subscription.id
         assigns(:subscription).should eq(subscription)
       end
@@ -151,7 +151,7 @@ describe SubscriptionsController do
       login_fixture_user
 
       it 'assigns the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :edit, id: subscription.id
         response.should be_forbidden
       end
@@ -159,7 +159,7 @@ describe SubscriptionsController do
 
     describe 'When not logged in' do
       it 'should not assign the requested subscription as @subscription' do
-        subscription = FactoryGirl.create(:subscription)
+        subscription = FactoryBot.create(:subscription)
         get :edit, id: subscription.id
         response.should redirect_to(new_user_session_url)
       end
@@ -285,7 +285,7 @@ describe SubscriptionsController do
 
   describe 'PUT update' do
     before(:each) do
-      @subscription = FactoryGirl.create(:subscription)
+      @subscription = FactoryBot.create(:subscription)
       @attrs = valid_attributes
       @invalid_attrs = { title: '' }
     end
@@ -386,7 +386,7 @@ describe SubscriptionsController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @subscription = FactoryGirl.create(:subscription)
+      @subscription = FactoryBot.create(:subscription)
     end
 
     describe 'When logged in as Administrator' do

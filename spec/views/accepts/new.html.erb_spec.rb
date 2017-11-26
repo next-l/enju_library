@@ -7,7 +7,7 @@ describe "accepts/new" do
     assign(:accept, stub_model(Accept,
       :item_id => 1
     ).as_new_record)
-    assign(:basket, FactoryGirl.create(:basket))
+    assign(:basket, FactoryBot.create(:basket))
     assign(:accepts, Kaminari::paginate_array([
       stub_model(Accept,
         :item_id => 1,

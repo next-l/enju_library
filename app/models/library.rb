@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 class Library < ActiveRecord::Base
   include MasterModel
   default_scope { order('libraries.position') }
@@ -31,8 +30,6 @@ class Library < ActiveRecord::Base
   after_create :create_shelf
   after_save :clear_all_cache
   after_destroy :clear_all_cache
-
-  paginates_per 10
 
   def self.all_cache
     if Rails.env == 'production'

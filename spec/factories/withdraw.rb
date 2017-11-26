@@ -1,10 +1,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :withdraw do
-    item_id{FactoryGirl.create(:item).id}
-    librarian_id{FactoryGirl.create(:librarian).id}
-    basket_id{FactoryGirl.create(:basket, user_id: librarian_id).id}
+    item_id{FactoryBot.create(:item).id}
+    librarian_id{FactoryBot.create(:librarian).id}
+    basket_id{FactoryBot.create(:basket, user_id: librarian_id).id}
   end
 end
 

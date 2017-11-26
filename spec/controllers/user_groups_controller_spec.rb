@@ -4,12 +4,12 @@ describe UserGroupsController do
   fixtures :all
 
   def valid_attributes
-    FactoryGirl.attributes_for(:user_group)
+    FactoryBot.attributes_for(:user_group)
   end
 
   describe 'GET index' do
     before(:each) do
-      FactoryGirl.create(:user_group)
+      FactoryBot.create(:user_group)
     end
 
     describe 'When logged in as Administrator' do
@@ -52,7 +52,7 @@ describe UserGroupsController do
       login_fixture_admin
 
       it 'assigns the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :show, id: user_group.id
         assigns(:user_group).should eq(user_group)
       end
@@ -62,7 +62,7 @@ describe UserGroupsController do
       login_fixture_librarian
 
       it 'assigns the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :show, id: user_group.id
         assigns(:user_group).should eq(user_group)
       end
@@ -72,7 +72,7 @@ describe UserGroupsController do
       login_fixture_user
 
       it 'assigns the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :show, id: user_group.id
         assigns(:user_group).should eq(user_group)
       end
@@ -80,7 +80,7 @@ describe UserGroupsController do
 
     describe 'When not logged in' do
       it 'assigns the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :show, id: user_group.id
         assigns(:user_group).should eq(user_group)
       end
@@ -132,7 +132,7 @@ describe UserGroupsController do
       login_fixture_admin
 
       it 'assigns the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :edit, id: user_group.id
         assigns(:user_group).should eq(user_group)
       end
@@ -142,7 +142,7 @@ describe UserGroupsController do
       login_fixture_librarian
 
       it 'assigns the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :edit, id: user_group.id
         expect(response).to be_forbidden
       end
@@ -152,7 +152,7 @@ describe UserGroupsController do
       login_fixture_user
 
       it 'assigns the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :edit, id: user_group.id
         expect(response).to be_forbidden
       end
@@ -160,7 +160,7 @@ describe UserGroupsController do
 
     describe 'When not logged in' do
       it 'should not assign the requested user_group as @user_group' do
-        user_group = FactoryGirl.create(:user_group)
+        user_group = FactoryBot.create(:user_group)
         get :edit, id: user_group.id
         expect(response).to redirect_to(new_user_session_url)
       end
@@ -286,7 +286,7 @@ describe UserGroupsController do
 
   describe 'PUT update' do
     before(:each) do
-      @user_group = FactoryGirl.create(:user_group)
+      @user_group = FactoryBot.create(:user_group)
       @attrs = valid_attributes
       @invalid_attrs = { name: '' }
     end
@@ -387,7 +387,7 @@ describe UserGroupsController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @user_group = FactoryGirl.create(:user_group)
+      @user_group = FactoryBot.create(:user_group)
     end
 
     describe 'When logged in as Administrator' do

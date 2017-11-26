@@ -21,6 +21,24 @@ class LibraryGroup < ActiveRecord::Base
   translates :login_banner, :footer_banner
   globalize_accessors
 
+  if ENV['ENJU_STORAGE'] == 's3'
+    has_attached_file :header_logo, storage: :s3,
+      s3_credentials: {
+        access_key: ENV['AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        bucket: ENV['S3_BUCKET_NAME'],
+        s3_host_name: ENV['S3_HOST_NAME'],
+        s3_region: ENV["S3_REGION"]
+      },
+      s3_permissions: :private
+  else
+    has_attached_file :header_logo,
+      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
+  end
+
+  validates_attachment_content_type :header_logo, content_type: /\Aimage\/.*\Z/
+  paginates_per 10
+
   def self.site_config
     LibraryGroup.order(:created_at).first
   end
@@ -67,7 +85,7 @@ end
 #  display_name                  :text
 #  short_name                    :string           not null
 #  my_networks                   :text
-#  login_banner                  :text
+#  old_login_banner              :text
 #  note                          :text
 #  country_id                    :integer
 #  position                      :integer
@@ -84,4 +102,9 @@ end
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
 #  user_id                       :integer
+#  csv_charset_conversion        :boolean          default(FALSE), not null
+#  header_logo_file_name         :string
+#  header_logo_content_type      :string
+#  header_logo_file_size         :integer
+#  header_logo_updated_at        :datetime
 #

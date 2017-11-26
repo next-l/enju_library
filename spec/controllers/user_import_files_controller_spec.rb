@@ -131,8 +131,8 @@ describe UserImportFilesController do
   describe 'POST create' do
     describe 'When logged in as Librarian' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
-        @user = FactoryGirl.create(:librarian)
+        profile = FactoryBot.create(:profile)
+        @user = FactoryBot.create(:librarian)
         @user.profile = profile
         sign_in @user
       end
@@ -147,8 +147,8 @@ describe UserImportFilesController do
 
     describe 'When logged in as User' do
       before(:each) do
-        profile = FactoryGirl.create(:profile)
-        @user = FactoryGirl.create(:user)
+        profile = FactoryBot.create(:profile)
+        @user = FactoryBot.create(:user)
         @user.profile = profile
         sign_in @user
       end

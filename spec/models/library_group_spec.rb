@@ -24,7 +24,7 @@ end
 #  display_name                  :text
 #  short_name                    :string           not null
 #  my_networks                   :text
-#  login_banner                  :text
+#  old_login_banner              :text
 #  note                          :text
 #  country_id                    :integer
 #  position                      :integer
@@ -41,4 +41,9 @@ end
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
 #  user_id                       :integer
+#  csv_charset_conversion        :boolean          default(FALSE), not null
+#  header_logo_file_name         :string
+#  header_logo_content_type      :string
+#  header_logo_file_size         :integer
+#  header_logo_updated_at        :datetime
 #
