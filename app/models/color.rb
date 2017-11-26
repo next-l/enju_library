@@ -14,8 +14,8 @@ end
 #
 #  id               :integer          not null, primary key
 #  library_group_id :integer
-#  property         :string
-#  code             :string
+#  property         :string           not null
+#  code             :string           not null
 #  position         :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

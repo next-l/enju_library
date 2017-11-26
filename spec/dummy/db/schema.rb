@@ -730,7 +730,7 @@ ActiveRecord::Schema.define(version: 20171014141921) do
     t.text "note"
     t.integer "call_number_rows", default: 1, null: false
     t.string "call_number_delimiter", default: "|", null: false
-    t.integer "library_group_id", default: 1, null: false
+    t.uuid "library_group_id", null: false
     t.integer "users_count", default: 0, null: false
     t.integer "position"
     t.integer "country_id"
@@ -745,7 +745,7 @@ ActiveRecord::Schema.define(version: 20171014141921) do
     t.index ["name"], name: "index_libraries_on_name", unique: true
   end
 
-  create_table "library_groups", force: :cascade do |t|
+  create_table "library_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.jsonb "display_name_translations"
     t.string "short_name", null: false
@@ -1619,6 +1619,7 @@ ActiveRecord::Schema.define(version: 20171014141921) do
   add_foreign_key "items", "shelves"
   add_foreign_key "lending_policies", "items"
   add_foreign_key "lending_policies", "user_groups"
+  add_foreign_key "libraries", "library_groups"
   add_foreign_key "library_groups", "users"
   add_foreign_key "owns", "agents"
   add_foreign_key "owns", "items"

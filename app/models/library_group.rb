@@ -76,7 +76,7 @@ end
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
-#  user_id                       :integer
+#  user_id                       :integer          not null
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_data              :jsonb
 #

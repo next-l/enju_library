@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe LibraryGroup do
@@ -9,7 +8,7 @@ describe LibraryGroup do
   end
 
   it 'should allow access from allowed networks' do
-    library_group = LibraryGroup.find(1)
+    library_group = LibraryGroup.find(library_groups(:one).id)
     library_group.my_networks = '127.0.0.1'
     library_group.network_access_allowed?('192.168.0.1').should be_falsy
   end
@@ -39,7 +38,7 @@ end
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
-#  user_id                       :integer
+#  user_id                       :integer          not null
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_data              :jsonb
 #

@@ -13,7 +13,7 @@ library_00001:
   locality: 
   street: 
   created_at: 2007-08-13 18:10:00 +09:00
-  library_group_id: 1
+  library_group_id: 7dbdeb02-98ff-4158-881b-ce5339742780
   country_id: 1
   call_number_delimiter: "|"
   position: 1
@@ -31,7 +31,7 @@ library_00002:
   locality: 
   street: 
   created_at: 2007-08-13 18:10:00 +09:00
-  library_group_id: 1
+  library_group_id: 7dbdeb02-98ff-4158-881b-ce5339742780
   country_id: 1
   call_number_delimiter: "|"
   position: 2
@@ -50,7 +50,7 @@ library_00003:
   locality: Hachioji
   street: 
   created_at: 2007-08-14 16:37:00 +09:00
-  library_group_id: 1
+  library_group_id: 7dbdeb02-98ff-4158-881b-ce5339742780
   country_id: 1
   call_number_delimiter: "|"
   position: 3
@@ -68,7 +68,7 @@ library_00004:
   locality: Minato
   street: 
   created_at: 2007-08-23 19:51:00 +09:00
-  library_group_id: 1
+  library_group_id: 7dbdeb02-98ff-4158-881b-ce5339742780
   country_id: 1
   call_number_delimiter: "|"
   position: 4

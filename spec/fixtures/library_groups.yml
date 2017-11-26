@@ -1,6 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 one:
-  id: 1
+  id: 7dbdeb02-98ff-4158-881b-ce5339742780
   name: enju_library
   display_name_translations: {"en": "Enju Library", "ja": "えんじゅ図書館"}
   short_name: enju_library
@@ -38,7 +38,7 @@ one:
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
-#  user_id                       :integer
+#  user_id                       :integer          not null
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_data              :jsonb
 #
