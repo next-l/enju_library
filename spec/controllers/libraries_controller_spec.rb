@@ -44,7 +44,7 @@ describe LibrariesController do
 
       it 'should get index with query' do
         get :index, params: { query: 'kamata' }
-        response.should be_success
+        response.should be_successful
         assigns(:libraries).include?(Library.where(name: 'kamata').first).should be_truthy
       end
     end
@@ -193,12 +193,12 @@ describe LibrariesController do
 
         it 'should be successful' do
           post :create, params: { library: @invalid_attrs }
-          response.should be_success
+          response.should be_successful
         end
 
         it 'should not create library without short_display_name' do
           post :create, params: { library: { name: 'fujisawa', short_display_name: '' } }
-          response.should be_success
+          response.should be_successful
         end
       end
     end

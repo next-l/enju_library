@@ -17,7 +17,7 @@ describe LibraryGroupsController do
       it 'assigns all library_groups as @library_groups' do
         get :index
         assigns(:library_groups).should_not be_empty
-        response.should be_success
+        response.should be_successful
       end
     end
   end
@@ -36,7 +36,7 @@ describe LibraryGroupsController do
       it 'assigns the requested library_group as @library_group' do
         get :show, params: { id: library_groups(:one).id }
         assigns(:library_group).should eq(LibraryGroup.find(library_groups(:one).id))
-        response.should be_success
+        response.should be_successful
       end
     end
   end

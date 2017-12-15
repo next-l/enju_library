@@ -44,19 +44,19 @@ describe ShelvesController do
       it 'assigns all shelves as @shelves' do
         get :index
         assigns(:shelves).should_not be_empty
-        response.should be_success
+        response.should be_successful
       end
 
       it 'assigns all shelves as @shelves with library_id' do
         get :index, params: { library_id: 'kamata' }
         assigns(:shelves).map(&:id).should eq(Library.where(name: 'kamata').first.shelves.order(:position).page(1).pluck(:id))
-        response.should be_success
+        response.should be_successful
       end
 
       it 'assigns all shelves as @shelves with select mode' do
         get :index, params: { mode: 'select' }
         assigns(:shelves).should eq(Shelf.real.order(:position))
-        response.should be_success
+        response.should be_successful
       end
     end
   end
@@ -186,7 +186,7 @@ describe ShelvesController do
 
         it 'should be successful' do
           post :create, params: { shelf: @invalid_attrs }
-          response.should be_success
+          response.should be_successful
         end
       end
     end
