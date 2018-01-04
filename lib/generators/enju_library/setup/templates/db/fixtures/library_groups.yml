@@ -1,5 +1,4 @@
 library_group_00001:
-  id: 1
   name: enju_library
   display_name_translations: {"en": "Enju Library", "ja": "えんじゅ図書館"}
   short_name: enju
@@ -11,3 +10,4 @@ library_group_00001:
   "en": "[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), an open source integrated library system | [About this system](/page/about) | [Report bugs](https://github.com/next-l/enju_leaf/issues) | [Manual](https://next-l.github.io/manual/1.2/)<br/>\r\n\
     Developed by [Kosuke Tanabe](https://github.com/nabeta) and [Project Next-L](http://www.next-l.jp)."}
   admin_networks: "0.0.0.0/0"
+  email: 'enju@library.example.jp'

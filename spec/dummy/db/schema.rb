@@ -10,20 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171014141921) do
+ActiveRecord::Schema.define(version: 2018_01_04_152615) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "pgcrypto"
+  enable_extension "plpgsql"
 
   create_table "accepts", force: :cascade do |t|
     t.uuid "basket_id"
-    t.uuid "item_id", null: false
     t.bigint "librarian_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["basket_id"], name: "index_accepts_on_basket_id"
-    t.index ["item_id"], name: "index_accepts_on_item_id"
     t.index ["librarian_id"], name: "index_accepts_on_librarian_id"
   end
 
@@ -675,14 +673,12 @@ ActiveRecord::Schema.define(version: 20171014141921) do
     t.string "binding_call_number"
     t.datetime "binded_at"
     t.uuid "manifestation_id"
-    t.uuid "shelf_id", null: false
     t.index ["binding_item_identifier"], name: "index_items_on_binding_item_identifier"
     t.index ["bookstore_id"], name: "index_items_on_bookstore_id"
     t.index ["checkout_type_id"], name: "index_items_on_checkout_type_id"
     t.index ["circulation_status_id"], name: "index_items_on_circulation_status_id"
     t.index ["item_identifier"], name: "index_items_on_item_identifier", unique: true
     t.index ["manifestation_id"], name: "index_items_on_manifestation_id"
-    t.index ["shelf_id"], name: "index_items_on_shelf_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -768,6 +764,7 @@ ActiveRecord::Schema.define(version: 20171014141921) do
     t.bigint "user_id", null: false
     t.boolean "csv_charset_conversion", default: false, null: false
     t.jsonb "header_logo_data"
+    t.string "email", null: false
     t.index ["name"], name: "index_library_groups_on_name", unique: true
     t.index ["short_name"], name: "index_library_groups_on_short_name", unique: true
     t.index ["user_id"], name: "index_library_groups_on_user_id"
@@ -1565,17 +1562,14 @@ ActiveRecord::Schema.define(version: 20171014141921) do
 
   create_table "withdraws", force: :cascade do |t|
     t.uuid "basket_id"
-    t.uuid "item_id"
     t.bigint "librarian_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["basket_id"], name: "index_withdraws_on_basket_id"
-    t.index ["item_id"], name: "index_withdraws_on_item_id"
     t.index ["librarian_id"], name: "index_withdraws_on_librarian_id"
   end
 
   add_foreign_key "accepts", "baskets", on_delete: :nullify
-  add_foreign_key "accepts", "items"
   add_foreign_key "accepts", "users", column: "librarian_id"
   add_foreign_key "agent_import_files", "users"
   add_foreign_key "baskets", "users"
@@ -1616,7 +1610,6 @@ ActiveRecord::Schema.define(version: 20171014141921) do
   add_foreign_key "items", "checkout_types"
   add_foreign_key "items", "circulation_statuses"
   add_foreign_key "items", "manifestations"
-  add_foreign_key "items", "shelves"
   add_foreign_key "lending_policies", "items"
   add_foreign_key "lending_policies", "user_groups"
   add_foreign_key "libraries", "library_groups"
@@ -1652,6 +1645,5 @@ ActiveRecord::Schema.define(version: 20171014141921) do
   add_foreign_key "user_import_results", "users"
   add_foreign_key "users", "profiles", on_delete: :cascade
   add_foreign_key "withdraws", "baskets", on_delete: :nullify
-  add_foreign_key "withdraws", "items"
   add_foreign_key "withdraws", "users", column: "librarian_id"
 end

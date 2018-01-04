@@ -41,4 +41,5 @@ end
 #  user_id                       :integer          not null
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_data              :jsonb
+#  email                         :string           not null
 #

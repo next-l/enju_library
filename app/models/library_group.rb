@@ -5,7 +5,6 @@ class LibraryGroup < ActiveRecord::Base
   has_many :libraries
   has_many :colors
   belongs_to :country
-  belongs_to :user
 
   validates :url, presence: true, url: true
   validates :max_number_of_results, numericality: {
@@ -79,4 +78,5 @@ end
 #  user_id                       :integer          not null
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_data              :jsonb
+#  email                         :string           not null
 #
