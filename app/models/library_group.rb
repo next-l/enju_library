@@ -11,7 +11,6 @@ class LibraryGroup < ActiveRecord::Base
       greater_than_or_equal_to: 0
     }
   accepts_nested_attributes_for :colors, update_only: true
-  accepts_nested_attributes_for :user, update_only: true
   translates :display_name, :login_banner, :footer_banner
 
   def self.site_config
