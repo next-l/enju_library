@@ -14,6 +14,12 @@
 </p>
 
 <p>
+  <strong><%= t('activerecord.attributes.library_group.header_logo') -%>:</strong>
+  <br />
+  <%= image_tag(library_group_path(@library_group, format: :download), size: @library_group.header_logo.image_size(:medium)) if @library_group.header_logo.exists? -%>
+</p>
+
+<p>
   <strong><%= t('activerecord.attributes.library_group.email') -%>:</strong>
   <%= @library_group.user.email -%>
 </p>
