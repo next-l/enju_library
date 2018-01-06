@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "geocoder"
   s.add_dependency "statesman", "~> 1.3"
   s.add_dependency "paperclip", "~> 4.3"
+  s.add_dependency "paperclip-meta"
 
   s.add_development_dependency "enju_leaf", "~> 1.2.1"
   s.add_development_dependency "enju_biblio", "~> 0.2.3"
