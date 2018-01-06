@@ -32,7 +32,7 @@ class LibraryGroup < ActiveRecord::Base
       },
       s3_permissions: :private
   else
-    has_attached_file :header_logo, styles: { medium: '180x90'},
+    has_attached_file :header_logo, styles: { medium: 'x80'},
       path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
   end
 
