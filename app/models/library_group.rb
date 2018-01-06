@@ -37,6 +37,7 @@ class LibraryGroup < ActiveRecord::Base
   end
 
   validates_attachment_content_type :header_logo, content_type: /\Aimage\/.*\Z/
+  attr_accessor :delete_header_logo
 
   def self.site_config
     LibraryGroup.order(:created_at).first

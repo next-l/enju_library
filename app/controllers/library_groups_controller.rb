@@ -45,6 +45,10 @@ class LibraryGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @library_group.update_attributes(library_group_params)
+        if @library_group.delete_header_logo == '1'
+          @library_group.header_logo.destroy
+        end
+
         format.html { redirect_to @library_group, notice: t('controller.successfully_updated', model: t('activerecord.models.library_group')) }
         format.json { head :no_content }
       else
@@ -58,7 +62,11 @@ class LibraryGroupsController < ApplicationController
   private
   def set_library_group
     @library_group = LibraryGroup.find(params[:id])
-    authorize @library_group
+    if request.format == 'download'
+      authorize @library_group, :show_logo?
+    else
+      authorize @library_group
+    end
   end
 
   def check_policy
@@ -71,7 +79,7 @@ class LibraryGroupsController < ApplicationController
       :login_banner, :note, :country_id, :admin_networks, :url,
       :max_number_of_results, :footer_banner, :email,
       :book_jacket_source, :screenshot_generator, :erms_url,
-      :header_logo,
+      :header_logo, :delete_header_logo,
       :allow_bookmark_external_url, # EnjuBookmark
       {
         :colors_attributes =>  [:id, :property, :code]

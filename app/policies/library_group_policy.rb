@@ -7,6 +7,10 @@ class LibraryGroupPolicy < ApplicationPolicy
     true if user.try(:has_role?, 'Librarian')
   end
 
+  def show_logo?
+    true
+  end
+
   def create?
     true if user.try(:has_role?, 'Administrator')
   end
