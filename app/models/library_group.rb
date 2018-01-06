@@ -22,7 +22,7 @@ class LibraryGroup < ActiveRecord::Base
   globalize_accessors
 
   if ENV['ENJU_STORAGE'] == 's3'
-    has_attached_file :header_logo, styles: { medium: '180x90'},
+    has_attached_file :header_logo, storage: :s3, styles: { medium: '180x90'},
       s3_credentials: {
         access_key: ENV['AWS_ACCESS_KEY_ID'],
         secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -37,7 +37,6 @@ class LibraryGroup < ActiveRecord::Base
   end
 
   validates_attachment_content_type :header_logo, content_type: /\Aimage\/.*\Z/
-  paginates_per 10
 
   def self.site_config
     LibraryGroup.order(:created_at).first
