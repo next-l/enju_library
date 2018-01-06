@@ -22,7 +22,7 @@ class LibraryGroup < ActiveRecord::Base
   globalize_accessors
 
   if ENV['ENJU_STORAGE'] == 's3'
-    has_attached_file :header_logo, storage: :s3,
+    has_attached_file :header_logo, styles: { medium: '180x90'},
       s3_credentials: {
         access_key: ENV['AWS_ACCESS_KEY_ID'],
         secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
@@ -32,7 +32,7 @@ class LibraryGroup < ActiveRecord::Base
       },
       s3_permissions: :private
   else
-    has_attached_file :header_logo,
+    has_attached_file :header_logo, styles: { medium: '180x90'},
       path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
   end
 
