@@ -46,4 +46,5 @@ end
 #  header_logo_content_type      :string
 #  header_logo_file_size         :integer
 #  header_logo_updated_at        :datetime
+#  header_logo_meta              :text
 #
