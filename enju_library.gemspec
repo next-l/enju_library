@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_dependency "enju_seed", "~> 0.2.2"
   s.add_dependency "paper_trail", "~> 8.0"
   s.add_dependency "geocoder"
-  s.add_dependency "statesman", "~> 1.3"
+  s.add_dependency "statesman", "~> 3.3"
   s.add_dependency "paperclip", "~> 4.3"
   s.add_dependency "paperclip-meta"
 

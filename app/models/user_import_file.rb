@@ -31,7 +31,7 @@ class UserImportFile < ActiveRecord::Base
   belongs_to :default_library, class_name: 'Library'
   has_many :user_import_results
 
-  has_many :user_import_file_transitions
+  has_many :user_import_file_transitions, autosave: false
 
   attr_accessor :mode
 
