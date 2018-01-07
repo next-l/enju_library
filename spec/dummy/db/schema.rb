@@ -669,7 +669,7 @@ ActiveRecord::Schema.define(version: 20180102162311) do
     t.string   "binding_item_identifier"
     t.string   "binding_call_number"
     t.datetime "binded_at"
-    t.integer  "manifestation_id"
+    t.integer  "manifestation_id",                        null: false
   end
 
   add_index "items", ["binding_item_identifier"], name: "index_items_on_binding_item_identifier"
