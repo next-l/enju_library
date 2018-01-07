@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180102162311) do
+ActiveRecord::Schema.define(version: 20180107160740) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer  "basket_id"
@@ -1471,10 +1471,11 @@ ActiveRecord::Schema.define(version: 20180102162311) do
     t.integer  "user_export_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "most_recent"
+    t.boolean  "most_recent",                        null: false
   end
 
   add_index "user_export_file_transitions", ["sort_key", "user_export_file_id"], name: "index_user_export_file_transitions_on_sort_key_and_file_id", unique: true
+  add_index "user_export_file_transitions", ["user_export_file_id", "most_recent"], name: "index_user_export_file_transitions_parent_most_recent", unique: true
   add_index "user_export_file_transitions", ["user_export_file_id"], name: "index_user_export_file_transitions_on_file_id"
   add_index "user_export_file_transitions", ["user_export_file_id"], name: "index_user_export_file_transitions_on_user_export_file_id"
 
@@ -1543,10 +1544,11 @@ ActiveRecord::Schema.define(version: 20180102162311) do
     t.integer  "user_import_file_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "most_recent"
+    t.boolean  "most_recent",                        null: false
   end
 
   add_index "user_import_file_transitions", ["sort_key", "user_import_file_id"], name: "index_user_import_file_transitions_on_sort_key_and_file_id", unique: true
+  add_index "user_import_file_transitions", ["user_import_file_id", "most_recent"], name: "index_user_import_file_transitions_parent_most_recent", unique: true
   add_index "user_import_file_transitions", ["user_import_file_id"], name: "index_user_import_file_transitions_on_user_import_file_id"
 
   create_table "user_import_files", force: :cascade do |t|
