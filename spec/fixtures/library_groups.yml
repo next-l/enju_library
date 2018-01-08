@@ -22,14 +22,14 @@ one:
 #  name                          :string           not null
 #  display_name_translations     :jsonb
 #  short_name                    :string           not null
-#  my_networks                   :cidr
+#  my_networks                   :text
 #  login_banner_translations     :jsonb
 #  note                          :text
 #  country_id                    :integer
 #  position                      :integer
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
-#  admin_networks                :cidr
+#  admin_networks                :text
 #  url                           :string           default("http://localhost:3000/")
 #  footer_banner_translations    :jsonb
 #  html_snippet                  :text
@@ -38,7 +38,6 @@ one:
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
-#  user_id                       :integer          not null
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_data              :jsonb
 #  email                         :string           not null

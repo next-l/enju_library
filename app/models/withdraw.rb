@@ -27,4 +27,5 @@ end
 #  librarian_id :integer          not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  item_id      :uuid             not null
 #
