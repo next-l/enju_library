@@ -1,7 +1,7 @@
 class UserImportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
-  has_one_attached :attachment
+  include AttachmentUploader[:attachment]
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 

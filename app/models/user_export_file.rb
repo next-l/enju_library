@@ -1,7 +1,7 @@
 class UserExportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
-  has_one_attached :attachment
+  include AttachmentUploader[:attachment]
 
   has_many :user_export_file_transitions
 
