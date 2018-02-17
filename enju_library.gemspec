@@ -19,6 +19,9 @@ Gem::Specification.new do |s|
   s.add_dependency "geocoder"
   s.add_dependency "cocoon"
   #s.add_dependency "enju_biblio", "~> 0.2.0"
+  s.add_dependency "shrine"
+  s.add_dependency "image_processing"
+  s.add_dependency "mini_magick"
 
   s.add_development_dependency "pg"
   s.add_development_dependency "rspec-rails", "~> 3.5"
