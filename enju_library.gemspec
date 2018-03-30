@@ -30,7 +30,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_event", "~> 0.2.3"
   s.add_development_dependency "enju_circulation", "~> 0.2.5"
   s.add_development_dependency "sqlite3"
-  s.add_development_dependency "mysql2"
+  s.add_development_dependency "mysql2", "~> 0.4.10"
   s.add_development_dependency "pg", "~> 0.21"
   s.add_development_dependency "rspec-rails", "~> 3.5"
   s.add_development_dependency "factory_bot_rails"
