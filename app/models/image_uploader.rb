@@ -4,9 +4,9 @@ class ImageUploader < Shrine
   plugin :processing
   plugin :versions
   plugin :store_dimensions
-  plugin :default_url do |context|
+  Attacher.default_url do {
     'ninja/noimage60x80.jpg'
-  end
+  }
 
   process(:store) do |io, context|
     original = io.download
