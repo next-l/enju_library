@@ -4,7 +4,7 @@ class ImageUploader < Shrine
   plugin :processing
   plugin :versions
   plugin :store_dimensions
-  Attacher.default_url do {
+  Attacher.default_url {
     'ninja/noimage60x80.jpg'
   }
 
