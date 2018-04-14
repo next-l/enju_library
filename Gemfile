@@ -20,9 +20,7 @@ gem "enju_inter_library_loan", github: "next-l/enju_inter_library_loan"
 gem "enju_manifestation_viewer", github: "next-l/enju_manifestation_viewer"
 gem "jquery-rails"
 gem "jquery-ui-rails", "~> 4.2"
-gem "mini_magick"
 gem "rails-controller-testing"
-gem "json_translate"
 
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
