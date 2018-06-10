@@ -62,7 +62,7 @@ class LibraryGroupsController < ApplicationController
       :html_snippet,
       :allow_bookmark_external_url, # EnjuBookmark
       {
-        :colors_attributes =>  [:id, :property, :code]
+        colors_attributes: [:id, :property, :code]
       }
     )
   end

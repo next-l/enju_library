@@ -81,7 +81,7 @@ class BasketsController < ApplicationController
 
     respond_to do |format|
       #if @basket.update_attributes({})
-      if @basket.save(:validate => false)
+      if @basket.save(validate: false)
         # 貸出完了時
         format.html { redirect_to checkouts_url(user_id: @basket.user.username), notice: t('basket.checkout_completed') }
         format.json { head :no_content }
