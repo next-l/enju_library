@@ -4,7 +4,7 @@ RSpec.describe "withdraws/index", type: :view do
   fixtures :all
 
   before(:each) do
-    assign(:withdraws, Kaminari::paginate_array([
+    assign(:withdraws, Kaminari.paginate_array([
       stub_model(Withdraw,
         item_id: 1,
         created_at: Time.zone.now

@@ -4,7 +4,7 @@ describe "accepts/index" do
   fixtures :all
 
   before(:each) do
-    assign(:accepts, Kaminari::paginate_array([
+    assign(:accepts, Kaminari.paginate_array([
       stub_model(Accept,
         item_id: 1,
         created_at: Time.zone.now
