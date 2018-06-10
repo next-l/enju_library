@@ -1,5 +1,5 @@
 class Subscribe < ActiveRecord::Base
-  belongs_to :subscription, :counter_cache => true, validate: true
+  belongs_to :subscription, counter_cache: true, validate: true
   belongs_to :work, class_name: 'Manifestation', validate: true
 
   validates_associated :subscription, :work
