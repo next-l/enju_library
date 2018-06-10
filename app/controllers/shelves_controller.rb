@@ -93,7 +93,7 @@ class ShelvesController < ApplicationController
     respond_to do |format|
       if @shelf.save
         format.html { redirect_to @shelf, notice: t('controller.successfully_created', model: t('activerecord.models.shelf')) }
-        format.json { render json: @shelf, status: :created, location:  @shelf }
+        format.json { render json: @shelf, status: :created, location: @shelf }
       else
         @library = Library.first if @shelf.library.nil?
         format.html { render action: "new" }
@@ -137,6 +137,7 @@ class ShelvesController < ApplicationController
   end
 
   private
+
   def set_shelf
     @shelf = Shelf.find(params[:id])
     authorize @shelf

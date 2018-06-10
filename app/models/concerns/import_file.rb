@@ -55,6 +55,7 @@ module ImportFile
   end
 
   private
+
   def nkf_encode(line)
     case user_encoding
     when 'auto_detect'

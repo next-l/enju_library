@@ -43,6 +43,7 @@ class LibraryGroupsController < ApplicationController
   end
 
   private
+
   def set_library_group
     @library_group = LibraryGroup.find(params[:id])
     authorize @library_group

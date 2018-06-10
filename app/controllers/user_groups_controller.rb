@@ -86,6 +86,7 @@ class UserGroupsController < ApplicationController
   end
 
   private
+
   def set_user_group
     @user_group = UserGroup.find(params[:id])
     authorize @user_group

@@ -40,6 +40,7 @@ class UserImportResultsController < ApplicationController
   end
 
   private
+
   def set_user_import_result
     @user_import_result = UserImportResult.find(params[:id])
     authorize @user_import_result

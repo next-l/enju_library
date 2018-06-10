@@ -183,6 +183,7 @@ class UserImportFile < ActiveRecord::Base
   end
 
   private
+
   def self.transition_class
     UserImportFileTransition
   end
@@ -233,6 +234,7 @@ class UserImportFile < ActiveRecord::Base
   end
 
   private
+
   # ユーザ情報のパラメータを設定します。
   # @param [Hash] row 利用者情報のハッシュ
   def set_user_params(row)

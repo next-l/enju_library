@@ -84,7 +84,7 @@ class WithdrawsController < ApplicationController
       if @withdraw.save
         flash[:message] << t('withdraw.successfully_withdrawn', model: t('activerecord.models.withdraw'))
         format.html { redirect_to withdraws_url(basket_id: @basket.id) }
-        format.json { render json: @withdraw, status: :created, location:  @withdraw }
+        format.json { render json: @withdraw, status: :created, location: @withdraw }
         format.js { redirect_to withdraws_url(basket_id: @basket.id, format: :js) }
       else
         @withdraws = @basket.withdraws.page(params[:page])
@@ -121,6 +121,7 @@ class WithdrawsController < ApplicationController
   end
 
   private
+
   def set_withdraw
     @withdraw = Withdraw.find(params[:id])
     authorize @withdraw

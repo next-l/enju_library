@@ -6,7 +6,7 @@ class Withdraw < ActiveRecord::Base
   validates :item_id,
     uniqueness: true, # { message: I18n.t('withdraw.already_withdrawn', locale: I18n.default_locale) },
     presence: true # , { message: I18n.translate('withdraw.item_not_found', locale: I18n.default_locale) }
-  validates_presence_of :basket_id
+  validates :basket_id, presence: true
   validate :check_item
 
   attr_accessor :item_identifier

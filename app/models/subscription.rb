@@ -6,7 +6,7 @@ class Subscription < ActiveRecord::Base
     belongs_to :order_list
   end
 
-  validates_presence_of :title, :user
+  validates :title, :user, presence: true
   validates_associated :user
 
   searchable do

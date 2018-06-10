@@ -98,6 +98,7 @@ class UserImportFilesController < ApplicationController
   end
 
   private
+
   def set_user_import_file
     @user_import_file = UserImportFile.find(params[:id])
     authorize @user_import_file

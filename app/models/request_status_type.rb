@@ -5,6 +5,7 @@ class RequestStatusType < ActiveRecord::Base
   translates :display_name
 
   private
+
   def valid_name?
     true
   end

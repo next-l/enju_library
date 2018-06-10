@@ -92,6 +92,7 @@ class UserExportFilesController < ApplicationController
   end
 
   private
+
   def set_user_export_file
     @user_export_file = UserExportFile.find(params[:id])
     authorize @user_export_file

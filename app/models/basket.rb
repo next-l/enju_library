@@ -6,7 +6,7 @@ class Basket < ActiveRecord::Base
 
   validates_associated :user, on: :create
   # 貸出完了後にかごのユーザidは破棄する
-  validates_presence_of :user, on: :create
+  validates :user, presence: { on: :create }
   validate :check_suspended
 
   attr_accessor :user_number

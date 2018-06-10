@@ -84,6 +84,7 @@ class BookstoresController < ApplicationController
   end
 
   private
+
   def set_bookstore
     @bookstore = Bookstore.find(params[:id])
     authorize @bookstore

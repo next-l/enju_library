@@ -84,6 +84,7 @@ class RequestTypesController < ApplicationController
   end
 
   private
+
   def set_request_type
     @request_type = RequestType.find(params[:id])
     authorize @request_type

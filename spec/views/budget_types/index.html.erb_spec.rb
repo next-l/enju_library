@@ -3,19 +3,19 @@ require 'rails_helper'
 describe "budget_types/index" do
   before(:each) do
     assign(:budget_types, [
-      stub_model(BudgetType,
-        name: "public_funds",
-        display_name: "Public funds",
-        note: "MyText",
-        position: 1
-      ),
+             stub_model(BudgetType,
+               name: "public_funds",
+               display_name: "Public funds",
+               note: "MyText",
+               position: 1
+             ),
       stub_model(BudgetType,
         name: "donation",
         display_name: "Donation",
         note: "MyText",
         position: 2
       )
-    ])
+           ])
     allow(view).to receive(:policy).and_return double(create?: true, update?: true, destroy?: true)
   end
 

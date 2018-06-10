@@ -116,6 +116,7 @@ class LibrariesController < ApplicationController
   end
 
   private
+
   def set_library
     @library = Library.friendly.find(params[:id])
     authorize @library
