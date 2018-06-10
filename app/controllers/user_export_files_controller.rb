@@ -67,7 +67,7 @@ class UserExportFilesController < ApplicationController
   # PUT /user_export_files/1.json
   def update
     respond_to do |format|
-      if @user_export_file.update_attributes(user_export_file_params)
+      if @user_export_file.update(user_export_file_params)
         if @user_export_file.mode == 'export'
           UserExportFileJob.perform_later(@user_export_file)
         end

@@ -62,7 +62,7 @@ class BudgetTypesController < ApplicationController
     end
 
     respond_to do |format|
-      if @budget_type.update_attributes(budget_type_params)
+      if @budget_type.update(budget_type_params)
         format.html { redirect_to @budget_type, notice: t('controller.successfully_updated', model: t('activerecord.models.budget_type')) }
         format.json { head :no_content }
       else

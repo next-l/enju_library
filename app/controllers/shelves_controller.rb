@@ -114,7 +114,7 @@ class ShelvesController < ApplicationController
     end
 
     respond_to do |format|
-      if @shelf.update_attributes(shelf_params)
+      if @shelf.update(shelf_params)
         format.html { redirect_to @shelf, notice: t('controller.successfully_updated', model: t('activerecord.models.shelf')) }
         format.json { head :no_content }
       else

@@ -72,7 +72,7 @@ class UserImportFilesController < ApplicationController
   # PUT /user_import_files/1.json
   def update
     respond_to do |format|
-      if @user_import_file.update_attributes(user_import_file_params)
+      if @user_import_file.update(user_import_file_params)
         if @user_import_file.mode == 'import'
           UserImportFileJob.perform_later(@user_import_file)
         end

@@ -99,7 +99,7 @@ class AcceptsController < ApplicationController
   # PUT /accepts/1.json
   def update
     respond_to do |format|
-      if @accept.update_attributes(accept_params)
+      if @accept.update(accept_params)
         format.html { redirect_to @accept, notice: t('controller.successfully_updated', model: t('activerecord.models.accept')) }
         format.json { head :no_content }
       else

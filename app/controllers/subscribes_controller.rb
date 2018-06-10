@@ -60,7 +60,7 @@ class SubscribesController < ApplicationController
   # PUT /subscribes/1.json
   def update
     respond_to do |format|
-      if @subscribe.update_attributes(subscribe_params)
+      if @subscribe.update(subscribe_params)
         format.html { redirect_to @subscribe, notice: t('controller.successfully_updated', model: t('activerecord.models.subscribe')) }
         format.json { head :no_content }
       else

@@ -62,7 +62,7 @@ class BookstoresController < ApplicationController
     end
 
     respond_to do |format|
-      if @bookstore.update_attributes(bookstore_params)
+      if @bookstore.update(bookstore_params)
         format.html { redirect_to @bookstore, notice: t('controller.successfully_updated', model: t('activerecord.models.bookstore')) }
         format.json { head :no_content }
       else

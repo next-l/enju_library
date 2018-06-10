@@ -31,7 +31,7 @@ class LibraryGroupsController < ApplicationController
   # PUT /library_groups/1.json
   def update
     respond_to do |format|
-      if @library_group.update_attributes(library_group_params)
+      if @library_group.update(library_group_params)
         format.html { redirect_to @library_group, notice: t('controller.successfully_updated', model: t('activerecord.models.library_group')) }
         format.json { head :no_content }
       else

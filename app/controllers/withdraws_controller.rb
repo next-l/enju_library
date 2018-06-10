@@ -99,7 +99,7 @@ class WithdrawsController < ApplicationController
   # PUT /withdraws/1.json
   def update
     respond_to do |format|
-      if @withdraw.update_attributes(withdraw_params)
+      if @withdraw.update(withdraw_params)
         format.html { redirect_to @withdraw, notice: t('controller.successfully_updated', model: t('activerecord.models.withdraw')) }
         format.json { head :no_content }
       else
