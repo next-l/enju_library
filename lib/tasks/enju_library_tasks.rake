@@ -3,7 +3,7 @@ require 'tasks/color'
 
 desc "create initial records for enju_library"
 namespace :enju_library do
-  task :setup => :environment do
+  task setup: :environment do
     ActiveRecord::FixtureSet.create_fixtures('db/fixtures/enju_library', 'library_groups')
     Dir.glob(Rails.root.to_s + '/db/fixtures/enju_library/*.yml').sort.each do |file|
       next if file == 'library_groups'
@@ -12,7 +12,7 @@ namespace :enju_library do
   end
 
   desc "upgrade enju_library"
-  task :upgrade => :environment do
+  task upgrade: :environment do
     LibraryGroup.transaction do
       update_color
       library_group = LibraryGroup.find(1)

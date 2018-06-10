@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   resources :shelves
 
   resources :baskets
-  resources :accepts, :except => [:edit, :update]
+  resources :accepts, except: [:edit, :update]
 
   resources :bookstores
-  resources :library_groups, :except => [:new, :create, :destroy]
+  resources :library_groups, except: [:new, :create, :destroy]
   resources :subscriptions
   resources :subscribes
   resources :search_engines

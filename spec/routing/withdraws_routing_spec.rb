@@ -16,23 +16,23 @@ RSpec.describe WithdrawsController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/withdraws").to route_to("withdraws#index")
+      expect(get: "/withdraws").to route_to("withdraws#index")
     end
 
     it "routes to #new" do
-      expect(:get => "/withdraws/new").to route_to("withdraws#new")
+      expect(get: "/withdraws/new").to route_to("withdraws#new")
     end
 
     it "routes to #show" do
-      expect(:get => "/withdraws/1").to route_to("withdraws#show", :id => "1")
+      expect(get: "/withdraws/1").to route_to("withdraws#show", id: "1")
     end
 
     it "routes to #create" do
-      expect(:post => "/withdraws").to route_to("withdraws#create")
+      expect(post: "/withdraws").to route_to("withdraws#create")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/withdraws/1").to route_to("withdraws#destroy", :id => "1")
+      expect(delete: "/withdraws/1").to route_to("withdraws#destroy", id: "1")
     end
 
   end

@@ -25,11 +25,11 @@ describe BudgetTypesController do
     end
 
     it "routes to #show" do
-      get("/budget_types/1").should route_to("budget_types#show", :id => "1")
+      get("/budget_types/1").should route_to("budget_types#show", id: "1")
     end
 
     it "routes to #edit" do
-      get("/budget_types/1/edit").should route_to("budget_types#edit", :id => "1")
+      get("/budget_types/1/edit").should route_to("budget_types#edit", id: "1")
     end
 
     it "routes to #create" do
@@ -37,11 +37,11 @@ describe BudgetTypesController do
     end
 
     it "routes to #update" do
-      put("/budget_types/1").should route_to("budget_types#update", :id => "1")
+      put("/budget_types/1").should route_to("budget_types#update", id: "1")
     end
 
     it "routes to #destroy" do
-      delete("/budget_types/1").should route_to("budget_types#destroy", :id => "1")
+      delete("/budget_types/1").should route_to("budget_types#destroy", id: "1")
     end
 
   end
