@@ -25,7 +25,7 @@ module CalculateStat
 
   # 利用統計の集計完了メッセージを送信します。
   def send_message
-    sender = User.find(1) #system
+    sender = User.find(1) # system
     message_template = MessageTemplate.localized_template('counting_completed', user.profile.locale)
     request = MessageRequest.new
     request.assign_attributes({sender: sender, receiver: user, message_template: message_template})

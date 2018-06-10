@@ -1,5 +1,5 @@
 class Color < ActiveRecord::Base
-  #attr_accessible :code, :property
+  # attr_accessible :code, :property
 
   belongs_to :library_group
   validates :code, presence: true, format: /\A[A-Fa-f0-9]{6}\Z/

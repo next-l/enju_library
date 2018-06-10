@@ -21,9 +21,9 @@ class Library < ActiveRecord::Base
 
   validates :short_display_name, presence: true
   validates :library_group, presence: true
-  #validates_uniqueness_of :short_display_name, case_sensitive: false
+  # validates_uniqueness_of :short_display_name, case_sensitive: false
   validates_uniqueness_of :isil, allow_blank: true
-  #validates :display_name, uniqueness: true
+  # validates :display_name, uniqueness: true
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
   validates :isil, format: { with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/ }, allow_blank: true
   after_validation :geocode, if: :address_changed?
@@ -34,7 +34,7 @@ class Library < ActiveRecord::Base
   paginates_per 10
 
   def self.all_cache
-    if Rails.env == 'production'
+    if Rails.env.production?
       Rails.cache.fetch('library_all'){ Library.all }
     else
       Library.all

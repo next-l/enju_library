@@ -17,10 +17,10 @@ class ShelvesController < ApplicationController
       return
     else
       sort = {sort_by: 'name', order: 'asc'}
-      #case params[:sort_by]
-      #when 'name'
+      # case params[:sort_by]
+      # when 'name'
       #  sort[:sort_by] = 'name'
-      #end
+      # end
       sort[:order] = 'desc' if params[:order] == 'desc'
 
       query = @query = params[:query].to_s.strip
@@ -67,7 +67,7 @@ class ShelvesController < ApplicationController
     @shelf = Shelf.new
     @library = current_user.profile.library unless @library
     @shelf.library = @library
-    #@shelf.user = current_user
+    # @shelf.user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -87,7 +87,7 @@ class ShelvesController < ApplicationController
     if @library
       @shelf.library = @library
     else
-      @shelf.library = Library.web #unless current_user.has_role?('Librarian')
+      @shelf.library = Library.web # unless current_user.has_role?('Librarian')
     end
 
     respond_to do |format|

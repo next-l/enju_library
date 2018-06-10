@@ -4,8 +4,8 @@ class Withdraw < ActiveRecord::Base
   belongs_to :librarian, class_name: 'User'
 
   validates :item_id,
-    uniqueness: true, #{ message: I18n.t('withdraw.already_withdrawn', locale: I18n.default_locale) },
-    presence: true #, { message: I18n.translate('withdraw.item_not_found', locale: I18n.default_locale) }
+    uniqueness: true, # { message: I18n.t('withdraw.already_withdrawn', locale: I18n.default_locale) },
+    presence: true # , { message: I18n.translate('withdraw.item_not_found', locale: I18n.default_locale) }
   validates_presence_of :basket_id
   validate :check_item
 

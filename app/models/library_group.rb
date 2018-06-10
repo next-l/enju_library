@@ -1,5 +1,5 @@
 class LibraryGroup < ActiveRecord::Base
-  #include Singleton
+  # include Singleton
   include MasterModel
 
   has_many :libraries

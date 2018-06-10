@@ -8,7 +8,7 @@ module ExportFile
   end
 
   def send_message
-    sender = User.find(1) #system
+    sender = User.find(1) # system
     locale = user.profile.try(:locale) || I18n.default_locale.to_s
     message_template = MessageTemplate.localized_template('export_completed', locale)
     request = MessageRequest.new

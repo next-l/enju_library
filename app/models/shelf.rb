@@ -1,13 +1,13 @@
 class Shelf < ActiveRecord::Base
-  #include MasterModel
+  # include MasterModel
   scope :real, -> { where(library: Library.real) }
   belongs_to :library
   has_many :items
   has_many :picture_files, as: :picture_attachable, dependent: :destroy
 
-  #validates_associated :library
+  # validates_associated :library
   validates :library, presence: true
-  #validates_uniqueness_of :display_name, scope: :library_id
+  # validates_uniqueness_of :display_name, scope: :library_id
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
   before_update :reset_position
 
@@ -32,9 +32,9 @@ class Shelf < ActiveRecord::Base
     false
   end
 
-  #def self.web
+  # def self.web
   #  Shelf.find_by(name: 'web')
-  #end
+  # end
 
   # http://stackoverflow.com/a/12437606
   def reset_position
