@@ -44,7 +44,7 @@ class UserImportFile < ActiveRecord::Base
 
   # 利用者情報をTSVファイルを用いて作成します。
   def import
-    transition_to!(:started)
+    #transition_to!(:started)
     num = { user_imported: 0, user_found: 0, failed: 0, error: 0 }
     rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
@@ -111,20 +111,20 @@ class UserImportFile < ActiveRecord::Base
     end
     save
     if num[:error] >= 1
-      transition_to!(:failed)
+      #transition_to!(:failed)
     else
       transition_to!(:completed)
     end
     send_message
     num
-  rescue => e
-    transition_to!(:failed)
-    raise e
+  #rescue => e
+  #  transition_to!(:failed)
+  #  raise e
   end
 
   # 利用者情報をTSVファイルを用いて更新します。
   def modify
-    transition_to!(:started)
+    #transition_to!(:started)
     num = { user_updated: 0, user_not_found: 0, failed: 0 }
     rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
@@ -163,13 +163,13 @@ class UserImportFile < ActiveRecord::Base
     rows.close
     transition_to!(:completed)
     Sunspot.commit
-    send_message
+    #send_message
     num
-  rescue => e
-    self.error_message = "line #{row_num}: #{e.message}"
-    save
-    transition_to!(:failed)
-    raise e
+  #rescue => e
+  #  self.error_message = "line #{row_num}: #{e.message}"
+  #  save
+  #  transition_to!(:failed)
+  #  raise e
   end
 
   # 利用者情報をTSVファイルを用いて削除します。
@@ -195,12 +195,12 @@ class UserImportFile < ActiveRecord::Base
       end
     end
     transition_to!(:completed)
-    send_message
-  rescue => e
-    self.error_message = "line #{row_num}: #{e.message}"
-    save
-    transition_to!(:failed)
-    raise e
+    #send_message
+  #rescue => e
+  #  self.error_message = "line #{row_num}: #{e.message}"
+  #  save
+  #  transition_to!(:failed)
+  #  raise e
   end
 
   private

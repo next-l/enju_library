@@ -71,7 +71,7 @@ class Library < ActiveRecord::Base
   end
 
   def address_changed?
-    return true if region_changed? || locality_changed? || street_changed?
+    return true if saved_change_to_region? || saved_change_to_locality? || saved_change_to_street?
     false
   end
 

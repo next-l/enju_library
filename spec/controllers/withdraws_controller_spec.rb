@@ -45,7 +45,7 @@ RSpec.describe WithdrawsController, type: :controller do
       login_fixture_admin
       it 'assigns all withdraws as @withdraws' do
         Withdraw.create! valid_attributes
-        get :index, basket_id: 1
+        get :index, params: { basket_id: 1 }
         expect(assigns(:withdraws)).to eq baskets(:basket_00001).withdraws.order('withdraws.created_at DESC').page(1)
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe WithdrawsController, type: :controller do
       login_fixture_admin
       it 'assigns the requested withdraw as @withdraw' do
         withdraw = Withdraw.create! valid_attributes
-        get :show, id: withdraw.to_param
+        get :show, params: { id: withdraw.to_param }
         expect(assigns(:withdraw)).to eq(withdraw)
         response.should be_success
       end
@@ -79,25 +79,24 @@ RSpec.describe WithdrawsController, type: :controller do
       context 'with valid params' do
         it 'creates a new Withdraw' do
           expect do
-            post :create, valid_create_attributes
+            post :create, params: valid_create_attributes
           end.to change(Withdraw, :count).by(1)
           expect(assigns(:withdraw)).to be_persisted
         end
 
         it 'assigns a newly created withdraw as @withdraw' do
-          post :create, valid_create_attributes
+          post :create, params: valid_create_attributes
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(assigns(:withdraw)).to be_persisted
         end
 
         it 'redirects to the created withdraw' do
-          post :create, valid_create_attributes
+          post :create, params: valid_create_attributes
           expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
         end
 
         it 'should not withdraw a checked-out item' do
-          post :create, basket_id: valid_create_attributes[:basket_id],
-            withdraw: { item_identifier: '00001' }
+          post :create, params: { basket_id: valid_create_attributes[:basket_id], withdraw: { item_identifier: '00001' } }
           expect(assigns(:withdraw)).to be_a(Withdraw)
           expect(response).to be_success
         end
@@ -105,12 +104,12 @@ RSpec.describe WithdrawsController, type: :controller do
 
       context 'with invalid params' do
         it 'assigns a newly created but unsaved withdraw as @withdraw' do
-          post :create, basket_id: valid_create_attributes[:basket_id], withdraw: { item_id: nil }
+          post :create, params: { basket_id: valid_create_attributes[:basket_id], withdraw: { item_id: nil } }
           expect(assigns(:withdraw)).to be_a_new(Withdraw)
         end
 
         it "re-renders the 'new' template" do
-          post :create, basket_id: valid_create_attributes[:basket_id], withdraw: { item_id: nil }
+          post :create, params: { basket_id: valid_create_attributes[:basket_id], withdraw: { item_id: nil } }
           expect(response).to render_template('index')
         end
       end
@@ -123,13 +122,13 @@ RSpec.describe WithdrawsController, type: :controller do
       it 'destroys the requested withdraw' do
         withdraw = Withdraw.create! valid_attributes
         expect do
-          delete :destroy, id: withdraw.to_param
+          delete :destroy, params: { id: withdraw.to_param }
         end.to change(Withdraw, :count).by(-1)
       end
 
       it 'redirects to the withdraws list' do
         withdraw = Withdraw.create! valid_attributes
-        delete :destroy, id: withdraw.to_param
+        delete :destroy, params: { id: withdraw.to_param }
         expect(response).to redirect_to(withdraws_url)
       end
     end

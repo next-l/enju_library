@@ -13,10 +13,15 @@ describe UserImportFile do
     end
 
     it "should be imported" do
+      file = UserImportFile.new user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv")
+      file.default_user_group = UserGroup.find(2)
+      file.default_library = Library.find(3)
+      file.user = users(:admin)
+      file.save
       old_users_count = User.count
       old_import_results_count = UserImportResult.count
-      @file.current_state.should eq 'pending'
-      @file.import_start.should eq({:user_imported => 5, :user_found => 0, :failed => 0, error: 3})
+      file.current_state.should eq 'pending'
+      file.import_start.should eq({:user_imported => 5, :user_found => 0, :failed => 0, error: 3})
       User.order('id DESC')[1].username.should eq 'user005'
       User.order('id DESC')[2].username.should eq 'user003'
       User.count.should eq old_users_count + 5
@@ -68,12 +73,12 @@ describe UserImportFile do
       user006.profile.user_number.should be_nil
       user006.profile.user_group.name.should eq UserGroup.find(2).name
 
-      @file.user_import_fingerprint.should be_truthy
-      @file.executed_at.should be_truthy
+      file.user_import_fingerprint.should be_truthy
+      file.executed_at.should be_truthy
 
-      @file.reload
-      @file.error_message.should eq "次の列は無視されました。 save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください。\nline 9: 利用者番号は不正な値です。\nline 10: 利用者番号はすでに存在します。"
-      @file.current_state.should eq 'failed'
+      file.reload
+      file.error_message.should eq "次の列は無視されました。 save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください。\nline 9: 利用者番号は不正な値です。\nline 10: 利用者番号はすでに存在します。"
+      file.current_state.should eq 'failed'
     end
 
     it "should send message when import is completed" do

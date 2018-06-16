@@ -42,7 +42,7 @@ describe LibrariesController do
       end
 
       it 'should get index with query' do
-        get :index, query: 'kamata'
+        get :index, params: { query: 'kamata' }
         response.should be_success
         assigns(:libraries).include?(Library.friendly.find('kamata')).should be_truthy
       end
@@ -54,7 +54,7 @@ describe LibrariesController do
       login_fixture_admin
 
       it 'assigns the requested library as @library' do
-        get :show, id: 1
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end
@@ -63,7 +63,7 @@ describe LibrariesController do
       login_fixture_librarian
 
       it 'assigns the requested library as @library' do
-        get :show, id: 1
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end
@@ -72,14 +72,14 @@ describe LibrariesController do
       login_fixture_user
 
       it 'assigns the requested library as @library' do
-        get :show, id: 1
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested library as @library' do
-        get :show, id: 1
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end
@@ -129,7 +129,7 @@ describe LibrariesController do
 
       it 'assigns the requested library as @library' do
         library = FactoryBot.create(:library)
-        get :edit, id: library.id
+        get :edit, params: { id: library.id }
         assigns(:library).should eq(library)
       end
     end
@@ -139,7 +139,7 @@ describe LibrariesController do
 
       it 'assigns the requested library as @library' do
         library = FactoryBot.create(:library)
-        get :edit, id: library.id
+        get :edit, params: { id: library.id }
         response.should be_forbidden
       end
     end
@@ -149,7 +149,7 @@ describe LibrariesController do
 
       it 'assigns the requested library as @library' do
         library = FactoryBot.create(:library)
-        get :edit, id: library.id
+        get :edit, params: { id: library.id }
         response.should be_forbidden
       end
     end
@@ -157,7 +157,7 @@ describe LibrariesController do
     describe 'When not logged in' do
       it 'should not assign the requested library as @library' do
         library = FactoryBot.create(:library)
-        get :edit, id: library.id
+        get :edit, params: { id: library.id }
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -174,29 +174,29 @@ describe LibrariesController do
 
       describe 'with valid params' do
         it 'assigns a newly created library as @library' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           assigns(:library).should be_valid
         end
 
         it 'redirects to the created patron' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           response.should redirect_to(assigns(:library))
         end
       end
 
       describe 'with invalid params' do
         it 'assigns a newly created but unsaved library as @library' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           assigns(:library).should_not be_valid
         end
 
         it 'should be successful' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           response.should be_success
         end
 
         it 'should not create library without short_display_name' do
-          post :create, library: { name: 'fujisawa', short_display_name: '' }
+          post :create, params: { library: { name: 'fujisawa', short_display_name: '' } }
           response.should be_success
         end
       end
@@ -207,24 +207,24 @@ describe LibrariesController do
 
       describe 'with valid params' do
         it 'assigns a newly created library as @library' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           assigns(:library).should be_nil
         end
 
         it 'should be forbidden' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           response.should be_forbidden
         end
       end
 
       describe 'with invalid params' do
         it 'assigns a newly created but unsaved library as @library' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           assigns(:library).should be_nil
         end
 
         it 'should be forbidden' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           response.should be_forbidden
         end
       end
@@ -235,24 +235,24 @@ describe LibrariesController do
 
       describe 'with valid params' do
         it 'assigns a newly created library as @library' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           assigns(:library).should be_nil
         end
 
         it 'should be forbidden' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           response.should be_forbidden
         end
       end
 
       describe 'with invalid params' do
         it 'assigns a newly created but unsaved library as @library' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           assigns(:library).should be_nil
         end
 
         it 'should be forbidden' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           response.should be_forbidden
         end
       end
@@ -261,24 +261,24 @@ describe LibrariesController do
     describe 'When not logged in' do
       describe 'with valid params' do
         it 'assigns a newly created library as @library' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           assigns(:library).should be_nil
         end
 
         it 'should be redirected to new session url' do
-          post :create, library: @attrs
+          post :create, params: { library: @attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe 'with invalid params' do
         it 'assigns a newly created but unsaved library as @library' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           assigns(:library).should be_nil
         end
 
         it 'should be redirected to new session url' do
-          post :create, library: @invalid_attrs
+          post :create, params: { library: @invalid_attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -297,23 +297,23 @@ describe LibrariesController do
 
       describe 'with valid params' do
         it 'updates the requested library' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
         end
 
         it 'assigns the requested library as @library' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
           assigns(:library).should eq(@library)
         end
 
         it 'moves its position when specified' do
-          put :update, id: @library.id, library: @attrs, move: 'lower'
+          put :update, params: { id: @library.id, library: @attrs, move: 'lower' }
           response.should redirect_to(libraries_url)
         end
       end
 
       describe 'with invalid params' do
         it 'assigns the requested library as @library' do
-          put :update, id: @library.id, library: @invalid_attrs
+          put :update, params: { id: @library.id, library: @invalid_attrs }
           response.should render_template('edit')
         end
       end
@@ -324,18 +324,18 @@ describe LibrariesController do
 
       describe 'with valid params' do
         it 'updates the requested library' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
         end
 
         it 'should be forbidden' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
           response.should be_forbidden
         end
       end
 
       describe 'with invalid params' do
         it 'should be forbidden' do
-          put :update, id: @library.id, library: @invalid_attrs
+          put :update, params: { id: @library.id, library: @invalid_attrs }
           response.should be_forbidden
         end
       end
@@ -346,18 +346,18 @@ describe LibrariesController do
 
       describe 'with valid params' do
         it 'updates the requested library' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
         end
 
         it 'should be forbidden' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
           response.should be_forbidden
         end
       end
 
       describe 'with invalid params' do
         it 'should be forbidden' do
-          put :update, id: @library.id, library: @invalid_attrs
+          put :update, params: { id: @library.id, library: @invalid_attrs }
           response.should be_forbidden
         end
       end
@@ -366,18 +366,18 @@ describe LibrariesController do
     describe 'When not logged in' do
       describe 'with valid params' do
         it 'updates the requested library' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
         end
 
         it 'should be forbidden' do
-          put :update, id: @library.id, library: @attrs
+          put :update, params: { id: @library.id, library: @attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
 
       describe 'with invalid params' do
         it 'assigns the requested library as @library' do
-          put :update, id: @library.id, library: @invalid_attrs
+          put :update, params: { id: @library.id, library: @invalid_attrs }
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -394,21 +394,21 @@ describe LibrariesController do
         login_fixture_admin
 
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'should be forbidden' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should be_forbidden
         end
 
         it 'should not destroy library_id 1' do
-          delete :destroy, id: 'web'
+          delete :destroy, params: { id: 'web' }
           response.should be_forbidden
         end
 
         it 'should not destroy library that contains shelves' do
-          delete :destroy, id: 'kamata'
+          delete :destroy, params: { id: 'kamata' }
           response.should be_forbidden
         end
       end
@@ -417,11 +417,11 @@ describe LibrariesController do
         login_fixture_librarian
 
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'should be forbidden' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should be_forbidden
         end
       end
@@ -430,22 +430,22 @@ describe LibrariesController do
         login_fixture_user
 
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'should be forbidden' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should be_forbidden
         end
       end
 
       describe 'When not logged in' do
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'should be forbidden' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should redirect_to(new_user_session_url)
         end
       end
@@ -461,11 +461,11 @@ describe LibrariesController do
         login_fixture_admin
 
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'redirects to the libraries list' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should redirect_to(libraries_url)
         end
       end
@@ -474,11 +474,11 @@ describe LibrariesController do
         login_fixture_librarian
 
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'should be forbidden' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should be_forbidden
         end
       end
@@ -487,22 +487,22 @@ describe LibrariesController do
         login_fixture_user
 
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'should be forbidden' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should be_forbidden
         end
       end
 
       describe 'When not logged in' do
         it 'destroys the requested library' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
         end
 
         it 'should be forbidden' do
-          delete :destroy, id: @library.id
+          delete :destroy, params: { id: @library.id }
           response.should redirect_to(new_user_session_url)
         end
       end
