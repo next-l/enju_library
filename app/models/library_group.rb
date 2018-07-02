@@ -4,7 +4,7 @@ class LibraryGroup < ActiveRecord::Base
 
   has_many :libraries
   has_many :colors
-  belongs_to :country
+  belongs_to :country, optional: true
   belongs_to :user, optional: true
 
   validates :url, presence: true, url: true
