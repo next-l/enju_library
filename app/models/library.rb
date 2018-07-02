@@ -5,7 +5,7 @@ class Library < ActiveRecord::Base
   has_many :shelves
   belongs_to :library_group, validate: true
   has_many :profiles
-  belongs_to :country
+  belongs_to :country, optional: true
 
   extend FriendlyId
   friendly_id :name
