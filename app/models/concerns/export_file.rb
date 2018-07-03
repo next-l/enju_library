@@ -14,6 +14,7 @@ module ExportFile
     request = MessageRequest.new
     request.assign_attributes({sender: sender, receiver: user, message_template: message_template})
     request.save_message_body
+    request.save!
     request.transition_to!(:sent)
   end
 end

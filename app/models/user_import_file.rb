@@ -26,12 +26,12 @@ class UserImportFile < ActiveRecord::Base
     'application/vnd.ms-excel'
   ]
   validates_attachment_presence :user_import
-  belongs_to :user, validate: true
+  belongs_to :user
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
-  has_many :user_import_results
+  has_many :user_import_results, dependent: :destroy
 
-  has_many :user_import_file_transitions, autosave: false
+  has_many :user_import_file_transitions, autosave: false, dependent: :destroy
 
   attr_accessor :mode
 
@@ -44,7 +44,7 @@ class UserImportFile < ActiveRecord::Base
 
   # 利用者情報をTSVファイルを用いて作成します。
   def import
-    #transition_to!(:started)
+    transition_to!(:started)
     num = { user_imported: 0, user_found: 0, failed: 0, error: 0 }
     rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
@@ -111,7 +111,7 @@ class UserImportFile < ActiveRecord::Base
     end
     save
     if num[:error] >= 1
-      #transition_to!(:failed)
+      transition_to!(:failed)
     else
       transition_to!(:completed)
     end
@@ -124,7 +124,7 @@ class UserImportFile < ActiveRecord::Base
 
   # 利用者情報をTSVファイルを用いて更新します。
   def modify
-    #transition_to!(:started)
+    transition_to!(:started)
     num = { user_updated: 0, user_not_found: 0, failed: 0 }
     rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
@@ -163,7 +163,7 @@ class UserImportFile < ActiveRecord::Base
     rows.close
     transition_to!(:completed)
     Sunspot.commit
-    #send_message
+    send_message
     num
   #rescue => e
   #  self.error_message = "line #{row_num}: #{e.message}"
@@ -195,7 +195,7 @@ class UserImportFile < ActiveRecord::Base
       end
     end
     transition_to!(:completed)
-    #send_message
+    send_message
   #rescue => e
   #  self.error_message = "line #{row_num}: #{e.message}"
   #  save

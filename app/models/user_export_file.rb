@@ -17,7 +17,7 @@ class UserExportFile < ActiveRecord::Base
   end
   validates_attachment_content_type :user_export, content_type: /\Atext\/plain\Z/
 
-  has_many :user_export_file_transitions, autosave: false
+  has_many :user_export_file_transitions, autosave: false, dependent: :destroy
 
   def state_machine
     UserExportFileStateMachine.new(self, transition_class: UserExportFileTransition)

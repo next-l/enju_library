@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require 'rails_helper'
   
 describe UserExportFile do
@@ -6,9 +5,7 @@ describe UserExportFile do
   
   it "should export users" do
     message_count = Message.count
-    file = UserExportFile.new
-    file.user = users(:admin)
-    file.save
+    file = UserExportFile.create(user: users(:admin))
     file.export!
     #UserExportFileJob.perform_later(file).should be_truthy
     Message.count.should eq message_count + 1
