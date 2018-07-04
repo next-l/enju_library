@@ -3,10 +3,10 @@ require 'rails_helper'
 describe "budget_types/show" do
   before(:each) do
     @budget_type = assign(:budget_type, stub_model(BudgetType,
-      :name => "Name",
-      :display_name => "MyText",
-      :note => "MyText",
-      :position => 1
+      name: "Name",
+      display_name: "MyText",
+      note: "MyText",
+      position: 1
     ))
   end
 

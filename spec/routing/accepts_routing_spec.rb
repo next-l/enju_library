@@ -12,7 +12,7 @@ describe AcceptsController do
     end
 
     it "routes to #show" do
-      get("/accepts/1").should route_to("accepts#show", :id => "1")
+      get("/accepts/1").should route_to("accepts#show", id: "1")
     end
 
     it "routes to #create" do
@@ -20,7 +20,7 @@ describe AcceptsController do
     end
 
     it "routes to #destroy" do
-      delete("/accepts/1").should route_to("accepts#destroy", :id => "1")
+      delete("/accepts/1").should route_to("accepts#destroy", id: "1")
     end
 
   end

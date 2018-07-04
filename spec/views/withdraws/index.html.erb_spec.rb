@@ -6,12 +6,12 @@ RSpec.describe "withdraws/index", type: :view do
   before(:each) do
     assign(:withdraws, Kaminari::paginate_array([
       stub_model(Withdraw,
-        :item_id => 1,
-        :created_at => Time.zone.now
+        item_id: 1,
+        created_at: Time.zone.now
       ),
       stub_model(Withdraw,
-        :item_id => 1,
-        :created_at => Time.zone.now
+        item_id: 1,
+        created_at: Time.zone.now
       )
     ]).page(1))
     basket = FactoryBot.create(:basket)
