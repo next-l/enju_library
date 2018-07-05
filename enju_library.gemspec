@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
   s.add_dependency "enju_seed", "~> 0.2.3"
-  s.add_dependency "paper_trail", "~> 9.1"
+  s.add_dependency "paper_trail", "~> 9.2"
   s.add_dependency "geocoder"
   s.add_dependency "statesman", "~> 3.4"
   s.add_dependency "paperclip", "~> 5.3"
@@ -40,5 +40,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency "sunspot-rails-tester"
   s.add_development_dependency "rspec-activemodel-mocks"
   s.add_development_dependency "coveralls"
-  s.add_development_dependency "capybara", "~> 3.1.1"
+  s.add_development_dependency "capybara", "~> 3.3"
 end
