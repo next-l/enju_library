@@ -5,5 +5,7 @@ FactoryBot.define do
     f.association :user, factory: :user
     f.association :librarian, factory: :librarian
     f.association :basket, factory: :basket
+    f.association :library
+    f.association :shelf
   end
 end

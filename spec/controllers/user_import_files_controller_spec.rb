@@ -218,10 +218,13 @@ describe UserImportFilesController do
       login_fixture_admin
 
       it 'should update user_import_file' do
-        post :create, params: { user_import_file: {
-          user_import: fixture_file_upload('/../../examples/user_import_file_sample.tsv', 'text/csv') }
-        }
-        put :update, params: { id: assigns(:user_import_file).id, user_import_file: { note: 'test' } }
+        user_import_file = UserImportFile.create!(
+          user_import: fixture_file_upload('/../../examples/user_import_file_sample.tsv', 'text/csv'),
+          user: users(:admin),
+          default_library_id: 1,
+          default_user_group_id: 1
+        )
+        put :update, params: { id: user_import_file.id, user_import_file: { note: 'test' } }
         expect(response).to redirect_to user_import_file_url(assigns(:user_import_file))
       end
     end
@@ -230,12 +233,13 @@ describe UserImportFilesController do
       login_fixture_librarian
 
       it 'should update user_import_file' do
-        post :create, params: { user_import_file: {
+        user_import_file = UserImportFile.create!(
           user_import: fixture_file_upload('/../../examples/user_import_file_sample.tsv', 'text/csv'),
+          user: users(:admin),
           default_library_id: 1,
           default_user_group_id: 1
-        }}
-        put :update, params: { id: assigns(:user_import_file).id, user_import_file: { note: 'test' } }
+        )
+        put :update, params: { id: user_import_file.id, user_import_file: { note: 'test' } }
         expect(response).to redirect_to user_import_file_url(assigns(:user_import_file))
       end
     end
