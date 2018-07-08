@@ -18,19 +18,19 @@ module EnjuLibrary
       return if performed?
       if user_signed_in?
         respond_to do |format|
-          format.html {render template: 'page/403', status: 403}
+          format.html {render template: 'page/403', status: :forbidden}
           # format.html.phone {render template: 'page/403', status: 403}
-          format.xml {render template: 'page/403', status: 403}
+          format.xml {render template: 'page/403', status: :forbidden}
           format.json { render text: '{"error": "forbidden"}' }
-          format.rss {render template: 'page/403.xml', status: 403}
+          format.rss {render template: 'page/403.xml', status: :forbidden}
         end
       else
         respond_to do |format|
           format.html { redirect_to main_app.new_user_session_url }
           # format.html.phone { redirect_to new_user_session_url }
-          format.xml { render template: 'page/403', status: 403 }
+          format.xml { render template: 'page/403', status: :forbidden }
           format.json { render text: '{"error": "forbidden"}' }
-          format.rss { render template: 'page/403.xml', status: 403 }
+          format.rss { render template: 'page/403.xml', status: :forbidden }
         end
       end
     end
@@ -38,11 +38,11 @@ module EnjuLibrary
     def render_404
       return if performed?
       respond_to do |format|
-        format.html { render template: 'page/404', status: 404 }
+        format.html { render template: 'page/404', status: :not_found }
         # format.html.phone { render template: 'page/404', status: 404 }
-        format.xml { render template: 'page/404', status: 404 }
+        format.xml { render template: 'page/404', status: :not_found }
         format.json { render text: '{"error": "not_found"}' }
-        format.rss { render template: 'page/404.xml', status: 404 }
+        format.rss { render template: 'page/404.xml', status: :not_found }
       end
     end
 
@@ -54,11 +54,11 @@ module EnjuLibrary
     def render_500
       return if performed?
       respond_to do |format|
-        format.html {render file: "#{Rails.root}/public/500", layout: false, status: 500}
+        format.html {render file: "#{Rails.root}/public/500", layout: false, status: :internal_server_error}
         # format.html.phone {render file: "#{Rails.root}/public/500", layout: false, status: 500}
-        format.xml {render template: 'page/500', status: 500}
+        format.xml {render template: 'page/500', status: :internal_server_error}
         format.json { render text: '{"error": "server_error"}' }
-        format.xml {render template: 'page/500.xml', status: 500}
+        format.xml {render template: 'page/500.xml', status: :internal_server_error}
       end
     end
 
@@ -67,11 +67,11 @@ module EnjuLibrary
       return if performed?
       # flash[:notice] = t('page.connection_failed')
       respond_to do |format|
-        format.html {render template: "page/500_nosolr", layout: false, status: 500}
+        format.html {render template: "page/500_nosolr", layout: false, status: :internal_server_error}
         # format.html.phone {render template: "page/500_nosolr", layout: false, status: 500}
-        format.xml {render template: 'page/500', status: 500}
+        format.xml {render template: 'page/500', status: :internal_server_error}
         format.json { render text: '{"error": "server_error"}' }
-        format.xml {render template: 'page/500.xml', status: 500}
+        format.xml {render template: 'page/500.xml', status: :internal_server_error}
       end
     end
 

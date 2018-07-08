@@ -117,9 +117,9 @@ class UserImportFile < ActiveRecord::Base
     end
     send_message
     num
-  #rescue => e
-  #  transition_to!(:failed)
-  #  raise e
+  rescue => e
+    transition_to!(:failed)
+    raise e
   end
 
   # 利用者情報をTSVファイルを用いて更新します。
@@ -165,11 +165,11 @@ class UserImportFile < ActiveRecord::Base
     Sunspot.commit
     send_message
     num
-  #rescue => e
-  #  self.error_message = "line #{row_num}: #{e.message}"
-  #  save
-  #  transition_to!(:failed)
-  #  raise e
+  rescue => e
+    self.error_message = "line #{row_num}: #{e.message}"
+    save
+    transition_to!(:failed)
+    raise e
   end
 
   # 利用者情報をTSVファイルを用いて削除します。
@@ -196,11 +196,11 @@ class UserImportFile < ActiveRecord::Base
     end
     transition_to!(:completed)
     send_message
-  #rescue => e
-  #  self.error_message = "line #{row_num}: #{e.message}"
-  #  save
-  #  transition_to!(:failed)
-  #  raise e
+  rescue => e
+    self.error_message = "line #{row_num}: #{e.message}"
+    save
+    transition_to!(:failed)
+    raise e
   end
 
   private
