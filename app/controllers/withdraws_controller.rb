@@ -122,6 +122,7 @@ class WithdrawsController < ApplicationController
   end
 
   private
+
   def set_withdraw
     @withdraw = Withdraw.find(params[:id])
     authorize @withdraw

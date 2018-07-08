@@ -84,6 +84,7 @@ class SearchEnginesController < ApplicationController
   end
 
   private
+
   def set_search_engine
     @search_engine = SearchEngine.find(params[:id])
     authorize @search_engine

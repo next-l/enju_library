@@ -4,6 +4,7 @@ class RequestStatusType < ActiveRecord::Base
   has_many :reserves
 
   private
+
   def valid_name?
     true
   end

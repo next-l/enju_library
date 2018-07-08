@@ -82,6 +82,7 @@ class SubscribesController < ApplicationController
   end
 
   private
+
   def set_subscribe
     @subscribe = Subscribe.find(params[:id])
     authorize @subscribe

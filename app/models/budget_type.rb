@@ -4,6 +4,7 @@ class BudgetType < ActiveRecord::Base
   has_many :items
 
   private
+
   def valid_name?
     true
   end

@@ -84,6 +84,7 @@ class RequestStatusTypesController < ApplicationController
   end
 
   private
+
   def set_request_status_type
     @request_status_type = RequestStatusType.find(params[:id])
     authorize @request_status_type

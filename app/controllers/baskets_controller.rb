@@ -80,7 +80,7 @@ class BasketsController < ApplicationController
     end
 
     respond_to do |format|
-      #if @basket.update_attributes({})
+      # if @basket.update_attributes({})
       if @basket.save(validate: false)
         # 貸出完了時
         format.html { redirect_to checkouts_url(user_id: @basket.user.username), notice: t('basket.checkout_completed') }
@@ -105,6 +105,7 @@ class BasketsController < ApplicationController
   end
 
   private
+
   def set_basket
     @basket = Basket.find(params[:id])
     authorize @basket

@@ -121,6 +121,7 @@ class AcceptsController < ApplicationController
   end
 
   private
+
   def set_accept
     @accept = Accept.find(params[:id])
     authorize @accept

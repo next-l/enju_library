@@ -6,9 +6,9 @@ module EnjuLibrary
       before_action :get_library_group, :set_locale, :set_available_languages, :set_mobile_request
       before_action :store_current_location, unless: :devise_controller?
       rescue_from Pundit::NotAuthorizedError, with: :render_403
-      #rescue_from ActiveRecord::RecordNotFound, with: :render_404
+      # rescue_from ActiveRecord::RecordNotFound, with: :render_404
       rescue_from Errno::ECONNREFUSED, with: :render_500_nosolr
-      #rescue_from ActionView::MissingTemplate, with: :render_404_invalid_format
+      # rescue_from ActionView::MissingTemplate, with: :render_404_invalid_format
       helper_method :filtered_params
     end
 
@@ -19,7 +19,7 @@ module EnjuLibrary
       if user_signed_in?
         respond_to do |format|
           format.html {render template: 'page/403', status: 403}
-          #format.html.phone {render template: 'page/403', status: 403}
+          # format.html.phone {render template: 'page/403', status: 403}
           format.xml {render template: 'page/403', status: 403}
           format.json { render text: '{"error": "forbidden"}' }
           format.rss {render template: 'page/403.xml', status: 403}
@@ -27,7 +27,7 @@ module EnjuLibrary
       else
         respond_to do |format|
           format.html { redirect_to main_app.new_user_session_url }
-          #format.html.phone { redirect_to new_user_session_url }
+          # format.html.phone { redirect_to new_user_session_url }
           format.xml { render template: 'page/403', status: 403 }
           format.json { render text: '{"error": "forbidden"}' }
           format.rss { render template: 'page/403.xml', status: 403 }
@@ -39,7 +39,7 @@ module EnjuLibrary
       return if performed?
       respond_to do |format|
         format.html { render template: 'page/404', status: 404 }
-        #format.html.phone { render template: 'page/404', status: 404 }
+        # format.html.phone { render template: 'page/404', status: 404 }
         format.xml { render template: 'page/404', status: 404 }
         format.json { render text: '{"error": "not_found"}' }
         format.rss { render template: 'page/404.xml', status: 404 }
@@ -55,7 +55,7 @@ module EnjuLibrary
       return if performed?
       respond_to do |format|
         format.html {render file: "#{Rails.root}/public/500", layout: false, status: 500}
-        #format.html.phone {render file: "#{Rails.root}/public/500", layout: false, status: 500}
+        # format.html.phone {render file: "#{Rails.root}/public/500", layout: false, status: 500}
         format.xml {render template: 'page/500', status: 500}
         format.json { render text: '{"error": "server_error"}' }
         format.xml {render template: 'page/500.xml', status: 500}
@@ -65,10 +65,10 @@ module EnjuLibrary
     def render_500_nosolr
       Rails.logger.fatal("please confirm that the Solr is running.")
       return if performed?
-      #flash[:notice] = t('page.connection_failed')
+      # flash[:notice] = t('page.connection_failed')
       respond_to do |format|
         format.html {render template: "page/500_nosolr", layout: false, status: 500}
-        #format.html.phone {render template: "page/500_nosolr", layout: false, status: 500}
+        # format.html.phone {render template: "page/500_nosolr", layout: false, status: 500}
         format.xml {render template: 'page/500', status: 500}
         format.json { render text: '{"error": "server_error"}' }
         format.xml {render template: 'page/500.xml', status: 500}
@@ -129,7 +129,7 @@ module EnjuLibrary
 
     def get_user
       @user = User.where(username: params[:user_id]).first if params[:user_id]
-      #authorize! :show, @user if @user
+      # authorize! :show, @user if @user
     end
 
     def get_user_group
@@ -154,7 +154,7 @@ module EnjuLibrary
     end
 
     def store_page
-      if request.get? and request.format.try(:html?) and !request.xhr?
+      if request.get? && request.format.try(:html?) && !request.xhr?
         flash[:page] = params[:page] if params[:page].to_i > 0
       end
     end
@@ -179,7 +179,7 @@ module EnjuLibrary
     end
 
     def api_request?
-      true unless params[:format].nil? or params[:format] == 'html'
+      true unless params[:format].nil? || (params[:format] == 'html')
     end
 
     def get_top_page_content

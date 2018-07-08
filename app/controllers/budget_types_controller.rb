@@ -84,6 +84,7 @@ class BudgetTypesController < ApplicationController
   end
 
   private
+
   def set_budget_type
     @budget_type = BudgetType.find(params[:id])
     authorize @budget_type
