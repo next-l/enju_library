@@ -349,6 +349,33 @@ ActiveRecord::Schema.define(version: 20180107160740) do
     t.datetime "updated_at"
   end
 
+  create_table "classification_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "display_name"
+    t.text "note"
+    t.integer "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "classifications", force: :cascade do |t|
+    t.integer "parent_id"
+    t.string "category", null: false
+    t.text "note"
+    t.integer "classification_type_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "lft"
+    t.integer "rgt"
+    t.integer "manifestation_id"
+    t.string "url"
+    t.string "label"
+    t.index ["category"], name: "index_classifications_on_category"
+    t.index ["classification_type_id"], name: "index_classifications_on_classification_type_id"
+    t.index ["manifestation_id"], name: "index_classifications_on_manifestation_id"
+    t.index ["parent_id"], name: "index_classifications_on_parent_id"
+  end
+
   create_table "colors", force: :cascade do |t|
     t.integer "library_group_id"
     t.string "property"
@@ -1314,6 +1341,48 @@ ActiveRecord::Schema.define(version: 20180107160740) do
     t.datetime "deleted_at"
     t.boolean "closed", default: false, null: false
     t.index ["library_id"], name: "index_shelves_on_library_id"
+  end
+
+  create_table "subject_heading_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "display_name"
+    t.text "note"
+    t.integer "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subject_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "display_name"
+    t.text "note"
+    t.integer "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "subjects", force: :cascade do |t|
+    t.integer "parent_id"
+    t.integer "use_term_id"
+    t.string "term"
+    t.text "term_transcription"
+    t.integer "subject_type_id", null: false
+    t.text "scope_note"
+    t.text "note"
+    t.integer "required_role_id", default: 1, null: false
+    t.integer "lock_version", default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "deleted_at"
+    t.string "url"
+    t.integer "manifestation_id"
+    t.integer "subject_heading_type_id"
+    t.index ["manifestation_id"], name: "index_subjects_on_manifestation_id"
+    t.index ["parent_id"], name: "index_subjects_on_parent_id"
+    t.index ["required_role_id"], name: "index_subjects_on_required_role_id"
+    t.index ["subject_type_id"], name: "index_subjects_on_subject_type_id"
+    t.index ["term"], name: "index_subjects_on_term"
+    t.index ["use_term_id"], name: "index_subjects_on_use_term_id"
   end
 
   create_table "subscribes", force: :cascade do |t|
