@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
   s.add_dependency "enju_seed", "~> 0.3.0.beta5"
-  s.add_dependency "paper_trail", "~> 9.2"
+  s.add_dependency "paper_trail", "~> 10.0"
   s.add_dependency "geocoder"
   s.add_dependency "statesman", "~> 3.4"
   s.add_dependency "paperclip", "~> 5.3"
