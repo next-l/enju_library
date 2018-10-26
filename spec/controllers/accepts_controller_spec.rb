@@ -16,14 +16,14 @@ describe AcceptsController do
       it 'assigns all accepts as @accepts' do
         get :index
         assigns(:accepts).should_not be_nil
-        response.should be_success
+        response.should be_successful
       end
 
       describe 'When basket_id is specified' do
         it 'assigns all accepts as @accepts' do
           get :index, params: { basket_id: 10 }
           assigns(:accepts).should eq baskets(:basket_00010).accepts.order('accepts.created_at DESC').page(1)
-          response.should be_success
+          response.should be_successful
         end
       end
     end
@@ -34,14 +34,14 @@ describe AcceptsController do
       it 'assigns all accepts as @accepts' do
         get :index
         assigns(:accepts).should_not be_nil
-        response.should be_success
+        response.should be_successful
       end
 
       describe 'When basket_id is specified' do
         it 'assigns all accepts as @accepts' do
           get :index, params: { basket_id: 9 }
           assigns(:accepts).should eq baskets(:basket_00009).accepts.order('accepts.created_at DESC').page(1)
-          response.should be_success
+          response.should be_successful
         end
       end
     end
@@ -181,7 +181,7 @@ describe AcceptsController do
       it 'should not create accept without item_id' do
         post :create, params: { accept: { item_identifier: nil }, basket_id: 9 }
         assigns(:accept).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 

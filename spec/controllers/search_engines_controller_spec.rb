@@ -98,7 +98,7 @@ describe SearchEnginesController do
       it 'assigns the requested search_engine as @search_engine' do
         get :new
         assigns(:search_engine).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -200,7 +200,7 @@ describe SearchEnginesController do
 
         it 'should be successful' do
           post :create, params: { search_engine: @invalid_attrs }
-          response.should be_success
+          response.should be_successful
         end
       end
     end

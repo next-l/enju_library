@@ -98,7 +98,7 @@ describe BookstoresController do
       it 'assigns the requested bookstore as @bookstore' do
         get :new
         assigns(:bookstore).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -200,7 +200,7 @@ describe BookstoresController do
 
         it 'should be successful' do
           post :create, params: { bookstore: @invalid_attrs }
-          response.should be_success
+          response.should be_successful
         end
       end
     end
