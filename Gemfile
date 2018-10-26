@@ -14,5 +14,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem 'enju_circulation', github: 'next-l/enju_circulation', branch: '1.3'
 gem 'rails-controller-testing'
+gem 'mobility', '~> 0.8'

@@ -1,6 +1,7 @@
 class LibraryGroup < ActiveRecord::Base
   #include Singleton
   include MasterModel
+  extend Mobility
 
   has_many :libraries
   has_many :colors
@@ -18,8 +19,7 @@ class LibraryGroup < ActiveRecord::Base
     :erms_url
   ], coder: JSON
 
-  translates :login_banner, :footer_banner
-  globalize_accessors
+  translates :login_banner, :footer_banner, locale_accessors: true
 
   if ENV['ENJU_STORAGE'] == 's3'
     has_attached_file :header_logo, storage: :s3, styles: { medium: 'x80'},

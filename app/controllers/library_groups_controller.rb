@@ -82,13 +82,18 @@ class LibraryGroupsController < ApplicationController
       :book_jacket_source, :screenshot_generator, :erms_url,
       :header_logo, :delete_header_logo,
       :allow_bookmark_external_url, # EnjuBookmark
+      I18n.available_locales.map{|l|
+        [
+          :"login_banner_#{Mobility.normalize_locale(l)}",
+          :"footer_banner_#{Mobility.normalize_locale(l)}"
+        ]
+      },
       {
         colors_attributes: [:id, :property, :code]
       },
       {
         user_attributes: [:email]
       },
-      *LibraryGroup.globalize_attribute_names,
     )
   end
 end
