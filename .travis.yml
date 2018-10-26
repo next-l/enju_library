@@ -17,4 +17,4 @@ notifications:
     secure: RiboVJ5+DiKFZVN4kKnSvVmbd3An1/yiHN/PENUWLCo5PNF4ZnDAcd/V/uyawiblXNcINfX7XAN32RjtCVWDNvpNcF/RAynoltg6yc15GA4Io6tGRBNxtDe6qodvFWSsSw4Wzl2eS580vXMihWvB7Rghrt3dC+ub/SP1DkfZnq8=
 sudo: false
 addons:
-  postgresql: "10.1"
+  postgresql: "9.6"
