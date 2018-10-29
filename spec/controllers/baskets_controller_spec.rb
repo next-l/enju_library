@@ -10,12 +10,12 @@ describe BasketsController do
       it 'assigns all baskets as @baskets' do
         get :index, params: { user_id: users(:user1).username }
         assigns(:baskets).should_not be_empty
-        response.should be_success
+        response.should be_successful
       end
 
       it 'should get index without user_id' do
         get :index
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -25,7 +25,7 @@ describe BasketsController do
       it 'assigns all baskets as @baskets' do
         get :index, params: { user_id: users(:user1).username }
         assigns(:baskets).should_not be_empty
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -234,20 +234,20 @@ describe BasketsController do
         post :create, params: { basket: { user_number: users(:user4).profile.user_number } }
         assigns(:basket).should_not be_valid
         assigns(:basket).errors['base'].include?(I18n.t('basket.this_account_is_suspended')).should be_truthy
-        response.should be_success
+        response.should be_successful
       end
 
       it 'should not create basket when user is not found' do
         post :create, params: { basket: { user_number: 'not found' } }
         assigns(:basket).should_not be_valid
         assigns(:basket).errors['base'].include?(I18n.t('user.not_found')).should be_truthy
-        response.should be_success
+        response.should be_successful
       end
 
       it 'should not create basket without user_number' do
         post :create, params: { basket: { note: 'test' } }
         assigns(:basket).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
 
       it 'should create basket' do
@@ -259,7 +259,7 @@ describe BasketsController do
       it 'should not create basket without user_number' do
         post :create, params: { basket: { note: 'test' } }
         assigns(:basket).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 

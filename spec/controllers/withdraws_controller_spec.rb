@@ -58,7 +58,7 @@ RSpec.describe WithdrawsController, type: :controller do
         withdraw = Withdraw.create! valid_attributes
         get :show, params: { id: withdraw.to_param }
         expect(assigns(:withdraw)).to eq(withdraw)
-        response.should be_success
+        response.should be_successful
       end
     end
   end
@@ -98,7 +98,7 @@ RSpec.describe WithdrawsController, type: :controller do
         it 'should not withdraw a checked-out item' do
           post :create, params: { basket_id: valid_create_attributes[:basket_id], withdraw: { item_identifier: '00001' } }
           expect(assigns(:withdraw)).to be_a(Withdraw)
-          expect(response).to be_success
+          expect(response).to be_successful
         end
       end
 

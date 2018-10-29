@@ -48,12 +48,12 @@ describe UserImportFilesController do
       it 'assigns the requested user_import_file as @user_import_file' do
         get :show, params: { id: user_import_files(:two).id }
         assigns(:user_import_file).should eq(user_import_files(:two))
-        expect(response).to be_success
+        expect(response).to be_successful
       end
 
       it 'assigns user_import_results' do
         get :show, params: { id: user_import_files(:one).id }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(assigns(:user_import_file)).to eq user_import_files(:one)
         expect(assigns(:user_import_results)).to include user_import_results(:one)
       end
@@ -65,7 +65,7 @@ describe UserImportFilesController do
       it 'assigns the requested user_import_file as @user_import_file' do
         get :show, params: { id: user_import_files(:two).id }
         assigns(:user_import_file).should eq(user_import_files(:two))
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -95,7 +95,7 @@ describe UserImportFilesController do
       it 'assigns the requested user_import_file as @user_import_file' do
         get :new
         assigns(:user_import_file).should_not be_valid
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -105,7 +105,7 @@ describe UserImportFilesController do
       it 'should not assign the requested user_import_file as @user_import_file' do
         get :new
         assigns(:user_import_file).should_not be_valid
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

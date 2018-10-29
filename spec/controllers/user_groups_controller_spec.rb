@@ -94,7 +94,7 @@ describe UserGroupsController do
       it 'assigns the requested user_group as @user_group' do
         get :new
         assigns(:user_group).should_not be_valid
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

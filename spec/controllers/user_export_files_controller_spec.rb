@@ -48,7 +48,7 @@ describe UserExportFilesController do
       it 'assigns the requested user_export_file as @user_export_file' do
         get :show, params: { id: user_export_files(:user_export_file_00003).id }
         assigns(:user_export_file).should eq(user_export_files(:user_export_file_00003))
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 
@@ -88,7 +88,7 @@ describe UserExportFilesController do
       it 'assigns the requested user_export_file as @user_export_file' do
         get :new
         assigns(:user_export_file).should be_valid
-        expect(response).to be_success
+        expect(response).to be_successful
       end
     end
 

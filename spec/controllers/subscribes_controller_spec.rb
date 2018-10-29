@@ -96,7 +96,7 @@ describe SubscribesController do
       it 'assigns the requested subscribe as @subscribe' do
         get :new
         assigns(:subscribe).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 
@@ -106,7 +106,7 @@ describe SubscribesController do
       it 'assigns the requested subscribe as @subscribe' do
         get :new
         assigns(:subscribe).should_not be_valid
-        response.should be_success
+        response.should be_successful
       end
     end
 
