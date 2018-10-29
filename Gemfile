@@ -14,9 +14,9 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem 'enju_seed', github: 'next-l/enju_seed', branch: '1.3'
 gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '1.3'
 gem 'enju_biblio', github: 'next-l/enju_biblio', branch: '1.3'
 gem 'enju_circulation', github: 'next-l/enju_circulation', branch: '1.3'
+gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer', branch: '1.3'
 gem 'enju_event', github: 'next-l/enju_event', branch: '1.3'
 gem 'rails-controller-testing'
