@@ -38,7 +38,7 @@ user_group_00003:
 #  name                             :string
 #  display_name                     :text
 #  note                             :text
-#  position                         :integer
+#  position                         :integer          default(1), not null
 #  created_at                       :datetime
 #  updated_at                       :datetime
 #  deleted_at                       :datetime

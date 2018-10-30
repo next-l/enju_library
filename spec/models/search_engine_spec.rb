@@ -22,7 +22,7 @@ end
 #  query_param      :text             not null
 #  additional_param :text
 #  note             :text
-#  position         :integer
+#  position         :integer          default(1), not null
 #  created_at       :datetime
 #  updated_at       :datetime
 #

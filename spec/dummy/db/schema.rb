@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_26_064038) do
+ActiveRecord::Schema.define(version: 2018_10_30_074920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -229,7 +229,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.string "telephone_number"
     t.string "fax_number"
     t.string "url"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.string "name"
     t.text "display_name"
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -384,7 +384,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.integer "library_group_id"
     t.string "property"
     t.string "code"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["library_group_id"], name: "index_colors_on_library_group_id"
@@ -723,7 +723,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.string "call_number_delimiter", default: "|", null: false
     t.integer "library_group_id", null: false
     t.integer "users_count", default: 0, null: false
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.integer "country_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -744,7 +744,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.text "old_login_banner"
     t.text "note"
     t.integer "country_id"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text "admin_networks"
@@ -1096,7 +1096,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.string "name", null: false
     t.text "display_name"
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1105,7 +1105,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.string "name", null: false
     t.text "display_name"
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1255,7 +1255,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.text "query_param", null: false
     t.text "additional_param"
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -1330,7 +1330,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.text "note"
     t.integer "library_id", null: false
     t.integer "items_count", default: 0, null: false
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
@@ -1505,7 +1505,7 @@ ActiveRecord::Schema.define(version: 2018_10_26_064038) do
     t.string "name"
     t.text "display_name"
     t.text "note"
-    t.integer "position"
+    t.integer "position", default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"

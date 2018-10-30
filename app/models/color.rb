@@ -16,7 +16,7 @@ end
 #  library_group_id :integer
 #  property         :string
 #  code             :string
-#  position         :integer
+#  position         :integer          default(1), not null
 #  created_at       :datetime
 #  updated_at       :datetime
 #

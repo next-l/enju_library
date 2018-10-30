@@ -88,7 +88,7 @@ end
 #  old_login_banner              :text
 #  note                          :text
 #  country_id                    :integer
-#  position                      :integer
+#  position                      :integer          default(1), not null
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  admin_networks                :text
@@ -108,4 +108,6 @@ end
 #  header_logo_file_size         :integer
 #  header_logo_updated_at        :datetime
 #  header_logo_meta              :text
+#  login_banner                  :jsonb            not null
+#  footer_banner                 :jsonb            not null
 #

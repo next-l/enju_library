@@ -20,7 +20,7 @@ end
 #  note         :text
 #  library_id   :integer          not null
 #  items_count  :integer          default(0), not null
-#  position     :integer
+#  position     :integer          default(1), not null
 #  created_at   :datetime
 #  updated_at   :datetime
 #  deleted_at   :datetime
