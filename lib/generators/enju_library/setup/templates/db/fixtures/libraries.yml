@@ -19,8 +19,8 @@ library_00002:
   telephone_number_1: 
   telephone_number_2: 
   id: 2
-  region: Ibaraki
-  locality: Tsukuba
+  region: 
+  locality: 
   library_group_id: 1
   call_number_delimiter: "|"
   position: 2
