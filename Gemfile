@@ -24,3 +24,4 @@ gem 'enju_event', github: 'next-l/enju_event', branch: '1.4'
 gem 'enju_message', github: 'next-l/enju_message', branch: '1.4'
 gem 'enju_ndl', github: 'next-l/enju_ndl', branch: '1.4'
 gem 'enju_subject', github: 'next-l/enju_subject', branch: '1.4'
+gem 'rspec_junit_formatter', group: :test
