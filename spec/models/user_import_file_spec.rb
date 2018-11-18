@@ -49,8 +49,6 @@ describe UserImportFile do
       user003.profile.user_number.should eq '001003'
       user003.profile.library.name.should eq 'kamata'
       user003.profile.locale.should eq 'ja'
-      user003.profile.checkout_icalendar_token.should eq 'secrettoken'
-      user003.profile.save_checkout_history.should be_truthy
       user003.profile.save_search_history.should be_falsy
       user003.profile.share_bookmarks.should be_falsy
       User.where(username: 'user000').first.should be_nil
@@ -77,7 +75,7 @@ describe UserImportFile do
       file.executed_at.should be_truthy
 
       file.reload
-      file.error_message.should eq "次の列は無視されました。 save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください。\nline 9: 利用者番号は不正な値です。\nline 10: 利用者番号はすでに存在します。"
+      file.error_message.should eq "次の列は無視されました。 checkout_icalendar_token, save_checkout_history, save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください。\nline 9: 利用者番号は不正な値です。\nline 10: 利用者番号はすでに存在します。"
       file.current_state.should eq 'failed'
     end
 
@@ -199,23 +197,8 @@ describe UserImportFile do
       )
       old_message_count = Message.count
       file.remove
-      User.count.should eq old_count - 2
+      User.count.should eq old_count - 3
       Message.count.should eq old_message_count + 1
-    end
-
-    it "should not remove users if there are checkouts" do
-      user001 = User.where(username: 'user001').first
-      FactoryBot.create(:checkout, user: user001, item: FactoryBot.create(:item))
-      old_count = User.count
-      file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"),
-        user: users(:admin),
-        default_user_group: UserGroup.find(2),
-        default_library: Library.find(3)
-      )
-      file.remove
-      User.where(username: 'user001').should_not be_blank
-      User.count.should eq old_count - 2
     end
   end
 
