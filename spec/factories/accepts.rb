@@ -2,9 +2,9 @@
 
 FactoryBot.define do
   factory :accept do
-    basket{FactoryBot.create(:basket)}
-    item{FactoryBot.create(:item)}
-    librarian{FactoryBot.create(:librarian)}
+    basket_id{FactoryBot.create(:basket).id}
+    item_id{FactoryBot.create(:item).id}
+    librarian_id{FactoryBot.create(:librarian).id}
   end
 end
 
