@@ -1,12 +1,12 @@
 class Subscription < ActiveRecord::Base
   has_many :subscribes, dependent: :destroy
   has_many :works, through: :subscribes
-  belongs_to :user
+  belongs_to :user, validate: true
   if defined?(EnjuPurchasRequest)
-    belongs_to :order_list
+    belongs_to :order_list, validate: true
   end
 
-  validates :title, :user, presence: true
+  validates_presence_of :title, :user
   validates_associated :user
 
   searchable do
@@ -33,7 +33,8 @@ end
 #  note             :text
 #  user_id          :integer
 #  order_list_id    :integer
+#  deleted_at       :datetime
 #  subscribes_count :integer          default(0), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #

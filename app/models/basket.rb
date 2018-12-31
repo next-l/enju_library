@@ -1,12 +1,13 @@
 class Basket < ActiveRecord::Base
+  default_scope { order('baskets.id DESC') }
   scope :will_expire, lambda {|date| where('created_at < ?', date)}
-  belongs_to :user
+  belongs_to :user, validate: true
   has_many :accepts
   has_many :withdraws
 
   validates_associated :user, on: :create
   # 貸出完了後にかごのユーザidは破棄する
-  validates :user, presence: { on: :create }
+  validates_presence_of :user, on: :create
   validate :check_suspended
 
   attr_accessor :user_number
@@ -29,10 +30,10 @@ end
 #
 # Table name: baskets
 #
-#  id           :uuid             not null, primary key
+#  id           :integer          not null, primary key
 #  user_id      :integer
 #  note         :text
 #  lock_version :integer          default(0), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  created_at   :datetime
+#  updated_at   :datetime
 #

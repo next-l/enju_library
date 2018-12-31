@@ -19,7 +19,6 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe WithdrawsController, type: :controller do
-  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   # This should return the minimal set of attributes required to create a valid
@@ -33,7 +32,7 @@ RSpec.describe WithdrawsController, type: :controller do
   end
   let(:valid_create_attributes) do
     { basket_id: Basket.find(valid_attributes[:basket_id]).id,
-      withdraw: { item_identifier: Item.find(valid_attributes[:item_id]).item_identifier } }
+      withdraw: { item_identifier: Item.find(valid_attributes[:item_id]).item_identifier }}
   end
 
   # This should return the minimal set of values that should be in the session
@@ -45,8 +44,8 @@ RSpec.describe WithdrawsController, type: :controller do
     describe 'When logged in as Administrator' do
       login_fixture_admin
       it 'assigns all withdraws as @withdraws' do
-        withdraw = Withdraw.create! valid_attributes
-        get :index, params: { basket_id: baskets(:basket_00001).id }
+        Withdraw.create! valid_attributes
+        get :index, params: { basket_id: 1 }
         expect(assigns(:withdraws)).to eq baskets(:basket_00001).withdraws.order('withdraws.created_at DESC').page(1)
       end
     end
@@ -95,6 +94,12 @@ RSpec.describe WithdrawsController, type: :controller do
           post :create, params: valid_create_attributes
           expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
         end
+
+        it 'should not withdraw a checked-out item' do
+          post :create, params: { basket_id: valid_create_attributes[:basket_id], withdraw: { item_identifier: '00001' } }
+          expect(assigns(:withdraw)).to be_a(Withdraw)
+          expect(response).to be_successful
+        end
       end
 
       context 'with invalid params' do
@@ -124,7 +129,6 @@ RSpec.describe WithdrawsController, type: :controller do
       it 'redirects to the withdraws list' do
         withdraw = Withdraw.create! valid_attributes
         delete :destroy, params: { id: withdraw.to_param }
-
         expect(response).to redirect_to(withdraws_url)
       end
     end

@@ -44,6 +44,7 @@ class LibrariesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
+      format.html.phone
       format.json { render json: @library }
       format.js
     end
@@ -52,6 +53,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/new
   def new
     @library = Library.new
+    @library.library_group = LibraryGroup.first
     @library.country = LibraryGroup.site_config.country
     prepare_options
 
@@ -92,7 +94,7 @@ class LibrariesController < ApplicationController
     end
 
     respond_to do |format|
-      if @library.update(library_params)
+      if @library.update_attributes(library_params)
         format.html { redirect_to @library, notice: t('controller.successfully_updated', model: t('activerecord.models.library')) }
         format.json { head :no_content }
       else
@@ -120,7 +122,6 @@ class LibrariesController < ApplicationController
   def set_library
     @library = Library.friendly.find(params[:id])
     authorize @library
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy
@@ -138,6 +139,6 @@ class LibrariesController < ApplicationController
 
   def prepare_options
     @library_groups = LibraryGroup.all
-    @countries = Country.all_cache
+    @countries = Country.order(:position)
   end
 end

@@ -1,14 +1,10 @@
 require 'rails_helper'
 
 describe Accept do
-  fixtures :users, :manifestations, :items, :baskets, :subscriptions,
-    :user_groups
   fixtures :all
 
-  it 'should change circulation_status' do
+  it "should change circulation_status" do
     accept = FactoryBot.create(:accept)
-    accept.item.circulation_status.name.should eq 'Available On Shelf'
-    accept.item.use_restriction.name.should eq 'Limited Circulation, Normal Loan Period'
   end
 end
 
@@ -17,9 +13,9 @@ end
 # Table name: accepts
 #
 #  id           :integer          not null, primary key
-#  basket_id    :uuid
-#  librarian_id :integer          not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  item_id      :uuid             not null
+#  basket_id    :integer
+#  item_id      :integer
+#  librarian_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
 #

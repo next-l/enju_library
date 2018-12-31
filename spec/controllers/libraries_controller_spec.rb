@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe LibrariesController do
-  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   describe 'GET index', solr: true do
@@ -45,7 +44,7 @@ describe LibrariesController do
       it 'should get index with query' do
         get :index, params: { query: 'kamata' }
         response.should be_successful
-        assigns(:libraries).include?(Library.where(name: 'kamata').first).should be_truthy
+        assigns(:libraries).include?(Library.friendly.find('kamata')).should be_truthy
       end
     end
   end
@@ -55,7 +54,7 @@ describe LibrariesController do
       login_fixture_admin
 
       it 'assigns the requested library as @library' do
-        get :show, params: { id: libraries(:library_00001).id }
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end
@@ -64,7 +63,7 @@ describe LibrariesController do
       login_fixture_librarian
 
       it 'assigns the requested library as @library' do
-        get :show, params: { id: libraries(:library_00001).id }
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end
@@ -73,14 +72,14 @@ describe LibrariesController do
       login_fixture_user
 
       it 'assigns the requested library as @library' do
-        get :show, params: { id: libraries(:library_00001).id }
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested library as @library' do
-        get :show, params: { id: libraries(:library_00001).id }
+        get :show, params: { id: 1 }
         assigns(:library).should eq(libraries(:library_00001))
       end
     end

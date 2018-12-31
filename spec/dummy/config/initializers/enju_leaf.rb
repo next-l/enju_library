@@ -1,6 +1,0 @@
-Accept.include(EnjuCirculation::EnjuAccept)
-Basket.include(EnjuCirculation::EnjuBasket)
-Manifestation.include(EnjuCirculation::EnjuManifestation)
-Item.include(EnjuCirculation::EnjuItem)
-Item.include(EnjuLibrary::EnjuItem)
-Withdraw.include(EnjuCirculation::EnjuWithdraw)

@@ -19,7 +19,6 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 describe BudgetTypesController do
-  fixtures :users, :profiles, :manifestations
   fixtures :all
   login_fixture_admin
 
@@ -32,7 +31,7 @@ describe BudgetTypesController do
 
   describe 'GET index' do
     it 'assigns all budget_types as @budget_types' do
-      BudgetType.create! valid_attributes
+      budget_type = BudgetType.create! valid_attributes
       get :index
       assigns(:budget_types).should eq(BudgetType.order(:position))
     end
@@ -106,9 +105,8 @@ describe BudgetTypesController do
         # specifies that the BudgetType created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
+        BudgetType.any_instance.should_receive(:update_attributes).with('note' => 'test')
         put :update, params: { id: budget_type.id, budget_type: { note: 'test' } }
-        budget_type.reload
-        expect(budget_type.note).to eq 'test'
       end
 
       it 'assigns the requested budget_type as @budget_type' do

@@ -1,16 +1,4 @@
-# == Schema Information
-#
-# Table name: accepts
-#
-#  id           :integer          not null, primary key
-#  basket_id    :integer
-#  item_id      :integer
-#  librarian_id :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
-require "rails_helper"
+require "spec_helper"
 
 describe AcceptsController do
   describe "routing" do

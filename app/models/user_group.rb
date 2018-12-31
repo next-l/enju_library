@@ -1,11 +1,10 @@
 class UserGroup < ActiveRecord::Base
   include MasterModel
   has_many :profiles
-  translates :display_name
 
-  validates :valid_period_for_new_user,
-    numericality: { greater_than_or_equal_to: 0,
-    allow_blank: true }
+  validates_numericality_of :valid_period_for_new_user,
+    greater_than_or_equal_to: 0,
+    allow_blank: true
 
   paginates_per 10
 end
@@ -14,13 +13,14 @@ end
 #
 # Table name: user_groups
 #
-#  id                               :uuid             not null, primary key
+#  id                               :integer          not null, primary key
 #  name                             :string
-#  display_name_translations        :jsonb
+#  display_name                     :text
 #  note                             :text
-#  position                         :integer
-#  created_at                       :datetime         not null
-#  updated_at                       :datetime         not null
+#  position                         :integer          default(1), not null
+#  created_at                       :datetime
+#  updated_at                       :datetime
+#  deleted_at                       :datetime
 #  valid_period_for_new_user        :integer          default(0), not null
 #  expired_at                       :datetime
 #  number_of_day_to_notify_overdue  :integer          default(1), not null

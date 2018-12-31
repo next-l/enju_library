@@ -1,7 +1,7 @@
 class AcceptsController < ApplicationController
   before_action :set_accept, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :set_basket, only: [:index, :create]
+  before_action :get_basket, only: [:index, :create]
 
   # GET /accepts
   # GET /accepts.json
@@ -20,7 +20,7 @@ class AcceptsController < ApplicationController
         if @basket
           @accepts = @basket.accepts.order('accepts.created_at DESC').page(params[:page])
         else
-          @accepts = Accept.order(created_at: :desc).page(params[:page])
+          @accepts = Accept.order('accepts.created_at DESC').page(params[:page])
         end
       end
     end
@@ -84,7 +84,7 @@ class AcceptsController < ApplicationController
       if @accept.save
         flash[:message] << t('accept.successfully_accepted', model: t('activerecord.models.accept'))
         format.html { redirect_to accepts_url(basket_id: @basket.id) }
-        format.json { render json: @accept, status: :created, location: @accept }
+        format.json { render json: @accept, status: :created, location:  @accept }
         format.js { redirect_to accepts_url(basket_id: @basket.id, format: :js) }
       else
         @accepts = @basket.accepts.page(params[:page])
@@ -99,7 +99,7 @@ class AcceptsController < ApplicationController
   # PUT /accepts/1.json
   def update
     respond_to do |format|
-      if @accept.update(accept_params)
+      if @accept.update_attributes(accept_params)
         format.html { redirect_to @accept, notice: t('controller.successfully_updated', model: t('activerecord.models.accept')) }
         format.json { head :no_content }
       else

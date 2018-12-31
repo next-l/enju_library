@@ -1,7 +1,7 @@
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :set_work
+  before_action :get_work
 
   # GET /subscriptions
   # GET /subscriptions.json
@@ -51,7 +51,7 @@ class SubscriptionsController < ApplicationController
     respond_to do |format|
       if @subscription.save
         format.html { redirect_to @subscription, notice: t('controller.successfully_created', model: t('activerecord.models.subscription')) }
-        format.json { render json: @subscription, status: :created, location: @subscription }
+        format.json { render json: @subscription, status: :created, location:  @subscription }
       else
         format.html { render action: "new" }
         format.json { render json: @subscription.errors, status: :unprocessable_entity }

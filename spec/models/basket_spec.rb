@@ -1,9 +1,10 @@
+# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe Basket do
   fixtures :all
 
-  it 'should not create basket when user is not active' do
+  it "should not create basket when user is not active" do
     basket = Basket.new
     basket.user = users(:user4)
     basket.should_not be_valid
@@ -14,10 +15,10 @@ end
 #
 # Table name: baskets
 #
-#  id           :uuid             not null, primary key
+#  id           :integer          not null, primary key
 #  user_id      :integer
 #  note         :text
 #  lock_version :integer          default(0), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  created_at   :datetime
+#  updated_at   :datetime
 #

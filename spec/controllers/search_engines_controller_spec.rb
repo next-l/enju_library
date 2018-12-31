@@ -300,11 +300,11 @@ describe SearchEnginesController do
 
       describe 'with valid params' do
         it 'updates the requested search_engine' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
         end
 
         it 'assigns the requested search_engine as @search_engine' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
           assigns(:search_engine).should eq(@search_engine)
         end
 
@@ -327,11 +327,11 @@ describe SearchEnginesController do
 
       describe 'with valid params' do
         it 'updates the requested search_engine' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
         end
 
         it 'assigns the requested search_engine as @search_engine' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
           assigns(:search_engine).should eq(@search_engine)
           response.should be_forbidden
         end
@@ -350,11 +350,11 @@ describe SearchEnginesController do
 
       describe 'with valid params' do
         it 'updates the requested search_engine' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
         end
 
         it 'assigns the requested search_engine as @search_engine' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
           assigns(:search_engine).should eq(@search_engine)
           response.should be_forbidden
         end
@@ -371,11 +371,11 @@ describe SearchEnginesController do
     describe 'When not logged in' do
       describe 'with valid params' do
         it 'updates the requested search_engine' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
         end
 
         it 'should be forbidden' do
-          put :update, params: { id:  @search_engine.id, search_engine: @attrs }
+          put :update, params: { id: @search_engine.id, search_engine: @attrs }
           response.should redirect_to(new_user_session_url)
         end
       end

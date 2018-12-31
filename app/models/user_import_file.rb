@@ -1,16 +1,37 @@
 class UserImportFile < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
-  include AttachmentUploader[:attachment]
+  default_scope {order('user_import_files.id DESC')}
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 
+  if ENV['ENJU_STORAGE'] == 's3'
+    has_attached_file :user_import, storage: :s3,
+      s3_credentials: {
+        access_key: ENV['AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        bucket: ENV['S3_BUCKET_NAME'],
+        s3_host_name: ENV['S3_HOST_NAME']
+      },
+      s3_permissions: :private
+  else
+    has_attached_file :user_import,
+      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
+  end
+  validates_attachment_content_type :user_import, content_type: [
+    'text/csv',
+    'text/plain',
+    'text/tab-separated-values',
+    'application/octet-stream',
+    'application/vnd.ms-excel'
+  ]
+  validates_attachment_presence :user_import
   belongs_to :user
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
-  has_many :user_import_results
-  has_many :user_import_file_transitions
-  validates :attachment, presence: true
+  has_many :user_import_results, dependent: :destroy
+
+  has_many :user_import_file_transitions, autosave: false, dependent: :destroy
 
   attr_accessor :mode
 
@@ -41,14 +62,14 @@ class UserImportFile < ActiveRecord::Base
       next if row['dummy'].to_s.strip.present?
 
       username = row['username']
-      new_user = User.find_by(username: username)
+      new_user = User.where(username: username).first
       if new_user
         import_result.user = new_user
         import_result.save
         num[:user_found] += 1
       else
         new_user = User.new
-        new_user.role = Role.find_by(name: row['role'])
+        new_user.role = Role.where(name: row['role']).first
         if new_user.role
           unless user.has_role?(new_user.role.name)
             num[:failed] += 1
@@ -121,7 +142,7 @@ class UserImportFile < ActiveRecord::Base
       )
 
       username = row['username']
-      new_user = User.find_by(username: username)
+      new_user = User.where(username: username).first
       if new_user.try(:profile)
         new_user.assign_attributes(set_user_params(row))
         new_user.profile.assign_attributes(set_profile_params(row))
@@ -165,7 +186,7 @@ class UserImportFile < ActiveRecord::Base
     rows.each do |row|
       row_num += 1
       username = row['username'].to_s.strip
-      remove_user = User.find_by(username: username)
+      remove_user = User.where(username: username).first
       if remove_user.try(:deletable_by?, user)
         UserImportFile.transaction do
           remove_user.destroy
@@ -258,15 +279,15 @@ class UserImportFile < ActiveRecord::Base
   # @param [Hash] row 利用者情報のハッシュ
   def set_profile_params(row)
     params = {}
-    user_group = UserGroup.find_by(name: row['user_group'])
+    user_group = UserGroup.where(name: row['user_group']).first
     unless user_group
       user_group = default_user_group
     end
     params[:user_group_id] = user_group.id if user_group
 
-    required_role = Role.find_by(name: row['required_role'])
+    required_role = Role.where(name: row['required_role']).first
     unless required_role
-      required_role = Role.find_by(name: 'Librarian')
+      required_role = Role.where(name: 'Librarian').first
     end
     params[:required_role_id] = required_role.id if required_role
 
@@ -288,7 +309,7 @@ class UserImportFile < ActiveRecord::Base
       params[:locale] = row['locale']
     end
 
-    library = Library.find_by(name: row['library'].to_s.strip)
+    library = Library.where(name: row['library'].to_s.strip).first
     unless library
       library = default_library || Library.web
     end
@@ -312,15 +333,20 @@ end
 #
 # Table name: user_import_files
 #
-#  id                    :integer          not null, primary key
-#  user_id               :integer          not null
-#  note                  :text
-#  edit_mode             :string
-#  error_message         :text
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  user_encoding         :string
-#  default_library_id    :integer
-#  default_user_group_id :integer
-#  attachment_data       :jsonb
+#  id                       :integer          not null, primary key
+#  user_id                  :integer
+#  note                     :text
+#  executed_at              :datetime
+#  user_import_file_name    :string
+#  user_import_content_type :string
+#  user_import_file_size    :integer
+#  user_import_updated_at   :datetime
+#  user_import_fingerprint  :string
+#  edit_mode                :string
+#  error_message            :text
+#  created_at               :datetime
+#  updated_at               :datetime
+#  user_encoding            :string
+#  default_library_id       :integer
+#  default_user_group_id    :integer
 #

@@ -2,7 +2,7 @@ div[data-role="header"]
   a.ui-btn-left[href="javascript:history.back()" data-icon="back" data-iconpos="notext"]
     = t('page.back')
   .panel-heading
-    = @library.display_name
+    = @library.display_name.localize
   div[data-role="content"]
     #detail
       p

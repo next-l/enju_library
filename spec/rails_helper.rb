@@ -1,5 +1,7 @@
 require 'simplecov'
-SimpleCov.start
+require 'coveralls'
+SimpleCov.start 'rails'
+Coveralls.wear!
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV['RAILS_ENV'] ||= 'test'
@@ -30,7 +32,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
-ActiveRecord::Migration.maintain_test_schema!
+ActiveRecord::Migration.maintain_test_schema! if Rails::VERSION::MAJOR >= 4
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -61,3 +63,4 @@ end
 
 FactoryBot.definition_file_paths << "#{::Rails.root}/../../spec/factories"
 FactoryBot.find_definitions
+

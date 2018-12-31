@@ -5,11 +5,19 @@ describe "accepts/new" do
 
   before(:each) do
     assign(:accept, stub_model(Accept,
-      item_id: Item.first
+      item_id: 1
     ).as_new_record)
-    assign(:basket, baskets(:basket_00001))
-    assign(:accepts, Accept.page(1))
-    view.stub(:current_user).and_return(User.where(username: 'enjuadmin').first)
+    assign(:basket, FactoryBot.create(:basket))
+    assign(:accepts, Kaminari::paginate_array([
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      ),
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      )
+    ]).page(1))
   end
 
   it "renders new accept form" do

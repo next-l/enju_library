@@ -1,16 +1,4 @@
-# == Schema Information
-#
-# Table name: baskets
-#
-#  id           :integer          not null, primary key
-#  user_id      :integer
-#  note         :text
-#  lock_version :integer          default(0), not null
-#  created_at   :datetime
-#  updated_at   :datetime
-#
-
-require "rails_helper"
+require "spec_helper"
 
 describe BasketsController do
   describe "routing" do

@@ -62,7 +62,7 @@ class BudgetTypesController < ApplicationController
     end
 
     respond_to do |format|
-      if @budget_type.update(budget_type_params)
+      if @budget_type.update_attributes(budget_type_params)
         format.html { redirect_to @budget_type, notice: t('controller.successfully_updated', model: t('activerecord.models.budget_type')) }
         format.json { head :no_content }
       else
@@ -88,7 +88,6 @@ class BudgetTypesController < ApplicationController
   def set_budget_type
     @budget_type = BudgetType.find(params[:id])
     authorize @budget_type
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy

@@ -62,7 +62,7 @@ class SearchEnginesController < ApplicationController
     end
 
     respond_to do |format|
-      if @search_engine.update(search_engine_params)
+      if @search_engine.update_attributes(search_engine_params)
         format.html { redirect_to @search_engine, notice: t('controller.successfully_updated', model: t('activerecord.models.search_engine')) }
         format.json { head :no_content }
       else
@@ -88,7 +88,6 @@ class SearchEnginesController < ApplicationController
   def set_search_engine
     @search_engine = SearchEngine.find(params[:id])
     authorize @search_engine
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy

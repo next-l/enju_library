@@ -1,8 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AcceptsController, type: :controller do
-  fixtures :users, :profiles, :manifestations, :libraries, :items, :baskets,
-           :user_groups, :subscriptions
+describe AcceptsController do
   fixtures :all
 
   def mock_user(stubs = {})
@@ -23,7 +21,7 @@ RSpec.describe AcceptsController, type: :controller do
 
       describe 'When basket_id is specified' do
         it 'assigns all accepts as @accepts' do
-          get :index, params: { basket_id: baskets(:basket_00010).id }
+          get :index, params: { basket_id: 10 }
           assigns(:accepts).should eq baskets(:basket_00010).accepts.order('accepts.created_at DESC').page(1)
           response.should be_successful
         end
@@ -41,7 +39,7 @@ RSpec.describe AcceptsController, type: :controller do
 
       describe 'When basket_id is specified' do
         it 'assigns all accepts as @accepts' do
-          get :index, params: { basket_id: baskets(:basket_00009).id }
+          get :index, params: { basket_id: 9 }
           assigns(:accepts).should eq baskets(:basket_00009).accepts.order('accepts.created_at DESC').page(1)
           response.should be_successful
         end
@@ -161,9 +159,8 @@ RSpec.describe AcceptsController, type: :controller do
 
         describe 'When basket_id is specified' do
           it 'redirects to the created accept' do
-            post :create, params: { accept: @attrs, basket_id: baskets(:basket_00009).id }
+            post :create, params: { accept: @attrs, basket_id: 9 }
             response.should redirect_to(accepts_url(basket_id: assigns(:accept).basket.id))
-            assigns(:accept).item.circulation_status.name.should eq 'Available On Shelf'
           end
         end
       end
@@ -181,7 +178,7 @@ RSpec.describe AcceptsController, type: :controller do
       end
 
       it 'should not create accept without item_id' do
-        post :create, params: { accept: { item_identifier: nil }, basket_id: baskets(:basket_00009).id }
+        post :create, params: { accept: { item_identifier: nil }, basket_id: 9 }
         assigns(:accept).should_not be_valid
         response.should be_successful
       end

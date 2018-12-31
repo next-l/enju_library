@@ -1,11 +1,12 @@
 class Accept < ActiveRecord::Base
+  default_scope { order('accepts.id DESC') }
   belongs_to :basket
   belongs_to :item, touch: true
   belongs_to :librarian, class_name: 'User'
 
-  validates :item_id, uniqueness: true, presence: true # , message:  I18n.t('accept.already_accepted')
-  validates :basket_id, presence: true
-  #  validates :item_id, presence: true
+  validates_uniqueness_of :item_id #, message:  I18n.t('accept.already_accepted')
+  validates_presence_of :item_id #, message:  I18n.t('accept.item_not_found')
+  validates_presence_of :basket_id
 
   attr_accessor :item_identifier
 
@@ -17,9 +18,9 @@ end
 # Table name: accepts
 #
 #  id           :integer          not null, primary key
-#  basket_id    :uuid
-#  librarian_id :integer          not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  item_id      :uuid             not null
+#  basket_id    :integer
+#  item_id      :integer
+#  librarian_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
 #

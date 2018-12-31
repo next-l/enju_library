@@ -5,12 +5,20 @@ RSpec.describe "withdraws/new", type: :view do
 
   before(:each) do
     assign(:withdraw, stub_model(Withdraw,
-      item_id: Shelf.first
+      item_id: 1
     ).as_new_record)
     assign(:basket, baskets(:basket_00001))
-    assign(:withdraws, Withdraw.page(1))
-    view.stub(:current_user).and_return(User.find_by(username: 'enjuadmin'))
-    allow(view).to receive(:policy).and_return double(create?: true, update?: true, destroy?: true)
+    assign(:withdraws, Kaminari::paginate_array([
+      stub_model(Withdraw,
+        item_id: 1,
+        created_at: Time.zone.now
+      ),
+      stub_model(Withdraw,
+        item_id: 1,
+        created_at: Time.zone.now
+      )
+    ]).page(1))
+    view.stub(:current_user).and_return(User.friendly.find('enjuadmin'))
   end
 
   it "renders new withdraw form" do

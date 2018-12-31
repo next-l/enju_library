@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 describe ShelvesController do
-  fixtures :users, :profiles, :manifestations
   fixtures :all
 
   def valid_attributes
@@ -49,7 +48,7 @@ describe ShelvesController do
 
       it 'assigns all shelves as @shelves with library_id' do
         get :index, params: { library_id: 'kamata' }
-        assigns(:shelves).map(&:id).should eq(Library.where(name: 'kamata').first.shelves.order(:position).page(1).pluck(:id))
+        assigns(:shelves).map(&:id).should eq(Library.friendly.find('kamata').shelves.order(:position).page(1).pluck(:id))
         response.should be_successful
       end
 
@@ -66,15 +65,15 @@ describe ShelvesController do
       login_fixture_admin
 
       it 'assigns the requested shelf as @shelf' do
-        get :show, params: { id: shelves(:shelf_00001).id }
-        assigns(:shelf).should eq(shelves(:shelf_00001))
+        get :show, params: { id: 1 }
+        assigns(:shelf).should eq(Shelf.find(1))
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested shelf as @shelf' do
-        get :show, params: { id: shelves(:shelf_00001).id }
-        assigns(:shelf).should eq(shelves(:shelf_00001))
+        get :show, params: { id: 1 }
+        assigns(:shelf).should eq(Shelf.find(1))
       end
     end
   end
@@ -95,6 +94,7 @@ describe ShelvesController do
       it 'assigns the requested shelf as @shelf' do
         get :new
         assigns(:shelf).should be_nil
+        response.should be_forbidden
       end
     end
 
@@ -393,7 +393,7 @@ describe ShelvesController do
       end
 
       it 'should not destroy a shelf that has id 1' do
-        delete :destroy, params: { id: shelves(:shelf_00001).id }
+        delete :destroy, params: { id: 1 }
         response.should be_forbidden
       end
     end

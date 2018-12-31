@@ -5,7 +5,7 @@ class BookstoresController < ApplicationController
   # GET /bookstores
   # GET /bookstores.json
   def index
-    @bookstores = Bookstore.order(:position).page(params[:page])
+    @bookstores = Bookstore.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -62,7 +62,7 @@ class BookstoresController < ApplicationController
     end
 
     respond_to do |format|
-      if @bookstore.update(bookstore_params)
+      if @bookstore.update_attributes(bookstore_params)
         format.html { redirect_to @bookstore, notice: t('controller.successfully_updated', model: t('activerecord.models.bookstore')) }
         format.json { head :no_content }
       else
@@ -88,7 +88,6 @@ class BookstoresController < ApplicationController
   def set_bookstore
     @bookstore = Bookstore.find(params[:id])
     authorize @bookstore
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy

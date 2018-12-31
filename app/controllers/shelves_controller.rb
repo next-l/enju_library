@@ -1,8 +1,8 @@
 class ShelvesController < ApplicationController
   before_action :set_shelf, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :set_library
-  before_action :set_libraries, only: [:new, :edit, :create, :update]
+  before_action :get_library
+  before_action :get_libraries, only: [:new, :edit, :create, :update]
 
   # GET /shelves
   # GET /shelves.json
@@ -93,7 +93,7 @@ class ShelvesController < ApplicationController
     respond_to do |format|
       if @shelf.save
         format.html { redirect_to @shelf, notice: t('controller.successfully_created', model: t('activerecord.models.shelf')) }
-        format.json { render json: @shelf, status: :created, location: @shelf }
+        format.json { render json: @shelf, status: :created, location:  @shelf }
       else
         @library = Library.first if @shelf.library.nil?
         format.html { render action: "new" }
@@ -114,7 +114,7 @@ class ShelvesController < ApplicationController
     end
 
     respond_to do |format|
-      if @shelf.update(shelf_params)
+      if @shelf.update_attributes(shelf_params)
         format.html { redirect_to @shelf, notice: t('controller.successfully_updated', model: t('activerecord.models.shelf')) }
         format.json { head :no_content }
       else
@@ -141,7 +141,6 @@ class ShelvesController < ApplicationController
   def set_shelf
     @shelf = Shelf.find(params[:id])
     authorize @shelf
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy

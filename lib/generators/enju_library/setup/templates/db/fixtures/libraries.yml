@@ -1,27 +1,26 @@
 --- 
 library_00001: 
   name: web
-  short_display_name_translations: {"en": "web", "ja": "web"}
-  display_name_translations: {"en": "World Wide Web", "ja": "ウェブ"}
+  short_display_name: Web
+  display_name: World Wide Web
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 
+  id: 1
   region: 
-  library_group_id: <%= LibraryGroup.first.id %>
-  country_id: 1
+  library_group_id: 1
   call_number_delimiter: "|"
   position: 1
 library_00002: 
   name: yours
-  short_display_name_translations: {"en": "enju_library"}
-  display_name_translations: {"en": "Enju Library", "ja": "えんじゅ図書館"}
+  short_display_name: your_library
+  display_name: Your Library
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 
   id: 2
   region: 
   locality: 
-  library_group_id: <%= LibraryGroup.first.id %>
-  country_id: 1
+  library_group_id: 1
   call_number_delimiter: "|"
   position: 2

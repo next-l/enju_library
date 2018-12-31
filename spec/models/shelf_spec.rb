@@ -1,9 +1,10 @@
+# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe Shelf do
   fixtures :all
 
-  it 'should respond to web_shelf' do
+  it "should respond to web_shelf" do
     shelves(:shelf_00001).web_shelf?.should be_truthy
     shelves(:shelf_00002).web_shelf?.should_not be_truthy
   end
@@ -13,14 +14,15 @@ end
 #
 # Table name: shelves
 #
-#  id                        :uuid             not null, primary key
-#  name                      :string           not null
-#  display_name_translations :jsonb
-#  note                      :text
-#  library_id                :uuid             not null
-#  items_count               :integer          default(0), not null
-#  position                  :integer
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
-#  closed                    :boolean          default(FALSE), not null
+#  id           :integer          not null, primary key
+#  name         :string           not null
+#  display_name :text
+#  note         :text
+#  library_id   :integer          not null
+#  items_count  :integer          default(0), not null
+#  position     :integer          default(1), not null
+#  created_at   :datetime
+#  updated_at   :datetime
+#  deleted_at   :datetime
+#  closed       :boolean          default(FALSE), not null
 #

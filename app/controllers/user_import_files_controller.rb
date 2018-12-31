@@ -6,7 +6,7 @@ class UserImportFilesController < ApplicationController
   # GET /user_import_files
   # GET /user_import_files.json
   def index
-    @user_import_files = UserImportFile.order(id: :desc).page(params[:page])
+    @user_import_files = UserImportFile.order('id DESC').page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,15 +17,23 @@ class UserImportFilesController < ApplicationController
   # GET /user_import_files/1
   # GET /user_import_files/1.json
   def show
+    if @user_import_file.user_import.path
+      unless ENV['ENJU_STORAGE'] == 's3'
+        file = @user_import_file.user_import.path
+      end
+    end
     @user_import_results = @user_import_file.user_import_results.page(params[:page])
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user_import_file }
       format.download {
-        send_file @user_import_file.user_import.download,
-          filename: File.basename(@user_import_file.user_import_filename),
-          type: 'application/octet-stream'
+        if ENV['ENJU_STORAGE'] == 's3'
+          send_data Faraday.get(@user_import_file.user_import.expiring_url).body.force_encoding('UTF-8'),
+            filename: File.basename(@user_import_file.user_import_file_name), type: 'application/octet-stream'
+        else
+          send_file file, filename: @user_import_file.user_import_file_name, type: 'application/octet-stream'
+        end
       }
     end
   end
@@ -72,7 +80,7 @@ class UserImportFilesController < ApplicationController
   # PUT /user_import_files/1.json
   def update
     respond_to do |format|
-      if @user_import_file.update(user_import_file_params)
+      if @user_import_file.update_attributes(user_import_file_params)
         if @user_import_file.mode == 'import'
           UserImportFileJob.perform_later(@user_import_file)
         end
@@ -102,7 +110,6 @@ class UserImportFilesController < ApplicationController
   def set_user_import_file
     @user_import_file = UserImportFile.find(params[:id])
     authorize @user_import_file
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy

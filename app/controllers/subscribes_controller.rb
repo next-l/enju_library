@@ -1,7 +1,7 @@
 class SubscribesController < ApplicationController
   before_action :set_subscribe, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :set_subscription, :set_work
+  before_action :get_subscription, :get_work
 
   # GET /subscribes
   # GET /subscribes.json
@@ -48,7 +48,7 @@ class SubscribesController < ApplicationController
     respond_to do |format|
       if @subscribe.save
         format.html { redirect_to @subscribe, notice: t('controller.successfully_created', model: t('activerecord.models.subscribe')) }
-        format.json { render json: @subscribe, status: :created, location: @subscribe }
+        format.json { render json: @subscribe, status: :created, location:  @subscribe }
       else
         format.html { render action: "new" }
         format.json { render json: @subscribe.errors, status: :unprocessable_entity }
@@ -60,7 +60,7 @@ class SubscribesController < ApplicationController
   # PUT /subscribes/1.json
   def update
     respond_to do |format|
-      if @subscribe.update(subscribe_params)
+      if @subscribe.update_attributes(subscribe_params)
         format.html { redirect_to @subscribe, notice: t('controller.successfully_updated', model: t('activerecord.models.subscribe')) }
         format.json { head :no_content }
       else

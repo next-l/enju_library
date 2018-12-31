@@ -58,6 +58,7 @@ ja:
         color: 色
         max_number_of_results: 検索結果の最大件数
         book_jacket_source: 書影の取得元
+        header_logo: ヘッダーのロゴ
       bookstore:
         name: 名前
         zip_code: 郵便番号
@@ -128,4 +129,5 @@ ja:
     successfully_withdrawn: "この資料は正常に除籍されました。"
   book_jacket:
     google: Googleブックス
+    openbd: openBD
     hanmotocom: 版元ドットコム

@@ -3,7 +3,7 @@ module EnjuLibrary
     extend ActiveSupport::Concern
 
     included do
-      before_action :set_library_group, :set_locale, :set_available_languages, :set_mobile_request
+      before_action :get_library_group, :set_locale, :set_available_languages, :set_mobile_request
       before_action :store_current_location, unless: :devise_controller?
       rescue_from Pundit::NotAuthorizedError, with: :render_403
       # rescue_from ActiveRecord::RecordNotFound, with: :render_404
@@ -83,7 +83,7 @@ module EnjuLibrary
     def set_locale
       if params[:locale]
         unless I18n.available_locales.include?(params[:locale].to_s.intern)
-          raise EnjuLeaf::InvalidLocaleError
+          raise InvalidLocaleError
         end
       end
       if user_signed_in?
@@ -96,7 +96,8 @@ module EnjuLibrary
       else
         I18n.locale = @locale = session[:locale] = I18n.default_locale
       end
-    rescue EnjuLeaf::InvalidLocaleError
+    rescue InvalidLocaleError
+      reset_session
       @locale = I18n.default_locale
     end
 
@@ -105,9 +106,9 @@ module EnjuLibrary
     end
 
     def set_available_languages
-      if Rails.env.production?
+      if Rails.env == 'production'
         @available_languages = Rails.cache.fetch('available_languages'){
-          Language.where(iso_639_1: I18n.available_locales.map{|l| l.to_s})
+          Language.where(iso_639_1: I18n.available_locales.map{|l| l.to_s}).select([:id, :iso_639_1, :name, :native_name, :display_name, :position]).all
         }
       else
         @available_languages = Language.where(iso_639_1: I18n.available_locales.map{|l| l.to_s})
@@ -126,12 +127,12 @@ module EnjuLibrary
       raise Pundit::NotAuthorizedError
     end
 
-    def set_user
+    def get_user
       @user = User.where(username: params[:user_id]).first if params[:user_id]
       # authorize! :show, @user if @user
     end
 
-    def set_user_group
+    def get_user_group
       @user_group = UserGroup.find(params[:user_group_id]) if params[:user_group_id]
     end
 
@@ -153,7 +154,7 @@ module EnjuLibrary
     end
 
     def store_page
-      if request.get? and request.format.try(:html?) and !request.xhr?
+      if request.get? && request.format.try(:html?) && !request.xhr?
         flash[:page] = params[:page] if params[:page].to_i > 0
       end
     end
@@ -165,7 +166,7 @@ module EnjuLibrary
       end
     end
 
-    def set_version
+    def get_version
       @version = params[:version_id].to_i if params[:version_id]
       @version = nil if @version == 0
     end
@@ -178,15 +179,15 @@ module EnjuLibrary
     end
 
     def api_request?
-      true unless params[:format].nil? or params[:format] == 'html'
+      true unless params[:format].nil? || (params[:format] == 'html')
     end
 
-    def set_top_page_content
+    def get_top_page_content
       if defined?(EnjuNews)
         @news_feeds = Rails.cache.fetch('news_feed_all'){NewsFeed.order(:position)}
         @news_posts = NewsPost.limit(LibraryGroup.site_config.news_post_number_top_page || 10)
       end
-      @libraries = Library.order(:position)
+      @libraries = Library.real
     end
 
     def set_mobile_request
@@ -223,43 +224,36 @@ module EnjuLibrary
       store_location_for(:user, request.url) if request.format == 'text/html'
     end
 
-    def set_library_group
+    def get_library_group
       @library_group = LibraryGroup.site_config
     end
 
-    def set_basket
-      if params[:basket_id]
-        @basket = Basket.find(params[:basket_id])
-        authorize @basket, :show?
-      end
-    end
-
-    def set_shelf
+    def get_shelf
       if params[:shelf_id]
         @shelf = Shelf.includes(:library).find(params[:shelf_id])
         authorize @shelf, :show?
       end
     end
 
-    def set_library
+    def get_library
       if params[:library_id]
         @library = Library.friendly.find(params[:library_id])
         authorize @library, :show?
       end
     end
 
-    def set_libraries
+    def get_libraries
       @libraries = Library.order(:position)
     end
 
-    def set_bookstore
+    def get_bookstore
       if params[:bookstore_id]
         @bookstore = Bookstore.find(params[:bookstore_id])
         authorize @bookstore, :show?
       end
     end
 
-    def set_subscription
+    def get_subscription
       if params[:subscription_id]
         @subscription = Subscription.find(params[:subscription_id])
         authorize @subscription, :show?
@@ -267,7 +261,10 @@ module EnjuLibrary
     end
 
     def filtered_params
-      params.permit([:view, :format, :page, :order, :sort_by, :per_page])
+      params.permit([:q, :query, :view, :format, :order, :sort_by, :page, :per_page])
+    end
+
+    class InvalidLocaleError < StandardError
     end
   end
 end

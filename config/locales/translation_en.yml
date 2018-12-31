@@ -58,6 +58,7 @@ en:
         color: Color
         max_number_of_results: Max number of results
         book_jacket_source: Book jacket source
+        header_logo: Header logo
       bookstore:
         name: Name
         zip_code: Zip code
@@ -128,4 +129,5 @@ en:
     successfully_withdrawn: "This items was successfully withdrawn."
   book_jacket:
     google: Google Books
+    openbd: openBD
     hanmotocom: Hanmoto.com

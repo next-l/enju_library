@@ -1,7 +1,7 @@
 class WithdrawsController < ApplicationController
   before_action :set_withdraw, only: [:show, :edit, :update, :destroy]
   before_action :check_policy, only: [:index, :new, :create]
-  before_action :set_basket, only: [:index, :create]
+  before_action :get_basket, only: [:index, :create]
 
   # GET /withdraws
   # GET /withdraws.json
@@ -20,7 +20,7 @@ class WithdrawsController < ApplicationController
         if @basket
           @withdraws = @basket.withdraws.order('withdraws.created_at DESC').page(params[:page])
         else
-          @withdraws = Withdraw.order(created_at: :desc).page(params[:page])
+          @withdraws = Withdraw.order('withdraws.created_at DESC').page(params[:page])
         end
       end
     end
@@ -49,6 +49,7 @@ class WithdrawsController < ApplicationController
     @basket.user = current_user
     @basket.save!
     @withdraw = Withdraw.new
+    authorize @withdraw, :new?
     @withdraws = []
 
     respond_to do |format|
@@ -84,7 +85,7 @@ class WithdrawsController < ApplicationController
       if @withdraw.save
         flash[:message] << t('withdraw.successfully_withdrawn', model: t('activerecord.models.withdraw'))
         format.html { redirect_to withdraws_url(basket_id: @basket.id) }
-        format.json { render json: @withdraw, status: :created, location: @withdraw }
+        format.json { render json: @withdraw, status: :created, location:  @withdraw }
         format.js { redirect_to withdraws_url(basket_id: @basket.id, format: :js) }
       else
         @withdraws = @basket.withdraws.page(params[:page])
@@ -99,7 +100,7 @@ class WithdrawsController < ApplicationController
   # PUT /withdraws/1.json
   def update
     respond_to do |format|
-      if @withdraw.update(withdraw_params)
+      if @withdraw.update_attributes(withdraw_params)
         format.html { redirect_to @withdraw, notice: t('controller.successfully_updated', model: t('activerecord.models.withdraw')) }
         format.json { head :no_content }
       else

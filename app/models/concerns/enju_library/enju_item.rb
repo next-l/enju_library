@@ -6,7 +6,7 @@ module EnjuLibrary
       has_one :accept
       scope :accepted_between, lambda{|from, to| includes(:accept).where('items.created_at BETWEEN ? AND ?', Time.zone.parse(from).beginning_of_day, Time.zone.parse(to).end_of_day)}
 
-      belongs_to :shelf, counter_cache: true
+      belongs_to :shelf, counter_cache: true, validate: true
       validates_associated :shelf
 
       searchable do

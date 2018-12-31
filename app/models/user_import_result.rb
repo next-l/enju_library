@@ -3,7 +3,7 @@ class UserImportResult < ActiveRecord::Base
   scope :failed, -> { where(user_id: nil) }
 
   belongs_to :user_import_file
-  belongs_to :user
+  belongs_to :user, optional: true
 end
 
 # == Schema Information
@@ -11,9 +11,10 @@ end
 # Table name: user_import_results
 #
 #  id                  :integer          not null, primary key
-#  user_import_file_id :integer          not null
-#  user_id             :integer          not null
+#  user_import_file_id :integer
+#  user_id             :integer
 #  body                :text
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  created_at          :datetime
+#  updated_at          :datetime
+#  error_message       :text
 #

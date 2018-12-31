@@ -62,7 +62,7 @@ class RequestStatusTypesController < ApplicationController
     end
 
     respond_to do |format|
-      if @request_status_type.update(request_status_type_params)
+      if @request_status_type.update_attributes(request_status_type_params)
         format.html { redirect_to @request_status_type, notice: t('controller.successfully_updated', model: t('activerecord.models.request_status_type')) }
         format.json { head :no_content }
       else
@@ -88,7 +88,6 @@ class RequestStatusTypesController < ApplicationController
   def set_request_status_type
     @request_status_type = RequestStatusType.find(params[:id])
     authorize @request_status_type
-    access_denied unless LibraryGroup.site_config.network_access_allowed?(request.ip)
   end
 
   def check_policy

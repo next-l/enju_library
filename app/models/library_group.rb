@@ -1,24 +1,50 @@
 class LibraryGroup < ActiveRecord::Base
-  # include Singleton
+  #include Singleton
   include MasterModel
+  extend Mobility
 
   has_many :libraries
   has_many :colors
-  belongs_to :country
+  belongs_to :country, optional: true
+  belongs_to :user, optional: true
 
   validates :url, presence: true, url: true
   validates :max_number_of_results, numericality: {
-      greater_than_or_equal_to: 0
+      greater_than_or_equal_to: 1
     }
   accepts_nested_attributes_for :colors, update_only: true
-  translates :display_name, :login_banner, :footer_banner
+  accepts_nested_attributes_for :user, update_only: true
+  store :settings, accessors: [
+    :book_jacket_unknown_resource,
+    :erms_url
+  ], coder: JSON
+
+  translates :login_banner, :footer_banner, locale_accessors: true
+
+  if ENV['ENJU_STORAGE'] == 's3'
+    has_attached_file :header_logo, storage: :s3, styles: { medium: 'x80'},
+      s3_credentials: {
+        access_key: ENV['AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        bucket: ENV['S3_BUCKET_NAME'],
+        s3_host_name: ENV['S3_HOST_NAME'],
+        s3_region: ENV["S3_REGION"]
+      },
+      s3_permissions: :private
+  else
+    has_attached_file :header_logo, styles: { medium: 'x80'},
+      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
+  end
+
+  validates_attachment_content_type :header_logo, content_type: /\Aimage\/.*\Z/
+  attr_accessor :delete_header_logo
 
   def self.site_config
     LibraryGroup.order(:created_at).first
   end
 
   def self.system_name(locale = I18n.locale)
-    LibraryGroup.site_config.display_name
+    LibraryGroup.site_config.display_name.localize(locale)
   end
 
   def config?
@@ -54,27 +80,34 @@ end
 #
 # Table name: library_groups
 #
-#  id                            :uuid             not null, primary key
+#  id                            :integer          not null, primary key
 #  name                          :string           not null
-#  display_name_translations     :jsonb
+#  display_name                  :text
 #  short_name                    :string           not null
 #  my_networks                   :text
-#  login_banner_translations     :jsonb
+#  old_login_banner              :text
 #  note                          :text
 #  country_id                    :integer
-#  position                      :integer
-#  created_at                    :datetime         not null
-#  updated_at                    :datetime         not null
+#  position                      :integer          default(1), not null
+#  created_at                    :datetime
+#  updated_at                    :datetime
 #  admin_networks                :text
+#  allow_bookmark_external_url   :boolean          default(FALSE), not null
 #  url                           :string           default("http://localhost:3000/")
-#  footer_banner_translations    :jsonb
+#  settings                      :text
 #  html_snippet                  :text
 #  book_jacket_source            :string
 #  max_number_of_results         :integer          default(500)
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
+#  user_id                       :integer
 #  csv_charset_conversion        :boolean          default(FALSE), not null
-#  header_logo_data              :jsonb
-#  email                         :string           not null
+#  header_logo_file_name         :string
+#  header_logo_content_type      :string
+#  header_logo_file_size         :bigint(8)
+#  header_logo_updated_at        :datetime
+#  header_logo_meta              :text
+#  login_banner                  :jsonb            not null
+#  footer_banner                 :jsonb            not null
 #

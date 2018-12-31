@@ -16,8 +16,8 @@ describe LibraryGroupsController do
     describe 'When not logged in' do
       it 'assigns all library_groups as @library_groups' do
         get :index
-        assigns(:library_groups).should_not be_empty
-        response.should be_successful
+        assigns(:library_groups).should be_nil
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -27,16 +27,16 @@ describe LibraryGroupsController do
       login_fixture_admin
 
       it 'assigns the requested library_group as @library_group' do
-        get :show, params: { id: library_groups(:one).id }
-        assigns(:library_group).should eq(LibraryGroup.find(library_groups(:one).id))
+        get :show, params: { id: 1 }
+        assigns(:library_group).should eq(LibraryGroup.find(1))
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested library_group as @library_group' do
-        get :show, params: { id: library_groups(:one).id }
-        assigns(:library_group).should eq(LibraryGroup.find(library_groups(:one).id))
-        response.should be_successful
+        get :show, params: { id: 1 }
+        assigns(:library_group).should eq(LibraryGroup.find(1))
+        response.should redirect_to(new_user_session_url)
       end
     end
   end
@@ -46,7 +46,7 @@ describe LibraryGroupsController do
       login_fixture_admin
 
       it 'assigns the requested library_group as @library_group' do
-        library_group = LibraryGroup.find(library_groups(:one).id)
+        library_group = LibraryGroup.find(1)
         get :edit, params: { id: library_group.id }
         assigns(:library_group).should eq(library_group)
       end
@@ -56,7 +56,7 @@ describe LibraryGroupsController do
       login_fixture_librarian
 
       it 'should not assign the requested library_group as @library_group' do
-        library_group = LibraryGroup.find(library_groups(:one).id)
+        library_group = LibraryGroup.find(1)
         get :edit, params: { id: library_group.id }
         response.should be_forbidden
       end
@@ -66,7 +66,7 @@ describe LibraryGroupsController do
       login_fixture_user
 
       it 'should not assign the requested library_group as @library_group' do
-        library_group = LibraryGroup.find(library_groups(:one).id)
+        library_group = LibraryGroup.find(1)
         get :edit, params: { id: library_group.id }
         response.should be_forbidden
       end
@@ -74,7 +74,7 @@ describe LibraryGroupsController do
 
     describe 'When not logged in' do
       it 'should not assign the requested library_group as @library_group' do
-        library_group = LibraryGroup.find(library_groups(:one).id)
+        library_group = LibraryGroup.find(1)
         get :edit, params: { id: library_group.id }
         response.should redirect_to(new_user_session_url)
       end
@@ -83,7 +83,7 @@ describe LibraryGroupsController do
 
   describe 'PUT update' do
     before(:each) do
-      @library_group = LibraryGroup.find(library_groups(:one).id)
+      @library_group = LibraryGroup.find(1)
       @attrs = { name: 'example' }
       @invalid_attrs = { name: '' }
     end

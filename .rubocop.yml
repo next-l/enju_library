@@ -1,3 +1,7 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  TargetRubyVersion: 2.2
 Rails:
   Enabled: true
 Layout/SpaceInsideHashLiteralBraces:
@@ -6,15 +10,25 @@ Layout/SpaceInsideBlockBraces:
   Enabled: false
 Layout/SpaceBeforeBlockBraces:
   Enabled: false
+Layout/ExtraSpacing:
+  Enabled: false
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
 Style/WordArray:
   Enabled: false
 Style/Documentation:
   Enabled: false
 Style/StringLiterals:
   Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: false
 Metrics/MethodLength:
   Enabled: false
 Metrics/LineLength:
   Enabled: false
 Metrics/BlockLength:
+  Enabled: false
+Metrics/AbcSize:
   Enabled: false
