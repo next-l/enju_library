@@ -102,7 +102,6 @@ class UserImportFile < ActiveRecord::Base
     end
 
     Sunspot.commit
-    rows.close
     error_messages = user_import_results.order(:id).pluck(:error_message).compact
     unless error_messages.empty?
       self.error_message = '' if error_message.nil?
@@ -160,7 +159,6 @@ class UserImportFile < ActiveRecord::Base
       end
     end
 
-    rows.close
     transition_to!(:completed)
     Sunspot.commit
     send_message
@@ -238,10 +236,10 @@ class UserImportFile < ActiveRecord::Base
       self.error_message = I18n.t('import.following_column_were_ignored', column: ignored_columns.join(', '))
       save!
     end
-    rows = CSV.open(tempfile.path, 'r:utf-8', headers: header, col_sep: "\t")
+    rows = CSV.read(tempfile.path, 'r:utf-8', headers: header, col_sep: "\t")
     UserImportResult.create!(user_import_file_id: id, body: header.join("\t"))
     tempfile.close(true)
-    file.close
+    rows.delete(0)
     rows
   end
 
