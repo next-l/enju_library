@@ -13,13 +13,13 @@ end
 #
 # Table name: subscriptions
 #
-#  id               :integer          not null, primary key
+#  id               :bigint(8)        not null, primary key
 #  title            :text             not null
 #  note             :text
-#  user_id          :integer
-#  order_list_id    :integer
+#  user_id          :bigint(8)
+#  order_list_id    :bigint(8)
 #  deleted_at       :datetime
 #  subscribes_count :integer          default(0), not null
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #

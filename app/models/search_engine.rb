@@ -31,7 +31,7 @@ end
 #
 # Table name: search_engines
 #
-#  id               :integer          not null, primary key
+#  id               :bigint(8)        not null, primary key
 #  name             :string           not null
 #  display_name     :text
 #  url              :string           not null
@@ -41,6 +41,6 @@ end
 #  additional_param :text
 #  note             :text
 #  position         :integer          default(1), not null
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #

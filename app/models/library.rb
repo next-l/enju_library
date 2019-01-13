@@ -94,7 +94,7 @@ end
 #
 # Table name: libraries
 #
-#  id                    :integer          not null, primary key
+#  id                    :bigint(8)        not null, primary key
 #  name                  :string           not null
 #  display_name          :text
 #  short_display_name    :string           not null
@@ -108,12 +108,12 @@ end
 #  note                  :text
 #  call_number_rows      :integer          default(1), not null
 #  call_number_delimiter :string           default("|"), not null
-#  library_group_id      :integer          not null
+#  library_group_id      :bigint(8)        not null
 #  users_count           :integer          default(0), not null
 #  position              :integer          default(1), not null
-#  country_id            :integer
-#  created_at            :datetime
-#  updated_at            :datetime
+#  country_id            :bigint(8)
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
 #  deleted_at            :datetime
 #  opening_hour          :text
 #  isil                  :string

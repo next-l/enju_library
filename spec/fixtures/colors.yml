@@ -28,11 +28,11 @@ color_00004:
 #
 # Table name: colors
 #
-#  id               :integer          not null, primary key
-#  library_group_id :integer
+#  id               :bigint(8)        not null, primary key
+#  library_group_id :bigint(8)
 #  property         :string
 #  code             :string
 #  position         :integer          default(1), not null
-#  created_at       :datetime
-#  updated_at       :datetime
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
 #

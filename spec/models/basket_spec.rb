@@ -15,10 +15,10 @@ end
 #
 # Table name: baskets
 #
-#  id           :integer          not null, primary key
-#  user_id      :integer
+#  id           :bigint(8)        not null, primary key
+#  user_id      :bigint(8)
 #  note         :text
 #  lock_version :integer          default(0), not null
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #
