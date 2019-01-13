@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_213129) do
+ActiveRecord::Schema.define(version: 2018_10_30_074920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -724,17 +724,6 @@ ActiveRecord::Schema.define(version: 2019_01_13_213129) do
     t.index ["name"], name: "index_libraries_on_name"
   end
 
-  create_table "library_group_translations", force: :cascade do |t|
-    t.text "login_banner"
-    t.text "footer_banner"
-    t.string "locale", null: false
-    t.bigint "library_group_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["library_group_id", "locale"], name: "index_6a2d1f44f9116e652d8a4c6abc8be9dd34bc1a61", unique: true
-    t.index ["locale"], name: "index_library_group_translations_on_locale"
-  end
-
   create_table "library_groups", force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
@@ -749,7 +738,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_213129) do
     t.text "admin_networks"
     t.boolean "allow_bookmark_external_url", default: false, null: false
     t.string "url", default: "http://localhost:3000/"
-    t.text "settings"
+    t.jsonb "settings"
     t.text "html_snippet"
     t.string "book_jacket_source"
     t.integer "max_number_of_results", default: 500
@@ -1551,7 +1540,6 @@ ActiveRecord::Schema.define(version: 2019_01_13_213129) do
   add_foreign_key "lending_policies", "items"
   add_foreign_key "lending_policies", "user_groups"
   add_foreign_key "libraries", "library_groups"
-  add_foreign_key "library_group_translations", "library_groups"
   add_foreign_key "library_groups", "users"
   add_foreign_key "reserves", "manifestations"
   add_foreign_key "reserves", "users"
