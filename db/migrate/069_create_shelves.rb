@@ -8,7 +8,6 @@ class CreateShelves < ActiveRecord::Migration[5.2]
       t.integer :items_count, default: 0, null: false
       t.integer :position
       t.timestamps
-      t.datetime :deleted_at
     end
   end
 end

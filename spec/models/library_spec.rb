@@ -38,7 +38,6 @@ end
 #  country_id            :bigint(8)
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
-#  deleted_at            :datetime
 #  opening_hour          :text
 #  isil                  :string
 #  latitude              :float

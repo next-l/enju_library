@@ -20,7 +20,6 @@ class CreateLibraries < ActiveRecord::Migration[5.2]
       t.references :country
 
       t.timestamps
-      t.datetime :deleted_at
     end
   end
 end

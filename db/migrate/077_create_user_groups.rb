@@ -6,7 +6,6 @@ class CreateUserGroups < ActiveRecord::Migration[5.2]
       t.text :note
       t.integer :position
       t.timestamps
-      t.datetime :deleted_at
     end
   end
 end

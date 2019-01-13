@@ -231,7 +231,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_074920) do
     t.string "fax_number"
     t.string "url"
     t.integer "position", default: 1, null: false
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -714,7 +713,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_074920) do
     t.bigint "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.text "opening_hour"
     t.string "isil"
     t.float "latitude"
@@ -1255,7 +1253,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_074920) do
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.boolean "closed", default: false, null: false
     t.index ["library_id"], name: "index_shelves_on_library_id"
   end
@@ -1318,7 +1315,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_074920) do
     t.text "note"
     t.bigint "user_id"
     t.bigint "order_list_id"
-    t.datetime "deleted_at"
     t.integer "subscribes_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1406,7 +1402,6 @@ ActiveRecord::Schema.define(version: 2018_10_30_074920) do
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.integer "valid_period_for_new_user", default: 0, null: false
     t.datetime "expired_at"
     t.integer "number_of_day_to_notify_overdue", default: 1, null: false

@@ -18,7 +18,6 @@ end
 #  fax_number       :string
 #  url              :string
 #  position         :integer          default(1), not null
-#  deleted_at       :datetime
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
