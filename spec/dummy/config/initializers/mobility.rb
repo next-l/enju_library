@@ -1,7 +1,7 @@
 Mobility.configure do |config|
   # Sets the default backend to use in models. This can be overridden in models
   # by passing +backend: ...+ to +translates+.
-  config.default_backend = :jsonb
+  config.default_backend = :table
 
   # By default, Mobility uses the +translates+ class method in models to
   # describe translated attributes, but you can configure this method to be
