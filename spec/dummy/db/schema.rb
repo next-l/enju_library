@@ -1081,7 +1081,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "request_status_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.jsonb "display_name"
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
