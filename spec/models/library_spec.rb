@@ -20,7 +20,7 @@ end
 #
 #  id                    :bigint(8)        not null, primary key
 #  name                  :string           not null
-#  display_name          :text
+#  display_name          :jsonb            not null
 #  short_display_name    :string           not null
 #  zip_code              :string
 #  street                :text

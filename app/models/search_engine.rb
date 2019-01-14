@@ -33,7 +33,7 @@ end
 #
 #  id               :bigint(8)        not null, primary key
 #  name             :string           not null
-#  display_name     :text
+#  display_name     :jsonb            not null
 #  url              :string           not null
 #  base_url         :text             not null
 #  http_method      :text             not null

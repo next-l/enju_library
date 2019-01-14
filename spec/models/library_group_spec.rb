@@ -21,7 +21,7 @@ end
 #
 #  id                            :bigint(8)        not null, primary key
 #  name                          :string           not null
-#  display_name                  :text
+#  display_name                  :jsonb            not null
 #  short_name                    :string           not null
 #  my_networks                   :text
 #  old_login_banner              :text

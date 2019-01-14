@@ -53,7 +53,7 @@ end
 #
 #  id           :bigint(8)        not null, primary key
 #  name         :string           not null
-#  display_name :text
+#  display_name :jsonb            not null
 #  note         :text
 #  library_id   :bigint(8)        not null
 #  items_count  :integer          default(0), not null
