@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe UserGroup do
@@ -8,12 +7,6 @@ describe UserGroup do
     user_group = user_groups(:user_group_00001)
     user_group.display_name = "en:test"
     user_group.valid?.should be_truthy
-  end
-
-  it "should not contain invalid yaml in its display_name" do
-    user_group = user_groups(:user_group_00001)
-    user_group.display_name = "en:test\r\nja: テスト"
-    user_group.valid?.should be_falsy
   end
 end
 
