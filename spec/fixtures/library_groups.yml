@@ -2,7 +2,7 @@
 one:
   id: 1
   name: unknown
-  display_name: unknown
+  display_name: {"en": "unknown", "ja": "不明"}
   short_name: unknown
   note: 
   my_networks: "0.0.0.0/0\r\n\

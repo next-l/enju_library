@@ -19,7 +19,7 @@ class LibraryGroup < ActiveRecord::Base
     :erms_url
   ], coder: JSON
 
-  translates :login_banner, :footer_banner, locale_accessors: true
+  translates :login_banner, :footer_banner, :display_name, locale_accessors: true
 
   if ENV['ENJU_STORAGE'] == 's3'
     has_attached_file :header_logo, storage: :s3, styles: { medium: 'x80'},

@@ -41,10 +41,9 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "agent_import_files", force: :cascade do |t|
-    t.integer "parent_id"
     t.string "content_type"
     t.integer "size"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.text "note"
     t.datetime "executed_at"
     t.string "agent_import_file_name"
@@ -57,7 +56,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.text "error_message"
     t.string "edit_mode"
     t.string "user_encoding"
-    t.index ["parent_id"], name: "index_agent_import_files_on_parent_id"
     t.index ["user_id"], name: "index_agent_import_files_on_user_id"
   end
 
@@ -256,7 +254,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "carrier_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -376,7 +374,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "content_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -559,7 +557,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "form_of_works", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -568,7 +566,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "frequencies", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -696,7 +694,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.integer "required_role_id", default: 1, null: false
     t.integer "required_score", default: 0, null: false
     t.datetime "acquired_at"
-    t.integer "bookstore_id"
+    t.bigint "bookstore_id"
     t.integer "budget_type_id"
     t.integer "circulation_status_id", default: 5, null: false
     t.integer "checkout_type_id", default: 1, null: false
@@ -809,7 +807,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "licenses", force: :cascade do |t|
     t.string "name", null: false
-    t.string "display_name"
+    t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -1061,8 +1059,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "realize_types", force: :cascade do |t|
-    t.string "name"
-    t.text "display_name"
+    t.string "name", null: false
+    t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -1172,10 +1170,9 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "resource_import_files", force: :cascade do |t|
-    t.integer "parent_id"
     t.string "content_type"
     t.integer "size"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.text "note"
     t.datetime "executed_at"
     t.string "resource_import_file_name"
@@ -1188,8 +1185,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "resource_import_fingerprint"
     t.text "error_message"
     t.string "user_encoding"
-    t.integer "default_shelf_id"
-    t.index ["parent_id"], name: "index_resource_import_files_on_parent_id"
+    t.bigint "default_shelf_id"
+    t.index ["default_shelf_id"], name: "index_resource_import_files_on_default_shelf_id"
     t.index ["user_id"], name: "index_resource_import_files_on_user_id"
   end
 
@@ -1564,6 +1561,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["librarian_id"], name: "index_withdraws_on_librarian_id"
   end
 
+  add_foreign_key "agent_import_files", "users"
   add_foreign_key "carrier_type_has_checkout_types", "carrier_types"
   add_foreign_key "carrier_type_has_checkout_types", "checkout_types"
   add_foreign_key "checked_items", "baskets"
@@ -1587,6 +1585,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "issn_records", "manifestations"
   add_foreign_key "item_has_use_restrictions", "items"
   add_foreign_key "item_has_use_restrictions", "use_restrictions"
+  add_foreign_key "items", "bookstores"
   add_foreign_key "items", "manifestations"
   add_foreign_key "lending_policies", "items"
   add_foreign_key "lending_policies", "user_groups"
@@ -1594,6 +1593,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "library_groups", "users"
   add_foreign_key "reserves", "manifestations"
   add_foreign_key "reserves", "users"
+  add_foreign_key "resource_import_files", "users"
   add_foreign_key "user_group_has_checkout_types", "checkout_types"
   add_foreign_key "user_group_has_checkout_types", "user_groups"
 end
