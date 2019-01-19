@@ -5,10 +5,10 @@ class CreateResourceExportFileTransitions < ActiveRecord::Migration[5.2]
       if ActiveRecord::Base.configurations[Rails.env]["adapter"].try(:match, /mysql/)
         t.text :metadata
       else
-        t.text :metadata, default: "{}"
+        t.jsonb :metadata, default: {}
       end
       t.integer :sort_key
-      t.integer :resource_export_file_id
+      t.references :resource_export_file, index: false
       t.timestamps
     end
 
