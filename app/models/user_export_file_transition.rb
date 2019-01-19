@@ -1,5 +1,4 @@
 class UserExportFileTransition < ActiveRecord::Base
-  include Statesman::Adapters::ActiveRecordTransition
 
   
   belongs_to :user_export_file, inverse_of: :user_export_file_transitions
