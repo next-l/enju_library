@@ -10,7 +10,7 @@ end
 #
 #  id                  :bigint(8)        not null, primary key
 #  to_state            :string
-#  metadata            :text             default({})
+#  metadata            :jsonb
 #  sort_key            :integer
 #  user_import_file_id :bigint(8)
 #  created_at          :datetime         not null
