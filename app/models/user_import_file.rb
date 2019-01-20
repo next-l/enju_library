@@ -62,7 +62,7 @@ class UserImportFile < ActiveRecord::Base
       next if row['dummy'].to_s.strip.present?
 
       username = row['username']
-      new_user = User.where(username: username).first
+      new_user = User.find_by(username: username)
       if new_user
         import_result.user = new_user
         import_result.save
@@ -82,10 +82,11 @@ class UserImportFile < ActiveRecord::Base
         new_user.assign_attributes(set_user_params(row))
         profile = Profile.new
         profile.assign_attributes(set_profile_params(row))
+        new_user.profile = profile
 
         Profile.transaction do
-          if new_user.valid? and profile.valid?
-            new_user.profile = profile
+          if new_user.valid? && profile.valid?
+            new_user.save!
             import_result.user = new_user
             import_result.save!
             num[:user_imported] += 1

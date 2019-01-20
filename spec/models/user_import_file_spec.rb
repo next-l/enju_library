@@ -53,9 +53,9 @@ describe UserImportFile do
       #user003.profile.share_bookmarks.should be_falsy
       User.where(username: 'user000').first.should be_nil
       UserImportResult.count.should eq old_import_results_count + 10
-      UserImportResult.order('id DESC')[0].error_message.should eq 'line 10: 利用者番号はすでに存在します。'
-      UserImportResult.order('id DESC')[1].error_message.should eq 'line 9: 利用者番号は不正な値です。'
-      UserImportResult.order('id DESC')[2].error_message.should eq 'line 8: パスワードは6文字以上で入力してください。'
+      UserImportResult.order('id DESC')[0].error_message.should eq 'line 10: User number has already been taken'
+      UserImportResult.order('id DESC')[1].error_message.should eq 'line 9: User number is invalid'
+      UserImportResult.order('id DESC')[2].error_message.should eq 'line 8: Password is too short (minimum is 6 characters)'
 
       user005 = User.where(username: 'user005').first
       user005.role.name.should eq 'User'
@@ -75,7 +75,7 @@ describe UserImportFile do
       file.executed_at.should be_truthy
 
       file.reload
-      file.error_message.should eq "次の列は無視されました。 checkout_icalendar_token, save_checkout_history, save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください。\nline 9: 利用者番号は不正な値です。\nline 10: 利用者番号はすでに存在します。"
+      file.error_message.should eq "The following column(s) were ignored: checkout_icalendar_token, save_checkout_history, save_search_history, share_bookmarks, invalid\nline 8: Password is too short (minimum is 6 characters)\nline 9: User number is invalid\nline 10: User number has already been taken"
       file.current_state.should eq 'failed'
     end
 
@@ -105,6 +105,7 @@ describe UserImportFile do
         profile: FactoryBot.create(:profile)
       )
     end
+
     it "should update users" do
       @file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_update_file.tsv"),
@@ -135,6 +136,7 @@ describe UserImportFile do
         note: 'Note',
         keyword_list: 'keyword1 keyword2',
         date_of_birth: 10.years.ago)
+      user.save
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"),
         user: users(:admin),
@@ -150,6 +152,7 @@ describe UserImportFile do
       user001.profile.full_name_transcription.should eq 'User 001'
       user001.profile.keyword_list.should eq 'keyword1 keyword2'
     end
+
     it "should update user_number" do
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"),
@@ -162,6 +165,7 @@ describe UserImportFile do
       user001 = User.where(username: 'user001').first
       user001.profile.user_number.should eq '0001'
     end
+
     it "should update user's lock status" do
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"),
