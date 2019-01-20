@@ -82,18 +82,20 @@ class UserImportFile < ActiveRecord::Base
         new_user.assign_attributes(set_user_params(row))
         profile = Profile.new
         profile.assign_attributes(set_profile_params(row))
-        new_user.profile = profile
 
         Profile.transaction do
-          if new_user.valid? && profile.valid?
+          if profile.valid?
+            profile.save!
+            new_user.profile = profile
+          end
+          if new_user.valid?
             new_user.save!
             import_result.user = new_user
             import_result.save!
             num[:user_imported] += 1
           else
             error_message = "line #{row_num}: "
-            error_message += new_user.errors.full_messages.join(" ")
-            error_message += profile.errors.full_messages.join(" ")
+            error_message += (new_user.errors.full_messages.+ profile.errors.full_messages).join(' ')
             import_result.error_message = error_message
             import_result.save
             num[:error] += 1
