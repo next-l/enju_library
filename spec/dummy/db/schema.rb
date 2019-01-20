@@ -1449,7 +1449,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "series_statement_merges", "series_statement_merge_lists"
   add_foreign_key "series_statement_merges", "series_statements"
   add_foreign_key "series_statements", "manifestations"
-  add_foreign_key "subscribes", "manifestations", column: "work_id"
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
