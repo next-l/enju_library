@@ -44,7 +44,7 @@ class LibraryGroup < ActiveRecord::Base
   end
 
   def self.system_name(locale = I18n.locale)
-    LibraryGroup.site_config.display_name.localize(locale)
+    LibraryGroup.site_config.display_name
   end
 
   def config?
