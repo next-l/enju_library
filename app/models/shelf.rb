@@ -1,5 +1,6 @@
 class Shelf < ActiveRecord::Base
   include MasterModel
+  extend Mobility
   scope :real, -> { where('library_id != 1') }
   belongs_to :library, validate: true
   has_many :items
@@ -12,6 +13,7 @@ class Shelf < ActiveRecord::Base
   before_update :reset_position
 
   acts_as_list scope: :library
+  translates :display_name
 
   searchable do
     string :name

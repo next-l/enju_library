@@ -1,5 +1,6 @@
 class Library < ActiveRecord::Base
   include MasterModel
+  extend Mobility
   default_scope { order('libraries.position') }
   scope :real, -> { where('id != 1') }
   has_many :shelves
@@ -10,6 +11,7 @@ class Library < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name
   geocoded_by :address
+  translates :display_name
 
   searchable do
     text :name, :display_name, :note, :address

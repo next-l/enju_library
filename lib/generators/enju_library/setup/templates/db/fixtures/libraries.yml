@@ -2,7 +2,7 @@
 library_00001: 
   name: web
   short_display_name: Web
-  display_name: World Wide Web
+  display_name: {"en": "World Wide Web", "ja": "ウェブ"}
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 
@@ -14,7 +14,7 @@ library_00001:
 library_00002: 
   name: yours
   short_display_name: your_library
-  display_name: Your Library
+  display_name: {"en": "Your Library", "ja": "自分の図書館"}
   fax_number: 
   telephone_number_1: 
   telephone_number_2: 
