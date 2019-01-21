@@ -1,19 +1,12 @@
-class CreateClassifications < ActiveRecord::Migration[4.2]
-  def self.up
+class CreateClassifications < ActiveRecord::Migration[5.2]
+  def change
     create_table :classifications do |t|
-      t.integer :parent_id
-      t.string :category, null: false
+      t.references :parent, foreign_key: {to_table: :classifications}
+      t.string :category, index: true, null: false
       t.text :note
-      t.integer :classification_type_id, null: false
+      t.references :classification_type, null: false
 
       t.timestamps
     end
-    add_index :classifications, :parent_id
-    add_index :classifications, :category
-    add_index :classifications, :classification_type_id
-  end
-
-  def self.down
-    drop_table :classifications
   end
 end

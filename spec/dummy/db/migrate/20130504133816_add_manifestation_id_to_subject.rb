@@ -1,6 +1,5 @@
-class AddManifestationIdToSubject < ActiveRecord::Migration[4.2]
+class AddManifestationIdToSubject < ActiveRecord::Migration[5.2]
   def change
-    add_column :subjects, :manifestation_id, :integer
-    add_index :subjects, :manifestation_id
+    add_reference :subjects, :manifestation, foreign_key: true
   end
 end

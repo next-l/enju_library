@@ -1,6 +1,5 @@
-class AddManifestationIdToClassification < ActiveRecord::Migration[4.2]
+class AddManifestationIdToClassification < ActiveRecord::Migration[5.2]
   def change
-    add_column :classifications, :manifestation_id, :integer
-    add_index :classifications, :manifestation_id
+    add_reference :classifications, :manifestation, foreign_key: true
   end
 end
