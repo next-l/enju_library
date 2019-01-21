@@ -3,7 +3,7 @@
 <div id="content_list">
   <% if @library %>
     <h2 class="resource_title">
-      <%= link_to @library.display_name.localize, @library -%>
+      <%= link_to @library.display_name, @library -%>
     </h2>
   <% end %>
   
@@ -35,12 +35,12 @@
       <% end %>
     </td>
     <td>
-      <%= link_to shelf.display_name.localize, shelf -%>
+      <%= link_to shelf.display_name, shelf -%>
       <br />
       <%= shelf.name if current_user.try(:has_role?, 'Librarian') %>
     </td>
     <td>
-      <%= link_to shelf.library.display_name.localize, library_path(shelf.library) -%>
+      <%= link_to shelf.library.display_name, library_path(shelf.library) -%>
       <% if shelf.closed? %>
         <%= t('activerecord.attributes.shelf.closed') %>
       <% end %>

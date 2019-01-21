@@ -4,8 +4,8 @@
 <p id="notice"><%= notice %></p>
 
   <h2 class="resource_title">
-    <%= link_to @shelf.library.display_name.localize, @shelf.library -%>
-    <%= @shelf.display_name.localize -%>
+    <%= link_to @shelf.library.display_name, @shelf.library -%>
+    <%= @shelf.display_name -%>
   </h2>
 
 <% if current_user.try(:has_role?, 'Librarian') %>
