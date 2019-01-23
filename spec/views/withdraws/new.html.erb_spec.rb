@@ -9,14 +9,8 @@ RSpec.describe "withdraws/new", type: :view do
     ).as_new_record)
     assign(:basket, baskets(:basket_00001))
     assign(:withdraws, Kaminari::paginate_array([
-      stub_model(Withdraw,
-        item_id: 1,
-        created_at: Time.zone.now
-      ),
-      stub_model(Withdraw,
-        item_id: 1,
-        created_at: Time.zone.now
-      )
+      FactoryBot.create(:withdraw),
+      FactoryBot.create(:withdraw)
     ]).page(1))
     view.stub(:current_user).and_return(User.friendly.find('enjuadmin'))
   end

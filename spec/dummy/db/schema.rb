@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "accepts", force: :cascade do |t|
     t.bigint "basket_id"
-    t.bigint "item_id"
+    t.uuid "item_id"
     t.bigint "librarian_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "checked_items", force: :cascade do |t|
-    t.bigint "item_id", null: false
+    t.uuid "item_id", null: false
     t.bigint "basket_id", null: false
     t.bigint "librarian_id"
     t.datetime "due_date", null: false
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "checkins", force: :cascade do |t|
-    t.bigint "item_id", null: false
+    t.uuid "item_id", null: false
     t.bigint "librarian_id"
     t.bigint "basket_id"
     t.datetime "created_at", null: false
@@ -328,8 +328,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "demands", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "item_id"
-    t.bigint "message_id"
+    t.uuid "item_id"
+    t.uuid "message_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_demands_on_item_id"
@@ -351,7 +351,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "donates", force: :cascade do |t|
     t.bigint "agent_id", null: false
-    t.bigint "item_id", null: false
+    t.uuid "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_donates_on_agent_id"
@@ -580,7 +580,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "item_has_use_restrictions", force: :cascade do |t|
-    t.bigint "item_id", null: false
+    t.uuid "item_id", null: false
     t.bigint "use_restriction_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -588,7 +588,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["use_restriction_id"], name: "index_item_has_use_restrictions_on_use_restriction_id"
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "call_number"
     t.string "item_identifier"
     t.datetime "created_at", null: false
@@ -630,7 +630,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "lending_policies", force: :cascade do |t|
-    t.bigint "item_id", null: false
+    t.uuid "item_id", null: false
     t.uuid "user_group_id", null: false
     t.integer "loan_period", default: 0, null: false
     t.datetime "fixed_due_date"
@@ -825,7 +825,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.bigint "receiver_id"
     t.bigint "message_template_id"
     t.datetime "sent_at"
-    t.datetime "deleted_at"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -858,14 +857,14 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["sort_key", "message_id"], name: "index_message_transitions_on_sort_key_and_message_id", unique: true
   end
 
-  create_table "messages", force: :cascade do |t|
+  create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "read_at"
     t.bigint "sender_id"
     t.bigint "receiver_id"
     t.string "subject", null: false
     t.text "body"
     t.bigint "message_request_id"
-    t.bigint "parent_id"
+    t.uuid "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "lft"
@@ -879,7 +878,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "owns", force: :cascade do |t|
     t.bigint "agent_id", null: false
-    t.bigint "item_id", null: false
+    t.uuid "item_id", null: false
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1069,7 +1068,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   create_table "resource_import_results", force: :cascade do |t|
     t.bigint "resource_import_file_id"
     t.bigint "manifestation_id"
-    t.bigint "item_id"
+    t.uuid "item_id"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1387,7 +1386,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "withdraws", force: :cascade do |t|
     t.bigint "basket_id"
-    t.bigint "item_id"
+    t.uuid "item_id"
     t.bigint "librarian_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1396,6 +1395,9 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["librarian_id"], name: "index_withdraws_on_librarian_id"
   end
 
+  add_foreign_key "accepts", "baskets"
+  add_foreign_key "accepts", "items"
+  add_foreign_key "accepts", "users", column: "librarian_id"
   add_foreign_key "agent_import_files", "users"
   add_foreign_key "agent_import_results", "agent_import_files"
   add_foreign_key "agent_merges", "agents"
@@ -1406,6 +1408,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "checked_items", "items"
   add_foreign_key "checked_items", "users"
   add_foreign_key "checkins", "items"
+  add_foreign_key "checkins", "users", column: "librarian_id"
   add_foreign_key "classifications", "classifications", column: "parent_id"
   add_foreign_key "classifications", "manifestations"
   add_foreign_key "demands", "items"
@@ -1434,6 +1437,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "library_groups", "users"
   add_foreign_key "manifestation_relationships", "manifestations", column: "child_id"
   add_foreign_key "manifestation_relationships", "manifestations", column: "parent_id"
+  add_foreign_key "messages", "messages", column: "parent_id"
   add_foreign_key "resource_export_files", "users"
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "resource_import_results", "resource_import_files"
@@ -1446,4 +1450,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
   add_foreign_key "users", "profiles", on_delete: :cascade
+  add_foreign_key "withdraws", "baskets"
+  add_foreign_key "withdraws", "items"
+  add_foreign_key "withdraws", "users", column: "librarian_id"
 end

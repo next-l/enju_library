@@ -331,12 +331,12 @@ describe BasketsController do
       login_fixture_admin
 
       it 'should destroy basket without user_id' do
-        delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
+        delete :destroy, params: { id: @basket.id, user_id: users(:user1).username }
         response.should redirect_to(baskets_url(user_id: assigns(:basket).user.username))
       end
 
       it 'should destroy basket' do
-        delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
+        delete :destroy, params: { id: @basket.id, user_id: users(:user1).username }
         response.should redirect_to(baskets_url(user_id: assigns(:basket).user.username))
       end
     end
@@ -345,12 +345,12 @@ describe BasketsController do
       login_fixture_librarian
 
       it 'should destroy basket without user_id' do
-        delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
+        delete :destroy, params: { id: @basket.id, user_id: users(:user1).username }
         response.should redirect_to(baskets_url(user_id: assigns(:basket).user.username))
       end
 
       it 'should destroy basket' do
-        delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
+        delete :destroy, params: { id: @basket.id, user_id: users(:user1).username }
         response.should redirect_to(baskets_url(user_id: assigns(:basket).user.username))
       end
     end
