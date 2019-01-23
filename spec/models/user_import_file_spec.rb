@@ -6,7 +6,7 @@ describe UserImportFile do
   describe "when its mode is 'create'" do
     before(:each) do
       @file = UserImportFile.new user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv")
-      @file.default_user_group = UserGroup.find(2)
+      @file.default_user_group = UserGroup.find_by(name: 'user')
       @file.default_library = Library.find(3)
       @file.user = users(:admin)
       @file.save
@@ -14,7 +14,7 @@ describe UserImportFile do
 
     it "should be imported" do
       file = UserImportFile.new user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv")
-      file.default_user_group = UserGroup.find(2)
+      file.default_user_group = UserGroup.find_by(name: 'user')
       file.default_library = Library.find(3)
       file.user = users(:admin)
       file.save
@@ -69,7 +69,7 @@ describe UserImportFile do
       user006.profile.library.name.should eq 'hachioji'
       user006.profile.locale.should eq 'en'
       user006.profile.user_number.should be_nil
-      user006.profile.user_group.name.should eq UserGroup.find(2).name
+      user006.profile.user_group.name.should eq UserGroup.find_by(name: 'user').name
 
       file.user_import_fingerprint.should be_truthy
       file.executed_at.should be_truthy
@@ -81,7 +81,7 @@ describe UserImportFile do
 
     it "should send message when import is completed" do
       old_message_count = Message.count
-      @file.user = User.where(username: 'librarian1').first
+      @file.user = User.find_by(username: 'librarian1')
       @file.import_start
       Message.count.should eq old_message_count + 1
       Message.order(:id).last.subject.should eq 'インポートが完了しました'
@@ -90,7 +90,7 @@ describe UserImportFile do
     it "should not import users that have higher roles than current user's role" do
       old_users_count = User.count
       old_import_results_count = UserImportResult.count
-      @file.user = User.where(username: 'librarian1').first
+      @file.user = User.find_by(username: 'librarian1')
       @file.import_start.should eq({user_imported: 4, user_found: 0, failed: 1, error: 3})
       User.order('id DESC')[1].username.should eq 'user005'
       User.count.should eq old_users_count + 4
@@ -140,7 +140,7 @@ describe UserImportFile do
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"),
         user: users(:admin),
-        default_user_group: UserGroup.find(2),
+        default_user_group: UserGroup.find_by(name: 'user'),
         default_library: Library.find(3)
       )
       result = file.modify
@@ -157,7 +157,7 @@ describe UserImportFile do
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"),
         user: users(:admin),
-        default_user_group: UserGroup.find(2),
+        default_user_group: UserGroup.find_by(name: 'user'),
         default_library: Library.find(3)
       )
       result = file.modify
@@ -170,7 +170,7 @@ describe UserImportFile do
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"),
         user: users(:admin),
-        default_user_group: UserGroup.find(2),
+        default_user_group: UserGroup.find_by(name: 'user'),
         default_library: Library.find(3)
       )
       result = file.modify
@@ -185,7 +185,7 @@ describe UserImportFile do
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"),
         user: users(:admin),
-        default_user_group: UserGroup.find(2),
+        default_user_group: UserGroup.find_by(name: 'user'),
         default_library: Library.find(3)
       )
       file.import_start
@@ -196,7 +196,7 @@ describe UserImportFile do
       file = UserImportFile.create!(
         user_import: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"),
         user: users(:admin),
-        default_user_group: UserGroup.find(2),
+        default_user_group: UserGroup.find_by(name: 'user'),
         default_library: Library.find(3)
       )
       old_message_count = Message.count
@@ -209,7 +209,7 @@ describe UserImportFile do
   it "should import in background" do
     file = UserImportFile.new user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), user: users(:admin)
     file.user = users(:admin)
-    file.default_user_group = UserGroup.find(2)
+    file.default_user_group = UserGroup.find_by(name: 'user')
     file.default_library = Library.find(3)
     file.save
     UserImportFileJob.perform_later(file).should be_truthy
@@ -235,5 +235,5 @@ end
 #  updated_at               :datetime         not null
 #  user_encoding            :string
 #  default_library_id       :bigint(8)
-#  default_user_group_id    :bigint(8)
+#  default_user_group_id    :uuid
 #

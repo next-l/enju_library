@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "birth_date"
     t.string "death_date"
     t.string "agent_identifier"
-    t.bigint "profile_id"
+    t.uuid "profile_id"
     t.index ["agent_identifier"], name: "index_agents_on_agent_identifier"
     t.index ["country_id"], name: "index_agents_on_country_id"
     t.index ["full_name"], name: "index_agents_on_full_name"
@@ -506,7 +506,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
-    t.bigint "profile_id"
+    t.uuid "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "provider"
@@ -631,7 +631,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "lending_policies", force: :cascade do |t|
     t.bigint "item_id", null: false
-    t.bigint "user_group_id", null: false
+    t.uuid "user_group_id", null: false
     t.integer "loan_period", default: 0, null: false
     t.datetime "fixed_due_date"
     t.integer "renewal", default: 0, null: false
@@ -950,8 +950,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["manifestation_id"], name: "index_produces_on_manifestation_id"
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.bigint "user_group_id"
+  create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_group_id", null: false
     t.bigint "library_id"
     t.string "locale"
     t.string "user_number"
@@ -1279,8 +1279,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["user_id"], name: "index_user_export_files_on_user_id"
   end
 
-  create_table "user_groups", force: :cascade do |t|
-    t.string "name"
+  create_table "user_groups", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
     t.jsonb "display_name", default: {}, null: false
     t.text "note"
     t.integer "position", default: 1, null: false
@@ -1330,7 +1330,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.datetime "updated_at", null: false
     t.string "user_encoding"
     t.bigint "default_library_id"
-    t.bigint "default_user_group_id"
+    t.uuid "default_user_group_id"
     t.index ["default_library_id"], name: "index_user_import_files_on_default_library_id"
     t.index ["default_user_group_id"], name: "index_user_import_files_on_default_user_group_id"
     t.index ["user_id"], name: "index_user_import_files_on_user_id"
@@ -1367,7 +1367,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
-    t.bigint "profile_id"
+    t.uuid "profile_id"
     t.index ["email"], name: "index_users_on_email"
     t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

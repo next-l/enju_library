@@ -15,8 +15,8 @@ end
 #
 # Table name: user_groups
 #
-#  id                               :bigint(8)        not null, primary key
-#  name                             :string
+#  id                               :uuid             not null, primary key
+#  name                             :string           not null
 #  display_name                     :jsonb            not null
 #  note                             :text
 #  position                         :integer          default(1), not null

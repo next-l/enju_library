@@ -349,5 +349,5 @@ end
 #  updated_at               :datetime         not null
 #  user_encoding            :string
 #  default_library_id       :bigint(8)
-#  default_user_group_id    :bigint(8)
+#  default_user_group_id    :uuid
 #
