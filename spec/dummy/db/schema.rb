@@ -1452,7 +1452,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "shelves", "libraries"
   add_foreign_key "subjects", "manifestations"
   add_foreign_key "subjects", "subjects", column: "parent_id"
-  add_foreign_key "subscribes", "manifestations", column: "work_id"
   add_foreign_key "subscribes", "subscriptions"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "user_export_files", "users"
