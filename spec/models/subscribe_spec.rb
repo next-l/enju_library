@@ -12,7 +12,7 @@ end
 #
 #  id              :bigint(8)        not null, primary key
 #  subscription_id :bigint(8)        not null
-#  work_id         :bigint(8)        not null
+#  work_id         :uuid             not null
 #  start_at        :datetime         not null
 #  end_at          :datetime         not null
 #  created_at      :datetime         not null

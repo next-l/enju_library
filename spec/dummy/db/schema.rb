@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_budget_types_on_name", unique: true
   end
 
   create_table "carrier_types", force: :cascade do |t|
@@ -264,7 +265,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.datetime "updated_at", null: false
     t.integer "lft"
     t.integer "rgt"
-    t.bigint "manifestation_id"
+    t.uuid "manifestation_id"
     t.string "url"
     t.string "label"
     t.index ["category"], name: "index_classifications_on_category"
@@ -317,7 +318,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "creates", force: :cascade do |t|
     t.bigint "agent_id", null: false
-    t.bigint "work_id", null: false
+    t.uuid "work_id", null: false
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -342,7 +343,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "display_body", null: false
     t.string "source"
     t.jsonb "response", default: {}, null: false
-    t.bigint "manifestation_id", null: false
+    t.uuid "manifestation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["body"], name: "index_doi_records_on_body", unique: true
@@ -493,7 +494,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   create_table "identifiers", force: :cascade do |t|
     t.string "body", null: false
     t.integer "identifier_type_id", null: false
-    t.bigint "manifestation_id", null: false
+    t.uuid "manifestation_id", null: false
     t.boolean "primary"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -541,7 +542,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "isbn_record_and_manifestations", force: :cascade do |t|
     t.bigint "isbn_record_id", null: false
-    t.bigint "manifestation_id", null: false
+    t.uuid "manifestation_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -560,7 +561,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "issn_record_and_manifestations", force: :cascade do |t|
     t.bigint "issn_record_id", null: false
-    t.bigint "manifestation_id", null: false
+    t.uuid "manifestation_id", null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -572,11 +573,9 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "body", null: false
     t.string "issn_type"
     t.string "source"
-    t.bigint "manifestation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["body"], name: "index_issn_records_on_body", unique: true
-    t.index ["manifestation_id"], name: "index_issn_records_on_manifestation_id"
   end
 
   create_table "item_has_use_restrictions", force: :cascade do |t|
@@ -606,7 +605,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "binding_item_identifier"
     t.string "binding_call_number"
     t.datetime "binded_at"
-    t.bigint "manifestation_id", null: false
+    t.uuid "manifestation_id", null: false
     t.index ["binding_item_identifier"], name: "index_items_on_binding_item_identifier"
     t.index ["bookstore_id"], name: "index_items_on_bookstore_id"
     t.index ["item_identifier"], name: "index_items_on_item_identifier", unique: true
@@ -725,8 +724,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   create_table "manifestation_relationships", force: :cascade do |t|
-    t.bigint "parent_id", null: false
-    t.bigint "child_id", null: false
+    t.uuid "parent_id", null: false
+    t.uuid "child_id", null: false
     t.bigint "manifestation_relationship_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -735,7 +734,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["parent_id"], name: "index_manifestation_relationships_on_parent_id"
   end
 
-  create_table "manifestations", force: :cascade do |t|
+  create_table "manifestations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.text "original_title", null: false
     t.text "title_alternative"
     t.text "title_transcription"
@@ -940,7 +939,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "produces", force: :cascade do |t|
     t.bigint "agent_id", null: false
-    t.bigint "manifestation_id", null: false
+    t.uuid "manifestation_id", null: false
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -979,7 +978,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "realizes", force: :cascade do |t|
     t.bigint "agent_id", null: false
-    t.bigint "expression_id", null: false
+    t.uuid "expression_id", null: false
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1153,14 +1152,14 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.text "title_transcription"
     t.text "title_alternative"
     t.string "series_statement_identifier"
-    t.bigint "manifestation_id"
+    t.uuid "manifestation_id"
     t.text "note"
     t.text "title_subseries_transcription"
     t.text "creator_string"
     t.text "volume_number_string"
     t.text "volume_number_transcription_string"
     t.boolean "series_master"
-    t.integer "root_manifestation_id"
+    t.uuid "root_manifestation_id"
     t.index ["manifestation_id"], name: "index_series_statements_on_manifestation_id"
     t.index ["root_manifestation_id"], name: "index_series_statements_on_root_manifestation_id"
     t.index ["series_statement_identifier"], name: "index_series_statements_on_series_statement_identifier"
@@ -1210,7 +1209,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "url"
-    t.bigint "manifestation_id"
+    t.uuid "manifestation_id"
     t.bigint "subject_heading_type_id"
     t.index ["manifestation_id"], name: "index_subjects_on_manifestation_id"
     t.index ["parent_id"], name: "index_subjects_on_parent_id"
@@ -1223,7 +1222,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
 
   create_table "subscribes", force: :cascade do |t|
     t.bigint "subscription_id", null: false
-    t.bigint "work_id", null: false
+    t.uuid "work_id", null: false
     t.datetime "start_at", null: false
     t.datetime "end_at", null: false
     t.datetime "created_at", null: false
@@ -1290,6 +1289,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.integer "number_of_day_to_notify_overdue", default: 1, null: false
     t.integer "number_of_day_to_notify_due_date", default: 7, null: false
     t.integer "number_of_time_to_notify_overdue", default: 3, null: false
+    t.index ["name"], name: "index_user_groups_on_name", unique: true
   end
 
   create_table "user_has_roles", force: :cascade do |t|
@@ -1404,6 +1404,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "agent_relationships", "agents", column: "child_id"
   add_foreign_key "agent_relationships", "agents", column: "parent_id"
   add_foreign_key "agents", "profiles"
+  add_foreign_key "baskets", "users"
   add_foreign_key "checked_items", "baskets"
   add_foreign_key "checked_items", "items"
   add_foreign_key "checked_items", "users"
@@ -1411,6 +1412,8 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "checkins", "users", column: "librarian_id"
   add_foreign_key "classifications", "classifications", column: "parent_id"
   add_foreign_key "classifications", "manifestations"
+  add_foreign_key "colors", "library_groups"
+  add_foreign_key "creates", "manifestations", column: "work_id"
   add_foreign_key "demands", "items"
   add_foreign_key "demands", "messages"
   add_foreign_key "demands", "users"
@@ -1426,7 +1429,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "isbn_record_and_manifestations", "manifestations"
   add_foreign_key "issn_record_and_manifestations", "issn_records"
   add_foreign_key "issn_record_and_manifestations", "manifestations"
-  add_foreign_key "issn_records", "manifestations"
   add_foreign_key "item_has_use_restrictions", "items"
   add_foreign_key "item_has_use_restrictions", "use_restrictions"
   add_foreign_key "items", "bookstores"
@@ -1438,17 +1440,27 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "manifestation_relationships", "manifestations", column: "child_id"
   add_foreign_key "manifestation_relationships", "manifestations", column: "parent_id"
   add_foreign_key "messages", "messages", column: "parent_id"
+  add_foreign_key "produces", "agents"
+  add_foreign_key "produces", "manifestations"
+  add_foreign_key "realizes", "manifestations", column: "expression_id"
   add_foreign_key "resource_export_files", "users"
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "resource_import_results", "resource_import_files"
   add_foreign_key "series_statement_merges", "series_statement_merge_lists"
   add_foreign_key "series_statement_merges", "series_statements"
   add_foreign_key "series_statements", "manifestations"
+  add_foreign_key "shelves", "libraries"
   add_foreign_key "subjects", "manifestations"
   add_foreign_key "subjects", "subjects", column: "parent_id"
+  add_foreign_key "subscribes", "manifestations", column: "work_id"
   add_foreign_key "subscribes", "subscriptions"
+  add_foreign_key "subscriptions", "users"
+  add_foreign_key "user_export_files", "users"
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
+  add_foreign_key "user_import_files", "users"
+  add_foreign_key "user_import_results", "user_import_files"
+  add_foreign_key "user_import_results", "users"
   add_foreign_key "users", "profiles", on_delete: :cascade
   add_foreign_key "withdraws", "baskets"
   add_foreign_key "withdraws", "items"

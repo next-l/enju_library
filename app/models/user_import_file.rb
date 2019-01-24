@@ -187,7 +187,7 @@ class UserImportFile < ActiveRecord::Base
     rows.each do |row|
       row_num += 1
       username = row['username'].to_s.strip
-      remove_user = User.where(username: username).first
+      remove_user = User.find_by(username: username)
       if remove_user.try(:deletable_by?, user)
         UserImportFile.transaction do
           remove_user.destroy
