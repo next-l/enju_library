@@ -1396,7 +1396,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   end
 
   add_foreign_key "accepts", "baskets"
-  add_foreign_key "accepts", "items"
   add_foreign_key "accepts", "users", column: "librarian_id"
   add_foreign_key "agent_import_files", "users"
   add_foreign_key "agent_import_results", "agent_import_files"
@@ -1462,6 +1461,5 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "user_import_results", "users"
   add_foreign_key "users", "profiles", on_delete: :cascade
   add_foreign_key "withdraws", "baskets"
-  add_foreign_key "withdraws", "items"
   add_foreign_key "withdraws", "users", column: "librarian_id"
 end
