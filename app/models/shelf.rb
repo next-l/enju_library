@@ -34,7 +34,7 @@ class Shelf < ActiveRecord::Base
   end
 
   def self.web
-    Shelf.find(1)
+    Shelf.find_by(name: 'web')
   end
 
   def localized_display_name
@@ -53,7 +53,7 @@ end
 #
 # Table name: shelves
 #
-#  id           :bigint(8)        not null, primary key
+#  id           :uuid             not null, primary key
 #  name         :string           not null
 #  display_name :jsonb            not null
 #  note         :text
