@@ -29,7 +29,7 @@ class Shelf < ActiveRecord::Base
   paginates_per 10
 
   def web_shelf?
-    return true if id == 1
+    return true if name == 'web'
     false
   end
 

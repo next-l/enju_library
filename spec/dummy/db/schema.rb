@@ -454,16 +454,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["place_id"], name: "index_events_on_place_id"
   end
 
-  create_table "exemplifies", id: :serial, force: :cascade do |t|
-    t.integer "manifestation_id", null: false
-    t.integer "item_id", null: false
-    t.integer "position"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["item_id"], name: "index_exemplifies_on_item_id", unique: true
-    t.index ["manifestation_id"], name: "index_exemplifies_on_manifestation_id"
-  end
-
   create_table "extents", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
@@ -592,7 +582,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "item_identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "shelf_id"
+    t.uuid "shelf_id"
     t.boolean "include_supplements", default: false, null: false
     t.text "note"
     t.string "url"
@@ -847,7 +837,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.string "to_state"
     t.jsonb "metadata", default: {}
     t.integer "sort_key"
-    t.bigint "message_id"
+    t.uuid "message_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "most_recent", null: false
@@ -1165,7 +1155,7 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["series_statement_identifier"], name: "index_series_statements_on_series_statement_identifier"
   end
 
-  create_table "shelves", force: :cascade do |t|
+  create_table "shelves", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.jsonb "display_name", default: {}, null: false
     t.text "note"

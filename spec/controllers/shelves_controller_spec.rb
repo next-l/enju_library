@@ -65,15 +65,15 @@ describe ShelvesController do
       login_fixture_admin
 
       it 'assigns the requested shelf as @shelf' do
-        get :show, params: { id: 1 }
-        assigns(:shelf).should eq(Shelf.find(1))
+        get :show, params: { id: shelves(:shelf_00001).id }
+        assigns(:shelf).should eq(shelves(:shelf_00001))
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested shelf as @shelf' do
-        get :show, params: { id: 1 }
-        assigns(:shelf).should eq(Shelf.find(1))
+        get :show, params: { id: shelves(:shelf_00001).id }
+        assigns(:shelf).should eq(shelves(:shelf_00001))
       end
     end
   end
@@ -393,7 +393,7 @@ describe ShelvesController do
       end
 
       it 'should not destroy a shelf that has id 1' do
-        delete :destroy, params: { id: 1 }
+        delete :destroy, params: { id: shelves(:shelf_00001).id }
         response.should be_forbidden
       end
     end
