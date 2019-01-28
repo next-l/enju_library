@@ -1,7 +1,7 @@
 class Shelf < ActiveRecord::Base
   include MasterModel
   extend Mobility
-  scope :real, -> { where('library_id != 1') }
+  scope :real, -> { where('library_id != ?', 'web') }
   belongs_to :library, validate: true
   has_many :items
   has_many :picture_files, as: :picture_attachable, dependent: :destroy
