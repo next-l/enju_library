@@ -2,7 +2,7 @@ class Library < ActiveRecord::Base
   include MasterModel
   extend Mobility
   default_scope { order('libraries.position') }
-  scope :real, -> { where('id != 1') }
+  scope :real, -> { where('name != ?', 'web') }
   has_many :shelves
   belongs_to :library_group, validate: true
   has_many :profiles
@@ -30,20 +30,6 @@ class Library < ActiveRecord::Base
   validates :isil, format: { with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/ }, allow_blank: true
   after_validation :geocode, if: :address_changed?
   after_create :create_shelf
-  after_save :clear_all_cache
-  after_destroy :clear_all_cache
-
-  def self.all_cache
-    if Rails.env == 'production'
-      Rails.cache.fetch('library_all'){ Library.all }
-    else
-      Library.all
-    end
-  end
-
-  def clear_all_cache
-    Rails.cache.delete('library_all')
-  end
 
   def create_shelf
     shelf = Shelf.new
@@ -53,12 +39,12 @@ class Library < ActiveRecord::Base
   end
 
   def web?
-    return true if id == 1
+    return true if name == 'web'
     false
   end
 
   def self.web
-    Library.find(1)
+    Library.find_by(name: 'web')
   end
 
   def address(locale = I18n.locale)
@@ -94,7 +80,7 @@ end
 #
 # Table name: libraries
 #
-#  id                    :bigint(8)        not null, primary key
+#  id                    :uuid             not null, primary key
 #  name                  :string           not null
 #  display_name          :jsonb            not null
 #  short_display_name    :string           not null

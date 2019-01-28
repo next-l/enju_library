@@ -348,6 +348,6 @@ end
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  user_encoding            :string
-#  default_library_id       :bigint(8)
+#  default_library_id       :uuid
 #  default_user_group_id    :uuid
 #

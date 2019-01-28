@@ -140,7 +140,7 @@ describe UserImportFilesController do
       it 'should create agent_import_file' do
         post :create, params: { user_import_file: {
           user_import: fixture_file_upload('/../../examples/user_import_file_sample.tsv', 'text/csv'),
-          default_library_id: 1,
+          default_library_id: libraries(:library_00001).id,
           default_user_group_id: user_groups(:user_group_00001).id
         }}
         assigns(:user_import_file).should be_valid
@@ -221,8 +221,8 @@ describe UserImportFilesController do
         user_import_file = UserImportFile.create!(
           user_import: fixture_file_upload('/../../examples/user_import_file_sample.tsv', 'text/csv'),
           user: users(:admin),
-          default_library_id: 1,
-          default_user_group_id: user_groups(:user_group_00001).id
+          default_library: libraries(:library_00001),
+          default_user_group: user_groups(:user_group_00001)
         )
         put :update, params: { id: user_import_file.id, user_import_file: { note: 'test' } }
         expect(response).to redirect_to user_import_file_url(assigns(:user_import_file))
@@ -236,8 +236,8 @@ describe UserImportFilesController do
         user_import_file = UserImportFile.create!(
           user_import: fixture_file_upload('/../../examples/user_import_file_sample.tsv', 'text/csv'),
           user: users(:admin),
-          default_library_id: 1,
-          default_user_group_id: user_groups(:user_group_00001).id
+          default_library: libraries(:library_00001),
+          default_user_group: user_groups(:user_group_00001)
         )
         put :update, params: { id: user_import_file.id, user_import_file: { note: 'test' } }
         expect(response).to redirect_to user_import_file_url(assigns(:user_import_file))
