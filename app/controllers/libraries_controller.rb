@@ -30,7 +30,10 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
-    super
+    begin
+      super
+    rescue NoMethodError
+    end
 
     respond_to do |format|
       format.html # show.html.erb
