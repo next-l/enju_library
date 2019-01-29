@@ -360,101 +360,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.index ["item_id"], name: "index_donates_on_item_id"
   end
 
-  create_table "event_categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
-    t.text "note"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "event_export_file_transitions", force: :cascade do |t|
-    t.string "to_state"
-    t.jsonb "metadata", default: {}
-    t.integer "sort_key"
-    t.bigint "event_export_file_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "most_recent", null: false
-    t.index ["event_export_file_id", "most_recent"], name: "index_event_export_file_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index ["event_export_file_id"], name: "index_event_export_file_transitions_on_event_export_file_id"
-    t.index ["sort_key", "event_export_file_id"], name: "index_event_export_file_transitions_on_sort_key_and_file_id", unique: true
-  end
-
-  create_table "event_export_files", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "event_export_file_name"
-    t.string "event_export_content_type"
-    t.bigint "event_export_file_size"
-    t.datetime "event_export_updated_at"
-    t.datetime "executed_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_event_export_files_on_user_id"
-  end
-
-  create_table "event_import_file_transitions", force: :cascade do |t|
-    t.string "to_state"
-    t.jsonb "metadata", default: {}
-    t.integer "sort_key"
-    t.bigint "event_import_file_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "most_recent", null: false
-    t.index ["event_import_file_id", "most_recent"], name: "index_event_import_file_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index ["event_import_file_id"], name: "index_event_import_file_transitions_on_event_import_file_id"
-    t.index ["sort_key", "event_import_file_id"], name: "index_event_import_file_transitions_on_sort_key_and_file_id", unique: true
-  end
-
-  create_table "event_import_files", force: :cascade do |t|
-    t.bigint "user_id"
-    t.text "note"
-    t.datetime "executed_at"
-    t.string "event_import_file_name"
-    t.string "event_import_content_type"
-    t.integer "event_import_file_size"
-    t.datetime "event_import_updated_at"
-    t.string "edit_mode"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "event_import_fingerprint"
-    t.text "error_message"
-    t.string "user_encoding"
-    t.bigint "default_library_id"
-    t.bigint "default_event_category_id"
-    t.index ["default_event_category_id"], name: "index_event_import_files_on_default_event_category_id"
-    t.index ["default_library_id"], name: "index_event_import_files_on_default_library_id"
-    t.index ["user_id"], name: "index_event_import_files_on_user_id"
-  end
-
-  create_table "event_import_results", force: :cascade do |t|
-    t.bigint "event_import_file_id"
-    t.bigint "event_id"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_event_import_results_on_event_id"
-    t.index ["event_import_file_id"], name: "index_event_import_results_on_event_import_file_id"
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.uuid "library_id", null: false
-    t.bigint "event_category_id", null: false
-    t.string "name", null: false
-    t.text "note"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.boolean "all_day", default: false, null: false
-    t.jsonb "display_name", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "place_id"
-    t.index ["event_category_id"], name: "index_events_on_event_category_id"
-    t.index ["library_id"], name: "index_events_on_library_id"
-    t.index ["place_id"], name: "index_events_on_place_id"
-  end
-
   create_table "extents", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
@@ -874,16 +779,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
     t.datetime "updated_at", null: false
     t.index ["agent_id"], name: "index_owns_on_agent_id"
     t.index ["item_id"], name: "index_owns_on_item_id"
-  end
-
-  create_table "participates", force: :cascade do |t|
-    t.bigint "agent_id", null: false
-    t.bigint "event_id", null: false
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_participates_on_agent_id"
-    t.index ["event_id"], name: "index_participates_on_event_id"
   end
 
   create_table "picture_files", force: :cascade do |t|
@@ -1411,10 +1306,6 @@ ActiveRecord::Schema.define(version: 2019_01_02_034126) do
   add_foreign_key "doi_records", "manifestations"
   add_foreign_key "donates", "agents"
   add_foreign_key "donates", "items"
-  add_foreign_key "event_export_files", "users"
-  add_foreign_key "event_import_files", "users"
-  add_foreign_key "events", "event_categories"
-  add_foreign_key "events", "libraries"
   add_foreign_key "identifiers", "manifestations"
   add_foreign_key "import_requests", "manifestations"
   add_foreign_key "import_requests", "users"

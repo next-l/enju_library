@@ -30,17 +30,7 @@ class LibrariesController < ApplicationController
   # GET /libraries/1
   # GET /libraries/1.json
   def show
-    if defined?(EnjuEvent)
-      search = Sunspot.new_search(Event)
-      library_id = @library.id
-      search.build do
-        with(:library_id).equal_to library_id
-        order_by(:start_at, :desc)
-      end
-      page = params[:event_page] || 1
-      search.query.paginate(page.to_i, Event.default_per_page)
-      @events = search.execute!.results
-    end
+    super
 
     respond_to do |format|
       format.html # show.html.erb

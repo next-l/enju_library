@@ -61,16 +61,6 @@ class Library < ActiveRecord::Base
     false
   end
 
-  if defined?(EnjuEvent)
-    has_many :events
-
-    def closed?(date)
-      events.closing_days.map{ |c|
-        c.start_at.beginning_of_day
-      }.include?(date.beginning_of_day)
-    end
-  end
-
   if defined?(EnjuInterLibraryLoan)
     has_many :inter_library_loans, foreign_key: 'borrowing_library_id'
   end
