@@ -5,10 +5,13 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :display_name %><br />
-    <%= f.text_area :display_name %>
-  </div>
+  <% I18n.available_locales.each do |locale| %>
+    <div class="field">
+      <% display_name = "display_name_#{locale.to_s}" %>
+      <%= f.label :display_name -%> (<%= locale.to_s %>)<br />
+      <%= f.text_field display_name -%>
+    </div>
+  <% end %>
   <div class="field">
     <%= f.label :valid_period_for_new_user %><br />
     <%= f.text_field :valid_period_for_new_user, class: 'resource_integer' %>

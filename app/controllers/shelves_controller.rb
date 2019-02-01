@@ -149,7 +149,10 @@ class ShelvesController < ApplicationController
 
   def shelf_params
     params.require(:shelf).permit(
-      :name, :display_name, :note, :library_id, :closed
+      :name, :display_name, :note, :library_id, :closed,
+      I18n.available_locales.map{|locale|
+        :"display_name_#{locale.to_s}"
+      }
     )
   end
 end

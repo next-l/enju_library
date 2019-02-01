@@ -95,6 +95,11 @@ class RequestTypesController < ApplicationController
   end
 
   def request_type_params
-    params.require(:request_type).permit(:name, :display_name, :note)
+    params.require(:request_type).permit(
+      :name, :display_name, :note,
+      I18n.available_locales.map{|locale|
+        :"display_name_#{locale.to_s}"
+      }
+    )
   end
 end

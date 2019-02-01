@@ -103,6 +103,9 @@ class UserGroupsController < ApplicationController
       :number_of_day_to_notify_overdue,
       :number_of_day_to_notify_due_date,
       :number_of_time_to_notify_overdue,
+      I18n.available_locales.map{|locale|
+        :"display_name_#{locale.to_s}"
+      },
       # EnjuCirculation
       {user_group_has_checkout_types_attributes: [
         :id, :checkout_type_id, :checkout_limit, :checkout_period, :checkout_renewal_limit,
