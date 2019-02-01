@@ -12,10 +12,13 @@
     <%= f.text_area :short_display_name, class: 'resource_textarea' -%>
   </div>
 
-  <div class="field">
-    <%= f.label :display_name -%><br />
-    <%= f.text_area :display_name, class: 'resource_textarea' -%>
-  </div>
+  <% I18n.available_locales.each do |locale| %>
+    <div class="field">
+      <% display_name = "display_name_#{locale.to_s}" %>
+      <%= f.label :display_name -%> (<%= locale.to_s %>)<br />
+      <%= f.text_field display_name -%>
+    </div>
+  <% end %>
 
   <% unless @library.web? %>
   <div class="field">

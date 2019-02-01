@@ -1,9 +1,8 @@
+# frozen_string_literal: true
+
 module EnjuLibrary
   module EnjuItem
     extend ActiveSupport::Concern
-
-    included do
-    end
 
     def shelf_name
       shelf.name

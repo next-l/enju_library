@@ -82,10 +82,11 @@ class LibraryGroupsController < ApplicationController
       :book_jacket_source, :screenshot_generator, :erms_url,
       :header_logo, :delete_header_logo,
       :allow_bookmark_external_url, # EnjuBookmark
-      I18n.available_locales.map{|l|
+      I18n.available_locales.map{|locale|
         [
-          :"login_banner_#{Mobility.normalize_locale(l)}",
-          :"footer_banner_#{Mobility.normalize_locale(l)}"
+          :"display_name_#{locale.to_s}",
+          :"login_banner_#{locale.to_s}",
+          :"footer_banner_#{locale.to_s}"
         ]
       },
       {
