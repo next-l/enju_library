@@ -13,6 +13,8 @@ namespace :enju_library do
       next if basename == 'library_groups'
       ActiveRecord::FixtureSet.create_fixtures('db/fixtures/enju_library', basename)
     end
+    Shelf.create!(name: 'web', library: Library.find_by(name: 'web'))
+    Shelf.create!(name: 'first_shelf', library: Library.find_by(name: 'yours'))
   end
 
   desc "upgrade enju_library"
