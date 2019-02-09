@@ -197,12 +197,14 @@ class UserImportFile < ActiveRecord::Base
   # インポート作業用のファイルを読み込みます。
   # @param [File] tempfile 作業用のファイル
   def open_import_file
-    tempfile = Tempfile.open do |f|
-      f.binmode
-      f.write ActiveStorage::Blob.service.download(user_import.key)
-      f
+    byte = ActiveStorage::Blob.service.download(user_import.key)
+    if defined?(CharlockHolmes)
+      string = CharlockHolmes::Converter.convert(byte, user_encoding || byte.detect_encoding[:encoding], 'utf-8')
+    else
+      string = NKF.nkf("--ic=#{user_encoding || NKF.guess(byte).to_s} --oc=utf-8", byte)
     end
-    file = CSV.open(tempfile.path, 'r:utf-8', col_sep: "\t")
+
+    rows = CSV.parse(string, col_sep: "\t", encoding: 'utf-8', headers: true)
     header_columns = %w(
       username role email password user_group user_number expired_at
       full_name full_name_transcription required_role locked
@@ -218,16 +220,12 @@ class UserImportFile < ActiveRecord::Base
       header_columns += %w(share_bookmarks)
     end
 
-    header = file.first
-    ignored_columns = header - header_columns
+    ignored_columns = rows.headers - header_columns
     unless ignored_columns.empty?
       self.error_message = I18n.t('import.following_column_were_ignored', column: ignored_columns.join(', '))
       save!
     end
-    rows = CSV.read(tempfile.path, 'r:utf-8', headers: header, col_sep: "\t")
-    UserImportResult.create!(user_import_file_id: id, body: header.join("\t"))
-    tempfile.close(true)
-    rows.delete(0)
+    UserImportResult.create!(user_import_file_id: id, body: rows.headers.join("\t"))
     rows
   end
 
