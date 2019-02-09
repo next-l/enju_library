@@ -5,27 +5,7 @@ class UserImportFile < ActiveRecord::Base
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 
-  if ENV['ENJU_STORAGE'] == 's3'
-    has_attached_file :user_import, storage: :s3,
-      s3_credentials: {
-        access_key: ENV['AWS_ACCESS_KEY_ID'],
-        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-        bucket: ENV['S3_BUCKET_NAME'],
-        s3_host_name: ENV['S3_HOST_NAME']
-      },
-      s3_permissions: :private
-  else
-    has_attached_file :user_import,
-      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
-  end
-  validates_attachment_content_type :user_import, content_type: [
-    'text/csv',
-    'text/plain',
-    'text/tab-separated-values',
-    'application/octet-stream',
-    'application/vnd.ms-excel'
-  ]
-  validates_attachment_presence :user_import
+  has_one_attached :user_import
   belongs_to :user
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
@@ -46,7 +26,7 @@ class UserImportFile < ActiveRecord::Base
   def import
     transition_to!(:started)
     num = { user_imported: 0, user_found: 0, failed: 0, error: 0 }
-    rows = open_import_file(create_import_temp_file(user_import))
+    rows = open_import_file
     row_num = 1
 
     field = rows.first
@@ -128,7 +108,7 @@ class UserImportFile < ActiveRecord::Base
   def modify
     transition_to!(:started)
     num = { user_updated: 0, user_not_found: 0, failed: 0 }
-    rows = open_import_file(create_import_temp_file(user_import))
+    rows = open_import_file
     row_num = 1
 
     field = rows.first
@@ -177,7 +157,7 @@ class UserImportFile < ActiveRecord::Base
   def remove
     transition_to!(:started)
     row_num = 1
-    rows = open_import_file(create_import_temp_file(user_import))
+    rows = open_import_file
 
     field = rows.first
     if [field['username']].reject{ |f| f.to_s.strip == "" }.empty?
@@ -216,7 +196,12 @@ class UserImportFile < ActiveRecord::Base
 
   # インポート作業用のファイルを読み込みます。
   # @param [File] tempfile 作業用のファイル
-  def open_import_file(tempfile)
+  def open_import_file
+    tempfile = Tempfile.open do |f|
+      f.binmode
+      f.write ActiveStorage::Blob.service.download(user_import.key)
+      f
+    end
     file = CSV.open(tempfile.path, 'r:utf-8', col_sep: "\t")
     header_columns = %w(
       username role email password user_group user_number expired_at

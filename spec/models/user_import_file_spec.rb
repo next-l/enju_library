@@ -6,11 +6,11 @@ describe UserImportFile do
   describe "when its mode is 'create'" do
     before(:each) do
       @file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"),
         default_user_group: UserGroup.find_by(name: 'user'),
         default_library: libraries(:library_00003),
         user: users(:admin)
       )
+      @file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
     end
 
     it "should be imported" do
@@ -67,7 +67,7 @@ describe UserImportFile do
       user006.profile.user_number.should be_nil
       user006.profile.user_group.name.should eq UserGroup.find_by(name: 'user').name
 
-      @file.user_import_fingerprint.should be_truthy
+      @file.user_import.checksum.should be_truthy
       @file.executed_at.should be_truthy
 
       @file.reload
@@ -104,11 +104,11 @@ describe UserImportFile do
 
     it "should update users" do
       @file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file.tsv"),
         user: users(:admin),
         default_library: libraries(:library_00001),
         default_user_group: user_groups(:user_group_00001)
       )
+      @file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file.tsv"), filename: 'attachment.txt')
       old_message_count = Message.count
       result = @file.modify
       result.should have_key(:user_updated)
@@ -134,11 +134,11 @@ describe UserImportFile do
         date_of_birth: 10.years.ago)
       user.save
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find_by(name: 'user'),
         default_library: libraries(:library_00003)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
@@ -151,11 +151,11 @@ describe UserImportFile do
 
     it "should update user_number" do
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find_by(name: 'user'),
         default_library: libraries(:library_00003)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
@@ -164,11 +164,11 @@ describe UserImportFile do
 
     it "should update user's lock status" do
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find_by(name: 'user'),
         default_library: libraries(:library_00003)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
@@ -179,22 +179,22 @@ describe UserImportFile do
   describe "when its mode is 'destroy'" do
     before(:each) do
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find_by(name: 'user'),
         default_library: libraries(:library_00003)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
       file.import_start
     end
 
     it "should remove users" do
       old_count = User.count
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find_by(name: 'user'),
         default_library: libraries(:library_00003)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"), filename: 'attachment.txt')
       old_message_count = Message.count
       file.remove
       User.count.should eq old_count - 3
@@ -204,11 +204,11 @@ describe UserImportFile do
 
   it "should import in background" do
     file = UserImportFile.create!(
-      user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"),
       user: users(:admin),
       default_user_group: UserGroup.find_by(name: 'user'),
       default_library: libraries(:library_00003)
     )
+    file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
     UserImportFileJob.perform_later(file).should be_truthy
   end
 end

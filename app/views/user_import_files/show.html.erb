@@ -11,13 +11,13 @@
 <% if @user_import_file.user_import_file_name %>
 <p>
   <strong><%= t('activerecord.attributes.user_import_file.user_import_file_name') -%>:</strong>
-  <%= link_to @user_import_file.user_import_file_name, user_import_file_path(@user_import_file, format: :download) %>
-  (<%= @user_import_file.user_import_content_type -%>)
+  <%= link_to @user_import_file.user_import.filename, url_for(@user_import_file.user_import) %>
+  (<%= @user_import_file.user_import.content_type -%>)
 </p>
 
 <p>
   <strong><%= t('activerecord.attributes.user_import_file.user_import_file_size') -%>:</strong>
-  <%= @user_import_file.user_import_file_size -%>
+  <%= @user_import_file.user_import.byte_size -%>
 </p>
 <% end %>
 

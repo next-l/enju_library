@@ -15,11 +15,11 @@ describe UserImportResultsController do
       describe 'With @user_import_file parameter' do
         before(:each) do
           @file = UserImportFile.create!(
-            user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample_long.tsv"),
             user: users(:admin),
             default_user_group: UserGroup.find_by(name: 'user'),
             default_library: libraries(:library_00003)
           )
+          @file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample_long.tsv"), filename: 'attachment.txt')
           @file.import_start
         end
         render_views
