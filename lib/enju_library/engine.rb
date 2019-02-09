@@ -1,6 +1,5 @@
 require 'enju_seed'
 require 'paper_trail'
-require 'paperclip'
 require 'mini_magick'
 require 'statesman'
 require 'geocoder'

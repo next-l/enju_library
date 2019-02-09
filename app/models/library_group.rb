@@ -86,10 +86,6 @@ end
 #  pub_year_facet_range_interval :integer          default(10)
 #  user_id                       :bigint(8)
 #  csv_charset_conversion        :boolean          default(FALSE), not null
-#  header_logo_file_name         :string
-#  header_logo_content_type      :string
-#  header_logo_file_size         :bigint(8)
-#  header_logo_updated_at        :datetime
 #  header_logo_meta              :text
 #  login_banner                  :jsonb            not null
 #  footer_banner                 :jsonb            not null
