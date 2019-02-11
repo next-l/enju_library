@@ -19,7 +19,6 @@ class UserExportFilesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user_export_file }
-      format.download
     end
   end
 

@@ -22,7 +22,6 @@ class UserImportFilesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user_import_file }
-      format.download
     end
   end
 
