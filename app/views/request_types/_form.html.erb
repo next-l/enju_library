@@ -3,7 +3,7 @@
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required: true %>
   </div>
   <% I18n.available_locales.each do |locale| %>
     <div class="field">
