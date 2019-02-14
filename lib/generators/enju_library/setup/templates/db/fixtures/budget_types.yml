@@ -1,4 +1,4 @@
 default:
   name: default
-  display_name: {"en": "Default", "ja": "既定の予算"}
+  display_name_translations: {"en": "Default", "ja": "既定の予算"}
   position: 1
