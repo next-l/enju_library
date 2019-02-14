@@ -14,16 +14,16 @@ end
 #
 # Table name: search_engines
 #
-#  id               :bigint(8)        not null, primary key
-#  name             :string           not null
-#  display_name     :jsonb            not null
-#  url              :string           not null
-#  base_url         :text             not null
-#  http_method      :text             not null
-#  query_param      :text             not null
-#  additional_param :text
-#  note             :text
-#  position         :integer          default(1), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id                        :bigint(8)        not null, primary key
+#  name                      :string           not null
+#  display_name_translations :jsonb            not null
+#  url                       :string           not null
+#  base_url                  :text             not null
+#  http_method               :text             not null
+#  query_param               :text             not null
+#  additional_param          :text
+#  note                      :text
+#  position                  :integer          default(1), not null
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #

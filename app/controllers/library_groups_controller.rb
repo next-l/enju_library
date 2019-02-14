@@ -50,7 +50,7 @@ class LibraryGroupsController < ApplicationController
 
   def set_library_group
     @library_group = LibraryGroup.find(params[:id])
-    if request.format == :download
+    unless request.format.html?
       authorize @library_group, :show_logo?
     else
       authorize @library_group

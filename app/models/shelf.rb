@@ -1,6 +1,5 @@
 class Shelf < ActiveRecord::Base
   include MasterModel
-  extend Mobility
   scope :real, -> { includes(:library).references(:library).where('libraries.name != ?', 'web') }
   belongs_to :library, validate: true
   has_many :items
@@ -8,7 +7,7 @@ class Shelf < ActiveRecord::Base
 
   validates_associated :library
   validates :library, presence: true
-  validates_uniqueness_of :display_name, scope: :library_id
+  # validates_uniqueness_of :display_name, scope: :library_id
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
   before_update :reset_position
 
@@ -21,7 +20,7 @@ class Shelf < ActiveRecord::Base
       library.name
     end
     text :name do
-      [name, library.name, display_name, library.display_name]
+      [name, library.name, display_name, library.display_name_translations]
     end
     integer :position
   end
@@ -53,14 +52,14 @@ end
 #
 # Table name: shelves
 #
-#  id           :uuid             not null, primary key
-#  name         :string           not null
-#  display_name :jsonb            not null
-#  note         :text
-#  library_id   :uuid             not null
-#  items_count  :integer          default(0), not null
-#  position     :integer          default(1), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  closed       :boolean          default(FALSE), not null
+#  id                        :uuid             not null, primary key
+#  name                      :string           not null
+#  display_name_translations :jsonb            not null
+#  note                      :text
+#  library_id                :uuid             not null
+#  items_count               :integer          default(0), not null
+#  position                  :integer          default(1), not null
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#  closed                    :boolean          default(FALSE), not null
 #

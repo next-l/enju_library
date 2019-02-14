@@ -1,7 +1,6 @@
 class LibraryGroup < ActiveRecord::Base
   #include Singleton
   include MasterModel
-  extend Mobility
 
   has_many :libraries
   has_many :colors
@@ -66,7 +65,7 @@ end
 #
 #  id                            :bigint(8)        not null, primary key
 #  name                          :string           not null
-#  display_name                  :jsonb            not null
+#  display_name_translations     :jsonb            not null
 #  short_name                    :string           not null
 #  my_networks                   :text
 #  old_login_banner              :text
@@ -87,6 +86,6 @@ end
 #  user_id                       :bigint(8)
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_meta              :text
-#  login_banner                  :jsonb            not null
-#  footer_banner                 :jsonb            not null
+#  login_banner_translations     :jsonb            not null
+#  footer_banner_translations    :jsonb            not null
 #

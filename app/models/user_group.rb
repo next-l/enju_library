@@ -1,6 +1,5 @@
 class UserGroup < ActiveRecord::Base
   include MasterModel
-  extend Mobility
   translates :display_name
   has_many :profiles
 
@@ -17,7 +16,7 @@ end
 #
 #  id                               :uuid             not null, primary key
 #  name                             :string           not null
-#  display_name                     :jsonb            not null
+#  display_name_translations        :jsonb            not null
 #  note                             :text
 #  position                         :integer          default(1), not null
 #  created_at                       :datetime         not null

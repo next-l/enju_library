@@ -14,7 +14,6 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem 'mobility', '~> 0.8'
 gem 'enju_seed', github: 'next-l/enju_seed'
 gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
@@ -24,3 +23,4 @@ gem 'enju_ndl', github: 'next-l/enju_ndl'
 gem 'enju_subject', github: 'next-l/enju_subject'
 gem 'rails-controller-testing', group: :test
 gem 'rspec_junit_formatter', group: :test
+gem 'json_translate'
