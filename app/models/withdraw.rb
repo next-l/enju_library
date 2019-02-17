@@ -15,6 +15,7 @@ class Withdraw < ActiveRecord::Base
 
   def check_item
     errors.add(:item) if item.try(:rent?)
+    errors.add(:item) if item.try(:reserved?)
   end
 end
 
