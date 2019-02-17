@@ -23,4 +23,5 @@ gem 'enju_ndl', github: 'next-l/enju_ndl'
 gem 'enju_subject', github: 'next-l/enju_subject'
 gem 'rails-controller-testing', group: :test
 gem 'rspec_junit_formatter', group: :test
+gem 'chromedriver-helper', group: :test
 gem 'json_translate'
