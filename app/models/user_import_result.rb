@@ -10,8 +10,8 @@ end
 #
 # Table name: user_import_results
 #
-#  id                  :bigint(8)        not null, primary key
-#  user_import_file_id :bigint(8)
+#  id                  :uuid             not null, primary key
+#  user_import_file_id :uuid
 #  user_id             :bigint(8)
 #  body                :text
 #  created_at          :datetime         not null
