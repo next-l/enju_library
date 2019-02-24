@@ -42,12 +42,16 @@ describe UserExportFilesController do
   end
 
   describe 'GET show' do
+    before do
+      @user_export_file = FactoryBot.create(:user_export_file)
+    end
+
     describe 'When logged in as Administrator' do
       login_fixture_admin
 
       it 'assigns the requested user_export_file as @user_export_file' do
-        get :show, params: { id: user_export_files(:user_export_file_00003).id }
-        assigns(:user_export_file).should eq(user_export_files(:user_export_file_00003))
+        get :show, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
         expect(response).to be_successful
       end
     end
@@ -56,8 +60,8 @@ describe UserExportFilesController do
       login_fixture_librarian
 
       it 'assigns the requested user_export_file as @user_export_file' do
-        get :show, params: { id: user_export_files(:user_export_file_00003).id }
-        assigns(:user_export_file).should eq(user_export_files(:user_export_file_00003))
+        get :show, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
         expect(response).to be_forbidden
       end
     end
@@ -66,16 +70,16 @@ describe UserExportFilesController do
       login_fixture_user
 
       it 'assigns the requested user_export_file as @user_export_file' do
-        get :show, params: { id: user_export_files(:user_export_file_00003).id }
-        assigns(:user_export_file).should eq(user_export_files(:user_export_file_00003))
+        get :show, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
         expect(response).to be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested user_export_file as @user_export_file' do
-        get :show, params: { id: user_export_files(:user_export_file_00003).id }
-        assigns(:user_export_file).should eq(user_export_files(:user_export_file_00003))
+        get :show, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -163,13 +167,16 @@ describe UserExportFilesController do
   end
 
   describe 'GET edit' do
+    before do
+      @user_export_file = FactoryBot.create(:user_export_file)
+    end
+
     describe 'When logged in as Administrator' do
       login_fixture_admin
 
       it 'assigns the requested user_export_file as @user_export_file' do
-        user_export_file = user_export_files(:user_export_file_00001)
-        get :edit, params: { id: user_export_file.id }
-        assigns(:user_export_file).should eq(user_export_file)
+        get :edit, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
       end
     end
 
@@ -177,8 +184,8 @@ describe UserExportFilesController do
       login_fixture_librarian
 
       it 'assigns the requested user_export_file as @user_export_file' do
-        user_export_file = user_export_files(:user_export_file_00001)
-        get :edit, params: { id: user_export_file.id }
+        get :edit, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
         expect(response).to be_forbidden
       end
     end
@@ -187,27 +194,31 @@ describe UserExportFilesController do
       login_fixture_user
 
       it 'assigns the requested user_export_file as @user_export_file' do
-        user_export_file = user_export_files(:user_export_file_00001)
-        get :edit, params: { id: user_export_file.id }
+        get :edit, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
         expect(response).to be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'should not assign the requested user_export_file as @user_export_file' do
-        user_export_file = user_export_files(:user_export_file_00001)
-        get :edit, params: { id: user_export_file.id }
+        get :edit, params: { id: @user_export_file.id }
+        assigns(:user_export_file).should eq(@user_export_file)
         expect(response).to redirect_to(new_user_session_url)
       end
     end
   end
 
   describe 'PUT update' do
+    before(:each) do
+      @user_export_file = FactoryBot.create(:user_export_file)
+    end
+
     describe 'When logged in as Administrator' do
       login_fixture_admin
 
       it 'should update user_export_file' do
-        put :update, params: { id: user_export_files(:user_export_file_00003).id, user_export_file: { mode: 'export' } }
+        put :update, params: { id: @user_export_file.id, user_export_file: { mode: 'export' } }
         expect(response).to redirect_to user_export_file_url(assigns(:user_export_file))
       end
     end
@@ -216,7 +227,7 @@ describe UserExportFilesController do
       login_fixture_librarian
 
       it 'should update user_export_file' do
-        put :update, params: { id: user_export_files(:user_export_file_00003).id, user_export_file: { mode: 'export' } }
+        put :update, params: { id: @user_export_file.id, user_export_file: { mode: 'export' } }
         expect(response).to be_forbidden
       end
     end
@@ -225,14 +236,14 @@ describe UserExportFilesController do
       login_fixture_user
 
       it 'should not update user_export_file' do
-        put :update, params: { id: user_export_files(:user_export_file_00003).id, user_export_file: { mode: 'export' } }
+        put :update, params: { id: @user_export_file.id, user_export_file: { mode: 'export' } }
         expect(response).to be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'should not update user_export_file' do
-        put :update, params: { id: user_export_files(:user_export_file_00003).id, user_export_file: { mode: 'export' } }
+        put :update, params: { id: @user_export_file.id, user_export_file: { mode: 'export' } }
         expect(response).to redirect_to new_user_session_url
       end
     end
@@ -240,7 +251,7 @@ describe UserExportFilesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @user_export_file = user_export_files(:user_export_file_00001)
+      @user_export_file = FactoryBot.create(:user_export_file)
     end
 
     describe 'When logged in as Administrator' do

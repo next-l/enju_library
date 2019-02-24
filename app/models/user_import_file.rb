@@ -85,7 +85,7 @@ class UserImportFile < ActiveRecord::Base
     end
 
     Sunspot.commit
-    error_messages = user_import_results.order(:id).pluck(:error_message).compact
+    error_messages = user_import_results.order(:created_at).pluck(:error_message).compact
     unless error_messages.empty?
       self.error_message = '' if error_message.nil?
       self.error_message += "\n"

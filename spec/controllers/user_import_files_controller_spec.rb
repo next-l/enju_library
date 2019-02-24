@@ -42,20 +42,24 @@ describe UserImportFilesController do
   end
 
   describe 'GET show' do
+    before(:each) do
+      @user_import_file = FactoryBot.create(:user_import_file)
+    end
+
     describe 'When logged in as Administrator' do
       login_fixture_admin
 
       it 'assigns the requested user_import_file as @user_import_file' do
-        get :show, params: { id: user_import_files(:two).id }
-        assigns(:user_import_file).should eq(user_import_files(:two))
+        get :show, params: { id: @user_import_file.id }
+        assigns(:user_import_file).should eq(@user_import_file)
         expect(response).to be_successful
       end
 
       it 'assigns user_import_results' do
-        get :show, params: { id: user_import_files(:one).id }
+        get :show, params: { id: @user_import_file.id }
         expect(response).to be_successful
-        expect(assigns(:user_import_file)).to eq user_import_files(:one)
-        expect(assigns(:user_import_results)).to include user_import_results(:one)
+        expect(assigns(:user_import_file)).to eq @user_import_file
+        expect(assigns(:user_import_results)).to eq @user_import_file.user_import_results
       end
     end
 
@@ -63,8 +67,8 @@ describe UserImportFilesController do
       login_fixture_librarian
 
       it 'assigns the requested user_import_file as @user_import_file' do
-        get :show, params: { id: user_import_files(:two).id }
-        assigns(:user_import_file).should eq(user_import_files(:two))
+        get :show, params: { id: @user_import_file.id }
+        expect(assigns(:user_import_file)).to eq @user_import_file
         expect(response).to be_successful
       end
     end
@@ -73,16 +77,16 @@ describe UserImportFilesController do
       login_fixture_user
 
       it 'assigns the requested user_import_file as @user_import_file' do
-        get :show, params: { id: user_import_files(:two).id }
-        assigns(:user_import_file).should eq(user_import_files(:two))
+        get :show, params: { id: @user_import_file.id }
+        expect(assigns(:user_import_file)).to eq @user_import_file
         expect(response).to be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested user_import_file as @user_import_file' do
-        get :show, params: { id: user_import_files(:two).id }
-        assigns(:user_import_file).should eq(user_import_files(:two))
+        get :show, params: { id: @user_import_file.id }
+        expect(assigns(:user_import_file)).to eq @user_import_file
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -174,13 +178,16 @@ describe UserImportFilesController do
   end
 
   describe 'GET edit' do
+    before(:each) do
+      @user_import_file = FactoryBot.create(:user_import_file)
+    end
+
     describe 'When logged in as Administrator' do
       login_fixture_admin
 
       it 'assigns the requested user_import_file as @user_import_file' do
-        user_import_file = user_import_files(:one)
-        get :edit, params: { id: user_import_file.id }
-        assigns(:user_import_file).should eq(user_import_file)
+        get :edit, params: { id: @user_import_file.id }
+        assigns(:user_import_file).should eq(@user_import_file)
       end
     end
 
@@ -188,9 +195,8 @@ describe UserImportFilesController do
       login_fixture_librarian
 
       it 'assigns the requested user_import_file as @user_import_file' do
-        user_import_file = user_import_files(:one)
-        get :edit, params: { id: user_import_file.id }
-        assigns(:user_import_file).should eq(user_import_file)
+        get :edit, params: { id: @user_import_file.id }
+        assigns(:user_import_file).should eq(@user_import_file)
       end
     end
 
@@ -198,16 +204,14 @@ describe UserImportFilesController do
       login_fixture_user
 
       it 'assigns the requested user_import_file as @user_import_file' do
-        user_import_file = user_import_files(:one)
-        get :edit, params: { id: user_import_file.id }
+        get :edit, params: { id: @user_import_file.id }
         expect(response).to be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'should not assign the requested user_import_file as @user_import_file' do
-        user_import_file = user_import_files(:one)
-        get :edit, params: { id: user_import_file.id }
+        get :edit, params: { id: @user_import_file.id }
         expect(response).to redirect_to(new_user_session_url)
       end
     end
@@ -248,14 +252,14 @@ describe UserImportFilesController do
       login_fixture_user
 
       it 'should not update user_import_file' do
-        put :update, params: { id: user_import_files(:two).id, user_import_file: {} }
+        put :update, params: { id: FactoryBot.create(:user_import_file).id, user_import_file: {} }
         expect(response).to be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'should not update user_import_file' do
-        put :update, params: { id: user_import_files(:two).id, user_import_file: {} }
+        put :update, params: { id: FactoryBot.create(:user_import_file).id, user_import_file: {} }
         expect(response).to redirect_to new_user_session_url
       end
     end
@@ -263,7 +267,7 @@ describe UserImportFilesController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @user_import_file = user_import_files(:one)
+      @user_import_file = FactoryBot.create(:user_import_file)
     end
 
     describe 'When logged in as Administrator' do
