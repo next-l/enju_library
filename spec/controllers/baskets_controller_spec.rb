@@ -53,8 +53,8 @@ describe BasketsController do
       login_fixture_admin
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
       end
     end
 
@@ -62,8 +62,8 @@ describe BasketsController do
       login_fixture_librarian
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
       end
     end
 
@@ -71,16 +71,16 @@ describe BasketsController do
       login_fixture_user
 
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
         response.should be_forbidden
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested basket as @basket' do
-        get :show, params: { id: 1, user_id: users(:admin).username }
-        assigns(:basket).should eq(Basket.find(1))
+        get :show, params: { id: baskets(:basket_00001).id, user_id: users(:admin).username }
+        assigns(:basket).should eq(baskets(:basket_00001))
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -311,11 +311,11 @@ describe BasketsController do
 
       describe 'with valid params' do
         it 'updates the requested basket' do
-          put :update, params: { id: 8, basket: @attrs }
+          put :update, params: { id: baskets(:basket_00008).id, basket: @attrs }
         end
 
         it 'assigns the requested basket as @basket' do
-          put :update, params: { id: 8, basket: @attrs }
+          put :update, params: { id: baskets(:basket_00008).id, basket: @attrs }
           response.should redirect_to(assigns(:basket))
         end
       end
@@ -359,7 +359,7 @@ describe BasketsController do
       login_fixture_user
 
       it 'should not destroy basket' do
-        delete :destroy, params: { id: 3, user_id: users(:user1).username }
+        delete :destroy, params: { id: baskets(:basket_00003).id, user_id: users(:user1).username }
         response.should be_forbidden
       end
     end
