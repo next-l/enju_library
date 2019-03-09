@@ -1,11 +1,11 @@
 ---
 subscription_00001:
-  id: 1
+  id: 4ad0a9cf-e9a8-4a1e-b59c-edbb3544158c
   title: test
   user_id: 1
   order_list_id: 1
 subscription_00002:
-  id: 2
+  id: e5b97845-8061-421d-8a8d-74955d3a7edb
   title: test
   user_id: 2
   order_list_id: 2
@@ -14,7 +14,7 @@ subscription_00002:
 #
 # Table name: subscriptions
 #
-#  id               :bigint(8)        not null, primary key
+#  id               :uuid             not null, primary key
 #  title            :text             not null
 #  note             :text
 #  user_id          :bigint(8)
