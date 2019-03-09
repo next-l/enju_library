@@ -45,7 +45,6 @@ describe UserImportFile do
       user003.profile.user_number.should eq '001003'
       user003.profile.library.name.should eq 'kamata'
       user003.profile.locale.should eq 'ja'
-      user003.profile.save_search_history.should be_falsy
       #user003.profile.share_bookmarks.should be_falsy
       User.where(username: 'user000').first.should be_nil
       UserImportResult.count.should eq old_import_results_count + 10

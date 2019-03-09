@@ -859,7 +859,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "expired_at"
-    t.boolean "save_search_history"
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
     t.index ["library_id"], name: "index_profiles_on_library_id"
@@ -988,31 +987,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "search_histories", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.string "operation", default: "searchRetrieve"
-    t.float "sru_version", default: 1.2
-    t.string "query"
-    t.integer "start_record"
-    t.integer "maximum_records"
-    t.string "record_packing"
-    t.string "record_schema"
-    t.integer "result_set_ttl"
-    t.string "stylesheet"
-    t.string "extra_request_data"
-    t.integer "number_of_records", default: 0
-    t.string "result_set_id"
-    t.integer "result_set_idle_time"
-    t.text "records"
-    t.integer "next_record_position"
-    t.text "diagnostics"
-    t.text "extra_response_data"
-    t.text "echoed_search_retrieve_request"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.index ["user_id"], name: "index_search_histories_on_user_id"
   end
 
   create_table "series_statement_merge_lists", force: :cascade do |t|
@@ -1239,7 +1213,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
     t.string "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean "save_search_history", default: false, null: false
     t.string "username"
     t.datetime "expired_at"
     t.integer "failed_attempts", default: 0
