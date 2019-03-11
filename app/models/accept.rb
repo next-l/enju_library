@@ -17,7 +17,7 @@ end
 #
 # Table name: accepts
 #
-#  id           :bigint(8)        not null, primary key
+#  id           :uuid             not null, primary key
 #  basket_id    :uuid
 #  item_id      :uuid
 #  librarian_id :bigint(8)

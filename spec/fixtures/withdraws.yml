@@ -1,7 +1,7 @@
 --- 
 withdraw_00001: 
   updated_at: 2015-09-21 17:21:58.554146 +09:00
-  id: 1
+  id: e99a57d2-3f5f-47e2-87a9-c2394153141c
   librarian_id: 1
   basket_id: 64c57455-63c8-4745-b0c1-ca4afaaeac55
   item_id: 2611ea22-e022-4cab-9549-9979eb8eced7
@@ -11,7 +11,7 @@ withdraw_00001:
 #
 # Table name: withdraws
 #
-#  id           :bigint(8)        not null, primary key
+#  id           :uuid             not null, primary key
 #  basket_id    :uuid
 #  item_id      :uuid
 #  librarian_id :bigint(8)
