@@ -702,7 +702,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
     t.string "to_state"
     t.jsonb "metadata", default: {}
     t.integer "sort_key"
-    t.bigint "message_request_id"
+    t.uuid "message_request_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "most_recent", null: false
@@ -711,7 +711,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
     t.index ["sort_key", "message_request_id"], name: "index_message_request_transitions_on_sort_key_and_request_id", unique: true
   end
 
-  create_table "message_requests", force: :cascade do |t|
+  create_table "message_requests", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "sender_id"
     t.bigint "receiver_id"
     t.bigint "message_template_id"
