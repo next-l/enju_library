@@ -9,7 +9,7 @@ end
 #
 # Table name: bookstores
 #
-#  id               :bigint(8)        not null, primary key
+#  id               :uuid             not null, primary key
 #  name             :text             not null
 #  zip_code         :string
 #  address          :text
