@@ -9,8 +9,6 @@ before_script:
   - bundle exec rake db:migrate
   - bundle exec rake app:sunspot:solr:start
 services:
-  - mysql
-  - postgresql
   - redis-server
 branches:
   only: 
@@ -23,4 +21,3 @@ notifications:
   slack:
     secure: RiboVJ5+DiKFZVN4kKnSvVmbd3An1/yiHN/PENUWLCo5PNF4ZnDAcd/V/uyawiblXNcINfX7XAN32RjtCVWDNvpNcF/RAynoltg6yc15GA4Io6tGRBNxtDe6qodvFWSsSw4Wzl2eS580vXMihWvB7Rghrt3dC+ub/SP1DkfZnq8=
 sudo: false
-dist: xenial
