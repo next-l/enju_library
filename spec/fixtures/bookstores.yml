@@ -4,7 +4,7 @@ bookstore_00001:
   fax_number: 
   updated_at: 2008-02-10 11:14:57.605329 +09:00
   telephone_number: 
-  id: f41e4610-06b0-4b3b-bb88-64724fb4b0ca
+  id: 1
   note: ""
   address: ""
   created_at: 2008-02-10 11:14:57.605329 +09:00
@@ -16,7 +16,7 @@ bookstore_00002:
   fax_number: ""
   updated_at: 2008-02-10 12:15:14.840711 +09:00
   telephone_number: ""
-  id: dc253ac8-7415-40d4-ae48-9bbf4df2a3a6
+  id: 2
   note: ""
   address: ""
   created_at: 2008-02-10 11:16:02.598844 +09:00
@@ -28,7 +28,7 @@ bookstore_00003:
   fax_number: ""
   updated_at: 2008-02-10 12:15:33.555463 +09:00
   telephone_number: ""
-  id: edf9de11-f017-45d8-aa6f-052c9de33ab1
+  id: 3
   note: ""
   address: ""
   created_at: 2008-02-10 11:16:11.585284 +09:00
@@ -40,7 +40,7 @@ bookstore_00004:
   fax_number: ""
   updated_at: 2008-02-10 12:16:07.726445 +09:00
   telephone_number: ""
-  id: 316f092d-ccd3-4bbb-9cc6-b6be3488f2e2
+  id: 4
   note: ""
   address: ""
   created_at: 2008-02-10 11:16:22.565660 +09:00
@@ -52,7 +52,7 @@ bookstore_00005:
   fax_number: ""
   updated_at: 2008-02-10 12:16:17.990285 +09:00
   telephone_number: ""
-  id: 4f87e1d9-a6fd-490e-b672-0e95580e853c
+  id: 5
   note: ""
   address: ""
   created_at: 2008-02-10 12:15:44.923758 +09:00
@@ -64,7 +64,7 @@ bookstore_00006:
   fax_number: ""
   updated_at: 2008-02-10 12:16:25.906073 +09:00
   telephone_number: ""
-  id: 96e0250a-ee32-4ffc-9955-15ecada79bd9
+  id: 6
   note: ""
   address: ""
   created_at: 2008-02-10 12:15:54.558517 +09:00
@@ -74,7 +74,7 @@ bookstore_00007:
   fax_number: ""
   updated_at: 2008-02-10 12:16:25.906073 +09:00
   telephone_number: ""
-  id: f9745443-c07b-40b3-9be5-93491c973c1f
+  id: 7
   note: ""
   address: ""
   created_at: 2008-02-10 12:15:54.558517 +09:00
