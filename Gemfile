@@ -21,8 +21,10 @@ gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer'
 gem 'enju_message', github: 'next-l/enju_message'
 gem 'enju_ndl', github: 'next-l/enju_ndl'
 gem 'enju_subject', github: 'next-l/enju_subject'
-gem 'rails-controller-testing', group: :test
-gem 'rspec_junit_formatter', group: :test
-gem 'webdrivers', group: :test
 gem 'json_translate'
 gem 'sassc-rails'
+group :test do
+  gem 'rails-controller-testing'
+  gem 'rspec_junit_formatter'
+  gem 'webdrivers'
+end
