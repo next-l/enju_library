@@ -17,4 +17,5 @@ gem 'jquery-rails'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
+  gem 'webdrivers'
 end
