@@ -16,17 +16,17 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
-  s.add_dependency "enju_seed", "~> 0.3.1"
+  s.add_dependency "enju_seed", "~> 0.3.2"
   s.add_dependency "paper_trail", "~> 10.0"
   s.add_dependency "geocoder"
-  s.add_dependency "statesman", "~> 3.5"
+  s.add_dependency "statesman", "~> 4.1"
   s.add_dependency "paperclip", "~> 5.3"
   s.add_dependency "paperclip-meta"
 
   s.add_development_dependency "enju_leaf", "~> 1.3.1"
   s.add_development_dependency "enju_biblio", "~> 0.3.1"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.3.1"
-  s.add_development_dependency "enju_ndl", "~> 0.3.0"
+  s.add_development_dependency "enju_ndl", "~> 0.3.1"
   s.add_development_dependency "enju_event", "~> 0.3.1"
   s.add_development_dependency "enju_circulation", "~> 0.3.1"
   s.add_development_dependency "sqlite3"
