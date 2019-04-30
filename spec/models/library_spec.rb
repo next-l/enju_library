@@ -19,7 +19,7 @@ end
 #
 # Table name: libraries
 #
-#  id                        :uuid             not null, primary key
+#  id                        :bigint           not null, primary key
 #  name                      :string           not null
 #  display_name_translations :jsonb            not null
 #  short_display_name        :string           not null
@@ -33,10 +33,10 @@ end
 #  note                      :text
 #  call_number_rows          :integer          default(1), not null
 #  call_number_delimiter     :string           default("|"), not null
-#  library_group_id          :bigint(8)        not null
+#  library_group_id          :bigint           not null
 #  users_count               :integer          default(0), not null
 #  position                  :integer          default(1), not null
-#  country_id                :bigint(8)
+#  country_id                :bigint
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  opening_hour              :text

@@ -131,3 +131,14 @@ en:
     google: Google Books
     openbd: openBD
     hanmotocom: Hanmoto.com
+
+  user_import_mailer:
+    completed:
+      subject: 'Import completed'
+    failed:
+      subject: 'Import failed'
+  user_export_mailer:
+    completed:
+      subject: 'Export completed'
+    failed:
+      subject: 'Export failed'

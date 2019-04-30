@@ -9,7 +9,7 @@ describe UserExportFile do
     file.export!
     #UserExportFileJob.perform_later(file).should be_truthy
     Message.count.should eq message_count + 1
-    Message.order(:id).last.subject.should eq 'エクスポートが完了しました'
+    Message.order(:created_at).last.subject.should eq "Export completed: #{file.id}"
   end
 end
 
@@ -17,8 +17,8 @@ end
 #
 # Table name: user_export_files
 #
-#  id          :uuid             not null, primary key
-#  user_id     :bigint(8)
+#  id          :bigint           not null, primary key
+#  user_id     :bigint
 #  executed_at :datetime
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

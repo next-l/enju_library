@@ -17,7 +17,7 @@ end
 #
 # Table name: bookstores
 #
-#  id               :uuid             not null, primary key
+#  id               :bigint           not null, primary key
 #  name             :text             not null
 #  zip_code         :string
 #  address          :text

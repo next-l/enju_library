@@ -12,10 +12,10 @@ end
 #
 # Table name: accepts
 #
-#  id           :uuid             not null, primary key
-#  basket_id    :uuid
-#  item_id      :uuid
-#  librarian_id :bigint(8)
+#  id           :bigint           not null, primary key
+#  basket_id    :bigint
+#  item_id      :bigint
+#  librarian_id :bigint
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #

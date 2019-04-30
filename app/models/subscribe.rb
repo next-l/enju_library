@@ -11,9 +11,9 @@ end
 #
 # Table name: subscribes
 #
-#  id              :bigint(8)        not null, primary key
-#  subscription_id :uuid             not null
-#  work_id         :uuid             not null
+#  id              :bigint           not null, primary key
+#  subscription_id :bigint           not null
+#  work_id         :bigint           not null
 #  start_at        :datetime         not null
 #  end_at          :datetime         not null
 #  created_at      :datetime         not null

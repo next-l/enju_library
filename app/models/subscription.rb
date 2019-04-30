@@ -28,11 +28,11 @@ end
 #
 # Table name: subscriptions
 #
-#  id               :uuid             not null, primary key
+#  id               :bigint           not null, primary key
 #  title            :text             not null
 #  note             :text
-#  user_id          :bigint(8)
-#  order_list_id    :bigint(8)
+#  user_id          :bigint
+#  order_list_id    :bigint
 #  subscribes_count :integer          default(0), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

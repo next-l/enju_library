@@ -97,10 +97,13 @@ class UserImportFile < ActiveRecord::Base
     else
       transition_to!(:completed)
     end
-    send_message
+    mailer = UserImportMailer.completed(self)
+    send_message(mailer)
     num
   rescue => e
     transition_to!(:failed)
+    mailer = UserImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 
@@ -142,14 +145,17 @@ class UserImportFile < ActiveRecord::Base
       end
     end
 
-    transition_to!(:completed)
     Sunspot.commit
-    send_message
+    transition_to!(:completed)
+    mailer = UserImportMailer.completed(self)
+    send_message(mailer)
     num
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     save
     transition_to!(:failed)
+    mailer = UserImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 
@@ -176,11 +182,14 @@ class UserImportFile < ActiveRecord::Base
       end
     end
     transition_to!(:completed)
-    send_message
+    mailer = UserImportMailer.completed(self)
+    send_message(mailer)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     save
     transition_to!(:failed)
+    mailer = UserImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 
@@ -317,8 +326,8 @@ end
 #
 # Table name: user_import_files
 #
-#  id                    :uuid             not null, primary key
-#  user_id               :bigint(8)
+#  id                    :bigint           not null, primary key
+#  user_id               :bigint
 #  note                  :text
 #  executed_at           :datetime
 #  edit_mode             :string
@@ -326,6 +335,6 @@ end
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  user_encoding         :string
-#  default_library_id    :uuid
-#  default_user_group_id :uuid
+#  default_library_id    :bigint
+#  default_user_group_id :bigint
 #

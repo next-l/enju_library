@@ -79,7 +79,7 @@ describe UserImportFile do
       @file.user = User.find_by(username: 'librarian1')
       @file.import_start
       Message.count.should eq old_message_count + 1
-      Message.order(:created_at).last.subject.should eq 'インポートが完了しました'
+      Message.order(:created_at).last.subject.should eq "Import completed: #{@file.id}"
     end
 
     it "should not import users that have higher roles than current user's role" do
@@ -216,8 +216,8 @@ end
 #
 # Table name: user_import_files
 #
-#  id                    :uuid             not null, primary key
-#  user_id               :bigint(8)
+#  id                    :bigint           not null, primary key
+#  user_id               :bigint
 #  note                  :text
 #  executed_at           :datetime
 #  edit_mode             :string
@@ -225,6 +225,6 @@ end
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #  user_encoding         :string
-#  default_library_id    :uuid
-#  default_user_group_id :uuid
+#  default_library_id    :bigint
+#  default_user_group_id :bigint
 #

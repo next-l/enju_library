@@ -8,7 +8,7 @@ end
 #
 # Table name: budget_types
 #
-#  id           :bigint(8)        not null, primary key
+#  id           :bigint           not null, primary key
 #  name         :string           not null
 #  display_name :text             not null
 #  note         :text

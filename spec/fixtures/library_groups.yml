@@ -22,7 +22,7 @@ one:
 #
 # Table name: library_groups
 #
-#  id                            :bigint(8)        not null, primary key
+#  id                            :bigint           not null, primary key
 #  name                          :string           not null
 #  display_name_translations     :jsonb            not null
 #  short_name                    :string           not null
@@ -42,7 +42,7 @@ one:
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
-#  user_id                       :bigint(8)
+#  user_id                       :bigint
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  header_logo_meta              :text
 #  login_banner_translations     :jsonb            not null

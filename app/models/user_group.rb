@@ -14,7 +14,7 @@ end
 #
 # Table name: user_groups
 #
-#  id                               :uuid             not null, primary key
+#  id                               :bigint           not null, primary key
 #  name                             :string           not null
 #  display_name_translations        :jsonb            not null
 #  note                             :text

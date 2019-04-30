@@ -30,8 +30,8 @@ end
 #
 # Table name: baskets
 #
-#  id           :uuid             not null, primary key
-#  user_id      :bigint(8)
+#  id           :bigint           not null, primary key
+#  user_id      :bigint
 #  note         :text
 #  lock_version :integer          default(0), not null
 #  created_at   :datetime         not null
