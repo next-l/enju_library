@@ -86,7 +86,7 @@ describe UserImportFile do
       @file.user = User.where(username: 'librarian1').first
       @file.import_start
       Message.count.should eq old_message_count + 1
-      Message.order(:id).last.subject.should eq 'インポートが完了しました'
+      Message.order(:created_at).last.subject.should eq "インポートが完了しました: #{@file.id}"
     end
 
     it "should not import users that have higher roles than current user's role" do

@@ -34,12 +34,13 @@ class UserExportFile < ActiveRecord::Base
     tempfile.puts(file)
     tempfile.close
     self.user_export = File.new(tempfile.path, 'r')
-    if save
-      send_message
-    end
+    save!
     transition_to!(:completed)
+    mailer = UserExportMailer.completed(self)
+    send_message(mailer)
   rescue => e
     transition_to!(:failed)
+    mailer = UserExportMailer.failed(self)
     raise e
   end
 

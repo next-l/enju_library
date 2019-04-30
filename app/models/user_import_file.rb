@@ -115,10 +115,13 @@ class UserImportFile < ActiveRecord::Base
     else
       transition_to!(:completed)
     end
-    send_message
+    mailer = UserImportMailer.completed(self)
+    send_message(mailer)
     num
   rescue => e
     transition_to!(:failed)
+    mailer = UserImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 
@@ -161,14 +164,17 @@ class UserImportFile < ActiveRecord::Base
     end
 
     rows.close
-    transition_to!(:completed)
     Sunspot.commit
-    send_message
+    transition_to!(:completed)
+    mailer = UserImportMailer.completed(self)
+    send_message(mailer)
     num
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     save
     transition_to!(:failed)
+    mailer = UserImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 
@@ -195,11 +201,14 @@ class UserImportFile < ActiveRecord::Base
       end
     end
     transition_to!(:completed)
-    send_message
+    mailer = UserImportMailer.completed(self)
+    send_message(mailer)
   rescue => e
     self.error_message = "line #{row_num}: #{e.message}"
     save
     transition_to!(:failed)
+    mailer = UserImportMailer.failed(self)
+    send_message(mailer)
     raise e
   end
 

@@ -131,3 +131,14 @@ ja:
     google: Googleブックス
     openbd: openBD
     hanmotocom: 版元ドットコム
+
+  user_import_mailer:
+    completed:
+      subject: 'インポートが完了しました'
+    failed:
+      subject: 'インポートに失敗しました'
+  user_export_mailer:
+    completed:
+      subject: 'エクスポートが完了しました'
+    failed:
+      subject: 'エクスポートに失敗しました'
