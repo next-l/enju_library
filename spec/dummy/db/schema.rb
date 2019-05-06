@@ -239,24 +239,23 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
   end
 
   create_table "checkins", force: :cascade do |t|
-    t.bigint "item_id", null: false
     t.bigint "librarian_id"
     t.bigint "basket_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "lock_version", default: 0, null: false
     t.index ["basket_id"], name: "index_checkins_on_basket_id"
-    t.index ["item_id"], name: "index_checkins_on_item_id"
     t.index ["librarian_id"], name: "index_checkins_on_librarian_id"
   end
 
   create_table "circulation_statuses", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_circulation_statuses_on_name", unique: true
   end
 
   create_table "classification_types", force: :cascade do |t|
@@ -1094,11 +1093,12 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
 
   create_table "use_restrictions", force: :cascade do |t|
     t.string "name", null: false
-    t.jsonb "display_name", default: {}, null: false
+    t.jsonb "display_name_translations", default: {}, null: false
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_use_restrictions_on_name", unique: true
   end
 
   create_table "user_export_file_transitions", force: :cascade do |t|
@@ -1131,8 +1131,8 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
     t.datetime "updated_at", null: false
     t.integer "valid_period_for_new_user", default: 0, null: false
     t.datetime "expired_at"
-    t.integer "number_of_day_to_notify_overdue", default: 1, null: false
-    t.integer "number_of_day_to_notify_due_date", default: 7, null: false
+    t.integer "number_of_day_to_notify_overdue", default: 7, null: false
+    t.integer "number_of_day_to_notify_due_date", default: 3, null: false
     t.integer "number_of_time_to_notify_overdue", default: 3, null: false
     t.index ["name"], name: "index_user_groups_on_name", unique: true
   end
@@ -1237,8 +1237,6 @@ ActiveRecord::Schema.define(version: 2019_02_08_135957) do
   add_foreign_key "checked_items", "baskets"
   add_foreign_key "checked_items", "items"
   add_foreign_key "checked_items", "users"
-  add_foreign_key "checkins", "items"
-  add_foreign_key "checkins", "users", column: "librarian_id"
   add_foreign_key "classifications", "classifications", column: "parent_id"
   add_foreign_key "classifications", "manifestations"
   add_foreign_key "colors", "library_groups"
