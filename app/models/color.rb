@@ -14,8 +14,8 @@ end
 #
 #  id               :bigint           not null, primary key
 #  library_group_id :bigint
-#  property         :string
-#  code             :string
+#  property         :string           not null
+#  code             :string           not null
 #  position         :integer          default(1), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
