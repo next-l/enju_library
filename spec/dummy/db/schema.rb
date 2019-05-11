@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_151124) do
+ActiveRecord::Schema.define(version: 2019_05_11_145706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -852,8 +852,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.bigint "user_group_id", null: false
-    t.bigint "library_id"
     t.string "locale"
     t.string "user_number"
     t.text "full_name"
@@ -865,6 +863,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.datetime "expired_at"
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
+    t.bigint "user_group_id", null: false
+    t.bigint "library_id", null: false
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
     t.index ["user_number"], name: "index_profiles_on_user_number", unique: true
@@ -954,7 +954,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.text "error_message"
     t.string "user_encoding"
     t.bigint "default_shelf_id"
-    t.index ["default_shelf_id"], name: "index_resource_import_files_on_default_shelf_id"
     t.index ["user_id"], name: "index_resource_import_files_on_user_id"
   end
 
@@ -1163,9 +1162,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.bigint "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_user_has_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_user_has_roles_on_user_id_and_role_id", unique: true
-    t.index ["user_id"], name: "index_user_has_roles_on_user_id"
   end
 
   create_table "user_import_file_transitions", force: :cascade do |t|
@@ -1293,6 +1290,8 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
   add_foreign_key "periodicals", "frequencies"
   add_foreign_key "produces", "agents"
   add_foreign_key "produces", "manifestations"
+  add_foreign_key "profiles", "libraries"
+  add_foreign_key "profiles", "user_groups"
   add_foreign_key "realizes", "agents"
   add_foreign_key "realizes", "manifestations", column: "expression_id"
   add_foreign_key "resource_export_files", "users"
