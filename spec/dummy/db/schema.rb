@@ -416,8 +416,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["body"], name: "index_identifiers_on_body"
-    t.index ["identifier_type_id"], name: "index_identifiers_on_identifier_type_id"
+    t.index ["body", "identifier_type_id"], name: "index_identifiers_on_body_and_identifier_type_id"
     t.index ["manifestation_id"], name: "index_identifiers_on_manifestation_id"
   end
 
@@ -497,7 +496,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.string "item_identifier"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "shelf_id"
+    t.bigint "shelf_id", null: false
     t.boolean "include_supplements", default: false, null: false
     t.text "note"
     t.string "url"
@@ -817,7 +816,6 @@ ActiveRecord::Schema.define(version: 2019_03_14_151124) do
     t.integer "picture_width"
     t.integer "picture_height"
     t.index ["picture_attachable_id", "picture_attachable_type"], name: "index_picture_files_on_picture_attachable_id_and_type"
-    t.index ["picture_attachable_id"], name: "index_picture_files_on_picture_attachable_id"
   end
 
   create_table "places", force: :cascade do |t|
