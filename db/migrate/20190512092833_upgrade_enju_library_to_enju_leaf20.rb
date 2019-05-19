@@ -25,6 +25,11 @@ class UpgradeEnjuLibraryToEnjuLeaf20 < ActiveRecord::Migration[5.2]
           t.change :user_id, :bigint
         end
 
+        change_table :profiles do |t|
+          t.change :library_id, :bigint
+          t.change :user_group_id, :bigint
+        end
+
         change_table :subscribes do |t|
           t.change :subscription_id, :bigint
           t.change :work_id, :bigint
@@ -111,6 +116,11 @@ class UpgradeEnjuLibraryToEnjuLeaf20 < ActiveRecord::Migration[5.2]
 
         change_table :library_groups do |t|
           t.change :user_id, :integer
+        end
+
+        change_table :profiles do |t|
+          t.change :library_id, :integer
+          t.change :user_group_id, :integer
         end
 
         change_table :subscribes do |t|
@@ -208,5 +218,9 @@ class UpgradeEnjuLibraryToEnjuLeaf20 < ActiveRecord::Migration[5.2]
         }
       end
     end
+
+    add_foreign_key :profiles, :libraries
+    add_foreign_key :profiles, :user_groups
+    change_column_null :profiles, :user_group_id, false
   end
 end
