@@ -25,7 +25,7 @@ end
 #  telephone_number :string
 #  fax_number       :string
 #  url              :string
-#  position         :integer
+#  position         :integer          default(1), not null
 #  deleted_at       :datetime
 #  created_at       :datetime
 #  updated_at       :datetime

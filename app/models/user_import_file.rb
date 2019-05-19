@@ -357,5 +357,5 @@ end
 #  updated_at               :datetime
 #  user_encoding            :string
 #  default_library_id       :integer
-#  default_user_group_id    :integer
+#  default_user_group_id    :bigint
 #

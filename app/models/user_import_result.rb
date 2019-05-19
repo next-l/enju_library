@@ -11,7 +11,7 @@ end
 # Table name: user_import_results
 #
 #  id                  :integer          not null, primary key
-#  user_import_file_id :integer
+#  user_import_file_id :bigint
 #  user_id             :integer
 #  body                :text
 #  created_at          :datetime

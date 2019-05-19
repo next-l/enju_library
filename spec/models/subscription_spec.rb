@@ -16,7 +16,7 @@ end
 #  id               :integer          not null, primary key
 #  title            :text             not null
 #  note             :text
-#  user_id          :integer
+#  user_id          :bigint
 #  order_list_id    :integer
 #  deleted_at       :datetime
 #  subscribes_count :integer          default(0), not null

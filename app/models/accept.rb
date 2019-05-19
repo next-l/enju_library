@@ -20,7 +20,7 @@ end
 #  id           :integer          not null, primary key
 #  basket_id    :integer
 #  item_id      :integer
-#  librarian_id :integer
+#  librarian_id :bigint
 #  created_at   :datetime
 #  updated_at   :datetime
 #
