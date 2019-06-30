@@ -12,11 +12,12 @@ end
 #
 # Table name: budget_types
 #
-#  id           :bigint           not null, primary key
-#  name         :string           not null
-#  display_name :text             not null
-#  note         :text
-#  position     :integer          default(1), not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id                        :integer          not null, primary key
+#  name                      :string
+#  display_name              :text
+#  note                      :text
+#  position                  :integer
+#  created_at                :datetime
+#  updated_at                :datetime
+#  display_name_translations :jsonb            not null
 #

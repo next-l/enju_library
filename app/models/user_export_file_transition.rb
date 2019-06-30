@@ -1,5 +1,5 @@
 class UserExportFileTransition < ActiveRecord::Base
-
+  include Statesman::Adapters::ActiveRecordTransition
   
   belongs_to :user_export_file, inverse_of: :user_export_file_transitions
   #attr_accessible :to_state, :sort_key, :metadata
@@ -9,12 +9,12 @@ end
 #
 # Table name: user_export_file_transitions
 #
-#  id                  :bigint           not null, primary key
+#  id                  :integer          not null, primary key
 #  to_state            :string
-#  metadata            :jsonb
+#  metadata            :text             default("{}")
 #  sort_key            :integer
-#  user_export_file_id :bigint
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  user_export_file_id :integer
+#  created_at          :datetime
+#  updated_at          :datetime
 #  most_recent         :boolean          not null
 #

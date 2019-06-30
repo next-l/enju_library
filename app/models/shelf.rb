@@ -52,14 +52,16 @@ end
 #
 # Table name: shelves
 #
-#  id                        :bigint           not null, primary key
+#  id                        :integer          not null, primary key
 #  name                      :string           not null
-#  display_name_translations :jsonb            not null
+#  display_name              :text
 #  note                      :text
-#  library_id                :bigint           not null
+#  library_id                :integer          not null
 #  items_count               :integer          default(0), not null
-#  position                  :integer          default(1), not null
-#  created_at                :datetime         not null
-#  updated_at                :datetime         not null
+#  position                  :integer
+#  created_at                :datetime
+#  updated_at                :datetime
+#  deleted_at                :datetime
 #  closed                    :boolean          default(FALSE), not null
+#  display_name_translations :jsonb            not null
 #

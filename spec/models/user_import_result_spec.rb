@@ -11,11 +11,11 @@ end
 #
 # Table name: user_import_results
 #
-#  id                  :bigint           not null, primary key
-#  user_import_file_id :bigint
-#  user_id             :bigint
+#  id                  :integer          not null, primary key
+#  user_import_file_id :integer
+#  user_id             :integer
 #  body                :text
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  created_at          :datetime
+#  updated_at          :datetime
 #  error_message       :text
 #

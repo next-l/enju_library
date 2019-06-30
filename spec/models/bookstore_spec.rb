@@ -9,7 +9,7 @@ end
 #
 # Table name: bookstores
 #
-#  id               :bigint           not null, primary key
+#  id               :integer          not null, primary key
 #  name             :text             not null
 #  zip_code         :string
 #  address          :text
@@ -17,7 +17,8 @@ end
 #  telephone_number :string
 #  fax_number       :string
 #  url              :string
-#  position         :integer          default(1), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  position         :integer
+#  deleted_at       :datetime
+#  created_at       :datetime
+#  updated_at       :datetime
 #

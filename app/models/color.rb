@@ -12,11 +12,11 @@ end
 #
 # Table name: colors
 #
-#  id               :bigint           not null, primary key
-#  library_group_id :bigint
-#  property         :string           not null
-#  code             :string           not null
-#  position         :integer          default(1), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  id               :integer          not null, primary key
+#  library_group_id :integer
+#  property         :string
+#  code             :string
+#  position         :integer
+#  created_at       :datetime
+#  updated_at       :datetime
 #

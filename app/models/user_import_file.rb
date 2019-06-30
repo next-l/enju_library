@@ -326,15 +326,20 @@ end
 #
 # Table name: user_import_files
 #
-#  id                    :bigint           not null, primary key
-#  user_id               :bigint
-#  note                  :text
-#  executed_at           :datetime
-#  edit_mode             :string
-#  error_message         :text
-#  created_at            :datetime         not null
-#  updated_at            :datetime         not null
-#  user_encoding         :string
-#  default_library_id    :bigint
-#  default_user_group_id :bigint
+#  id                       :integer          not null, primary key
+#  user_id                  :integer
+#  note                     :text
+#  executed_at              :datetime
+#  user_import_file_name    :string
+#  user_import_content_type :string
+#  user_import_file_size    :integer
+#  user_import_updated_at   :datetime
+#  user_import_fingerprint  :string
+#  edit_mode                :string
+#  error_message            :text
+#  created_at               :datetime
+#  updated_at               :datetime
+#  user_encoding            :string
+#  default_library_id       :integer
+#  default_user_group_id    :integer
 #
