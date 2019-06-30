@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency "paperclip", "~> 5.3"
   s.add_dependency "paperclip-meta"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.1"
+  s.add_development_dependency "enju_leaf", "~> 1.3.2"
   s.add_development_dependency "enju_biblio", "~> 0.3.1"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.3.1"
   s.add_development_dependency "enju_ndl", "~> 0.3.1"

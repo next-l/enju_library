@@ -89,7 +89,7 @@ library_00004:
 #  call_number_delimiter :string           default("|"), not null
 #  library_group_id      :integer          not null
 #  users_count           :integer          default(0), not null
-#  position              :integer          default(1), not null
+#  position              :integer
 #  country_id            :integer
 #  created_at            :datetime
 #  updated_at            :datetime

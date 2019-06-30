@@ -88,7 +88,7 @@ end
 #  old_login_banner              :text
 #  note                          :text
 #  country_id                    :integer
-#  position                      :integer          default(1), not null
+#  position                      :integer
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  admin_networks                :text

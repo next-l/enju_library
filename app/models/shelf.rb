@@ -55,9 +55,9 @@ end
 #  name         :string           not null
 #  display_name :text
 #  note         :text
-#  library_id   :bigint           not null
+#  library_id   :integer          not null
 #  items_count  :integer          default(0), not null
-#  position     :integer          default(1), not null
+#  position     :integer
 #  created_at   :datetime
 #  updated_at   :datetime
 #  deleted_at   :datetime

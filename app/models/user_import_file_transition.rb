@@ -13,7 +13,7 @@ end
 #  to_state            :string
 #  metadata            :text             default({})
 #  sort_key            :integer
-#  user_import_file_id :bigint
+#  user_import_file_id :integer
 #  created_at          :datetime
 #  updated_at          :datetime
 #  most_recent         :boolean          not null
