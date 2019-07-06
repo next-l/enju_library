@@ -5,6 +5,7 @@ class UserGroup < ActiveRecord::Base
   validates_numericality_of :valid_period_for_new_user,
     greater_than_or_equal_to: 0,
     allow_blank: true
+  translates :display_name
 
   paginates_per 10
 end
