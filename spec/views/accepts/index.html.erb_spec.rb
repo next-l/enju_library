@@ -6,13 +6,11 @@ describe "accepts/index" do
   before(:each) do
     assign(:accepts, Kaminari::paginate_array([
       stub_model(Accept,
-        id: 'ad9f71dc-2696-4ffb-b517-2ab824bcd4df',
         item_id: 1,
         created_at: Time.zone.now
       ),
       stub_model(Accept,
-        id: '5903b664-4c61-49e2-8d1a-6d2bfc218e23',
-        item_id: 2,
+        item_id: 1,
         created_at: Time.zone.now
       )
     ]).page(1))

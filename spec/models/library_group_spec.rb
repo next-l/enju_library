@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 describe LibraryGroup do
@@ -32,6 +30,7 @@ end
 #  created_at                    :datetime
 #  updated_at                    :datetime
 #  admin_networks                :text
+#  allow_bookmark_external_url   :boolean          default(FALSE), not null
 #  url                           :string           default("http://localhost:3000/")
 #  settings                      :text
 #  html_snippet                  :text

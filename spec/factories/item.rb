@@ -5,6 +5,5 @@ FactoryBot.define do
     manifestation_id{FactoryBot.create(:manifestation).id}
     bookstore_id { 1 }
     budget_type_id { 1 }
-    association :shelf
   end
 end

@@ -5,7 +5,27 @@ class UserImportFile < ActiveRecord::Base
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 
-  has_one_attached :user_import
+  if ENV['ENJU_STORAGE'] == 's3'
+    has_attached_file :user_import, storage: :s3,
+      s3_credentials: {
+        access_key: ENV['AWS_ACCESS_KEY_ID'],
+        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+        bucket: ENV['S3_BUCKET_NAME'],
+        s3_host_name: ENV['S3_HOST_NAME']
+      },
+      s3_permissions: :private
+  else
+    has_attached_file :user_import,
+      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
+  end
+  validates_attachment_content_type :user_import, content_type: [
+    'text/csv',
+    'text/plain',
+    'text/tab-separated-values',
+    'application/octet-stream',
+    'application/vnd.ms-excel'
+  ]
+  validates_attachment_presence :user_import
   belongs_to :user
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
@@ -26,7 +46,7 @@ class UserImportFile < ActiveRecord::Base
   def import
     transition_to!(:started)
     num = { user_imported: 0, user_found: 0, failed: 0, error: 0 }
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
 
     field = rows.first
@@ -42,14 +62,14 @@ class UserImportFile < ActiveRecord::Base
       next if row['dummy'].to_s.strip.present?
 
       username = row['username']
-      new_user = User.find_by(username: username)
+      new_user = User.where(username: username).first
       if new_user
         import_result.user = new_user
         import_result.save
         num[:user_found] += 1
       else
         new_user = User.new
-        new_user.role = Role.find_by(name: row['role'])
+        new_user.role = Role.where(name: row['role']).first
         if new_user.role
           unless user.has_role?(new_user.role.name)
             num[:failed] += 1
@@ -64,18 +84,15 @@ class UserImportFile < ActiveRecord::Base
         profile.assign_attributes(set_profile_params(row))
 
         Profile.transaction do
-          if profile.valid?
-            profile.save!
+          if new_user.valid? and profile.valid?
             new_user.profile = profile
-          end
-          if new_user.valid?
-            new_user.save!
             import_result.user = new_user
             import_result.save!
             num[:user_imported] += 1
           else
             error_message = "line #{row_num}: "
-            error_message += (new_user.errors.full_messages.+ profile.errors.full_messages).join(' ')
+            error_message += new_user.errors.full_messages.join(" ")
+            error_message += profile.errors.full_messages.join(" ")
             import_result.error_message = error_message
             import_result.save
             num[:error] += 1
@@ -85,7 +102,8 @@ class UserImportFile < ActiveRecord::Base
     end
 
     Sunspot.commit
-    error_messages = user_import_results.order(:created_at).pluck(:error_message).compact
+    rows.close
+    error_messages = user_import_results.order(:id).pluck(:error_message).compact
     unless error_messages.empty?
       self.error_message = '' if error_message.nil?
       self.error_message += "\n"
@@ -111,7 +129,7 @@ class UserImportFile < ActiveRecord::Base
   def modify
     transition_to!(:started)
     num = { user_updated: 0, user_not_found: 0, failed: 0 }
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
 
     field = rows.first
@@ -127,7 +145,7 @@ class UserImportFile < ActiveRecord::Base
       )
 
       username = row['username']
-      new_user = User.find_by(username: username)
+      new_user = User.where(username: username).first
       if new_user.try(:profile)
         new_user.assign_attributes(set_user_params(row))
         new_user.profile.assign_attributes(set_profile_params(row))
@@ -145,6 +163,7 @@ class UserImportFile < ActiveRecord::Base
       end
     end
 
+    rows.close
     Sunspot.commit
     transition_to!(:completed)
     mailer = UserImportMailer.completed(self)
@@ -163,7 +182,7 @@ class UserImportFile < ActiveRecord::Base
   def remove
     transition_to!(:started)
     row_num = 1
-    rows = open_import_file
+    rows = open_import_file(create_import_temp_file(user_import))
 
     field = rows.first
     if [field['username']].reject{ |f| f.to_s.strip == "" }.empty?
@@ -173,7 +192,7 @@ class UserImportFile < ActiveRecord::Base
     rows.each do |row|
       row_num += 1
       username = row['username'].to_s.strip
-      remove_user = User.find_by(username: username)
+      remove_user = User.where(username: username).first
       if remove_user.try(:deletable_by?, user)
         UserImportFile.transaction do
           remove_user.destroy
@@ -205,15 +224,8 @@ class UserImportFile < ActiveRecord::Base
 
   # インポート作業用のファイルを読み込みます。
   # @param [File] tempfile 作業用のファイル
-  def open_import_file
-    byte = ActiveStorage::Blob.service.download(user_import.key)
-    if defined?(CharlockHolmes)
-      string = CharlockHolmes::Converter.convert(byte, user_encoding || byte.detect_encoding[:encoding], 'utf-8')
-    else
-      string = NKF.nkf("--ic=#{user_encoding || NKF.guess(byte).to_s} --oc=utf-8", byte)
-    end
-
-    rows = CSV.parse(string, col_sep: "\t", encoding: 'utf-8', headers: true)
+  def open_import_file(tempfile)
+    file = CSV.open(tempfile.path, 'r:utf-8', col_sep: "\t")
     header_columns = %w(
       username role email password user_group user_number expired_at
       full_name full_name_transcription required_role locked
@@ -229,12 +241,16 @@ class UserImportFile < ActiveRecord::Base
       header_columns += %w(share_bookmarks)
     end
 
-    ignored_columns = rows.headers - header_columns
+    header = file.first
+    ignored_columns = header - header_columns
     unless ignored_columns.empty?
       self.error_message = I18n.t('import.following_column_were_ignored', column: ignored_columns.join(', '))
       save!
     end
-    UserImportResult.create!(user_import_file_id: id, body: rows.headers.join("\t"))
+    rows = CSV.open(tempfile.path, 'r:utf-8', headers: header, col_sep: "\t")
+    UserImportResult.create!(user_import_file_id: id, body: header.join("\t"))
+    tempfile.close(true)
+    file.close
     rows
   end
 
@@ -272,15 +288,15 @@ class UserImportFile < ActiveRecord::Base
   # @param [Hash] row 利用者情報のハッシュ
   def set_profile_params(row)
     params = {}
-    user_group = UserGroup.find_by(name: row['user_group'])
+    user_group = UserGroup.where(name: row['user_group']).first
     unless user_group
       user_group = default_user_group
     end
     params[:user_group_id] = user_group.id if user_group
 
-    required_role = Role.find_by(name: row['required_role'])
+    required_role = Role.where(name: row['required_role']).first
     unless required_role
-      required_role = Role.find_by(name: 'Librarian')
+      required_role = Role.where(name: 'Librarian').first
     end
     params[:required_role_id] = required_role.id if required_role
 
@@ -302,7 +318,7 @@ class UserImportFile < ActiveRecord::Base
       params[:locale] = row['locale']
     end
 
-    library = Library.find_by(name: row['library'].to_s.strip)
+    library = Library.where(name: row['library'].to_s.strip).first
     unless library
       library = default_library || Library.web
     end

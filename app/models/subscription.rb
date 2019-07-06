@@ -19,7 +19,7 @@ class Subscription < ActiveRecord::Base
   paginates_per 10
 
   def subscribed(work)
-    subscribes.find_by(work_id: work.id)
+    subscribes.where(work_id: work.id).first
   end
 
 end

@@ -14,12 +14,10 @@ describe UserImportResultsController do
 
       describe 'With @user_import_file parameter' do
         before(:each) do
-          @file = UserImportFile.create!(
-            user: users(:admin),
-            default_user_group: UserGroup.find_by(name: 'user'),
-            default_library: libraries(:library_00003)
-          )
-          @file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample_long.tsv"), filename: 'attachment.txt')
+          @file = UserImportFile.create user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample_long.tsv"), user: users(:admin)
+          @file.default_user_group = UserGroup.find(2)
+          @file.default_library = Library.find(3)
+          @file.save
           @file.import_start
         end
         render_views
@@ -61,16 +59,12 @@ describe UserImportResultsController do
   end
 
   describe 'GET show' do
-    before(:each) do
-      @user_import_result = FactoryBot.create(:user_import_result)
-    end
-
     describe 'When logged in as Administrator' do
       login_fixture_admin
 
       it 'assigns the requested user_import_result as @user_import_result' do
-        get :show, params: { id: @user_import_result.id }
-        assigns(:user_import_result).should eq(@user_import_result)
+        get :show, params: { id: 1 }
+        assigns(:user_import_result).should eq(UserImportResult.find(1))
       end
     end
 
@@ -78,8 +72,8 @@ describe UserImportResultsController do
       login_fixture_librarian
 
       it 'assigns the requested user_import_result as @user_import_result' do
-        get :show, params: { id: @user_import_result.id }
-        assigns(:user_import_result).should eq(@user_import_result)
+        get :show, params: { id: 1 }
+        assigns(:user_import_result).should eq(UserImportResult.find(1))
       end
     end
 
@@ -87,16 +81,15 @@ describe UserImportResultsController do
       login_fixture_user
 
       it 'assigns the requested user_import_result as @user_import_result' do
-        get :show, params: { id: @user_import_result.id }
-        assigns(:user_import_result).should eq(@user_import_result)
-        response.should be_forbidden
+        get :show, params: { id: 1 }
+        assigns(:user_import_result).should eq(UserImportResult.find(1))
       end
     end
 
     describe 'When not logged in' do
       it 'assigns the requested user_import_result as @user_import_result' do
-        get :show, params: { id: @user_import_result.id }
-        assigns(:user_import_result).should eq(@user_import_result)
+        get :show, params: { id: 1 }
+        assigns(:user_import_result).should eq(UserImportResult.find(1))
         response.should redirect_to(new_user_session_url)
       end
     end
@@ -104,7 +97,7 @@ describe UserImportResultsController do
 
   describe 'DELETE destroy' do
     before(:each) do
-      @user_import_result = FactoryBot.create(:user_import_result)
+      @user_import_result = user_import_results(:one)
     end
 
     describe 'When logged in as Administrator' do

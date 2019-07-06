@@ -45,7 +45,7 @@ RSpec.describe WithdrawsController, type: :controller do
       login_fixture_admin
       it 'assigns all withdraws as @withdraws' do
         Withdraw.create! valid_attributes
-        get :index, params: { basket_id: baskets(:basket_00001).id }
+        get :index, params: { basket_id: 1 }
         expect(assigns(:withdraws)).to eq baskets(:basket_00001).withdraws.order('withdraws.created_at DESC').page(1)
       end
     end
@@ -93,6 +93,12 @@ RSpec.describe WithdrawsController, type: :controller do
         it 'redirects to the created withdraw' do
           post :create, params: valid_create_attributes
           expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
+        end
+
+        it 'should not withdraw a checked-out item' do
+          post :create, params: { basket_id: valid_create_attributes[:basket_id], withdraw: { item_identifier: '00001' } }
+          expect(assigns(:withdraw)).to be_a(Withdraw)
+          expect(response).to be_successful
         end
       end
 

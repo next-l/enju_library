@@ -1,7 +1,7 @@
 class Library < ActiveRecord::Base
   include MasterModel
   default_scope { order('libraries.position') }
-  scope :real, -> { where('name != ?', 'web') }
+  scope :real, -> { where('id != 1') }
   has_many :shelves
   belongs_to :library_group, validate: true
   has_many :profiles
@@ -13,7 +13,7 @@ class Library < ActiveRecord::Base
   translates :display_name
 
   searchable do
-    text :name, :display_name_translations, :note, :address
+    text :name, :display_name, :note, :address
     time :created_at
     time :updated_at
     integer :position
@@ -24,11 +24,25 @@ class Library < ActiveRecord::Base
   validates :library_group, presence: true
   validates_uniqueness_of :short_display_name, case_sensitive: false
   validates_uniqueness_of :isil, allow_blank: true
-  #validates :display_name, uniqueness: true
+  validates :display_name, uniqueness: true
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
   validates :isil, format: { with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/ }, allow_blank: true
   after_validation :geocode, if: :address_changed?
   after_create :create_shelf
+  after_save :clear_all_cache
+  after_destroy :clear_all_cache
+
+  def self.all_cache
+    if Rails.env == 'production'
+      Rails.cache.fetch('library_all'){ Library.all }
+    else
+      Library.all
+    end
+  end
+
+  def clear_all_cache
+    Rails.cache.delete('library_all')
+  end
 
   def create_shelf
     shelf = Shelf.new
@@ -38,12 +52,12 @@ class Library < ActiveRecord::Base
   end
 
   def web?
-    return true if name == 'web'
+    return true if id == 1
     false
   end
 
   def self.web
-    Library.find_by(name: 'web')
+    Library.find(1)
   end
 
   def address(locale = I18n.locale)
@@ -58,6 +72,16 @@ class Library < ActiveRecord::Base
   def address_changed?
     return true if saved_change_to_region? || saved_change_to_locality? || saved_change_to_street?
     false
+  end
+
+  if defined?(EnjuEvent)
+    has_many :events
+
+    def closed?(date)
+      events.closing_days.map{ |c|
+        c.start_at.beginning_of_day
+      }.include?(date.beginning_of_day)
+    end
   end
 
   if defined?(EnjuInterLibraryLoan)

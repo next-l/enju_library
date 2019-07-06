@@ -54,13 +54,7 @@ class BasketsController < ApplicationController
 
     respond_to do |format|
       if @basket.save
-        format.html {
-          if defined?(EnjuCirculation)
-            redirect_to new_checked_item_url(basket_id: @basket.id), notice: t('controller.successfully_created', model: t('activerecord.models.basket'))
-          else
-            redirect_to @basket, notice: t('controller.successfully_created', model: t('activerecord.models.basket'))
-          end
-        }
+        format.html { redirect_to new_checked_item_url(basket_id: @basket.id), notice: t('controller.successfully_created', model: t('activerecord.models.basket')) }
         format.json { render json: @basket, status: :created, location:  @basket }
       else
         format.html { render action: "new" }
@@ -73,40 +67,26 @@ class BasketsController < ApplicationController
   # PUT /baskets/1.json
   def update
     librarian = current_user
-    if defined?(EnjuCirculation)
-      begin
-        unless @basket.basket_checkout(librarian)
-          redirect_to new_checked_item_url(basket_id: @basket.id)
-          return
-        end
-      rescue ActiveRecord::RecordInvalid
-        flash[:message] = t('checked_item.already_checked_out_try_again')
-        @basket.checked_items.delete_all
+    begin
+      unless @basket.basket_checkout(librarian)
         redirect_to new_checked_item_url(basket_id: @basket.id)
         return
       end
+    rescue ActiveRecord::RecordInvalid
+      flash[:message] = t('checked_item.already_checked_out_try_again')
+      @basket.checked_items.delete_all
+      redirect_to new_checked_item_url(basket_id: @basket.id)
+      return
     end
 
     respond_to do |format|
       # if @basket.update_attributes({})
       if @basket.save(validate: false)
         # 貸出完了時
-        format.html {
-          if defined?(EnjuCirculation)
-            redirect_to checkouts_url(user_id: @basket.user.username), notice: t('basket.checkout_completed')
-          else
-            redirect_to @basket, notice: t('controller.successfully_updated', model: t('activerecord.models.basket'))
-          end
-        }
+        format.html { redirect_to checkouts_url(user_id: @basket.user.username), notice: t('basket.checkout_completed') }
         format.json { head :no_content }
       else
-        format.html {
-          if defined?(EnjuCirculation)
-            redirect_to checked_items_url(basket_id: @basket.id)
-          else
-            render action: "edit"
-          end
-        }
+        format.html { redirect_to checked_items_url(basket_id: @basket.id) }
         format.json { render json: @basket.errors, status: :unprocessable_entity }
       end
     end
@@ -119,13 +99,7 @@ class BasketsController < ApplicationController
     @basket.destroy
 
     respond_to do |format|
-      format.html {
-        if defined?(EnjuCirculation)
-          redirect_to checkouts_url(user_id: @basket.user.username)
-        else
-          redirect_to baskets_url(user_id: @basket.user.username)
-        end
-      }
+      format.html { redirect_to checkouts_url(user_id: @basket.user.username) }
       format.json { head :no_content }
     end
   end

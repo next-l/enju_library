@@ -3,10 +3,14 @@ class User < ActiveRecord::Base
     :recoverable, :rememberable, :trackable, #, :validatable
     :lockable, lock_strategy: :none, unlock_strategy: :none
 
-  include EnjuLibrary::EnjuUser
+  include EnjuSeed::EnjuUser
+  include EnjuCirculation::EnjuUser
 end
 
+Accept.include(EnjuCirculation::EnjuAccept)
+Basket.include(EnjuCirculation::EnjuBasket)
+Manifestation.include(EnjuCirculation::EnjuManifestation)
 Manifestation.include(EnjuSubject::EnjuManifestation)
-Manifestation.include(EnjuManifestationViewer::EnjuManifestation)
-Manifestation.include(EnjuNdl::EnjuManifestation)
+Item.include(EnjuCirculation::EnjuItem)
 Item.include(EnjuLibrary::EnjuItem)
+Withdraw.include(EnjuCirculation::EnjuWithdraw)

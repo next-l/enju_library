@@ -1,5 +1,6 @@
 class UserImportFileTransition < ActiveRecord::Base
   include Statesman::Adapters::ActiveRecordTransition
+
   
   belongs_to :user_import_file, inverse_of: :user_import_file_transitions
 end
@@ -10,7 +11,7 @@ end
 #
 #  id                  :integer          not null, primary key
 #  to_state            :string
-#  metadata            :text             default("{}")
+#  metadata            :text             default({})
 #  sort_key            :integer
 #  user_import_file_id :integer
 #  created_at          :datetime

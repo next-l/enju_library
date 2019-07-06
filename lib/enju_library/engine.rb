@@ -1,5 +1,7 @@
 require 'enju_seed'
-require 'mini_magick'
+require 'paper_trail'
+require 'paperclip'
+require 'paperclip-meta'
 require 'statesman'
 require 'geocoder'
 require 'ipaddr'

@@ -9,8 +9,14 @@ describe "accepts/new" do
     ).as_new_record)
     assign(:basket, FactoryBot.create(:basket))
     assign(:accepts, Kaminari::paginate_array([
-      FactoryBot.create(:accept),
-      FactoryBot.create(:accept)
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      ),
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      )
     ]).page(1))
   end
 

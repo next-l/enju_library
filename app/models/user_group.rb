@@ -1,6 +1,5 @@
 class UserGroup < ActiveRecord::Base
   include MasterModel
-  translates :display_name
   has_many :profiles
 
   validates_numericality_of :valid_period_for_new_user,
