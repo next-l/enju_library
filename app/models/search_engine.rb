@@ -10,6 +10,7 @@ class SearchEngine < ActiveRecord::Base
   after_destroy :clear_all_cache
 
   paginates_per 10
+  translates :display_name
 
   def clear_all_cache
     Rails.cache.delete('search_engine_all')
