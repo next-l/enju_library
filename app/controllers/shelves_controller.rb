@@ -16,7 +16,7 @@ class ShelvesController < ApplicationController
       render partial: 'select_form'
       return
     else
-      sort = {sort_by: 'name', order: 'asc'}
+      sort = {sort_by: 'shelf_name', order: 'asc'}
       # case params[:sort_by]
       # when 'name'
       #  sort[:sort_by] = 'name'

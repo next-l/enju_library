@@ -15,7 +15,9 @@ class Shelf < ActiveRecord::Base
   translates :display_name
 
   searchable do
-    string :name
+    string :shelf_name do
+      name
+    end
     string :library do
       library.name
     end

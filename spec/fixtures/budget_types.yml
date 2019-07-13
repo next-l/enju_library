@@ -2,14 +2,14 @@
 
 public_fund:
   name: Public fund
-  display_name_translations: {"en": "Public fund"}
+  display_name: Public fund
   note: 
   position: 1
   id: 1
 
 donation:
   name: Donation
-  display_name_translations: {"en": "Donation"}
+  display_name: Donation
   note: 
   position: 2
   id: 2
@@ -27,3 +27,4 @@ donation:
 #  updated_at                :datetime
 #  display_name_translations :jsonb            not null
 #
+
