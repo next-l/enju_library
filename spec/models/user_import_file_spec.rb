@@ -55,7 +55,7 @@ describe UserImportFile do
       user003.profile.share_bookmarks.should be_falsy
       User.where(username: 'user000').first.should be_nil
       UserImportResult.count.should eq old_import_results_count + 10
-      UserImportResult.order('id DESC')[0].error_message.should eq 'line 10: 利用者番号はすでに存在します。'
+      UserImportResult.order('id DESC')[0].error_message.should eq 'line 10: User number has already been taken'
       UserImportResult.order('id DESC')[1].error_message.should eq 'line 9: 利用者番号は不正な値です。'
       UserImportResult.order('id DESC')[2].error_message.should eq 'line 8: パスワードは6文字以上で入力してください。'
 
@@ -86,7 +86,7 @@ describe UserImportFile do
       @file.user = User.where(username: 'librarian1').first
       @file.import_start
       Message.count.should eq old_message_count + 1
-      Message.order(:created_at).last.subject.should eq "インポートが完了しました: #{@file.id}"
+      Message.order(:created_at).last.subject.should eq "Import completed: #{@file.id}"
     end
 
     it "should not import users that have higher roles than current user's role" do
