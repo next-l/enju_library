@@ -26,6 +26,7 @@ gem 'enju_subject', github: 'next-l/enju_subject'
 gem 'paper_trail'
 gem 'sassc-rails'
 gem 'jbuilder'
+gem 'rails-i18n'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
