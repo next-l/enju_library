@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path("lib", __dir__)
 
 # Maintain your gem's version:
 require "enju_library/version"
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Library module for Next-L Enju"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-  s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
+  s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"]
 
   s.add_dependency "enju_seed", "~> 0.4.0.beta.1"
   s.add_dependency "geocoder"
