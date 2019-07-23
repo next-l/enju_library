@@ -1,4 +1,4 @@
-class Subscription < ActiveRecord::Base
+class Subscription < ApplicationRecord
   has_many :subscribes, dependent: :destroy
   has_many :works, through: :subscribes
   belongs_to :user, validate: true

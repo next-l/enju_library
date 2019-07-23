@@ -1,4 +1,4 @@
-class Color < ActiveRecord::Base
+class Color < ApplicationRecord
   #attr_accessible :code, :property
 
   belongs_to :library_group
