@@ -24,3 +24,6 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
+jdk:
+  - openjdk8
+dist: xenial
