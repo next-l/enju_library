@@ -63,7 +63,7 @@ class UserGroupsController < ApplicationController
     end
 
     respond_to do |format|
-      if @user_group.update_attributes(user_group_params)
+      if @user_group.update(user_group_params)
         format.html { redirect_to @user_group, notice: t('controller.successfully_updated', model: t('activerecord.models.user_group')) }
         format.json { head :no_content }
       else

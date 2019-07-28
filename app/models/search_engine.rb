@@ -1,4 +1,4 @@
-class SearchEngine < ActiveRecord::Base
+class SearchEngine < ApplicationRecord
   acts_as_list
 
   validates :name, presence: true

@@ -1,4 +1,4 @@
-class UserImportFile < ActiveRecord::Base
+class UserImportFile < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   include ImportFile
   default_scope {order('user_import_files.id DESC')}

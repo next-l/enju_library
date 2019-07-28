@@ -1,4 +1,4 @@
-class UserExportFile < ActiveRecord::Base
+class UserExportFile < ApplicationRecord
   include Statesman::Adapters::ActiveRecordQueries
   include ExportFile
 

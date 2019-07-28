@@ -1,4 +1,4 @@
-class Library < ActiveRecord::Base
+class Library < ApplicationRecord
   include MasterModel
   default_scope { order('libraries.position') }
   scope :real, -> { where('id != 1') }

@@ -94,7 +94,7 @@ class LibrariesController < ApplicationController
     end
 
     respond_to do |format|
-      if @library.update_attributes(library_params)
+      if @library.update(library_params)
         format.html { redirect_to @library, notice: t('controller.successfully_updated', model: t('activerecord.models.library')) }
         format.json { head :no_content }
       else

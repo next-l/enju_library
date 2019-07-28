@@ -1,4 +1,4 @@
-class Subscribe < ActiveRecord::Base
+class Subscribe < ApplicationRecord
   belongs_to :subscription, counter_cache: true, validate: true
   belongs_to :work, class_name: 'Manifestation', validate: true
 

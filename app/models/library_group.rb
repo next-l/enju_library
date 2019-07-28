@@ -1,4 +1,4 @@
-class LibraryGroup < ActiveRecord::Base
+class LibraryGroup < ApplicationRecord
   #include Singleton
   include MasterModel
 
