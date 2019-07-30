@@ -14,7 +14,9 @@ class Shelf < ApplicationRecord
   acts_as_list scope: :library
 
   searchable do
-    string :name
+    string :shelf_name do
+      name
+    end
     string :library do
       library.name
     end

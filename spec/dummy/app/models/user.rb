@@ -5,6 +5,7 @@ class User < ApplicationRecord
 
   include EnjuSeed::EnjuUser
   include EnjuCirculation::EnjuUser
+      has_one :profile, dependent: :nullify
 end
 
 Accept.include(EnjuCirculation::EnjuAccept)

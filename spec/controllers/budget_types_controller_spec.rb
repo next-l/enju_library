@@ -103,9 +103,9 @@ describe BudgetTypesController do
         budget_type = BudgetType.create! valid_attributes
         # Assuming there are no other budget_types in the database, this
         # specifies that the BudgetType created on the previous line
-        # receives the :update_attributes message with whatever params are
+        # receives the :update message with whatever params are
         # submitted in the request.
-        BudgetType.any_instance.should_receive(:update_attributes).with('note' => 'test')
+        BudgetType.any_instance.should_receive(:update).with('note' => 'test')
         put :update, params: { id: budget_type.id, budget_type: { note: 'test' } }
       end
 
