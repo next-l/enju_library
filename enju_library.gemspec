@@ -45,5 +45,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency "puma"
   s.add_development_dependency "annotate"
   s.add_development_dependency "rails", "~> 5.2"
-  s.add_development_dependency "rails-i18n"
 end
