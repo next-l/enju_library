@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.summary     = "enju_library plugin"
   s.description = "Library module for Next-L Enju"
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"] - Dir["spec/dummy/db/*.sqlite3"]
 
   s.add_dependency "enju_seed", "~> 0.3.3"
