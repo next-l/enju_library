@@ -1,4 +1,4 @@
-class Bookstore < ActiveRecord::Base
+class Bookstore < ApplicationRecord
   default_scope { order('bookstores.position') }
   has_many :items
 

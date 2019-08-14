@@ -1,4 +1,4 @@
-class Basket < ActiveRecord::Base
+class Basket < ApplicationRecord
   default_scope { order('baskets.id DESC') }
   scope :will_expire, lambda {|date| where('created_at < ?', date)}
   belongs_to :user, validate: true

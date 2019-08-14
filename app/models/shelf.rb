@@ -1,4 +1,4 @@
-class Shelf < ActiveRecord::Base
+class Shelf < ApplicationRecord
   include MasterModel
   scope :real, -> { where('library_id != 1') }
   belongs_to :library, validate: true

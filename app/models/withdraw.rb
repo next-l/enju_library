@@ -1,4 +1,4 @@
-class Withdraw < ActiveRecord::Base
+class Withdraw < ApplicationRecord
   belongs_to :basket
   belongs_to :item, touch: true
   belongs_to :librarian, class_name: 'User'
