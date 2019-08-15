@@ -14,13 +14,8 @@ gemspec
 # To use debugger
 # gem 'debugger'
 gem 'enju_leaf', github: 'next-l/enju_leaf', branch: '2.x'
-gem 'enju_biblio', github: 'next-l/enju_biblio', branch: '2.x'
-gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer', branch: '2.x'
 gem 'enju_circulation', github: 'next-l/enju_circulation', branch: '2.x'
-gem 'enju_event', github: 'next-l/enju_event'
-gem 'enju_message', github: 'next-l/enju_message'
 gem 'enju_ndl', github: 'next-l/enju_ndl', branch: '2.x'
-gem 'enju_subject', github: 'next-l/enju_subject', branch: '2.x'
 gem 'paper_trail'
 gem 'sassc-rails'
 gem 'jbuilder'
