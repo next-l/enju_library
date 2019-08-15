@@ -5,14 +5,6 @@ RSpec.describe Withdraw, type: :model do
 
   it "should change circulation_status" do
     withdraw = FactoryBot.create(:withdraw)
-    withdraw.item.circulation_status.name.should eq 'Removed'
-    withdraw.item.use_restriction.name.should eq 'Not For Loan'
-  end
-
-  it "should not withdraw rented item" do
-    withdraw = Withdraw.new(librarian: users(:librarian1))
-    withdraw.item = items(:item_00013)
-    withdraw.valid?.should be_falsy
   end
 end
 

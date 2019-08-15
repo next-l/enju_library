@@ -253,7 +253,7 @@ describe BasketsController do
       it 'should create basket' do
         post :create, params: { basket: { user_number: users(:user1).profile.user_number } }
         assigns(:basket).should be_valid
-        response.should redirect_to new_checked_item_url(basket_id: assigns(:basket).id)
+        response.should redirect_to basket_url(assigns(:basket))
       end
 
       it 'should not create basket without user_number' do
@@ -316,8 +316,7 @@ describe BasketsController do
 
         it 'assigns the requested basket as @basket' do
           put :update, params: { id: 8, basket: @attrs }
-          assigns(:basket).checkouts.order('created_at DESC').first.item.circulation_status.name.should eq 'On Loan'
-          response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+          response.should redirect_to(basket_url(assigns(:basket)))
         end
       end
     end
@@ -333,12 +332,12 @@ describe BasketsController do
 
       it 'should destroy basket without user_id' do
         delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
 
       it 'should destroy basket' do
         delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
     end
 
@@ -347,12 +346,12 @@ describe BasketsController do
 
       it 'should destroy basket without user_id' do
         delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
 
       it 'should destroy basket' do
         delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
     end
 
