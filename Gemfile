@@ -25,6 +25,7 @@ gem 'enju_subject', github: 'next-l/enju_subject'
 gem 'paper_trail'
 gem 'sassc-rails'
 gem 'jbuilder'
+gem 'paperclip-meta'
 gem 'rails-i18n'
 group :test do
   gem 'rails-controller-testing'

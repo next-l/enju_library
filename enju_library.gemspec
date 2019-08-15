@@ -16,11 +16,10 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["spec/**/*"] - Dir["spec/dummy/{log,private,solr,tmp}/**/*"]
 
-  s.add_dependency "enju_seed", "~> 0.4.0.beta.1"
+  s.add_dependency "enju_seed", "~> 0.5.0.beta.1"
   s.add_dependency "geocoder"
   s.add_dependency "statesman", "~> 4.1"
   s.add_dependency "mini_magick"
-  s.add_dependency "paperclip-meta"
 
   s.add_development_dependency "enju_leaf", "~> 1.4.0.beta.1"
   s.add_development_dependency "enju_biblio", "~> 0.4.0.beta.1"
