@@ -45,7 +45,7 @@ class UserImportFile < ApplicationRecord
   # 利用者情報をTSVファイルを用いて作成します。
   def import
     transition_to!(:started)
-    num = { user_imported: 0, user_found: 0, failed: 0, error: 0 }
+    num = { user_imported: 0, user_found: 0, error: 0 }
     rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
 
@@ -62,41 +62,42 @@ class UserImportFile < ApplicationRecord
       next if row['dummy'].to_s.strip.present?
 
       username = row['username']
-      new_user = User.where(username: username).first
+      new_user = User.find_by(username: username)
       if new_user
         import_result.user = new_user
         import_result.save
         num[:user_found] += 1
       else
         new_user = User.new
-        new_user.role = Role.where(name: row['role']).first
-        if new_user.role
-          unless user.has_role?(new_user.role.name)
-            num[:failed] += 1
-            next
-          end
-        else
-          new_user.role = Role.find(2) # User
-        end
         new_user.username = username
         new_user.assign_attributes(set_user_params(row))
         profile = Profile.new
         profile.assign_attributes(set_profile_params(row))
+        if row['role'].present?
+          role = Role.find_by(name: row['role'])
+        else
+          role = Role.find(2) # User
+        end
 
         Profile.transaction do
-          if new_user.valid? and profile.valid?
+          if profile.valid? && role
             new_user.profile = profile
-            import_result.user = new_user
-            import_result.save!
-            num[:user_imported] += 1
-          else
-            error_message = "line #{row_num}: "
-            error_message += new_user.errors.full_messages.join(" ")
-            error_message += profile.errors.full_messages.join(" ")
-            import_result.error_message = error_message
-            import_result.save
-            num[:error] += 1
+            new_user.role = role
+
+            if new_user.save
+              import_result.user = new_user
+              import_result.save!
+              num[:user_imported] += 1
+              next
+            end
           end
+
+          error_message = "line #{row_num}: "
+          error_message += new_user.errors.full_messages.join(" ")
+          error_message += profile.errors.full_messages.join(" ")
+          import_result.error_message = error_message
+          import_result.save
+          num[:error] += 1
         end
       end
     end

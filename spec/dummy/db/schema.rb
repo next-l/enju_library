@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_163038) do
+ActiveRecord::Schema.define(version: 2019_08_14_120827) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -309,13 +309,15 @@ ActiveRecord::Schema.define(version: 2019_07_12_163038) do
   end
 
   create_table "checkins", id: :serial, force: :cascade do |t|
-    t.integer "item_id", null: false
+    t.integer "item_id"
     t.integer "librarian_id"
     t.integer "basket_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "lock_version", default: 0, null: false
+    t.bigint "checkout_id"
     t.index ["basket_id"], name: "index_checkins_on_basket_id"
+    t.index ["checkout_id"], name: "index_checkins_on_checkout_id"
     t.index ["item_id"], name: "index_checkins_on_item_id"
     t.index ["librarian_id"], name: "index_checkins_on_librarian_id"
   end
@@ -347,6 +349,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_163038) do
     t.integer "position"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.jsonb "display_name_translations", default: {}, null: false
     t.index ["name"], name: "index_checkout_types_on_name"
   end
 
@@ -1236,6 +1239,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_163038) do
     t.boolean "share_bookmarks"
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
+    t.jsonb "full_name_translations", default: {}, null: false
     t.index ["checkout_icalendar_token"], name: "index_profiles_on_checkout_icalendar_token", unique: true
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
@@ -1680,7 +1684,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_163038) do
     t.integer "checkout_renewal_limit", default: 0, null: false
     t.integer "reservation_limit", default: 0, null: false
     t.integer "reservation_expired_period", default: 7, null: false
-    t.boolean "set_due_date_before_closing_day", default: false, null: false
+    t.boolean "set_due_date_after_closing_day", default: false, null: false
     t.datetime "fixed_due_date"
     t.text "note"
     t.integer "position"
@@ -1807,8 +1811,10 @@ ActiveRecord::Schema.define(version: 2019_07_12_163038) do
     t.string "unlock_token"
     t.datetime "locked_at"
     t.datetime "confirmed_at"
+    t.bigint "profile_id"
     t.index ["checkout_icalendar_token"], name: "index_users_on_checkout_icalendar_token", unique: true
     t.index ["email"], name: "index_users_on_email"
+    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
@@ -1841,6 +1847,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_163038) do
   add_foreign_key "checked_items", "baskets"
   add_foreign_key "checked_items", "items"
   add_foreign_key "checked_items", "users"
+  add_foreign_key "checkins", "checkouts"
   add_foreign_key "checkins", "items"
   add_foreign_key "checkout_stat_has_manifestations", "manifestations"
   add_foreign_key "checkout_stat_has_users", "user_checkout_stats"
@@ -1895,4 +1902,5 @@ ActiveRecord::Schema.define(version: 2019_07_12_163038) do
   add_foreign_key "user_has_roles", "roles"
   add_foreign_key "user_has_roles", "users"
   add_foreign_key "user_reserve_stats", "users"
+  add_foreign_key "users", "profiles"
 end
