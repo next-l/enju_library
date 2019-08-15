@@ -5,9 +5,8 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 require "enju_library"
 require "enju_leaf"
-require "enju_circulation"
-require "enju_subject"
 require "enju_manifestation_viewer"
+require "enju_message"
 
 module Dummy
   class Application < Rails::Application

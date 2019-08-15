@@ -49,8 +49,6 @@ describe UserImportFile do
       user003.profile.user_number.should eq '001003'
       user003.profile.library.name.should eq 'kamata'
       user003.profile.locale.should eq 'ja'
-      user003.profile.checkout_icalendar_token.should eq 'secrettoken'
-      user003.profile.save_checkout_history.should be_truthy
       user003.profile.save_search_history.should be_falsy
       user003.profile.share_bookmarks.should be_falsy
       User.find_by(username: 'user000').should be_nil
@@ -77,7 +75,7 @@ describe UserImportFile do
       file.executed_at.should be_truthy
 
       file.reload
-      file.error_message.should eq "The following column(s) were ignored: save_search_history, share_bookmarks, invalid\nline 8: Password is too short (minimum is 6 characters)\nline 9: User number is invalid\nline 10: User number has already been taken"
+      file.error_message.should eq "The following column(s) were ignored: checkout_icalendar_token, save_checkout_history, save_search_history, share_bookmarks, invalid\nline 8: Password is too short (minimum is 6 characters)\nline 9: User number is invalid\nline 10: User number has already been taken"
       file.current_state.should eq 'failed'
     end
 
@@ -199,23 +197,8 @@ describe UserImportFile do
       )
       old_message_count = Message.count
       file.remove
-      User.count.should eq old_count - 2
+      User.count.should eq old_count - 3
       Message.count.should eq old_message_count + 1
-    end
-
-    it "should not remove users if there are checkouts" do
-      user001 = User.find_by(username: 'user001')
-      FactoryBot.create(:checkout, user: user001, item: FactoryBot.create(:item))
-      old_count = User.count
-      file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"),
-        user: users(:admin),
-        default_user_group: UserGroup.find(2),
-        default_library: Library.find(3)
-      )
-      file.remove
-      User.where(username: 'user001').should_not be_blank
-      User.count.should eq old_count - 2
     end
   end
 

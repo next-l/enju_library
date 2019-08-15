@@ -1895,7 +1895,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
   add_foreign_key "reserves", "manifestations"
   add_foreign_key "reserves", "users"
   add_foreign_key "retains", "items"
-  add_foreign_key "retains", "reserves"
+  add_foreign_key "retains", "reserves", column: "reserve_id"
   add_foreign_key "user_checkout_stats", "users"
   add_foreign_key "user_group_has_checkout_types", "checkout_types"
   add_foreign_key "user_group_has_checkout_types", "user_groups"
