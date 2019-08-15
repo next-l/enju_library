@@ -19,7 +19,7 @@ gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer', bra
 gem 'enju_circulation', github: 'next-l/enju_circulation', branch: '2.x'
 gem 'enju_event', github: 'next-l/enju_event'
 gem 'enju_message', github: 'next-l/enju_message'
-gem 'enju_ndl', github: 'next-l/enju_ndl'
+gem 'enju_ndl', github: 'next-l/enju_ndl', branch: '2.x'
 gem 'enju_subject', github: 'next-l/enju_subject', branch: '2.x'
 gem 'paper_trail'
 gem 'sassc-rails'
