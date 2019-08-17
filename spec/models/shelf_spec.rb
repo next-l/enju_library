@@ -13,15 +13,15 @@ end
 #
 # Table name: shelves
 #
-#  id                        :integer          not null, primary key
+#  id                        :bigint           not null, primary key
 #  name                      :string           not null
 #  display_name              :text
 #  note                      :text
-#  library_id                :integer          not null
+#  library_id                :bigint           not null
 #  items_count               :integer          default(0), not null
 #  position                  :integer
-#  created_at                :datetime
-#  updated_at                :datetime
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #  deleted_at                :datetime
 #  closed                    :boolean          default(FALSE), not null
 #  display_name_translations :jsonb            not null

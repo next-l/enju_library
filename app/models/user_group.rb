@@ -14,13 +14,13 @@ end
 #
 # Table name: user_groups
 #
-#  id                               :integer          not null, primary key
+#  id                               :bigint           not null, primary key
 #  name                             :string
 #  display_name                     :text
 #  note                             :text
 #  position                         :integer
-#  created_at                       :datetime
-#  updated_at                       :datetime
+#  created_at                       :datetime         not null
+#  updated_at                       :datetime         not null
 #  deleted_at                       :datetime
 #  valid_period_for_new_user        :integer          default(0), not null
 #  expired_at                       :datetime

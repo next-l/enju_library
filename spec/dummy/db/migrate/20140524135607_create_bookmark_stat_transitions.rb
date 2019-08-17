@@ -1,4 +1,4 @@
-class CreateBookmarkStatTransitions < ActiveRecord::Migration[4.2]
+class CreateBookmarkStatTransitions < ActiveRecord::Migration[5.2]
   def change
     create_table :bookmark_stat_transitions do |t|
       t.string :to_state
