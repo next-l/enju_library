@@ -13,15 +13,13 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
-<<<<<<< HEAD
+gem 'rails', '~> 5.2'
 gem 'enju_seed', github: 'next-l/enju_seed'
 gem 'enju_leaf', github: 'next-l/enju_leaf'
 gem 'enju_biblio', github: 'next-l/enju_biblio'
 gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer'
 gem 'enju_subject', github: 'next-l/enju_subject'
 gem 'enju_ndl', github: 'next-l/enju_ndl'
-=======
->>>>>>> 54fa40e... update default fixture file
 gem 'paper_trail'
 gem 'sassc-rails'
 gem 'jbuilder'
