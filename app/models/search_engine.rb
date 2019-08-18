@@ -28,7 +28,6 @@ end
 #
 #  id                        :bigint           not null, primary key
 #  name                      :string           not null
-#  display_name              :text
 #  url                       :string           not null
 #  base_url                  :text             not null
 #  http_method               :text             not null

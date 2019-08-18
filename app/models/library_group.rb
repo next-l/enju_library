@@ -81,7 +81,6 @@ end
 #
 #  id                            :bigint           not null, primary key
 #  name                          :string           not null
-#  display_name                  :text
 #  short_name                    :string           not null
 #  my_networks                   :text
 #  old_login_banner              :text

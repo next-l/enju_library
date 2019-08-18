@@ -16,12 +16,10 @@ end
 #
 #  id                               :bigint           not null, primary key
 #  name                             :string
-#  display_name                     :text
 #  note                             :text
 #  position                         :integer
 #  created_at                       :datetime         not null
 #  updated_at                       :datetime         not null
-#  deleted_at                       :datetime
 #  valid_period_for_new_user        :integer          default(0), not null
 #  expired_at                       :datetime
 #  number_of_day_to_notify_overdue  :integer          default(7), not null

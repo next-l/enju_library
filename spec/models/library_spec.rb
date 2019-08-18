@@ -19,7 +19,6 @@ end
 #
 #  id                        :bigint           not null, primary key
 #  name                      :string           not null
-#  display_name              :text
 #  short_display_name        :string           not null
 #  zip_code                  :string
 #  street                    :text
@@ -37,7 +36,6 @@ end
 #  country_id                :bigint
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  deleted_at                :datetime
 #  opening_hour              :text
 #  isil                      :string
 #  latitude                  :float

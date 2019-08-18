@@ -254,7 +254,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
     t.string "fax_number"
     t.string "url"
     t.integer "position"
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -821,7 +820,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
 
   create_table "libraries", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.string "short_display_name", null: false
     t.string "zip_code"
     t.text "street"
@@ -839,7 +837,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
     t.bigint "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.text "opening_hour"
     t.string "isil"
     t.float "latitude"
@@ -852,7 +849,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
 
   create_table "library_groups", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.string "short_name", null: false
     t.text "my_networks"
     t.text "old_login_banner"
@@ -1441,7 +1437,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
 
   create_table "search_engines", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.string "url", null: false
     t.text "base_url", null: false
     t.text "http_method", null: false
@@ -1520,14 +1515,12 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
 
   create_table "shelves", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note"
     t.bigint "library_id", null: false
     t.integer "items_count", default: 0, null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.boolean "closed", default: false, null: false
     t.jsonb "display_name_translations", default: {}, null: false
     t.index ["library_id"], name: "index_shelves_on_library_id"
@@ -1591,7 +1584,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
     t.text "note"
     t.bigint "user_id"
     t.bigint "order_list_id"
-    t.datetime "deleted_at"
     t.integer "subscribes_count", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1701,12 +1693,10 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
 
   create_table "user_groups", force: :cascade do |t|
     t.string "name"
-    t.text "display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "deleted_at"
     t.integer "valid_period_for_new_user", default: 0, null: false
     t.datetime "expired_at"
     t.integer "number_of_day_to_notify_overdue", default: 7, null: false
@@ -1895,6 +1885,7 @@ ActiveRecord::Schema.define(version: 2019_08_14_120827) do
   add_foreign_key "reserves", "users"
   add_foreign_key "retains", "items"
   add_foreign_key "retains", "reserves", column: "reserve_id"
+  add_foreign_key "subscriptions", "users"
   add_foreign_key "user_checkout_stats", "users"
   add_foreign_key "user_group_has_checkout_types", "checkout_types"
   add_foreign_key "user_group_has_checkout_types", "user_groups"
