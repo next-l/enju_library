@@ -14,13 +14,18 @@ describe UserImportResultsController do
 
       describe 'With @user_import_file parameter' do
         before(:each) do
-          @file = UserImportFile.create user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample_long.tsv"), user: users(:admin)
-          @file.default_user_group = UserGroup.find(2)
-          @file.default_library = Library.find(3)
+          @file = UserImportFile.new(
+            user: users(:admin),
+            default_user_group: UserGroup.find(2),
+            default_library: Library.find(3)
+          )
+          @file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample_long.tsv"), filename: 'attachment.txt')
           @file.save
           @file.import_start
         end
+
         render_views
+
         it 'should assign all user_import_results for the user_import_file with a page parameter' do
           get :index, params: { user_import_file_id: @file.id }
           results = assigns(:user_import_results)

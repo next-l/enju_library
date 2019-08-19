@@ -5,23 +5,19 @@ describe UserImportFile do
 
   describe "when its mode is 'create'" do
     before(:each) do
-      @file = UserImportFile.new user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv")
+      @file = UserImportFile.new
       @file.default_user_group = UserGroup.find(2)
       @file.default_library = Library.find(3)
       @file.user = users(:admin)
+      @file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
       @file.save
     end
 
     it "should be imported" do
-      file = UserImportFile.new user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv")
-      file.default_user_group = UserGroup.find(2)
-      file.default_library = Library.find(3)
-      file.user = users(:admin)
-      file.save
       old_users_count = User.count
       old_import_results_count = UserImportResult.count
-      file.current_state.should eq 'pending'
-      file.import_start.should eq({user_imported: 5, user_found: 0, error: 3})
+      @file.current_state.should eq 'pending'
+      @file.import_start.should eq({user_imported: 5, user_found: 0, error: 3})
       User.order('id DESC')[1].username.should eq 'user005'
       User.order('id DESC')[2].username.should eq 'user003'
       User.count.should eq old_users_count + 5
@@ -71,12 +67,12 @@ describe UserImportFile do
       user006.profile.user_number.should be_nil
       user006.profile.user_group.name.should eq UserGroup.find(2).name
 
-      file.user_import_fingerprint.should be_truthy
-      file.executed_at.should be_truthy
+      # @file.user_import_fingerprint.should be_truthy
+      @file.executed_at.should be_truthy
 
-      file.reload
-      file.error_message.should eq "The following column(s) were ignored: checkout_icalendar_token, save_checkout_history, save_search_history, share_bookmarks, invalid\nline 8: Password is too short (minimum is 6 characters)\nline 9: User number is invalid\nline 10: User number has already been taken"
-      file.current_state.should eq 'failed'
+      @file.reload
+      @file.error_message.should eq "The following column(s) were ignored: checkout_icalendar_token, save_checkout_history, save_search_history, share_bookmarks, invalid\nline 8: Password is too short (minimum is 6 characters)\nline 9: User number is invalid\nline 10: User number has already been taken"
+      @file.current_state.should eq 'failed'
     end
 
     it "should send message when import is completed" do
@@ -104,15 +100,16 @@ describe UserImportFile do
         username: 'user001'
       )
     end
+
     it "should update users" do
-      @file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file.tsv"),
+      file = UserImportFile.create!(
         user: users(:admin),
         default_library: libraries(:library_00001),
         default_user_group: user_groups(:user_group_00001)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file.tsv"), filename: 'attachment.txt')
       old_message_count = Message.count
-      result = @file.modify
+      result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
       user001.email.should eq 'user001@example.jp'
@@ -136,11 +133,11 @@ describe UserImportFile do
         date_of_birth: 10.years.ago)
       user.save!
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.friendly.find('user001')
@@ -150,25 +147,27 @@ describe UserImportFile do
       user001.profile.full_name_transcription.should eq 'User 001'
       user001.profile.keyword_list.should eq 'keyword1 keyword2'
     end
+
     it "should update user_number" do
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
       user001.profile.user_number.should eq '0001'
     end
+
     it "should update user's lock status" do
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
@@ -179,22 +178,22 @@ describe UserImportFile do
   describe "when its mode is 'destroy'" do
     before(:each) do
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
       file.import_start
     end
 
     it "should remove users" do
       old_count = User.count
       file = UserImportFile.create!(
-        user_import: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"),
         user: users(:admin),
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
+      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"), filename: 'attachment.txt')
       old_message_count = Message.count
       file.remove
       User.count.should eq old_count - 3
@@ -203,10 +202,12 @@ describe UserImportFile do
   end
 
   it "should import in background" do
-    file = UserImportFile.new user_import: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), user: users(:admin)
-    file.user = users(:admin)
-    file.default_user_group = UserGroup.find(2)
-    file.default_library = Library.find(3)
+    file = UserImportFile.new(
+      user: users(:admin),
+      default_user_group: UserGroup.find(2),
+      default_library: Library.find(3)
+    )
+    file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
     file.save
     UserImportFileJob.perform_later(file).should be_truthy
   end
@@ -216,20 +217,16 @@ end
 #
 # Table name: user_import_files
 #
-#  id                       :bigint           not null, primary key
-#  user_id                  :bigint
-#  note                     :text
-#  executed_at              :datetime
-#  user_import_file_name    :string
-#  user_import_content_type :string
-#  user_import_file_size    :integer
-#  user_import_updated_at   :datetime
-#  user_import_fingerprint  :string
-#  edit_mode                :string
-#  error_message            :text
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#  user_encoding            :string
-#  default_library_id       :bigint
-#  default_user_group_id    :bigint
+#  id                      :bigint           not null, primary key
+#  user_id                 :bigint
+#  note                    :text
+#  executed_at             :datetime
+#  user_import_fingerprint :string
+#  edit_mode               :string
+#  error_message           :text
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  user_encoding           :string
+#  default_library_id      :bigint
+#  default_user_group_id   :bigint
 #

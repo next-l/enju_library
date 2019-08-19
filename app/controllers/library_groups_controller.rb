@@ -20,16 +20,8 @@ class LibraryGroupsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @library_group }
       format.download {
-        if @library_group.header_logo.exists?
-          if ENV['ENJU_STORAGE'] == 's3'
-            file = Faraday.get(@library_group.header_logo.expiring_url(3600, :medium)).body.force_encoding('UTF-8')
-            send_data file, filename: File.basename(@library_group.header_logo_file_name), type: @library_group.header_logo_content_type, disposition: :inline
-          else
-            file = @library_group.header_logo.path(:medium)
-            if File.exist?(file) && File.file?(file)
-              send_file file, filename: File.basename(@library_group.header_logo_file_name), type: @library_group.header_logo_content_type, disposition: :inline
-            end
-          end
+        if @library_group.header_logo.attached?
+          send_data @library_group.header_logo.download, filename: @library_group.header_logo.filename, type: @library_group.header_logo.content_type, disposition: :inline
         end
       }
     end

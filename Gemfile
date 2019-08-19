@@ -23,10 +23,11 @@ gem 'enju_ndl', github: 'next-l/enju_ndl'
 gem 'paper_trail'
 gem 'sassc-rails'
 gem 'jbuilder'
-gem 'paperclip-meta'
 gem 'rails-i18n'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
   gem 'webdrivers'
 end
+gem 'paperclip'
+gem 'paperclip-meta'

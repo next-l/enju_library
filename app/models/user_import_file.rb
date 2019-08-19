@@ -5,27 +5,7 @@ class UserImportFile < ApplicationRecord
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 
-  if ENV['ENJU_STORAGE'] == 's3'
-    has_attached_file :user_import, storage: :s3,
-      s3_credentials: {
-        access_key: ENV['AWS_ACCESS_KEY_ID'],
-        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-        bucket: ENV['S3_BUCKET_NAME'],
-        s3_host_name: ENV['S3_HOST_NAME']
-      },
-      s3_permissions: :private
-  else
-    has_attached_file :user_import,
-      path: ":rails_root/private/system/:class/:attachment/:id_partition/:style/:filename"
-  end
-  validates_attachment_content_type :user_import, content_type: [
-    'text/csv',
-    'text/plain',
-    'text/tab-separated-values',
-    'application/octet-stream',
-    'application/vnd.ms-excel'
-  ]
-  validates_attachment_presence :user_import
+  has_one_attached :user_import
   belongs_to :user
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
@@ -343,20 +323,16 @@ end
 #
 # Table name: user_import_files
 #
-#  id                       :bigint           not null, primary key
-#  user_id                  :bigint
-#  note                     :text
-#  executed_at              :datetime
-#  user_import_file_name    :string
-#  user_import_content_type :string
-#  user_import_file_size    :integer
-#  user_import_updated_at   :datetime
-#  user_import_fingerprint  :string
-#  edit_mode                :string
-#  error_message            :text
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
-#  user_encoding            :string
-#  default_library_id       :bigint
-#  default_user_group_id    :bigint
+#  id                      :bigint           not null, primary key
+#  user_id                 :bigint
+#  note                    :text
+#  executed_at             :datetime
+#  user_import_fingerprint :string
+#  edit_mode               :string
+#  error_message           :text
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  user_encoding           :string
+#  default_library_id      :bigint
+#  default_user_group_id   :bigint
 #
