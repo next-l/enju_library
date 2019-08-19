@@ -1,5 +1,4 @@
 require 'enju_seed'
-require 'paper_trail'
 require 'statesman'
 require 'geocoder'
 require 'ipaddr'
