@@ -1471,7 +1471,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.datetime "updated_at", null: false
     t.boolean "save_search_history", default: false, null: false
     t.string "username"
-    t.datetime "deleted_at"
     t.datetime "expired_at"
     t.integer "failed_attempts", default: 0
     t.string "unlock_token"
