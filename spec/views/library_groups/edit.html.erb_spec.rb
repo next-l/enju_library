@@ -7,15 +7,6 @@ describe "library_groups/edit" do
     @countries = Country.all
   end
 
-  it "renders selector for multilpe book jacket sources." do
-    render
-    expect(rendered).to have_css "select#library_group_book_jacket_source"
-    expect(rendered).to have_css "select#library_group_book_jacket_source option", minimum: 2
-    expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="google"]'
-    expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="openbd"]'
-    expect(rendered).to have_css 'select#library_group_book_jacket_source option[value="hanmotocom"]'
-  end
-
   it "renders color forms." do
     render
     expect(rendered).to have_css "input#library_group_colors_attributes_0_code"

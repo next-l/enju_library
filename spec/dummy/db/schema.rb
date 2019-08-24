@@ -266,10 +266,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "attachment_file_name"
-    t.string "attachment_content_type"
-    t.bigint "attachment_file_size"
-    t.datetime "attachment_updated_at"
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
@@ -281,33 +277,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "display_name_translations", default: {}, null: false
-  end
-
-  create_table "classification_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "display_name"
-    t.text "note"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "classifications", force: :cascade do |t|
-    t.integer "parent_id"
-    t.string "category", null: false
-    t.text "note"
-    t.integer "classification_type_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "lft"
-    t.integer "rgt"
-    t.integer "manifestation_id"
-    t.string "url"
-    t.string "label"
-    t.index ["category"], name: "index_classifications_on_category"
-    t.index ["classification_type_id"], name: "index_classifications_on_classification_type_id"
-    t.index ["manifestation_id"], name: "index_classifications_on_manifestation_id"
-    t.index ["parent_id"], name: "index_classifications_on_parent_id"
   end
 
   create_table "colors", force: :cascade do |t|
@@ -400,7 +369,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
 
   create_table "event_categories", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -423,10 +391,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
 
   create_table "event_export_files", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "event_export_file_name"
-    t.string "event_export_content_type"
-    t.bigint "event_export_file_size"
-    t.datetime "event_export_updated_at"
     t.datetime "executed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -448,15 +412,9 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
 
   create_table "event_import_files", force: :cascade do |t|
     t.bigint "parent_id"
-    t.string "content_type"
-    t.integer "size"
     t.bigint "user_id"
     t.text "note"
     t.datetime "executed_at"
-    t.string "event_import_file_name"
-    t.string "event_import_content_type"
-    t.integer "event_import_file_size"
-    t.datetime "event_import_updated_at"
     t.string "edit_mode"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -489,7 +447,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.datetime "start_at"
     t.datetime "end_at"
     t.boolean "all_day", default: false, null: false
-    t.datetime "deleted_at"
     t.text "display_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -677,15 +634,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.index ["shelf_id"], name: "index_items_on_shelf_id"
   end
 
-  create_table "jpno_records", force: :cascade do |t|
-    t.string "body", null: false
-    t.bigint "manifestation_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["body"], name: "index_jpno_records_on_body", unique: true
-    t.index ["manifestation_id"], name: "index_jpno_records_on_manifestation_id"
-  end
-
   create_table "languages", force: :cascade do |t|
     t.string "name", null: false
     t.string "native_name"
@@ -822,10 +770,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.integer "required_score", default: 0, null: false
     t.integer "frequency_id", default: 1, null: false
     t.boolean "subscription_master", default: false, null: false
-    t.string "attachment_file_name"
-    t.string "attachment_content_type"
-    t.integer "attachment_file_size"
-    t.datetime "attachment_updated_at"
     t.text "title_alternative_transcription"
     t.text "description"
     t.text "abstract"
@@ -841,7 +785,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.integer "serial_number"
     t.integer "content_type_id", default: 1
     t.integer "year_of_publication"
-    t.text "attachment_meta"
     t.integer "month_of_publication"
     t.boolean "fulltext_content"
     t.string "doi"
@@ -935,24 +878,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.index ["sender_id"], name: "index_messages_on_sender_id"
   end
 
-  create_table "ndl_bib_id_records", force: :cascade do |t|
-    t.string "body", null: false
-    t.bigint "manifestation_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["body"], name: "index_ndl_bib_id_records_on_body", unique: true
-    t.index ["manifestation_id"], name: "index_ndl_bib_id_records_on_manifestation_id"
-  end
-
-  create_table "ndla_records", force: :cascade do |t|
-    t.bigint "agent_id"
-    t.string "body", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["agent_id"], name: "index_ndla_records_on_agent_id"
-    t.index ["body"], name: "index_ndla_records_on_body", unique: true
-  end
-
   create_table "owns", force: :cascade do |t|
     t.bigint "agent_id", null: false
     t.bigint "item_id", null: false
@@ -1001,10 +926,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "picture_file_name"
-    t.string "picture_content_type"
-    t.integer "picture_file_size"
-    t.datetime "picture_updated_at"
     t.text "picture_meta"
     t.string "picture_fingerprint"
     t.integer "picture_width"
@@ -1275,48 +1196,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.index ["library_id"], name: "index_shelves_on_library_id"
   end
 
-  create_table "subject_heading_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "display_name"
-    t.text "note"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "subject_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "display_name"
-    t.text "note"
-    t.integer "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "subjects", force: :cascade do |t|
-    t.bigint "parent_id"
-    t.integer "use_term_id"
-    t.string "term"
-    t.text "term_transcription"
-    t.bigint "subject_type_id", null: false
-    t.text "scope_note"
-    t.text "note"
-    t.bigint "required_role_id", default: 1, null: false
-    t.integer "lock_version", default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "deleted_at"
-    t.string "url"
-    t.integer "manifestation_id"
-    t.integer "subject_heading_type_id"
-    t.index ["manifestation_id"], name: "index_subjects_on_manifestation_id"
-    t.index ["parent_id"], name: "index_subjects_on_parent_id"
-    t.index ["required_role_id"], name: "index_subjects_on_required_role_id"
-    t.index ["subject_type_id"], name: "index_subjects_on_subject_type_id"
-    t.index ["term"], name: "index_subjects_on_term"
-    t.index ["use_term_id"], name: "index_subjects_on_use_term_id"
-  end
-
   create_table "subscribes", force: :cascade do |t|
     t.bigint "subscription_id", null: false
     t.integer "work_id", null: false
@@ -1504,6 +1383,8 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
   add_foreign_key "doi_records", "manifestations"
   add_foreign_key "donates", "agents"
   add_foreign_key "donates", "items"
+  add_foreign_key "event_export_files", "users"
+  add_foreign_key "event_import_files", "users"
   add_foreign_key "events", "event_categories"
   add_foreign_key "identifiers", "identifier_types"
   add_foreign_key "identifiers", "manifestations"
@@ -1516,11 +1397,8 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
   add_foreign_key "item_has_use_restrictions", "items"
   add_foreign_key "item_has_use_restrictions", "use_restrictions"
   add_foreign_key "items", "manifestations"
-  add_foreign_key "jpno_records", "manifestations"
   add_foreign_key "libraries", "library_groups"
   add_foreign_key "library_groups", "users"
-  add_foreign_key "ndl_bib_id_records", "manifestations"
-  add_foreign_key "ndla_records", "agents"
   add_foreign_key "periodical_and_manifestations", "manifestations"
   add_foreign_key "periodical_and_manifestations", "periodicals"
   add_foreign_key "periodicals", "frequencies"
