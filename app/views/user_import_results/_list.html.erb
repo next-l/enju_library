@@ -6,9 +6,10 @@
   </tr>
 
 <% @user_import_results.each do |user_import_result| %>
+  <%= next unless user_import_result.user_import_file.user_import.attached? %>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
-      <%= link_to user_import_result.user_import_file.user_import.filename, user_import_result.user_import_file if user_import_result.user_import_file.user_import.attached? %>
+      <%= link_to user_import_result.user_import_file.user_import.filename.to_s, user_import_result.user_import_file %>
       <br />
       <%=l user_import_result.created_at %>
     </td>
