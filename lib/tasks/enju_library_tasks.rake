@@ -65,7 +65,7 @@ EOS
     I18n.available_locales.each do |locale|
       LibraryGroup.with_translations(locale).each do |library_group|
         ['login_banner', 'footer_banner'].each do |column|
-          record.update("#{column}_#{locale}": library_group.send(column.to_h))
+          library_group.update("#{column}_#{locale}": library_group.send(column.to_h))
         end
       end
     end
