@@ -17,8 +17,8 @@ namespace :enju_library do
     Shelf.create!(name: 'first_shelf', library: Library.find_by(name: 'yours'))
   end
 
-  desc "upgrade enju_library"
-  task :upgrade => :environment do
+  desc "upgrade enju_library to 1.3"
+  task :upgrade_to_13 => :environment do
     Rake::Task['statesman:backfill_most_recent'].invoke('UserExportFile')
     Rake::Task['statesman:backfill_most_recent'].invoke('UserImportFile')
     library_group = LibraryGroup.site_config
@@ -46,4 +46,20 @@ EOS
     library_group.save
     puts 'enju_library: The upgrade completed successfully.'
   end
+
+  desc "upgrade enju_biblio to 2.0"
+  task upgrade: :environment do
+    class_names = [
+      BudgetType, Library, LibraryGroup, RequestStatusType, RequestType,
+      Shelf, UserGroup
+    ]
+    class_names.each do |klass|
+      klass.find_each do |record|
+        I18n.available_locales.each do |locale|
+          next unless record.respond_to?("display_name_#{locale}")
+          record.update("display_name_#{locale}": YAML.safe_load(record[:display_name])[locale.to_s])
+        end
+      end
+    end
+    puts 'enju_library: The upgrade completed successfully.'
 end
