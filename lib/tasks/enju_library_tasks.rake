@@ -62,12 +62,14 @@ EOS
       end
     end
 
-    I18n.available_locales.each do |locale|
-      LibraryGroup.with_translations(locale).each do |library_group|
-        ['login_banner', 'footer_banner'].each do |column|
-          library_group.update("#{column}_#{locale}": library_group.send(column.to_h))
-        end
-      end
+    sql = 'SELECT * FROM library_group_translations;'
+    results = ActiveRecord::Base.connection.execute(sql)
+    results.each do |row|
+      library_group = LibraryGroup.find(row['library_group_id'])
+      library_group.update(
+        "login_banner_#{row['locale']}": row['login_banner'],
+        "footer_banner_#{row['locale']}": row['footer_banner']
+      )
     end
 
     puts 'enju_library: The upgrade completed successfully.'
