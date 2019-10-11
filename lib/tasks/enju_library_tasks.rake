@@ -51,7 +51,7 @@ EOS
   task upgrade: :environment do
     class_names = [
       BudgetType, Library, LibraryGroup, RequestStatusType, RequestType,
-      Shelf, UserGroup
+      SearchEngine, Shelf, UserGroup
     ]
     class_names.each do |klass|
       klass.find_each do |record|
