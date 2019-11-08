@@ -1,5 +1,8 @@
 class UserExportFile < ApplicationRecord
-  include Statesman::Adapters::ActiveRecordQueries
+  include Statesman::Adapters::ActiveRecordQueries[
+    transition_class: UserExportFileTransition,
+    initial_state: :pending
+  ]
   include ExportFile
 
   has_one_attached :user_export

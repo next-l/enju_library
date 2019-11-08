@@ -1,5 +1,8 @@
 class UserImportFile < ApplicationRecord
-  include Statesman::Adapters::ActiveRecordQueries
+  include Statesman::Adapters::ActiveRecordQueries[
+    transition_class: UserImportFileTransition,
+    initial_state: :pending
+  ]
   include ImportFile
   default_scope {order('user_import_files.id DESC')}
   scope :not_imported, -> { in_state(:pending) }
