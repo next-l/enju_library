@@ -18,6 +18,7 @@ gem 'rails', '~> 5.2'
 gem 'sassc-rails'
 gem 'jbuilder'
 gem 'rails-i18n'
+gem 'sprockets', '~> 3.7'
 group :test do
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
