@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "statesman", "~> 4.1"
   s.add_dependency "mini_magick"
   s.add_dependency "paperclip-meta"
+  s.add_dependency "paper_trail"
 
   s.add_development_dependency "enju_leaf", "~> 2.0.0.beta.1"
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.4.0.beta.1"
