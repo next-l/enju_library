@@ -5,9 +5,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        - master
     docker:
       # specify the version you desire here
        - image: circleci/ruby:2.6-stretch-node-browsers
@@ -55,7 +52,6 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       - run: bundle exec rake app:sunspot:solr:start RAILS_ENV=test
-      - run: yarn install
 
       # run tests!
       - run:
