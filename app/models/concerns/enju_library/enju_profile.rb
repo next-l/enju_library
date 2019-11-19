@@ -7,6 +7,7 @@ module EnjuLibrary
       belongs_to :user_group
       validates_associated :user_group, :library
       validates_presence_of :user_group, :library, :locale #, :user_number
+      before_save :set_expired_at
     end
 
     # ユーザの有効期限を設定します。
