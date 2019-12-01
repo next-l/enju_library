@@ -7,6 +7,9 @@ class EnjuLibrary::SetupGenerator < Rails::Generators::Base
     return if file == 'fixture'
     inject_into_file 'app/controllers/application_controller.rb',
       "  include EnjuLibrary::Controller\n", after: "include EnjuLeaf::Controller\n"
-    append_to_file("app/models/user.rb", "Item.include(EnjuLibrary::EnjuItem)\n")
+    append_to_file "app/models/user.rb", <<EOS
+Item.include(EnjuLibrary::EnjuItem)
+Profile.include(EnjuLibrary::EnjuProfile)
+EOS
   end
 end
