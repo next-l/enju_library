@@ -11,8 +11,8 @@ one:
   position: 1
   login_banner_translations: {"ja": "オープンソース図書館システム Next-L Enju です。このメッセージは管理者としてログインした後に変更することができます。",
     "en": "Next-L Enju, an open-source integrated library system. You can edit this message after logging in as Administrator."}
-  footer_banner_translations: {"en":"[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), an open source integrated library system | [About this system](/page/about) | [Report bugs](https://github.com/next-l/enju_leaf/issues) | [Manual](https://next-l.github.io/manual/)",
-    "ja":"[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), オープンソース統合図書館システム | [このシステムについて](/page/about) | [不具合を報告する](https://github.com/next-l/enju_leaf/issues) | [マニュアル](https://next-l.github.io/manual/)"}
+  footer_banner_translations: {"en":"[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), an open source integrated library system \| [About this system](/page/about) \| [Report bugs](https://github.com/next-l/enju_leaf/issues) \| [Manual](https://next-l.github.io/manual/)",
+    "ja":"[Next-L Enju Leaf __VERSION__](https://github.com/next-l/enju_leaf), オープンソース統合図書館システム \| [このシステムについて](/page/about) \| [不具合を報告する](https://github.com/next-l/enju_leaf/issues) \| [マニュアル](https://next-l.github.io/manual/)"}
   admin_networks: "0.0.0.0/0\r\n\
     ::/0"
   pub_year_facet_range_interval: 10
