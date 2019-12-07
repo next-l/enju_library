@@ -198,14 +198,6 @@ class UserImportFile < ApplicationRecord
 
   private
 
-  def self.transition_class
-    UserImportFileTransition
-  end
-
-  def self.initial_state
-    :pending
-  end
-
   # インポート作業用のファイルを読み込みます。
   # @param [File] tempfile 作業用のファイル
   def open_import_file(tempfile)

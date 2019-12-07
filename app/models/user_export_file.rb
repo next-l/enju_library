@@ -33,14 +33,6 @@ class UserExportFile < ApplicationRecord
     mailer = UserExportMailer.failed(self)
     raise e
   end
-
-  def self.transition_class
-    UserExportFileTransition
-  end
-
-  def self.initial_state
-    :pending
-  end
 end
 
 # == Schema Information
