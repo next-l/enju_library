@@ -6,4 +6,5 @@ class User < ApplicationRecord
   include EnjuLibrary::EnjuUser
 end
 
+Profile.include(EnjuLibrary::EnjuProfile)
 Item.include(EnjuLibrary::EnjuItem)
