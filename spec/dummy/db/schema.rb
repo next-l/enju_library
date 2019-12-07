@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_18_075628) do
+ActiveRecord::Schema.define(version: 2019_11_19_105435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -966,8 +966,6 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
 
   create_table "profiles", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "user_group_id"
-    t.bigint "library_id"
     t.string "locale"
     t.string "user_number"
     t.text "full_name"
@@ -982,6 +980,8 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.text "full_name_transcription"
     t.datetime "date_of_birth"
     t.jsonb "full_name_translations", default: {}, null: false
+    t.bigint "user_group_id"
+    t.bigint "library_id"
     t.index ["library_id"], name: "index_profiles_on_library_id"
     t.index ["user_group_id"], name: "index_profiles_on_user_group_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
@@ -1095,10 +1095,10 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
     t.string "name", null: false
     t.string "display_name"
     t.text "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer "score", default: 0, null: false
     t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
@@ -1401,6 +1401,8 @@ ActiveRecord::Schema.define(version: 2019_08_18_075628) do
   add_foreign_key "periodical_and_manifestations", "manifestations"
   add_foreign_key "periodical_and_manifestations", "periodicals"
   add_foreign_key "periodicals", "frequencies"
+  add_foreign_key "profiles", "libraries"
+  add_foreign_key "profiles", "user_groups"
   add_foreign_key "profiles", "users"
   add_foreign_key "resource_import_files", "users"
   add_foreign_key "subscriptions", "users"
