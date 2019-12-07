@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_seed", "~> 0.4.0.rc.1"
   s.add_dependency "geocoder"
-  s.add_dependency "statesman", "~> 5.0"
+  s.add_dependency "statesman", "~> 5.1"
   s.add_dependency "mini_magick"
   s.add_dependency "paperclip-meta"
   s.add_dependency "paper_trail"
