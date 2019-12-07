@@ -19,6 +19,7 @@ jobs:
          environment:
            POSTGRES_USER: postgres
            POSTGRES_DB: enju_library_dummy_test
+       - image: selenium/standalone-chrome:latest
 
     working_directory: ~/repo
 
@@ -52,6 +53,7 @@ jobs:
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
       - run: bundle exec rake app:sunspot:solr:start RAILS_ENV=test
+      - run: spec/dummy/bin/yarn install
 
       # run tests!
       - run:
