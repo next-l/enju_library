@@ -39,7 +39,7 @@ class Shelf < ApplicationRecord
   end
 
   def localized_display_name
-    display_name.localize
+    display_name
   end
 
   # http://stackoverflow.com/a/12437606
