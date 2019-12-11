@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
+<div class="card bg-info">
 <h1 class="title"><%= t('page.showing', model: t('activerecord.models.user_group')) -%></h1>
-<div id="content_list">
+<div class="card-body bg-light">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -55,7 +55,7 @@
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+<div class="col-3">
   <ul>
     <%- if policy(@user_group).update? -%>
       <li><%= link_to t('page.edit'), edit_user_group_path(@user_group) -%></li>

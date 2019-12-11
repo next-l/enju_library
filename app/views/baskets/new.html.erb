@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
+<div class="card bg-info">
 <h1 class="title"><%= t('page.new', model: t('activerecord.models.basket')) -%></h1>
-<div id="content_list">
+<div class="card-body bg-light">
 
 <%= form_for(@basket, html: {name: 'basket_form'}) do |f| -%>
   <%= f.error_messages -%>
@@ -21,7 +21,7 @@
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+<div class="col-3">
   <ul>
     <% if defined?(EnjuCirculation) %>
       <li><%= link_to t('page.new', model: t('activerecord.models.checkin')), new_checkin_path -%></li>

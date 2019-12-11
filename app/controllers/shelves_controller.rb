@@ -57,7 +57,6 @@ class ShelvesController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @shelf }
-      format.html.phone
     end
   end
 

@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
+<div class="card bg-info">
 <h1 class="title"><%= t('page.listing', model: t('activerecord.models.user_export_file')) -%></h1>
-<div id="content_list">
+<div class="card-body bg-light">
 
 <table class="table table-striped index">
   <thead>
@@ -37,7 +37,7 @@
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+<div class="col-3">
   <ul>
     <li><%= link_to t('page.new', model: t('activerecord.models.user_export_file')), new_user_export_file_path -%></li>
   </ul>

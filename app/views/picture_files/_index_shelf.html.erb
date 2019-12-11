@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
+<div class="card bg-info">
   <h1 class="title"><%= t('page.listing', model: t('activerecord.models.picture_file')) -%></h1>
-<div id="content_list">
+<div class="card-body bg-light">
 <p id="notice"><%= notice %></p>
 
 <h2 class="resource_title"><%= link_to shelf.display_name, shelf -%></h2>
@@ -44,7 +44,7 @@
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+<div class="col-3">
   <%- if policy(PictureFile).create? -%>
     <ul>
       <li><%= link_to t('page.new', model: t('activerecord.models.picture_file')), new_picture_file_path(shelf_id: shelf.id) -%></li>
