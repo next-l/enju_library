@@ -3,7 +3,7 @@ module EnjuLibrary
     extend ActiveSupport::Concern
 
     included do
-      before_action :get_library_group, :set_locale, :set_available_languages, :set_mobile_request
+      before_action :get_library_group, :set_locale, :set_available_languages
       before_action :store_current_location, unless: :devise_controller?
       rescue_from Pundit::NotAuthorizedError, with: :render_403
       # rescue_from ActiveRecord::RecordNotFound, with: :render_404
@@ -19,7 +19,6 @@ module EnjuLibrary
       if user_signed_in?
         respond_to do |format|
           format.html {render template: 'page/403', status: :forbidden}
-          # format.html.phone {render template: 'page/403', status: 403}
           format.xml {render template: 'page/403', status: :forbidden}
           format.json { render text: '{"error": "forbidden"}' }
           format.rss {render template: 'page/403.xml', status: :forbidden}
@@ -27,7 +26,6 @@ module EnjuLibrary
       else
         respond_to do |format|
           format.html { redirect_to main_app.new_user_session_url }
-          # format.html.phone { redirect_to new_user_session_url }
           format.xml { render template: 'page/403', status: :forbidden }
           format.json { render text: '{"error": "forbidden"}' }
           format.rss { render template: 'page/403.xml', status: :forbidden }
@@ -39,7 +37,6 @@ module EnjuLibrary
       return if performed?
       respond_to do |format|
         format.html { render template: 'page/404', status: :not_found }
-        # format.html.phone { render template: 'page/404', status: 404 }
         format.xml { render template: 'page/404', status: :not_found }
         format.json { render text: '{"error": "not_found"}' }
         format.rss { render template: 'page/404.xml', status: :not_found }
@@ -55,7 +52,6 @@ module EnjuLibrary
       return if performed?
       respond_to do |format|
         format.html {render file: "#{Rails.root}/public/500", layout: false, status: :internal_server_error}
-        # format.html.phone {render file: "#{Rails.root}/public/500", layout: false, status: 500}
         format.xml {render template: 'page/500', status: :internal_server_error}
         format.json { render text: '{"error": "server_error"}' }
         format.xml {render template: 'page/500.xml', status: :internal_server_error}
@@ -68,7 +64,6 @@ module EnjuLibrary
       # flash[:notice] = t('page.connection_failed')
       respond_to do |format|
         format.html {render template: "page/500_nosolr", layout: false, status: :internal_server_error}
-        # format.html.phone {render template: "page/500_nosolr", layout: false, status: 500}
         format.xml {render template: 'page/500', status: :internal_server_error}
         format.json { render text: '{"error": "server_error"}' }
         format.xml {render template: 'page/500.xml', status: :internal_server_error}
@@ -188,26 +183,6 @@ module EnjuLibrary
         @news_posts = NewsPost.limit(LibraryGroup.site_config.news_post_number_top_page || 10)
       end
       @libraries = Library.real
-    end
-
-    def set_mobile_request
-      case params[:view]
-      when 'phone'
-        session[:enju_view] = :phone
-      when 'desktop'
-        session[:enju_view] = :desktop
-      when 'reset'
-        session[:enju_view] = nil
-      end
-
-      case session[:enju_view].try(:to_sym)
-      when :phone
-        request.variant = :phone
-      when :desktop
-        request.variant = nil
-      else
-        request.variant = :phone if browser.device.mobile?
-      end
     end
 
     def move_position(resource, direction, redirect = true)
