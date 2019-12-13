@@ -107,4 +107,7 @@ class UserGroupsController < ApplicationController
       }
     )
   end
+
+  def prepare_options
+  end
 end
