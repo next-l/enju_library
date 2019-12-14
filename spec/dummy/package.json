@@ -1,5 +1,5 @@
 {
-  "name": "enju_biblio",
+  "name": "enju_leaf",
   "private": true,
   "dependencies": {
     "@rails/activestorage": "^6.0.1",
@@ -7,9 +7,6 @@
     "@rails/webpacker": "4.2.2",
     "bootstrap": "4.4",
     "jquery": "^3.4.1",
-    "jquery-colorbox": "^1.6.4",
-    "jquery-powertip": "^1.3.1",
-    "jquery-ui": "1.10.5",
     "popper.js": "^1.16.0"
   },
   "devDependencies": {

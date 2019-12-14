@@ -22,7 +22,7 @@
     <%= f.text_field :end_at, value: @subscribe.end_at.try(:strftime, "%Y-%m-%d"), class: 'date_field' -%>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <%- end -%>
 
