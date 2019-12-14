@@ -1,70 +1,72 @@
-<div class="card bg-info">
-<h1 class="title"><%= t('page.showing', model: t('activerecord.models.user_group')) -%></h1>
-<div class="card-body bg-light">
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-9">
+    <h1 class="title"><%= t('page.showing', model: t('activerecord.models.user_group')) -%></h1>
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong><%= t('activerecord.attributes.user_group.name') -%>:</strong>
-  <%= @user_group.name -%>
-</p>
+    <p>
+      <strong><%= t('activerecord.attributes.user_group.name') -%>:</strong>
+      <%= @user_group.name -%>
+    </p>
 
-<p>
-  <strong><%= t('activerecord.attributes.user_group.display_name') -%>:</strong>
-  <%= @user_group.display_name -%>
-</p>
+    <p>
+      <strong><%= t('activerecord.attributes.user_group.display_name') -%>:</strong>
+      <%= @user_group.display_name -%>
+    </p>
 
-<p>
-  <strong><%= t('activerecord.attributes.user_group.valid_period_for_new_user') -%>:</strong>
-  <%= @user_group.valid_period_for_new_user %>
-</p>
+    <p>
+      <strong><%= t('activerecord.attributes.user_group.valid_period_for_new_user') -%>:</strong>
+      <%= @user_group.valid_period_for_new_user %>
+    </p>
 
-<% if defined?(EnjuCirculation) %>
-  <p>
-    <strong><%= t('activerecord.attributes.user_group.number_of_day_to_notify_due_date') -%>:</strong>
-    <%= @user_group.number_of_day_to_notify_due_date %>
-  </p>
-
-  <p>
-    <strong><%= t('activerecord.attributes.user_group.number_of_day_to_notify_overdue') -%>:</strong>
-    <%= @user_group.number_of_day_to_notify_overdue %>
-  </p>
-
-  <p>
-    <strong><%= t('activerecord.attributes.user_group.number_of_time_to_notify_overdue') -%>:</strong>
-    <%= @user_group.number_of_time_to_notify_overdue %>
-  </p>
-
-  <p>
-    <strong><%= t('activerecord.models.checkout_type') -%></strong>
-  </p>
-  <ul>
-    <%- @user_group.user_group_has_checkout_types.each do |available_checkout_type| -%>
-      <li>
-        <%= link_to available_checkout_type.checkout_type.display_name, available_checkout_type.checkout_type -%>
-        (<%= link_to t('page.number_of_days', count: available_checkout_type.checkout_period), edit_user_group_user_group_has_checkout_type_path(@user_group, available_checkout_type) -%>)
-      </li>
-    <%- end -%>
-  </ul>
-<% end %>
-
-<p>
-  <strong><%= t('activerecord.attributes.user_group.note') -%>:</strong>
-  <%= @user_group.note -%>
-</p>
-
-</div>
-</div>
-
-<div class="col-3">
-  <ul>
-    <%- if policy(@user_group).update? -%>
-      <li><%= link_to t('page.edit'), edit_user_group_path(@user_group) -%></li>
-    <%- end -%>
-    <li><%= back_to_index(flash[:page_info]) -%></li>
     <% if defined?(EnjuCirculation) %>
-      <%- if policy(UserGroupHasCheckoutType).create? -%>
-        <li><%= link_to t('page.new', model: t('activerecord.models.checkout_type')), new_user_group_user_group_has_checkout_type_path(@user_group) -%></li>
-      <%- end -%>
+      <p>
+        <strong><%= t('activerecord.attributes.user_group.number_of_day_to_notify_due_date') -%>:</strong>
+        <%= @user_group.number_of_day_to_notify_due_date %>
+      </p>
+
+      <p>
+        <strong><%= t('activerecord.attributes.user_group.number_of_day_to_notify_overdue') -%>:</strong>
+        <%= @user_group.number_of_day_to_notify_overdue %>
+      </p>
+
+      <p>
+        <strong><%= t('activerecord.attributes.user_group.number_of_time_to_notify_overdue') -%>:</strong>
+        <%= @user_group.number_of_time_to_notify_overdue %>
+      </p>
+
+      <p>
+        <strong><%= t('activerecord.models.checkout_type') -%></strong>
+      </p>
+      <ul>
+        <%- @user_group.user_group_has_checkout_types.each do |available_checkout_type| -%>
+          <li>
+            <%= link_to available_checkout_type.checkout_type.display_name, available_checkout_type.checkout_type -%>
+            (<%= link_to t('page.number_of_days', count: available_checkout_type.checkout_period), edit_user_group_user_group_has_checkout_type_path(@user_group, available_checkout_type) -%>)
+          </li>
+        <%- end -%>
+      </ul>
     <% end %>
-  </ul>
+
+    <p>
+      <strong><%= t('activerecord.attributes.user_group.note') -%>:</strong>
+      <%= @user_group.note -%>
+    </p>
+
+  </div>
+
+  <div class="col-3">
+    <div class="card card-body">
+      <ul>
+        <%- if policy(@user_group).update? -%>
+          <li><%= link_to t('page.edit'), edit_user_group_path(@user_group) -%></li>
+        <%- end -%>
+        <li><%= back_to_index(flash[:page_info]) -%></li>
+        <% if defined?(EnjuCirculation) %>
+          <%- if policy(UserGroupHasCheckoutType).create? -%>
+            <li><%= link_to t('page.new', model: t('activerecord.models.checkout_type')), new_user_group_user_group_has_checkout_type_path(@user_group) -%></li>
+          <%- end -%>
+        <% end %>
+      </ul>
+    </div>
+  </div>
 </div>
