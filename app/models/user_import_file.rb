@@ -153,13 +153,13 @@ class UserImportFile < ApplicationRecord
     mailer = UserImportMailer.completed(self)
     send_message(mailer)
     num
-  rescue => e
-    self.error_message = "line #{row_num}: #{e.message}"
-    save
-    transition_to!(:failed)
-    mailer = UserImportMailer.failed(self)
-    send_message(mailer)
-    raise e
+  #rescue => e
+  #  self.error_message = "line #{row_num}: #{e.message}"
+  #  save
+  #  transition_to!(:failed)
+  #  mailer = UserImportMailer.failed(self)
+  #  send_message(mailer)
+  #  raise e
   end
 
   # 利用者情報をTSVファイルを用いて削除します。
