@@ -38,9 +38,9 @@ end
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
-#  user_id                       :bigint
 #  csv_charset_conversion        :boolean          default(FALSE), not null
 #  display_name_translations     :jsonb            not null
 #  login_banner_translations     :jsonb            not null
 #  footer_banner_translations    :jsonb            not null
+#  email                         :string
 #
