@@ -1,5 +1,5 @@
 # EnjuLibrary
-![](https://github.com/next-l/enju_library/workflows/Ruby/badge.svg)
+[![CircleCI](https://circleci.com/gh/next-l/enju_library/tree/master.svg?style=svg)](https://circleci.com/gh/next-l/enju_library/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/next-l/enju_library/badge.svg?branch=master)](https://coveralls.io/github/next-l/enju_library?branch=master)
 
 This project rocks and uses MIT-LICENSE.
