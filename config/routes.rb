@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :user_export_files
+  resources :user_import_results, only: [:index, :show, :destroy]
+  resources :user_import_files
   resources :user_groups
   resources :withdraws, except: [:edit, :update]
   resources :libraries

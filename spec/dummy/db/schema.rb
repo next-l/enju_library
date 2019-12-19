@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "baskets", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "lock_version", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.text "name", null: false
     t.string "zip_code"
     t.text "address"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.string "telephone_number"
     t.string "fax_number"
     t.string "url"
@@ -252,7 +252,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   create_table "budget_types", force: :cascade do |t|
     t.string "name"
     t.text "display_name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -660,7 +660,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.string "telephone_number_1"
     t.string "telephone_number_2"
     t.string "fax_number"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "call_number_rows", default: 1, null: false
     t.string "call_number_delimiter", default: "|", null: false
     t.bigint "library_group_id", null: false
@@ -684,7 +684,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.string "short_name", null: false
     t.text "my_networks"
     t.text "old_login_banner"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "country_id"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -1013,7 +1013,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   create_table "request_status_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1023,7 +1023,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   create_table "request_types", force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1109,7 +1109,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.text "http_method", null: false
     t.text "query_param", null: false
     t.text "additional_param"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1182,7 +1182,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "shelves", force: :cascade do |t|
     t.string "name", null: false
-    t.text "note"
+    t.text "note", comment: "備考"
     t.bigint "library_id", null: false
     t.integer "items_count", default: 0, null: false
     t.integer "position"
@@ -1206,7 +1206,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.text "title", null: false
-    t.text "note"
+    t.text "note", comment: "備考"
     t.bigint "user_id"
     t.bigint "order_list_id"
     t.integer "subscribes_count", default: 0, null: false
@@ -1270,7 +1270,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "user_groups", force: :cascade do |t|
     t.string "name"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -1306,7 +1306,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "user_import_files", force: :cascade do |t|
     t.bigint "user_id"
-    t.text "note"
+    t.text "note", comment: "備考"
     t.datetime "executed_at"
     t.string "user_import_fingerprint"
     t.string "edit_mode"
