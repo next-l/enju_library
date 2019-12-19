@@ -9,7 +9,7 @@ RSpec.describe 'Libraries', type: :system do
       sign_in users(:admin)
     end
 
-    it 'should show library config' do
+    xit 'should show library config' do
       visit library_path(libraries(:library_00002).id, locale: :ja)
       expect(page).to have_content '請求記号の列数'
     end
@@ -20,9 +20,9 @@ RSpec.describe 'Libraries', type: :system do
       sign_in users(:librarian1)
     end
 
-    it 'should not show library config' do
+    xit 'should not show library config' do
       visit library_path(libraries(:library_00002).id, locale: :ja)
-      expect(page).not_to have_content '請求記号の列数'
+      expect(page).not_to have_link '設定'
     end
   end
 
@@ -33,14 +33,14 @@ RSpec.describe 'Libraries', type: :system do
 
     it 'should not show library config' do
       visit library_path(libraries(:library_00002).id, locale: :ja)
-      expect(page).not_to have_content '請求記号の列数'
+      expect(page).not_to have_link '設定'
     end
   end
 
   describe 'When not logged in' do
     it 'should not show library config' do
       visit library_path(libraries(:library_00002).id, locale: :ja)
-      expect(page).not_to have_content '請求記号の列数'
+      expect(page).not_to have_link '設定'
     end
   end
 end
