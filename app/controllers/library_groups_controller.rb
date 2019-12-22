@@ -91,10 +91,7 @@ class LibraryGroupsController < ApplicationController
       },
       {
         colors_attributes: [:id, :property, :code]
-      },
-      {
-        user_attributes: [:email]
-      },
+      }
     )
   end
 end
