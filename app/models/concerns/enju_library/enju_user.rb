@@ -58,7 +58,7 @@ module EnjuLibrary
         file = Tempfile.create do |f|
           f.write User.csv_header(role: role).to_csv(col_sep: col_sep)
           User.find_each do |user|
-          #  f.write user.to_hash(role: role).values.to_csv(col_sep: col_sep)
+            f.write user.to_hash(role: role).values.to_csv(col_sep: col_sep)
           end
 
           f.rewind
