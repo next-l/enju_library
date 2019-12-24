@@ -35,7 +35,8 @@ class UserExportFile < ApplicationRecord
       transition_to!(:started)
       role_name = user.try(:role).try(:name)
       tsv = User.export(role: role_name)
-      user_export.attach(io: StringIO.new(tsv), filename: "user_export.txt")
+      self.user_export = StringIO.new(tsv)
+      self.user_export.instance_write(:filename, "user_export.txt")
       save!
       transition_to!(:completed)
     end
