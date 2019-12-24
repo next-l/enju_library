@@ -18,14 +18,15 @@ class UserExportFile < ApplicationRecord
 
   # エクスポートの処理を実行します。
   def export!
-    transition_to!(:started)
-    tempfile = Tempfile.new(['user_export_file_', '.txt'])
-    file = User.export(format: :txt)
-    tempfile.puts(file)
-    tempfile.close
-    self.user_export = File.new(tempfile.path, 'r')
-    save!
-    transition_to!(:completed)
+    UserExportFile.transaction do
+      transition_to!(:started)
+      role_name = user.try(:role).try(:name)
+      tsv = User.export(role: role_name)
+      user_export.attach(io: StringIO.new(tsv), filename: "user_export.txt")
+      save!
+      transition_to!(:completed)
+    end
+
     mailer = UserExportMailer.completed(self)
     send_message(mailer)
   rescue => e
