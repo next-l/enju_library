@@ -5,7 +5,7 @@ class EnjuLibrary::SetupGenerator < Rails::Generators::Base
   def copy_setup_files
     directory("db/fixtures", "db/fixtures/enju_library")
     return if file == 'fixture'
-    inject_into_file 'app/controllers/application_controller.rb',
+    inject_into_class 'app/controllers/application_controller.rb', ApplicationController,
       "  include EnjuLibrary::Controller\n"
     append_to_file("app/models/user.rb", "Item.include(EnjuLibrary::EnjuItem)\n")
   end
