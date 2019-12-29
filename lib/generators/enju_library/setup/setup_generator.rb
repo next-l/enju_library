@@ -11,7 +11,7 @@ class EnjuLibrary::SetupGenerator < Rails::Generators::Base
     gsub_file 'app/models/user.rb', /, :validatable$/, <<EOS
 , # :validatable,
       :lockable, lock_strategy: :none, unlock_strategy: :none
-  include EnjuLibrary::EnjuUser
+  include EnjuSeed::EnjuUser
 EOS
   end
 end
