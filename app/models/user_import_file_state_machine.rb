@@ -6,7 +6,7 @@ class UserImportFileStateMachine
   state :completed
   state :failed
 
-  transition from: :pending, to: :started
+  transition from: :pending, to: [:started, :failed]
   transition from: :started, to: [:completed, :failed]
 
   after_transition(from: :pending, to: :started) do |user_import_file|
