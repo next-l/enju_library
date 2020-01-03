@@ -149,7 +149,7 @@ class UserImportFile < ApplicationRecord
       )
 
       username = row['username']
-      new_user = User.where(username: username).first
+      new_user = User.find_by(username: username)
       if new_user.try(:profile)
         new_user.assign_attributes(set_user_params(row))
         new_user.profile.assign_attributes(set_profile_params(row))
@@ -196,7 +196,7 @@ class UserImportFile < ApplicationRecord
     rows.each do |row|
       row_num += 1
       username = row['username'].to_s.strip
-      remove_user = User.where(username: username).first
+      remove_user = User.find_by(username: username)
       if remove_user.try(:deletable_by?, user)
         UserImportFile.transaction do
           remove_user.destroy
@@ -284,15 +284,15 @@ class UserImportFile < ApplicationRecord
   # @param [Hash] row 利用者情報のハッシュ
   def set_profile_params(row)
     params = {}
-    user_group = UserGroup.where(name: row['user_group']).first
+    user_group = UserGroup.find_by(name: row['user_group'])
     unless user_group
       user_group = default_user_group
     end
     params[:user_group_id] = user_group.id if user_group
 
-    required_role = Role.where(name: row['required_role']).first
+    required_role = Role.find_by(name: row['required_role'])
     unless required_role
-      required_role = Role.where(name: 'Librarian').first
+      required_role = Role.find_by(name: 'Librarian')
     end
     params[:required_role_id] = required_role.id if required_role
 
@@ -314,7 +314,7 @@ class UserImportFile < ApplicationRecord
       params[:locale] = row['locale']
     end
 
-    library = Library.where(name: row['library'].to_s.strip).first
+    library = Library.find_by(name: row['library'].to_s.strip)
     unless library
       library = default_library || Library.web
     end
