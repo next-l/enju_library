@@ -28,7 +28,7 @@ class UserImportFile < ApplicationRecord
   # 利用者情報をTSVファイルを用いて作成します。
   def import
     transition_to!(:started)
-    num = { user_imported: 0, user_found: 0, error: 0 }
+    num = { user_imported: 0, user_found: 0, failed: 0, error: 0 }
     rows = open_import_file(create_import_temp_file(user_import))
     row_num = 1
 
