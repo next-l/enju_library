@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_16_131755) do
+ActiveRecord::Schema.define(version: 2019_12_19_122214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -150,7 +150,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.text "full_name_alternative"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "deleted_at"
     t.string "zip_code_1"
     t.string "zip_code_2"
     t.text "address_1"
@@ -468,6 +467,15 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["work_id"], name: "index_creates_on_work_id"
   end
 
+  create_table "custom_properties", force: :cascade do |t|
+    t.integer "resource_id", null: false
+    t.string "resource_type", null: false
+    t.text "label", null: false
+    t.text "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "demands", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "item_id"
@@ -751,7 +759,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.string "item_identifier"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "deleted_at"
     t.integer "shelf_id", default: 1, null: false
     t.boolean "include_supplements", default: false, null: false
     t.text "note"
@@ -769,6 +776,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.string "binding_call_number"
     t.datetime "binded_at"
     t.integer "manifestation_id", null: false
+    t.text "memo"
     t.index ["binding_item_identifier"], name: "index_items_on_binding_item_identifier"
     t.index ["bookstore_id"], name: "index_items_on_bookstore_id"
     t.index ["checkout_type_id"], name: "index_items_on_checkout_type_id"
@@ -976,7 +984,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.datetime "date_copyrighted"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "deleted_at"
     t.string "access_address"
     t.integer "language_id", default: 1, null: false
     t.integer "carrier_type_id", default: 1, null: false
@@ -1026,6 +1033,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.text "publication_place"
     t.text "extent"
     t.text "dimensions"
+    t.text "memo"
     t.index ["access_address"], name: "index_manifestations_on_access_address"
     t.index ["date_of_publication"], name: "index_manifestations_on_date_of_publication"
     t.index ["doi"], name: "index_manifestations_on_doi"
