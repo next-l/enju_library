@@ -26,7 +26,7 @@ end
 #
 # Table name: search_engines
 #
-#  id                        :integer          not null, primary key
+#  id                        :bigint           not null, primary key
 #  name                      :string           not null
 #  display_name              :text
 #  url                       :string           not null
@@ -36,7 +36,7 @@ end
 #  additional_param          :text
 #  note                      :text
 #  position                  :integer
-#  created_at                :datetime
-#  updated_at                :datetime
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #  display_name_translations :jsonb            not null
 #
