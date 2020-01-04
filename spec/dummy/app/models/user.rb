@@ -5,5 +5,3 @@ class User < ApplicationRecord
 
   include EnjuLibrary::EnjuUser
 end
-
-Item.include(EnjuLibrary::EnjuItem)

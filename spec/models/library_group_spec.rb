@@ -49,4 +49,5 @@ end
 #  display_name_translations     :jsonb            not null
 #  login_banner_translations     :jsonb            not null
 #  footer_banner_translations    :jsonb            not null
+#  email                         :string
 #

@@ -7,6 +7,5 @@ class EnjuLibrary::SetupGenerator < Rails::Generators::Base
     return if file == 'fixture'
     inject_into_class 'app/controllers/application_controller.rb', ApplicationController,
       "  include EnjuLibrary::Controller\n"
-    append_to_file("app/models/user.rb", "Item.include(EnjuLibrary::EnjuItem)\n")
   end
 end
