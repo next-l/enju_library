@@ -4,9 +4,9 @@
   <%= f.hidden_field :mode, value: 'export' if @user_export_file.new_record? %><br>
   <div class="actions">
     <% if @user_export_file.new_record? %>
-      <%= f.submit t('page.export') %>
+      <%= f.submit t('page.export'), class: 'btn btn-primary' %>
     <% else %>
-      <%= f.submit %>
+      <%= f.submit class: 'btn btn-primary' %>
     <% end %>
   </div>
 <% end %>

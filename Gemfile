@@ -20,7 +20,6 @@ gem 'enju_biblio', github: 'next-l/enju_biblio'
 gem 'enju_message', github: 'next-l/enju_message'
 gem 'sassc-rails'
 gem 'rails-i18n'
-gem 'sprockets', '~> 3.7'
 gem 'webpacker'
 group :test do
   gem 'rails-controller-testing'

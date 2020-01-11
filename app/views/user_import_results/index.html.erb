@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
+<div class="card bg-info">
 <h1 class="title"><%= t('page.listing', model: t('activerecord.models.user_import_result')) -%></h1>
-<div id="content_list">
+<div class="card-body bg-light">
   <% if @user_import_file %>
     <%= render 'list_lines' %>
   <% else %>
@@ -10,5 +10,5 @@
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+<div class="col-3">
 </div>

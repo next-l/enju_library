@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
+<div class="card bg-info">
 <h1 class="title"><%= t('page.new', model: t('activerecord.models.subscribe')) -%></h1>
-<div id="content_list">
+<div class="card-body bg-light">
 
 <%= form_for(@subscribe) do |f| -%>
   <%= f.error_messages -%>
@@ -33,14 +33,14 @@
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <%- end -%>
 
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+<div class="col-3">
   <ul>
     <li><%= link_to t('activerecord.models.subscription'), subscription_path(@subscription) if @subscription -%>
     <li><%= link_to t('page.listing', model: t('activerecord.models.work')), subscription_works_path(@subscription) if @subscription -%>
