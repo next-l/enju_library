@@ -53,6 +53,7 @@ jobs:
       - run: bundle exec rake db:schema:load
       - run: bundle exec rake app:sunspot:solr:start RAILS_ENV=test
       - run: yarn install
+      - run: spec/dummy/bin/webpack
 
       # run tests!
       - run:
