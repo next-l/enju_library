@@ -1,6 +1,6 @@
-<div id="content_detail" class="ui-corner-all ui-widget-content">
+<div class="card bg-info">
   <h1 class="title"><%= t('page.editing', model: t('activerecord.models.subscribe')) -%></h1>
-<div id="content_list">
+<div class="card-body bg-light">
 
 <%= form_for(@subscribe) do |f| -%>
   <%= f.error_messages -%>
@@ -22,14 +22,14 @@
     <%= f.text_field :end_at, value: @subscribe.end_at.try(:strftime, "%Y-%m-%d"), class: 'date_field' -%>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <%- end -%>
 
 </div>
 </div>
 
-<div id="submenu" class="ui-corner-all ui-widget-content">
+<div class="col-3">
   <ul>
     <li><%= link_to t('page.show'), @subscribe -%></li>
     <li><%= link_to t('page.back'), subscribes_path -%></li>

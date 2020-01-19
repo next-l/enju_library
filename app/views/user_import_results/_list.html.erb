@@ -6,6 +6,7 @@
   </tr>
 
 <% @user_import_results.each do |user_import_result| %>
+  <% next unless user_import_result.user_import_file.user_import %>
   <tr class="line<%= cycle("0", "1") -%>">
     <td>
       <%= link_to user_import_result.user_import_file.user_import_file_name, user_import_result.user_import_file %>

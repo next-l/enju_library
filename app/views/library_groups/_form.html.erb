@@ -1,20 +1,20 @@
 <%= simple_form_for(@library_group) do |f| -%>
   <%= f.error_messages -%>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :name -%><br />
     <%= f.text_field :name, class: 'short_name' -%>
   </div>
 
   <% I18n.available_locales.each do |locale| %>
-    <div class="field">
+    <div class="form-group">
       <% display_name = "display_name_#{locale.to_s}" %>
       <%= f.label :display_name -%> (<%= locale.to_s %>)<br />
       <%= f.text_field display_name -%>
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :header_logo -%><br />
     <%= f.file_field :header_logo -%>
     <br />
@@ -22,75 +22,75 @@
     <%= t('page.destroy') %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :email -%><br />
     <%= f.email_field :email, class: 'resource_email' -%>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :url -%><br />
-    <%= f.url_field :url, class: 'resource_url' -%>
+    <%= f.url_field :url, class: 'form-control' -%>
   </div>
 
   <% I18n.available_locales.each do |locale| -%>
-    <div class="field">
-      <%= f.label :login_banner -%> (<%= locale -%>)<br />
-      <%= f.text_area :"login_banner_#{locale.to_s}" -%>
+    <div class="form-group">
+      <%= f.label :login_banner -%> (<%= locale -%>)
+      <%= f.text_area :"login_banner_#{locale.to_s}", class: 'form-control' -%>
     </div>
 
-    <div class="field">
-      <%= f.label :footer_banner -%> (<%= locale -%>)<br />
-      <%= f.text_area :"footer_banner_#{locale.to_s}" -%>
+    <div class="form-group">
+      <%= f.label :footer_banner -%> (<%= locale -%>)
+      <%= f.text_area :"footer_banner_#{locale.to_s}", class: 'form-control' -%>
     </div>
   <% end -%>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :max_number_of_results -%><br />
     <%= f.number_field :max_number_of_results -%>
   </div>
 
   <% if defined?(EnjuManifestationViewer) %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :book_jacket_source -%>
       <%= f.select :book_jacket_source, [[t('book_jacket.google'), 'google'], [t('book_jacket.openbd'), 'openbd'], [t('book_jacket.hanmotocom'), 'hanmotocom']] -%><br />
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :color -%><br />
     <%= f.fields_for :colors do |color_form| %>
       <%= render 'color_fields', f: color_form %>
     <% end %>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label t('activerecord.models.country') -%><br />
     <%= f.select(:country_id, @countries.collect{|c| [c.display_name, c.id]}) -%>
   </div>
 
   <% if defined?(EnjuBookmark) %>
-    <div class="field">
+    <div class="form-group">
       <%= f.label :allow_bookmark_external_url -%>
       <%= f.check_box :allow_bookmark_external_url -%>
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :my_networks -%><br />
-    <%= f.text_area :my_networks -%>
+    <%= f.text_area :my_networks, class: 'form-control' -%>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :admin_networks -%><br />
-    <%= f.text_area :admin_networks -%>
+    <%= f.text_area :admin_networks, class: 'form-control' -%>
   </div>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :note -%><br />
-    <%= f.text_area :note -%>
+    <%= f.text_area :note, class: 'form-control' -%>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <%- end -%>
