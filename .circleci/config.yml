@@ -44,8 +44,8 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Database setup
-      - run:
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      #- run:
+      #    command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
           command: sudo apt install -y openjdk-8-jre-headless
       - run:
