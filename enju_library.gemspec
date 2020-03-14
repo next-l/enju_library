@@ -18,14 +18,14 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_seed", "~> 0.5.0.beta.1"
   s.add_dependency "geocoder"
-  s.add_dependency "statesman", "~> 6.0"
+  s.add_dependency "statesman", "~> 7.1"
   s.add_dependency "mini_magick"
 
   s.add_development_dependency "enju_leaf", "~> 3.0.0.beta.1"
   s.add_development_dependency "enju_biblio", "~> 0.5.0.beta.1"
   s.add_development_dependency "enju_message", "~> 0.5.0.beta.1"
   s.add_development_dependency "pg"
-  s.add_development_dependency "rspec-rails", "~> 3.9"
+  s.add_development_dependency "rspec-rails", "~> 4.0.0.rc1"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "sunspot_solr", "~> 2.5"
   s.add_development_dependency "simplecov"
