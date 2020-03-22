@@ -59,6 +59,8 @@ en:
         max_number_of_results: Max number of results
         book_jacket_source: Book jacket source
         header_logo: Header logo
+        default_custom_manifestation_label: Default custom properties (Manifestation)
+        default_custom_item_label: Default custom properties (Item)
       bookstore:
         name: Name
         zip_code: Zip code
