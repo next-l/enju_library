@@ -18,7 +18,7 @@ end
 #  note             :text
 #  user_id          :bigint
 #  order_list_id    :bigint
-#  subscribes_count :integer          default(0), not null
+#  subscribes_count :integer          default("0"), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
