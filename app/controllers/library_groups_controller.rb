@@ -73,7 +73,6 @@ class LibraryGroupsController < ApplicationController
       :max_number_of_results, :footer_banner, :email,
       :book_jacket_source, :screenshot_generator, :erms_url,
       :header_logo, :delete_header_logo,
-      :default_custom_manifestation_label, :default_custom_item_label,
       :allow_bookmark_external_url, # EnjuBookmark
       I18n.available_locales.map{|locale|
         [
