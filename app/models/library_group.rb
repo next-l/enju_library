@@ -6,8 +6,6 @@ class LibraryGroup < ApplicationRecord
   has_many :colors, dependent: :destroy
   belongs_to :country, optional: true
   belongs_to :user, optional: true
-  has_many :default_custom_manifestation_labels, dependent: :destroy
-  has_many :default_custom_item_labels, dependent: :destroy
 
   validates :url, presence: true, url: true
   validates :max_number_of_results, numericality: {
