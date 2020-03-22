@@ -88,10 +88,10 @@ end
 #  telephone_number_2        :string
 #  fax_number                :string
 #  note                      :text
-#  call_number_rows          :integer          default(1), not null
+#  call_number_rows          :integer          default("1"), not null
 #  call_number_delimiter     :string           default("|"), not null
 #  library_group_id          :bigint           not null
-#  users_count               :integer          default(0), not null
+#  users_count               :integer          default("0"), not null
 #  position                  :integer
 #  country_id                :bigint
 #  created_at                :datetime         not null
