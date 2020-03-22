@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_16_131755) do
+ActiveRecord::Schema.define(version: 2019_12_19_122214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -527,7 +527,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.datetime "updated_at"
     t.boolean "most_recent", null: false
     t.index ["event_export_file_id", "most_recent"], name: "index_event_export_file_transitions_parent_most_recent", unique: true, where: "most_recent"
-    t.index ["event_export_file_id"], name: "index_event_export_file_transitions_on_event_export_file_id"
+    t.index ["event_export_file_id"], name: "index_event_export_file_transitions_on_file_id"
     t.index ["sort_key", "event_export_file_id"], name: "index_event_export_file_transitions_on_sort_key_and_file_id", unique: true
   end
 
@@ -575,8 +575,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.string "user_encoding"
     t.bigint "default_library_id"
     t.bigint "default_event_category_id"
-    t.index ["default_event_category_id"], name: "index_event_import_files_on_default_event_category_id"
-    t.index ["default_library_id"], name: "index_event_import_files_on_default_library_id"
     t.index ["parent_id"], name: "index_event_import_files_on_parent_id"
     t.index ["user_id"], name: "index_event_import_files_on_user_id"
   end
@@ -587,8 +585,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.text "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["event_id"], name: "index_event_import_results_on_event_id"
-    t.index ["event_import_file_id"], name: "index_event_import_results_on_event_import_file_id"
   end
 
   create_table "events", id: :serial, force: :cascade do |t|

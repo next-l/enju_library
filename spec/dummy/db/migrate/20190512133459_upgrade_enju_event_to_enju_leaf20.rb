@@ -93,12 +93,6 @@ class UpgradeEnjuEventToEnjuLeaf20 < ActiveRecord::Migration[5.2]
       end
     end
 
-    add_index :event_import_files, :default_event_category_id
-    add_index :event_import_files, :default_library_id
-    add_index :event_import_results, :event_id
-    add_index :event_import_results, :event_import_file_id
-    rename_index :event_export_file_translations, :index_event_export_file_transitions_on_file_id, :index_event_export_file_transitions_on_event_export_file_id
-
     [
       :event_export_files,
       :event_import_files,
