@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_053113) do
+ActiveRecord::Schema.define(version: 2020_03_22_053443) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer "basket_id"
@@ -786,6 +786,8 @@ ActiveRecord::Schema.define(version: 2020_03_22_053113) do
     t.integer "header_logo_file_size"
     t.datetime "header_logo_updated_at"
     t.text "header_logo_meta"
+    t.text "default_custom_manifestation_label"
+    t.text "default_custom_item_label"
     t.index ["short_name"], name: "index_library_groups_on_short_name"
     t.index ["user_id"], name: "index_library_groups_on_user_id"
   end
