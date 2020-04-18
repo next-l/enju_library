@@ -56,10 +56,10 @@ end
 #  name                      :string           not null
 #  note                      :text
 #  library_id                :bigint           not null
-#  items_count               :integer          default("0"), not null
+#  items_count               :integer          default(0), not null
 #  position                  :integer
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
-#  closed                    :boolean          default("false"), not null
+#  closed                    :boolean          default(FALSE), not null
 #  display_name_translations :jsonb            not null
 #
