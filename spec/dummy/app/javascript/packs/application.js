@@ -1,5 +1,4 @@
 import 'bootstrap'
-import '../src/cocoon.js'
 import '../src/application.scss'
 
 import Rails from '@rails/ujs'
