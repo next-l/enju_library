@@ -76,10 +76,6 @@
     </div>
   <% end %>
 
-  <% if defined?(EnjuBiblio) %>
-    <%= render 'library_groups/custom_property_form', f: f %>
-  <% end %>
-
   <div class="field">
     <%= f.label :my_networks -%><br />
     <%= f.text_area :my_networks -%>
