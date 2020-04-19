@@ -13,7 +13,6 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
-gem 'rails', '~> 5.2'
 gem 'sassc-rails'
 gem 'rails-i18n'
 gem 'webpacker'
