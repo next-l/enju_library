@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_22_053443) do
+ActiveRecord::Schema.define(version: 2019_08_18_075628) do
 
   create_table "accepts", force: :cascade do |t|
     t.integer "basket_id"
@@ -433,15 +433,6 @@ ActiveRecord::Schema.define(version: 2020_03_22_053443) do
     t.index ["work_id"], name: "index_creates_on_work_id"
   end
 
-  create_table "custom_properties", force: :cascade do |t|
-    t.integer "resource_id", null: false
-    t.string "resource_type", null: false
-    t.text "label", null: false
-    t.text "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "demands", force: :cascade do |t|
     t.integer "user_id"
     t.integer "item_id"
@@ -786,8 +777,6 @@ ActiveRecord::Schema.define(version: 2020_03_22_053443) do
     t.integer "header_logo_file_size"
     t.datetime "header_logo_updated_at"
     t.text "header_logo_meta"
-    t.text "default_custom_manifestation_label"
-    t.text "default_custom_item_label"
     t.index ["short_name"], name: "index_library_groups_on_short_name"
     t.index ["user_id"], name: "index_library_groups_on_user_id"
   end
