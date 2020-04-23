@@ -52,7 +52,7 @@
   <% if defined?(EnjuManifestationViewer) %>
     <div class="form-group">
       <%= f.label :book_jacket_source -%>
-      <%= f.select :book_jacket_source, [[t('book_jacket.google'), 'google'], [t('book_jacket.openbd'), 'openbd'], [t('book_jacket.hanmotocom'), 'hanmotocom']] -%><br />
+      <%= f.select :book_jacket_source, [[t('book_jacket.google'), 'google'], [t('book_jacket.openbd'), 'openbd'], [t('book_jacket.hanmotocom'), 'hanmotocom']], {}, {class: 'form-control col-sm-3'} -%><br />
     </div>
   <% end %>
 
@@ -65,7 +65,7 @@
 
   <div class="form-group">
     <%= f.label t('activerecord.models.country') -%><br />
-    <%= f.select(:country_id, @countries.collect{|c| [c.display_name, c.id]}) -%>
+    <%= f.select(:country_id, @countries.collect{|c| [c.display_name, c.id]}, {}, {class: 'form-control col-sm-4'}) -%>
   </div>
 
   <% if defined?(EnjuBookmark) %>
