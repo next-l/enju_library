@@ -3,14 +3,14 @@
 
   <div class="form-group">
     <%= f.label :name -%><br />
-    <%= f.text_field :name, class: 'short_name' -%>
+    <%= f.text_field :name, required: true, class: 'form-control' %>
   </div>
 
   <% I18n.available_locales.each do |locale| %>
     <div class="form-group">
       <% display_name = "display_name_#{locale.to_s}" %>
       <%= f.label :display_name -%> (<%= locale.to_s %>)<br />
-      <%= f.text_field display_name -%>
+      <%= f.text_field display_name, class: 'form-control' -%>
     </div>
   <% end %>
 
@@ -24,7 +24,7 @@
 
   <div class="form-group">
     <%= f.label :email -%><br />
-    <%= f.email_field :email, class: 'resource_email' -%>
+    <%= f.email_field :email, class: 'form-control' -%>
   </div>
 
   <div class="form-group">
