@@ -34,20 +34,20 @@ module EnjuLibrary
 
         if defined?(EnjuCirculation)
           record.merge!(
-            checkout_icalendar_token: checkout_icalendar_token,
-            save_checkout_history: save_checkout_history
+            checkout_icalendar_token: profile.try.checkout_icalendar_token,
+            save_checkout_history: profile.save_checkout_history
           )
         end
 
         if defined?(EnjuSearchLog)
           record.merge!(
-            save_search_history: save_checkout_history
+            save_search_history: profile.save_checkout_history
           )
         end
 
         if defined?(EnjuBookmark)
           record.merge!(
-            share_bookmarks: share_bookmarks
+            share_bookmarks: profile.share_bookmarks
           )
         end
 
