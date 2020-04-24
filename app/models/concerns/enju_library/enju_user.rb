@@ -34,7 +34,7 @@ module EnjuLibrary
 
         if defined?(EnjuCirculation)
           record.merge!(
-            checkout_icalendar_token: profile.try.checkout_icalendar_token,
+            checkout_icalendar_token: profile.checkout_icalendar_token,
             save_checkout_history: profile.save_checkout_history
           )
         end
