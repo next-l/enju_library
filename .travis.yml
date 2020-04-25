@@ -22,10 +22,8 @@ notifications:
 sudo: false
 addons:
   apt:
-    sources:
-      - google-chrome
     packages:
-      - google-chrome-stable
+      - chromium-browser
 jdk:
   - openjdk8
 dist: xenial
