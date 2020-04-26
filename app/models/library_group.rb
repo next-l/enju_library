@@ -42,8 +42,8 @@ class LibraryGroup < ApplicationRecord
     LibraryGroup.order(:created_at).first
   end
 
-  def self.system_name(locale = I18n.locale)
-    LibraryGroup.site_config.send(:"display_name_#{locale.to_s}")
+  def self.system_name
+    LibraryGroup.site_config.display_name
   end
 
   def config?
