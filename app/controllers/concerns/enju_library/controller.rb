@@ -20,14 +20,14 @@ module EnjuLibrary
         respond_to do |format|
           format.html {render template: 'page/403', status: :forbidden}
           format.xml {render template: 'page/403', status: :forbidden}
-          format.json { render text: '{"error": "forbidden"}' }
+          format.json { render json: {"error": "forbidden"} }
           format.rss {render template: 'page/403.xml', status: :forbidden}
         end
       else
         respond_to do |format|
           format.html { redirect_to main_app.new_user_session_url }
           format.xml { render template: 'page/403', status: :forbidden }
-          format.json { render text: '{"error": "forbidden"}' }
+          format.json { render json: {"error": "forbidden"} }
           format.rss { render template: 'page/403.xml', status: :forbidden }
         end
       end
@@ -38,7 +38,7 @@ module EnjuLibrary
       respond_to do |format|
         format.html { render template: 'page/404', status: :not_found }
         format.xml { render template: 'page/404', status: :not_found }
-        format.json { render text: '{"error": "not_found"}' }
+        format.json { render json: {"error": "not_found"} }
         format.rss { render template: 'page/404.xml', status: :not_found }
       end
     end
@@ -53,7 +53,7 @@ module EnjuLibrary
       respond_to do |format|
         format.html {render file: "#{Rails.root}/public/500", layout: false, status: :internal_server_error}
         format.xml {render template: 'page/500', status: :internal_server_error}
-        format.json { render text: '{"error": "server_error"}' }
+        format.json { render json: {"error": "server_error"} }
         format.xml {render template: 'page/500.xml', status: :internal_server_error}
       end
     end
@@ -65,7 +65,7 @@ module EnjuLibrary
       respond_to do |format|
         format.html {render template: "page/500_nosolr", layout: false, status: :internal_server_error}
         format.xml {render template: 'page/500', status: :internal_server_error}
-        format.json { render text: '{"error": "server_error"}' }
+        format.json { render json: {"error": "server_error"} }
         format.xml {render template: 'page/500.xml', status: :internal_server_error}
       end
     end
