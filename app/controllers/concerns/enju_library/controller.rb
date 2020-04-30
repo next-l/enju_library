@@ -236,7 +236,7 @@ module EnjuLibrary
     end
 
     def filtered_params
-      params.permit([:q, :query, :view, :format, :order, :sort_by, :page, :per_page])
+      params.except(:host, :port, :protocol).permit([:q, :query, :view, :format, :order, :sort_by, :page, :per_page])
     end
 
     class InvalidLocaleError < StandardError
