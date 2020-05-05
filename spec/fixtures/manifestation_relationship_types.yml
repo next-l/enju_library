@@ -1,15 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  name: successor
-  display_name: successor
+  name: reproduction
+  display_name_translations: {"en": "Reproduction", "ja": "複製"}
   note: 
   position: 1
   id: 1
 
 two:
-  name: copy
-  display_name: copy
+  name: alternate
+  display_name_translations: {"en": "Alternate", "ja": "代替"}
   note: 
   position: 2
   id: 2
@@ -18,12 +18,11 @@ two:
 #
 # Table name: manifestation_relationship_types
 #
-#  id                        :integer          not null, primary key
+#  id                        :bigint           not null, primary key
 #  name                      :string           not null
-#  display_name              :text
 #  note                      :text
 #  position                  :integer
-#  created_at                :datetime
-#  updated_at                :datetime
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #  display_name_translations :jsonb            not null
 #

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_16_131755) do
+ActiveRecord::Schema.define(version: 2020_04_26_165544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["sort_key", "agent_import_file_id"], name: "index_agent_import_file_transitions_on_sort_key_and_file_id", unique: true
   end
 
-  create_table "agent_import_files", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "agent_import_files", comment: "人物情報インポートファイル", force: :cascade do |t|
+    t.bigint "user_id", comment: "アップロードユーザ"
     t.text "note", comment: "備考"
     t.datetime "executed_at"
     t.datetime "created_at", null: false
@@ -75,15 +75,16 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   end
 
   create_table "agent_import_results", force: :cascade do |t|
-    t.integer "agent_import_file_id"
+    t.bigint "agent_import_file_id"
     t.integer "agent_id"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["agent_import_file_id"], name: "index_agent_import_results_on_agent_import_file_id"
   end
 
   create_table "agent_merge_lists", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -99,7 +100,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "agent_relationship_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -120,7 +120,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "agent_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -261,7 +260,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "carrier_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -291,7 +289,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "content_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -299,7 +296,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
-  create_table "countries", force: :cascade do |t|
+  create_table "countries", comment: "国・地域", force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
     t.string "alpha_2"
@@ -315,7 +312,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "create_types", force: :cascade do |t|
     t.string "name"
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -323,7 +319,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
-  create_table "creates", force: :cascade do |t|
+  create_table "creates", comment: "著者と書誌の関係", force: :cascade do |t|
     t.bigint "agent_id", null: false
     t.bigint "work_id", null: false
     t.integer "position", default: 1, null: false
@@ -478,7 +474,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "form_of_works", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -486,9 +481,8 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
-  create_table "frequencies", force: :cascade do |t|
+  create_table "frequencies", comment: "発行頻度", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
@@ -554,7 +548,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["user_id"], name: "index_import_requests_on_user_id"
   end
 
-  create_table "isbn_record_and_manifestations", force: :cascade do |t|
+  create_table "isbn_record_and_manifestations", comment: "書誌とISBNの関係", force: :cascade do |t|
     t.bigint "isbn_record_id", null: false
     t.bigint "manifestation_id", null: false
     t.integer "position"
@@ -564,16 +558,16 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["manifestation_id"], name: "index_isbn_record_and_manifestations_on_manifestation_id"
   end
 
-  create_table "isbn_records", force: :cascade do |t|
-    t.string "body", null: false
-    t.string "isbn_type"
-    t.string "source"
+  create_table "isbn_records", comment: "ISBN", force: :cascade do |t|
+    t.string "body", null: false, comment: "ISBN"
+    t.string "isbn_type", comment: "ISBNの種類"
+    t.string "source", comment: "情報源"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["body"], name: "index_isbn_records_on_body", unique: true
   end
 
-  create_table "issn_record_and_manifestations", force: :cascade do |t|
+  create_table "issn_record_and_manifestations", comment: "書誌とISSNの関係", force: :cascade do |t|
     t.bigint "issn_record_id", null: false
     t.bigint "manifestation_id", null: false
     t.integer "position"
@@ -583,13 +577,34 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["manifestation_id"], name: "index_issn_record_and_manifestations_on_manifestation_id"
   end
 
-  create_table "issn_records", force: :cascade do |t|
-    t.string "body", null: false
-    t.string "issn_type"
-    t.string "source"
+  create_table "issn_records", comment: "ISSN", force: :cascade do |t|
+    t.string "body", null: false, comment: "ISSN"
+    t.string "issn_type", comment: "ISSNの種類"
+    t.string "source", comment: "情報源"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["body"], name: "index_issn_records_on_body", unique: true
+  end
+
+  create_table "item_custom_properties", force: :cascade do |t|
+    t.string "name", null: false, comment: "ラベル名"
+    t.jsonb "display_name_translations", default: {}, null: false, comment: "表示名"
+    t.text "note", comment: "備考"
+    t.integer "position", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_item_custom_properties_on_name", unique: true
+  end
+
+  create_table "item_custom_values", force: :cascade do |t|
+    t.bigint "item_custom_property_id", null: false
+    t.bigint "item_id", null: false
+    t.text "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_custom_property_id", "item_id"], name: "index_item_custom_values_on_custom_item_property_and_item_id", unique: true
+    t.index ["item_custom_property_id"], name: "index_item_custom_values_on_custom_property_id"
+    t.index ["item_id"], name: "index_item_custom_values_on_item_id"
   end
 
   create_table "item_has_use_restrictions", force: :cascade do |t|
@@ -601,7 +616,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["use_restriction_id"], name: "index_item_has_use_restrictions_on_use_restriction_id"
   end
 
-  create_table "items", force: :cascade do |t|
+  create_table "items", comment: "所蔵", force: :cascade do |t|
     t.string "call_number", comment: "請求記号"
     t.string "item_identifier", comment: "所蔵情報ID"
     t.datetime "created_at", null: false
@@ -634,7 +649,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["shelf_id"], name: "index_items_on_shelf_id"
   end
 
-  create_table "languages", force: :cascade do |t|
+  create_table "languages", comment: "言語", force: :cascade do |t|
     t.string "name", null: false
     t.string "native_name"
     t.text "display_name"
@@ -710,17 +725,37 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "licenses", comment: "ライセンス", force: :cascade do |t|
     t.string "name", null: false
-    t.string "display_name"
     t.text "note", comment: "備考"
     t.integer "position", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "display_name_translations", default: {}, null: false
+    t.string "url"
+  end
+
+  create_table "manifestation_custom_properties", force: :cascade do |t|
+    t.string "name", null: false, comment: "ラベル名"
+    t.jsonb "display_name_translations", default: {}, null: false, comment: "表示名"
+    t.text "note", comment: "備考"
+    t.integer "position", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_manifestation_custom_properties_on_name", unique: true
+  end
+
+  create_table "manifestation_custom_values", force: :cascade do |t|
+    t.bigint "manifestation_custom_property_id", null: false
+    t.bigint "manifestation_id", null: false
+    t.text "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manifestation_custom_property_id", "manifestation_id"], name: "index_manifestation_custom_values_on_property_and_manifestation", unique: true
+    t.index ["manifestation_custom_property_id"], name: "index_manifestation_custom_values_on_custom_property_id"
+    t.index ["manifestation_id"], name: "index_manifestation_custom_values_on_manifestation_id"
   end
 
   create_table "manifestation_relationship_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -793,16 +828,17 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.text "extent"
     t.text "dimensions"
     t.text "memo"
+    t.bigint "license_id", default: 1, null: false
     t.index ["access_address"], name: "index_manifestations_on_access_address"
     t.index ["date_of_publication"], name: "index_manifestations_on_date_of_publication"
     t.index ["doi"], name: "index_manifestations_on_doi"
+    t.index ["license_id"], name: "index_manifestations_on_license_id"
     t.index ["manifestation_identifier"], name: "index_manifestations_on_manifestation_identifier"
     t.index ["updated_at"], name: "index_manifestations_on_updated_at"
   end
 
   create_table "medium_of_performances", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -944,7 +980,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "produce_types", force: :cascade do |t|
     t.string "name"
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -952,7 +987,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
-  create_table "produces", force: :cascade do |t|
+  create_table "produces", comment: "出版者と書誌の関係", force: :cascade do |t|
     t.bigint "agent_id", null: false
     t.bigint "manifestation_id", null: false
     t.integer "position", default: 1, null: false
@@ -990,7 +1025,6 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
 
   create_table "realize_types", force: :cascade do |t|
     t.string "name"
-    t.text "display_name"
     t.text "note", comment: "備考"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -998,7 +1032,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.jsonb "display_name_translations", default: {}, null: false
   end
 
-  create_table "realizes", force: :cascade do |t|
+  create_table "realizes", comment: "編者と書誌の関係", force: :cascade do |t|
     t.bigint "agent_id", null: false
     t.bigint "expression_id", null: false
     t.integer "position", default: 1, null: false
@@ -1064,8 +1098,8 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
     t.index ["sort_key", "resource_import_file_id"], name: "index_resource_import_file_transitions_on_sort_key_and_file_id", unique: true
   end
 
-  create_table "resource_import_files", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "resource_import_files", comment: "書誌情報インポートファイル", force: :cascade do |t|
+    t.bigint "user_id", comment: "アップロードユーザ"
     t.text "note", comment: "備考"
     t.datetime "executed_at"
     t.datetime "created_at", null: false
@@ -1376,6 +1410,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   add_foreign_key "accepts", "users", column: "librarian_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "agent_import_files", "users"
+  add_foreign_key "agent_import_results", "agent_import_files"
   add_foreign_key "demands", "items"
   add_foreign_key "demands", "messages"
   add_foreign_key "demands", "users"
@@ -1393,10 +1428,15 @@ ActiveRecord::Schema.define(version: 2019_12_16_131755) do
   add_foreign_key "isbn_record_and_manifestations", "manifestations"
   add_foreign_key "issn_record_and_manifestations", "issn_records"
   add_foreign_key "issn_record_and_manifestations", "manifestations"
+  add_foreign_key "item_custom_values", "item_custom_properties"
+  add_foreign_key "item_custom_values", "items"
   add_foreign_key "item_has_use_restrictions", "items"
   add_foreign_key "item_has_use_restrictions", "use_restrictions"
   add_foreign_key "items", "manifestations"
   add_foreign_key "libraries", "library_groups"
+  add_foreign_key "manifestation_custom_values", "manifestation_custom_properties"
+  add_foreign_key "manifestation_custom_values", "manifestations"
+  add_foreign_key "manifestations", "licenses"
   add_foreign_key "messages", "messages", column: "parent_id"
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
