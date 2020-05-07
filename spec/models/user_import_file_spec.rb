@@ -9,7 +9,7 @@ describe UserImportFile do
       @file.default_user_group = UserGroup.find(2)
       @file.default_library = Library.find(3)
       @file.user = users(:admin)
-      @file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
+      @file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
       @file.save
     end
 
@@ -107,7 +107,7 @@ describe UserImportFile do
         default_library: libraries(:library_00001),
         default_user_group: user_groups(:user_group_00001)
       )
-      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_update_file.tsv"), filename: 'attachment.txt')
       old_message_count = Message.count
       result = file.modify
       result.should have_key(:user_updated)
@@ -137,7 +137,7 @@ describe UserImportFile do
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
-      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_update_file2.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.friendly.find('user001')
@@ -154,7 +154,7 @@ describe UserImportFile do
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
-      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_update_file3.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
@@ -167,7 +167,7 @@ describe UserImportFile do
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
-      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_update_file4.tsv"), filename: 'attachment.txt')
       result = file.modify
       result.should have_key(:user_updated)
       user001 = User.find_by(username: 'user001')
@@ -182,7 +182,7 @@ describe UserImportFile do
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
-      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
       file.import_start
     end
 
@@ -193,7 +193,7 @@ describe UserImportFile do
         default_user_group: UserGroup.find(2),
         default_library: Library.find(3)
       )
-      file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"), filename: 'attachment.txt')
+      file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_delete_file.tsv"), filename: 'attachment.txt')
       old_message_count = Message.count
       file.remove
       User.count.should eq old_count - 3
@@ -207,7 +207,7 @@ describe UserImportFile do
       default_user_group: UserGroup.find(2),
       default_library: Library.find(3)
     )
-    file.user_import.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
+    file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
     file.save
     UserImportFileJob.perform_later(file).should be_truthy
   end

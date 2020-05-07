@@ -5,7 +5,7 @@ class UserExportFile < ApplicationRecord
   ]
   include ExportFile
 
-  has_one_attached :user_export
+  has_one_attached :attachment
 
   has_many :user_export_file_transitions, autosave: false, dependent: :destroy
 
@@ -22,7 +22,7 @@ class UserExportFile < ApplicationRecord
       transition_to!(:started)
       role_name = user.try(:role).try(:name)
       tsv = User.export(role: role_name)
-      user_export.attach(io: StringIO.new(tsv), filename: "user_export.txt")
+      attachment.attach(io: StringIO.new(tsv), filename: "attachment.txt")
       save!
       transition_to!(:completed)
     end

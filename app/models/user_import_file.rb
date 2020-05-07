@@ -8,7 +8,7 @@ class UserImportFile < ApplicationRecord
   scope :not_imported, -> { in_state(:pending) }
   scope :stucked, -> { in_state(:pending).where('user_import_files.created_at < ?', 1.hour.ago) }
 
-  has_one_attached :user_import
+  has_one_attached :attachment
   belongs_to :user
   belongs_to :default_user_group, class_name: 'UserGroup'
   belongs_to :default_library, class_name: 'Library'
@@ -29,7 +29,7 @@ class UserImportFile < ApplicationRecord
   def import
     transition_to!(:started)
     num = { user_imported: 0, user_found: 0, failed: 0, error: 0 }
-    rows = open_import_file(create_import_temp_file(user_import))
+    rows = open_import_file(create_import_temp_file(attachment))
     row_num = 1
 
     field = rows.first
@@ -113,7 +113,7 @@ class UserImportFile < ApplicationRecord
   def modify
     transition_to!(:started)
     num = { user_updated: 0, user_not_found: 0, failed: 0 }
-    rows = open_import_file(create_import_temp_file(user_import))
+    rows = open_import_file(create_import_temp_file(attachment))
     row_num = 1
 
     field = rows.first
@@ -166,7 +166,7 @@ class UserImportFile < ApplicationRecord
   def remove
     transition_to!(:started)
     row_num = 1
-    rows = open_import_file(create_import_temp_file(user_import))
+    rows = open_import_file(create_import_temp_file(attachment))
 
     field = rows.first
     if [field['username']].reject{ |f| f.to_s.strip == "" }.empty?
