@@ -108,7 +108,7 @@ class UserImportFilesController < ApplicationController
 
   def user_import_file_params
     params.require(:user_import_file).permit(
-      :user_import, :edit_mode, :user_encoding, :mode,
+      :attachment, :edit_mode, :user_encoding, :mode,
       :default_user_group_id, :default_library_id
     )
   end
