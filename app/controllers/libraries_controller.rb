@@ -129,10 +129,10 @@ class LibrariesController < ApplicationController
 
   def library_params
     params.require(:library).permit(
-      :name, :display_name, :short_display_name, :zip_code, :street,
+      :name, :short_display_name, :zip_code, :street,
       :locality, :region, :telephone_number_1, :telephone_number_2, :fax_number,
       :note, :call_number_rows, :call_number_delimiter, :library_group_id,
-      :country_id, :opening_hour, :isil, :position,
+      :country_id, :opening_hour, :isil, :position, :latitude, :longitude,
       I18n.available_locales.map{|locale|
         :"display_name_#{locale.to_s}"
       }
