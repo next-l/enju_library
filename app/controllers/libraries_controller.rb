@@ -133,7 +133,7 @@ class LibrariesController < ApplicationController
       :name, :display_name, :short_display_name, :zip_code, :street,
       :locality, :region, :telephone_number_1, :telephone_number_2, :fax_number,
       :note, :call_number_rows, :call_number_delimiter, :library_group_id,
-      :country_id, :opening_hour, :isil, :position
+      :country_id, :opening_hour, :isil, :position, :latitude, :longitude
     )
   end
 
