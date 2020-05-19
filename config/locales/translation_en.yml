@@ -26,8 +26,8 @@ en:
         telephone_number_1: Telephone number 1
         telephone_number_2: Telephone number 2
         fax_number: Fax number
-        lat: Lat
-        lng: Lng
+        latitude: Latitude
+        longitude: Longitude
         note: Note
         call_number_rows: Call number rows
         call_number_delimiter: Call number delimiter

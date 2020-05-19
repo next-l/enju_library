@@ -26,8 +26,8 @@ ja:
         telephone_number_1: 電話番号1
         telephone_number_2: 電話番号2
         fax_number: ファックス番号
-        lat: 緯度
-        lng: 経度
+        latitude: 緯度
+        longitude: 経度
         note: 注記
         call_number_rows: 請求記号の列数
         call_number_delimiter: 請求番号の区切り文字
