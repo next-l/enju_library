@@ -24,8 +24,8 @@ Gem::Specification.new do |s|
   s.add_dependency "paperclip-meta"
   s.add_dependency "globalize", "~> 5.2"
 
-  s.add_development_dependency "enju_leaf", "~> 1.3.4"
-  s.add_development_dependency "enju_biblio", "~> 0.3.10"
+  s.add_development_dependency "enju_leaf", "~> 1.3.3"
+  s.add_development_dependency "enju_biblio", "~> 0.3.9"
   #s.add_development_dependency "enju_manifestation_viewer", "~> 0.3.2"
   s.add_development_dependency "enju_ndl", "~> 0.3.2"
   s.add_development_dependency "enju_event", "~> 0.3.3"
