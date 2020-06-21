@@ -1,3 +1,3 @@
 module EnjuLibrary
-  VERSION = "0.3.8.rc.2".freeze
+  VERSION = "0.3.8".freeze
 end
