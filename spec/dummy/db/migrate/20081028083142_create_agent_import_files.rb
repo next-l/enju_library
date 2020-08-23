@@ -1,11 +1,8 @@
 class CreateAgentImportFiles < ActiveRecord::Migration[5.2]
   def change
-    create_table :agent_import_files do |t|
-      t.integer :parent_id
-      t.string :content_type
-      t.integer :size
-      t.integer :user_id
-      t.text :note
+    create_table :agent_import_files, comment: '人物情報インポートファイル' do |t|
+      t.references :user, foreign_key: true, comment: 'アップロードユーザ'
+      t.text :note, comment: '備考'
       t.datetime :executed_at
       t.string :agent_import_file_name
       t.string :agent_import_content_type
@@ -14,7 +11,5 @@ class CreateAgentImportFiles < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :agent_import_files, :parent_id
-    add_index :agent_import_files, :user_id
   end
 end

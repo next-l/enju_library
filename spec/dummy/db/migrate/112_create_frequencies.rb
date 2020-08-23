@@ -1,6 +1,6 @@
 class CreateFrequencies < ActiveRecord::Migration[5.2]
   def change
-    create_table :frequencies do |t|
+    create_table :frequencies, comment: '発行頻度' do |t|
       t.string :name, null: false
       t.text :display_name
       t.text :note
