@@ -2,9 +2,9 @@ class UserGroup < ApplicationRecord
   include MasterModel
   has_many :profiles
 
-  validates_numericality_of :valid_period_for_new_user,
-    greater_than_or_equal_to: 0,
-    allow_blank: true
+  validates :valid_period_for_new_user,
+    numericality: { greater_than_or_equal_to: 0,
+    allow_blank: true }
   translates :display_name
 
   paginates_per 10

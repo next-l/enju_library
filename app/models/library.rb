@@ -21,8 +21,8 @@ class Library < ApplicationRecord
 
   validates :short_display_name, presence: true
   validates :library_group, presence: true
-  validates_uniqueness_of :short_display_name, case_sensitive: false
-  validates_uniqueness_of :isil, allow_blank: true
+  validates :short_display_name, uniqueness: { case_sensitive: false }
+  validates :isil, uniqueness: { allow_blank: true }
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
   validates :isil, format: { with: /\A[A-Za-z]{1,4}-[A-Za-z0-9\/:\-]{2,11}\z/ }, allow_blank: true
   after_validation :geocode, if: :address_changed?
@@ -37,6 +37,7 @@ class Library < ApplicationRecord
 
   def web?
     return true if id == 1
+
     false
   end
 
@@ -55,6 +56,7 @@ class Library < ApplicationRecord
 
   def address_changed?
     return true if saved_change_to_region? || saved_change_to_locality? || saved_change_to_street?
+
     false
   end
 

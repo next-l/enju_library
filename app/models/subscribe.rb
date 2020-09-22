@@ -2,8 +2,8 @@ class Subscribe < ApplicationRecord
   belongs_to :subscription, counter_cache: true
   belongs_to :work, class_name: 'Manifestation'
 
-  validates_presence_of :subscription, :work, :start_at, :end_at
-  validates_uniqueness_of :work_id, scope: :subscription_id
+  validates :subscription, :work, :start_at, :end_at, presence: true
+  validates :work_id, uniqueness: { scope: :subscription_id }
 end
 
 # == Schema Information
