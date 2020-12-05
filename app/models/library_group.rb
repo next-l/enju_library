@@ -43,7 +43,11 @@ class LibraryGroup < ApplicationRecord
   end
 
   def self.system_name(locale = I18n.locale)
-    LibraryGroup.site_config.send(:"display_name_#{locale.to_s}") || LibraryGroup.site_config.display_name
+    if I18n.available_locales.include?(locale.to_sym)
+      LibraryGroup.site_config.send(:"display_name_#{locale.to_s}") || LibraryGroup.site_config.display_name
+    else
+      LibraryGroup.site_config.send(:"display_name_#{I18n.default_locale.to_s}") || LibraryGroup.site_config.display_name
+    end
   end
 
   def config?
