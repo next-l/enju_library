@@ -30,6 +30,7 @@ class Shelf < ApplicationRecord
 
   def web_shelf?
     return true if id == 1
+
     false
   end
 

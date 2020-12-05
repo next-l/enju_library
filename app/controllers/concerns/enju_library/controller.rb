@@ -16,6 +16,7 @@ module EnjuLibrary
 
     def render_403
       return if performed?
+
       if user_signed_in?
         respond_to do |format|
           format.html {render template: 'page/403', status: :forbidden}
@@ -35,6 +36,7 @@ module EnjuLibrary
 
     def render_404
       return if performed?
+
       respond_to do |format|
         format.html { render template: 'page/404', status: :not_found }
         format.xml { render template: 'page/404', status: :not_found }
@@ -45,11 +47,13 @@ module EnjuLibrary
 
     def render_404_invalid_format
       return if performed?
+
       render file: "#{Rails.root}/public/404", formats: [:html]
     end
 
     def render_500
       return if performed?
+
       respond_to do |format|
         format.html {render file: "#{Rails.root}/public/500", layout: false, status: :internal_server_error}
         format.xml {render template: 'page/500', status: :internal_server_error}
@@ -61,6 +65,7 @@ module EnjuLibrary
     def render_500_nosolr
       Rails.logger.fatal("please confirm that the Solr is running.")
       return if performed?
+
       # flash[:notice] = t('page.connection_failed')
       respond_to do |format|
         format.html {render template: "page/500_nosolr", layout: false, status: :internal_server_error}
@@ -96,12 +101,12 @@ module EnjuLibrary
       @locale = I18n.default_locale
     end
 
-    def default_url_options(options={})
+    def default_url_options(options = {})
       {locale: nil}
     end
 
     def set_available_languages
-      if Rails.env == 'production'
+      if Rails.env.production?
         @available_languages = Rails.cache.fetch('available_languages'){
           Language.where(iso_639_1: I18n.available_locales.map{|l| l.to_s}).select([:id, :iso_639_1, :name, :native_name, :display_name, :position]).all
         }
@@ -135,6 +140,7 @@ module EnjuLibrary
       case params[:format]
       when 'csv'
         return unless LibraryGroup.site_config.csv_charset_conversion
+
         # TODO: 他の言語
         if @locale.to_sym == :ja
           headers["Content-Type"] = "text/csv; charset=Shift_JIS"

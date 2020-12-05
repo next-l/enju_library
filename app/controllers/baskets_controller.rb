@@ -6,7 +6,7 @@ class BasketsController < ApplicationController
   # GET /baskets.json
   def index
     if current_user.has_role?('Librarian')
-     @baskets = Basket.page(params[:page])
+      @baskets = Basket.page(params[:page])
     else
       redirect_to new_basket_url
       return
@@ -57,7 +57,7 @@ class BasketsController < ApplicationController
         format.html {
           redirect_to basket_url(@basket), notice: t('controller.successfully_created', model: t('activerecord.models.basket'))
         }
-        format.json { render json: @basket, status: :created, location:  @basket }
+        format.json { render json: @basket, status: :created, location: @basket }
       else
         format.html { render action: "new" }
         format.json { render json: @basket.errors, status: :unprocessable_entity }

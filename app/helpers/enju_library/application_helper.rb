@@ -3,6 +3,7 @@ module EnjuLibrary
     def library_shelf_facet(current_library, facet)
       library = Library.where(name: facet.value).select([:name, :display_name_translations]).first
       return nil unless library
+
       current = true if current_library.try(:name) == library.name
       content_tag :li do
         if current
