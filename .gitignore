@@ -18,3 +18,4 @@ pickle-email-*.html
 /spec/dummy/log/*
 /spec/dummy/solr/*
 /spec/dummy/tmp/*
+node_modules
