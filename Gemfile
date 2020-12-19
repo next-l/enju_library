@@ -25,3 +25,5 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'webdrivers'
 end
+
+gem 'rails', '~> 6.0.3'
