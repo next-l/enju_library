@@ -16,17 +16,6 @@ ActiveRecord::Schema.define(version: 2020_04_26_165544) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "accepts", force: :cascade do |t|
-    t.bigint "basket_id"
-    t.bigint "item_id"
-    t.bigint "librarian_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["basket_id"], name: "index_accepts_on_basket_id"
-    t.index ["item_id"], name: "index_accepts_on_item_id"
-    t.index ["librarian_id"], name: "index_accepts_on_librarian_id"
-  end
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -710,7 +699,7 @@ ActiveRecord::Schema.define(version: 2020_04_26_165544) do
     t.text "settings"
     t.text "html_snippet"
     t.string "book_jacket_source"
-    t.integer "max_number_of_results", default: 500
+    t.integer "max_number_of_results", default: 1000
     t.boolean "family_name_first", default: true
     t.string "screenshot_generator"
     t.integer "pub_year_facet_range_interval", default: 10
@@ -1403,9 +1392,6 @@ ActiveRecord::Schema.define(version: 2020_04_26_165544) do
     t.index ["librarian_id"], name: "index_withdraws_on_librarian_id"
   end
 
-  add_foreign_key "accepts", "baskets"
-  add_foreign_key "accepts", "items"
-  add_foreign_key "accepts", "users", column: "librarian_id"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "agent_import_files", "users"
   add_foreign_key "agent_import_results", "agent_import_files"
