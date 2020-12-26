@@ -12,6 +12,11 @@ describe LibraryGroup do
     library_group.my_networks = "127.0.0.1"
     library_group.network_access_allowed?("192.168.0.1").should be_falsy
   end
+
+  it "should accept 0 as max_number_of_results" do
+    library_group = LibraryGroup.find(1)
+    library_group.update(max_number_of_results: 0).should be_truthy
+  end
 end
 
 # == Schema Information
