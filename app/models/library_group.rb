@@ -9,7 +9,7 @@ class LibraryGroup < ApplicationRecord
 
   validates :url, presence: true, url: true
   validates :max_number_of_results, numericality: {
-      greater_than_or_equal_to: 1
+      greater_than_or_equal_to: 0
     }
   accepts_nested_attributes_for :colors, update_only: true
   accepts_nested_attributes_for :user, update_only: true
