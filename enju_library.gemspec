@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_seed", "~> 0.5.0.beta.1"
   s.add_dependency "geocoder"
-  s.add_dependency "statesman", "~> 7.1"
-  s.add_dependency "mini_magick", '~> 4.10'
+  s.add_dependency "statesman", "~> 8.0"
+  s.add_dependency "image_processing", '~> 1.2'
 
   s.add_development_dependency "enju_leaf", "~> 3.0.0.beta.1"
   s.add_development_dependency "enju_biblio", "~> 0.5.0.beta.1"
