@@ -5,7 +5,7 @@ describe "user_import_results/index" do
 
   before(:each) do
     @user_import_file = UserImportFile.find(1)
-    @user_import_file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample.tsv"), filename: 'attachment.txt')
+    @user_import_file.attachment.attach(io: File.new("#{Rails.root}/../fixtures/files/user_import_file_sample.tsv"), filename: 'attachment.txt')
     @user_import_results = UserImportResult.where(user_import_file_id: 1).page(1)
     admin = User.friendly.find('enjuadmin')
     view.stub(:current_user).and_return(admin)

@@ -4,7 +4,7 @@ describe SubscribesController do
   fixtures :all
 
   def valid_attributes
-    FactoryBot.attributes_for(:subscribe)
+    FactoryBot.attributes_for(:subscribe, work_id: FactoryBot.create(:manifestation).id, subscription_id: FactoryBot.create(:subscription).id)
   end
 
   describe 'GET index' do

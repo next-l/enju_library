@@ -1,11 +1,9 @@
-# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe Subscription do
-  fixtures :subscriptions, :manifestations, :subscribes
-
   it "should_respond_to_subscribed" do
-    subscriptions(:subscription_00001).subscribed(manifestations(:manifestation_00001)).should be_truthy
+    subscribe = FactoryBot.create(:subscribe)
+    expect(subscribe.subscription.subscribed(subscribe.work)).to be_truthy
   end
 end
 

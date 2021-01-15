@@ -19,7 +19,7 @@ describe UserImportResultsController do
             default_user_group: UserGroup.find(2),
             default_library: Library.find(3)
           )
-          @file.attachment.attach(io: File.new("#{Rails.root}/../../examples/user_import_file_sample_long.tsv"), filename: 'attachment.txt')
+          @file.attachment.attach(io: File.new("#{Rails.root}/../fixtures/files/user_import_file_sample_long.tsv"), filename: 'attachment.txt')
           @file.save
           @file.import_start
         end
