@@ -11,9 +11,9 @@ class Basket < ApplicationRecord
 
   def check_suspended
     if user
-      errors[:base] << I18n.t('basket.this_account_is_suspended') if user.locked_at
+      errors.add(:base, I18n.t('basket.this_account_is_suspended')) if user.locked_at
     else
-      errors[:base] << I18n.t('user.not_found')
+      errors.add(:base, I18n.t('user.not_found'))
     end
   end
 
