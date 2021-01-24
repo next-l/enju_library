@@ -19,8 +19,8 @@ end
 #
 #  id           :bigint           not null, primary key
 #  basket_id    :bigint
-#  item_id      :bigint
 #  librarian_id :bigint
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  item_id      :bigint           not null
 #

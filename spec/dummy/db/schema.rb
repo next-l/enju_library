@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -877,7 +877,7 @@ ActiveRecord::Schema.define(version: 2020_08_23_054353) do
     t.text "settings"
     t.text "html_snippet"
     t.string "book_jacket_source"
-    t.integer "max_number_of_results", default: 500
+    t.integer "max_number_of_results", default: 1000
     t.boolean "family_name_first", default: true
     t.string "screenshot_generator"
     t.integer "pub_year_facet_range_interval", default: 10

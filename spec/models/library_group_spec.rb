@@ -39,7 +39,7 @@ end
 #  settings                      :text
 #  html_snippet                  :text
 #  book_jacket_source            :string
-#  max_number_of_results         :integer          default(500)
+#  max_number_of_results         :integer          default(1000)
 #  family_name_first             :boolean          default(TRUE)
 #  screenshot_generator          :string
 #  pub_year_facet_range_interval :integer          default(10)
