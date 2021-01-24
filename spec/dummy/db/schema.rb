@@ -787,7 +787,7 @@ ActiveRecord::Schema.define(version: 2020_04_25_074822) do
     t.text "settings"
     t.text "html_snippet"
     t.string "book_jacket_source"
-    t.integer "max_number_of_results", default: 500
+    t.integer "max_number_of_results", default: 1000
     t.boolean "family_name_first", default: true
     t.string "screenshot_generator"
     t.integer "pub_year_facet_range_interval", default: 10
