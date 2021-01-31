@@ -1,8 +1,8 @@
 language: ruby
 cache: bundler
 rvm:
-  - 2.4.5
-  - 2.6.6
+  - 2.4.9
+  - 2.6.5
 before_script:
   - mysql -e 'create database enju_test DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;'
   - psql -c 'create database enju_test;' -U postgres
@@ -20,10 +20,13 @@ notifications:
   slack:
     secure: RiboVJ5+DiKFZVN4kKnSvVmbd3An1/yiHN/PENUWLCo5PNF4ZnDAcd/V/uyawiblXNcINfX7XAN32RjtCVWDNvpNcF/RAynoltg6yc15GA4Io6tGRBNxtDe6qodvFWSsSw4Wzl2eS580vXMihWvB7Rghrt3dC+ub/SP1DkfZnq8=
 sudo: false
-addons:
+saddons:
+  postgresql: "11"
   apt:
     packages:
-      - chromium-browser
+    - postgresql-11
+    - postgresql-client-11
+    - chromium-browser
 jdk:
   - openjdk8
-dist: xenial
+dist: bionic
