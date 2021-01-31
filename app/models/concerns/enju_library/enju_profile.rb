@@ -5,8 +5,7 @@ module EnjuLibrary
     included do
       belongs_to :library
       belongs_to :user_group
-      validates_associated :user_group, :library
-      validates :user_group, :library, :locale, presence: true #, :user_number
+      validates :locale, presence: true
       before_save :set_expired_at
     end
 
