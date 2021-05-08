@@ -20,8 +20,6 @@ jobs:
            POSTGRES_USER: postgres
            POSTGRES_DB: enju_library_dummy_test
        - image: selenium/standalone-chrome:latest
-       - image: projectnextl/enju-solr:0.1
-         name: localhost
 
     executor: ruby/default
     working_directory: ~/repo
@@ -29,22 +27,10 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # Security scan
       - run: bundle exec brakeman
@@ -70,7 +56,6 @@ jobs:
             bundle exec rspec --format progress \
                             --format RspecJunitFormatter \
                             --out /tmp/test-results/rspec.xml \
-                            --format progress \
                             $TEST_FILES
 
       # collect reports
