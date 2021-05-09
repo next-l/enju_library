@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "enju_seed", "~> 0.4.0.rc.2"
   s.add_dependency "geocoder"
-  s.add_dependency "statesman", "~> 7.4"
+  s.add_dependency "statesman", "~> 8.0"
   s.add_dependency "mini_magick", '~> 4.10'
   s.add_dependency "paperclip-meta"
   s.add_dependency "paper_trail"
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "enju_manifestation_viewer", "~> 0.4.0.rc.1"
   s.add_development_dependency "enju_message", "~> 0.4.0.rc.1"
   s.add_development_dependency "pg"
-  s.add_development_dependency "rspec-rails", "~> 4.0"
+  s.add_development_dependency "rspec-rails", "~> 5.0"
   s.add_development_dependency "factory_bot_rails"
   s.add_development_dependency "sunspot_solr", "~> 2.5"
   s.add_development_dependency "simplecov"
