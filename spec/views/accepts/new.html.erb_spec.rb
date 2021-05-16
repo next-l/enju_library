@@ -4,15 +4,20 @@ describe "accepts/new" do
   fixtures :all
 
   before(:each) do
-    assign(:accept, FactoryBot.build(:accept))
     assign(:accept, stub_model(Accept,
       item_id: 1
     ).as_new_record)
     assign(:basket, FactoryBot.create(:basket))
-    2.times do
-      FactoryBot.create(:accept)
-    end
-    assign(:accepts, Accept.page(1))
+    assign(:accepts, Kaminari::paginate_array([
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      ),
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      )
+    ]).page(1))
   end
 
   it "renders new accept form" do

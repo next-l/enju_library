@@ -1,11 +1,11 @@
+# -*- encoding: utf-8 -*-
 require 'rails_helper'
 
 describe Subscription do
-  fixtures :subscriptions
+  fixtures :subscriptions, :manifestations, :subscribes
 
   it "should_respond_to_subscribed" do
-    subscribe = FactoryBot.create(:subscribe)
-    subscribe.subscription.subscribed(subscribe.work).should be_truthy
+    subscriptions(:subscription_00001).subscribed(manifestations(:manifestation_00001)).should be_truthy
   end
 end
 
@@ -13,12 +13,13 @@ end
 #
 # Table name: subscriptions
 #
-#  id               :bigint           not null, primary key
+#  id               :integer          not null, primary key
 #  title            :text             not null
 #  note             :text
-#  user_id          :bigint
-#  order_list_id    :bigint
+#  user_id          :integer
+#  order_list_id    :integer
+#  deleted_at       :datetime
 #  subscribes_count :integer          default(0), not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
+#  created_at       :datetime
+#  updated_at       :datetime
 #

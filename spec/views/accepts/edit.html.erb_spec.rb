@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe "accepts/edit" do
   before(:each) do
-    assign(:accept, FactoryBot.create(:accept))
+    @accept = assign(:accept, stub_model(Accept,
+      item_id: 1
+    ))
   end
 
   it "renders the edit accept form" do

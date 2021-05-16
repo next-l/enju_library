@@ -8,7 +8,6 @@ class SearchEngine < ApplicationRecord
   validates :base_url, presence: true, url: true, length: { maximum: 255 }
 
   paginates_per 10
-  translates :display_name
 
   def search_params(query)
     params = {}

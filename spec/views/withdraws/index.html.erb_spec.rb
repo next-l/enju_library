@@ -4,14 +4,20 @@ RSpec.describe "withdraws/index", type: :view do
   fixtures :all
 
   before(:each) do
-    2.times do
-      FactoryBot.create(:withdraw)
-    end
-    assign(:withdraws, Withdraw.page(1))
+    assign(:withdraws, Kaminari::paginate_array([
+      stub_model(Withdraw,
+        item_id: 1,
+        created_at: Time.zone.now
+      ),
+      stub_model(Withdraw,
+        item_id: 1,
+        created_at: Time.zone.now
+      )
+    ]).page(1))
     basket = FactoryBot.create(:basket)
     assign(:basket, basket)
     assign(:withdraw, basket.withdraws.new)
-    view.stub(:current_user).and_return(User.find_by(username: 'enjuadmin'))
+    view.stub(:current_user).and_return(User.friendly.find('enjuadmin'))
   end
 
   it "renders a list of withdraws" do

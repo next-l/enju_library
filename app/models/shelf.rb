@@ -13,7 +13,6 @@ class Shelf < ApplicationRecord
   has_one_attached :image
 
   acts_as_list scope: :library
-  translates :display_name
 
   searchable do
     string :shelf_name do
