@@ -18,6 +18,9 @@ class LibraryGroup < ApplicationRecord
     :erms_url
   ], coder: JSON
 
+  translates :login_banner, :footer_banner
+  globalize_accessors
+
   if ENV['ENJU_STORAGE'] == 's3'
     has_attached_file :header_logo, storage: :s3, styles: { medium: 'x80'},
       s3_credentials: {
@@ -41,11 +44,7 @@ class LibraryGroup < ApplicationRecord
   end
 
   def self.system_name(locale = I18n.locale)
-    if I18n.available_locales.include?(locale.to_sym)
-      LibraryGroup.site_config.send(:"display_name_#{locale.to_s}") || LibraryGroup.site_config.display_name
-    else
-      LibraryGroup.site_config.send(:"display_name_#{I18n.default_locale.to_s}") || LibraryGroup.site_config.display_name
-    end
+    LibraryGroup.site_config.display_name
   end
 
   def config?

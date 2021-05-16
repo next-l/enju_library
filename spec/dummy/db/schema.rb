@@ -793,12 +793,23 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.index ["name"], name: "index_libraries_on_name"
   end
 
+  create_table "library_group_translations", force: :cascade do |t|
+    t.integer "library_group_id", null: false
+    t.string "locale", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.text "login_banner"
+    t.text "footer_banner"
+    t.index ["library_group_id"], name: "index_library_group_translations_on_library_group_id"
+    t.index ["locale"], name: "index_library_group_translations_on_locale"
+  end
+
   create_table "library_groups", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.text "display_name"
     t.string "short_name", null: false
     t.text "my_networks"
-    t.text "old_login_banner"
+    t.text "login_banner"
     t.text "note"
     t.integer "country_id"
     t.integer "position"
