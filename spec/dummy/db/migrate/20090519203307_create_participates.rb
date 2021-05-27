@@ -1,4 +1,4 @@
-class CreateParticipates < ActiveRecord::Migration[4.2]
+class CreateParticipates < ActiveRecord::Migration[5.2]
   def self.up
     create_table :participates do |t|
       t.integer :agent_id, null: false

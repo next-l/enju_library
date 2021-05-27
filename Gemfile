@@ -28,5 +28,3 @@ gem 'enju_manifestation_viewer', github: 'next-l/enju_manifestation_viewer', bra
 gem 'enju_message', github: 'next-l/enju_message', branch: '2.x'
 gem 'enju_biblio', github: 'next-l/enju_biblio', branch: '2.x'
 gem 'rails', '~> 6.0.3'
-gem 'globalize', '~> 5.3'
-gem 'globalize-accessors'

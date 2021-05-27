@@ -19,7 +19,6 @@ class LibraryGroup < ApplicationRecord
   ], coder: JSON
 
   translates :login_banner, :footer_banner
-  globalize_accessors
 
   if ENV['ENJU_STORAGE'] == 's3'
     has_attached_file :header_logo, storage: :s3, styles: { medium: 'x80'},
@@ -85,7 +84,7 @@ end
 #  display_name                  :text
 #  short_name                    :string           not null
 #  my_networks                   :text
-#  old_login_banner              :text
+#  login_banner                  :text
 #  note                          :text
 #  country_id                    :integer
 #  position                      :integer
