@@ -72,35 +72,34 @@ class UserImportFile < ApplicationRecord
         num[:user_found] += 1
       else
         new_user = User.new
+        new_user.role = Role.find_by(name: row['role'])
+        if new_user.role
+          unless user.has_role?(new_user.role.name)
+            num[:failed] += 1
+            next
+          end
+        else
+          new_user.role = Role.find(2) # User
+        end
         new_user.username = username
         new_user.assign_attributes(set_user_params(row))
         profile = Profile.new
         profile.assign_attributes(set_profile_params(row))
-        if row['role'].present?
-          role = Role.find_by(name: row['role'])
-        else
-          role = Role.find(2) # User
-        end
 
         Profile.transaction do
-          if profile.valid? && role
+          if new_user.valid? and profile.valid?
             new_user.profile = profile
-            new_user.role = role
-
-            if new_user.save
-              import_result.user = new_user
-              import_result.save!
-              num[:user_imported] += 1
-              next
-            end
+            import_result.user = new_user
+            import_result.save!
+            num[:user_imported] += 1
+          else
+            error_message = "line #{row_num}: "
+            error_message += new_user.errors.full_messages.join(" ")
+            error_message += profile.errors.full_messages.join(" ")
+            import_result.error_message = error_message
+            import_result.save
+            num[:error] += 1
           end
-
-          error_message = "line #{row_num}: "
-          error_message += new_user.errors.full_messages.join(" ")
-          error_message += profile.errors.full_messages.join(" ")
-          import_result.error_message = error_message
-          import_result.save
-          num[:error] += 1
         end
       end
     end
@@ -338,8 +337,8 @@ end
 #
 # Table name: user_import_files
 #
-#  id                       :bigint           not null, primary key
-#  user_id                  :bigint
+#  id                       :integer          not null, primary key
+#  user_id                  :integer
 #  note                     :text
 #  executed_at              :datetime
 #  user_import_file_name    :string
@@ -349,9 +348,9 @@ end
 #  user_import_fingerprint  :string
 #  edit_mode                :string
 #  error_message            :text
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
+#  created_at               :datetime
+#  updated_at               :datetime
 #  user_encoding            :string
-#  default_library_id       :bigint
-#  default_user_group_id    :bigint
+#  default_library_id       :integer
+#  default_user_group_id    :integer
 #

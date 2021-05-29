@@ -332,12 +332,12 @@ describe BasketsController do
 
       it 'should destroy basket without user_id' do
         delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
 
       it 'should destroy basket' do
         delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
     end
 
@@ -346,12 +346,12 @@ describe BasketsController do
 
       it 'should destroy basket without user_id' do
         delete :destroy, params: { id: 1, basket: { user_id: nil }, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
 
       it 'should destroy basket' do
         delete :destroy, params: { id: 1, basket: {}, user_id: users(:user1).username }
-        response.should redirect_to(checkouts_url(user_id: assigns(:basket).user.username))
+        response.should redirect_to(baskets_url)
       end
     end
 

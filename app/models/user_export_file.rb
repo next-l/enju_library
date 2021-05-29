@@ -31,16 +31,14 @@ class UserExportFile < ApplicationRecord
 
   # エクスポートの処理を実行します。
   def export!
-    UserExportFile.transaction do
-      transition_to!(:started)
-      role_name = user.try(:role).try(:name)
-      tsv = User.export(role: role_name)
-      self.user_export = StringIO.new(tsv)
-      self.user_export.instance_write(:filename, "user_export.txt")
-      save!
-      transition_to!(:completed)
-    end
-
+    transition_to!(:started)
+    tempfile = Tempfile.new(['user_export_file_', '.txt'])
+    file = User.export(format: :txt)
+    tempfile.puts(file)
+    tempfile.close
+    self.user_export = File.new(tempfile.path, 'r')
+    save!
+    transition_to!(:completed)
     mailer = UserExportMailer.completed(self)
     send_message(mailer)
   rescue => e
@@ -54,13 +52,13 @@ end
 #
 # Table name: user_export_files
 #
-#  id                       :bigint           not null, primary key
-#  user_id                  :bigint
+#  id                       :integer          not null, primary key
+#  user_id                  :integer
 #  user_export_file_name    :string
 #  user_export_content_type :string
-#  user_export_file_size    :bigint
+#  user_export_file_size    :integer
 #  user_export_updated_at   :datetime
 #  executed_at              :datetime
-#  created_at               :datetime         not null
-#  updated_at               :datetime         not null
+#  created_at               :datetime
+#  updated_at               :datetime
 #

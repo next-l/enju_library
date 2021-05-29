@@ -114,11 +114,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "agent_relationship_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "agent_relationships", force: :cascade do |t|
@@ -134,11 +135,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "agent_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "agents", force: :cascade do |t|
@@ -285,7 +287,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "carrier_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
@@ -294,6 +296,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.string "attachment_content_type"
     t.bigint "attachment_file_size"
     t.datetime "attachment_updated_at"
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "checked_items", force: :cascade do |t|
@@ -423,11 +426,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "content_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "countries", force: :cascade do |t|
@@ -446,11 +450,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "create_types", force: :cascade do |t|
     t.string "name"
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "creates", force: :cascade do |t|
@@ -473,6 +478,18 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.index ["item_id"], name: "index_demands_on_item_id"
     t.index ["message_id"], name: "index_demands_on_message_id"
     t.index ["user_id"], name: "index_demands_on_user_id"
+  end
+
+  create_table "doi_records", force: :cascade do |t|
+    t.string "body", null: false
+    t.string "display_body", null: false
+    t.string "source"
+    t.jsonb "response", default: {}, null: false
+    t.bigint "manifestation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["body"], name: "index_doi_records_on_body", unique: true
+    t.index ["manifestation_id"], name: "index_doi_records_on_manifestation_id"
   end
 
   create_table "donates", force: :cascade do |t|
@@ -593,20 +610,22 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "form_of_works", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "frequencies", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "identifier_types", force: :cascade do |t|
@@ -665,6 +684,44 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.index ["isbn"], name: "index_import_requests_on_isbn"
     t.index ["manifestation_id"], name: "index_import_requests_on_manifestation_id"
     t.index ["user_id"], name: "index_import_requests_on_user_id"
+  end
+
+  create_table "isbn_record_and_manifestations", comment: "書誌とISBNの関係", force: :cascade do |t|
+    t.bigint "isbn_record_id", null: false
+    t.bigint "manifestation_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["isbn_record_id"], name: "index_isbn_record_and_manifestations_on_isbn_record_id"
+    t.index ["manifestation_id"], name: "index_isbn_record_and_manifestations_on_manifestation_id"
+  end
+
+  create_table "isbn_records", comment: "ISBN", force: :cascade do |t|
+    t.string "body", null: false, comment: "ISBN"
+    t.string "isbn_type", comment: "ISBNの種類"
+    t.string "source", comment: "情報源"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["body"], name: "index_isbn_records_on_body", unique: true
+  end
+
+  create_table "issn_record_and_manifestations", comment: "書誌とISSNの関係", force: :cascade do |t|
+    t.bigint "issn_record_id", null: false
+    t.bigint "manifestation_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["issn_record_id"], name: "index_issn_record_and_manifestations_on_issn_record_id"
+    t.index ["manifestation_id"], name: "index_issn_record_and_manifestations_on_manifestation_id"
+  end
+
+  create_table "issn_records", comment: "ISSN", force: :cascade do |t|
+    t.string "body", null: false, comment: "ISSN"
+    t.string "issn_type", comment: "ISSNの種類"
+    t.string "source", comment: "情報源"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["body"], name: "index_issn_records_on_body", unique: true
   end
 
   create_table "item_custom_properties", force: :cascade do |t|
@@ -828,11 +885,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "licenses", force: :cascade do |t|
     t.string "name", null: false
-    t.string "display_name"
+    t.string "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "manifestation_checkout_stat_transitions", force: :cascade do |t|
@@ -883,11 +941,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "manifestation_relationship_types", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "manifestation_relationships", force: :cascade do |t|
@@ -995,11 +1054,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "medium_of_performances", force: :cascade do |t|
     t.string "name", null: false
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "message_request_transitions", force: :cascade do |t|
@@ -1086,6 +1146,25 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
     t.index ["event_id"], name: "index_participates_on_event_id"
   end
 
+  create_table "periodical_and_manifestations", force: :cascade do |t|
+    t.bigint "periodical_id", null: false
+    t.bigint "manifestation_id", null: false
+    t.boolean "periodical_master", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["manifestation_id"], name: "index_periodical_and_manifestations_on_manifestation_id"
+    t.index ["periodical_id"], name: "index_periodical_and_manifestations_on_periodical_id"
+    t.index ["periodical_master"], name: "index_periodical_and_manifestations_on_periodical_master", unique: true, where: "(periodical_master IS TRUE)"
+  end
+
+  create_table "periodicals", force: :cascade do |t|
+    t.text "original_title", null: false
+    t.bigint "frequency_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["frequency_id"], name: "index_periodicals_on_frequency_id"
+  end
+
   create_table "picture_files", force: :cascade do |t|
     t.integer "picture_attachable_id"
     t.string "picture_attachable_type"
@@ -1108,11 +1187,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "produce_types", force: :cascade do |t|
     t.string "name"
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "produces", force: :cascade do |t|
@@ -1157,11 +1237,12 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
 
   create_table "realize_types", force: :cascade do |t|
     t.string "name"
-    t.text "display_name"
+    t.text "old_display_name"
     t.text "note"
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "display_name_translations", default: {}, null: false
   end
 
   create_table "realizes", force: :cascade do |t|
@@ -1712,6 +1793,11 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
   add_foreign_key "demands", "items"
   add_foreign_key "demands", "messages"
   add_foreign_key "demands", "users"
+  add_foreign_key "doi_records", "manifestations"
+  add_foreign_key "isbn_record_and_manifestations", "isbn_records"
+  add_foreign_key "isbn_record_and_manifestations", "manifestations"
+  add_foreign_key "issn_record_and_manifestations", "issn_records"
+  add_foreign_key "issn_record_and_manifestations", "manifestations"
   add_foreign_key "item_custom_values", "item_custom_properties"
   add_foreign_key "item_custom_values", "items"
   add_foreign_key "item_has_use_restrictions", "items"
@@ -1725,6 +1811,9 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
   add_foreign_key "manifestation_custom_values", "manifestation_custom_properties"
   add_foreign_key "manifestation_custom_values", "manifestations"
   add_foreign_key "manifestation_reserve_stats", "users"
+  add_foreign_key "periodical_and_manifestations", "manifestations"
+  add_foreign_key "periodical_and_manifestations", "periodicals"
+  add_foreign_key "periodicals", "frequencies"
   add_foreign_key "profiles", "users"
   add_foreign_key "reserve_stat_has_manifestations", "manifestations"
   add_foreign_key "reserve_stat_has_users", "user_reserve_stats"

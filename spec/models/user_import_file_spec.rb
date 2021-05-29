@@ -74,7 +74,7 @@ describe UserImportFile do
       file.executed_at.should be_truthy
 
       file.reload
-      file.error_message.should eq "次の列は無視されました。 save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください\nline 9: 利用者番号は不正な値です\nline 10: 利用者番号はすでに存在します"
+      file.error_message.should eq "次の列は無視されました。 checkout_icalendar_token, save_checkout_history, save_search_history, share_bookmarks, invalid\nline 8: パスワードは6文字以上で入力してください\nline 9: 利用者番号は不正な値です\nline 10: 利用者番号はすでに存在します"
       file.current_state.should eq 'failed'
     end
 
@@ -196,7 +196,7 @@ describe UserImportFile do
       )
       old_message_count = Message.count
       file.remove
-      User.count.should eq old_count - 2
+      User.count.should eq old_count - 3
       Message.count.should eq old_message_count + 1
     end
   end

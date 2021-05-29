@@ -7,6 +7,7 @@ class UserGroup < ApplicationRecord
     allow_blank: true
 
   paginates_per 10
+  translates :display_name
 end
 
 # == Schema Information
