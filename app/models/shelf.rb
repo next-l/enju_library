@@ -11,6 +11,7 @@ class Shelf < ApplicationRecord
   validates :name, format: { with: /\A[a-z][0-9a-z\-_]{1,253}[0-9a-z]\Z/ }
   before_update :reset_position
   has_one_attached :image
+  translates :display_name
 
   acts_as_list scope: :library
 

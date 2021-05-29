@@ -32,7 +32,7 @@ event_category_00005:
   created_at: 2008-01-01 16:25:04.251141 +09:00
   position: 5
 event_category_00001: 
-  name: unknown  
+  name: unknown
   display_name: (not specified)
   updated_at: 2008-01-01 16:24:17.869192 +09:00
   id: 1
