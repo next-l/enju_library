@@ -10,6 +10,7 @@ class Library < ApplicationRecord
   extend FriendlyId
   friendly_id :name
   geocoded_by :address
+  translates :display_name
 
   searchable do
     text :name, :display_name, :note, :address
