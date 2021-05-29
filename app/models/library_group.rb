@@ -18,7 +18,7 @@ class LibraryGroup < ApplicationRecord
     :erms_url
   ], coder: JSON
 
-  translates :login_banner, :footer_banner
+  translates :display_name, :login_banner, :footer_banner
 
   if ENV['ENJU_STORAGE'] == 's3'
     has_attached_file :header_logo, storage: :s3, styles: { medium: 'x80'},
