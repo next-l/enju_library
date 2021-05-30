@@ -790,12 +790,13 @@ ActiveRecord::Schema.define(version: 2021_01_11_033454) do
   create_table "languages", force: :cascade do |t|
     t.string "name", null: false
     t.string "native_name"
-    t.text "display_name"
+    t.text "old_display_name"
     t.string "iso_639_1"
     t.string "iso_639_2"
     t.string "iso_639_3"
     t.text "note"
     t.integer "position"
+    t.jsonb "display_name_translations", default: {}, null: false
     t.index ["iso_639_1"], name: "index_languages_on_iso_639_1"
     t.index ["iso_639_2"], name: "index_languages_on_iso_639_2"
     t.index ["iso_639_3"], name: "index_languages_on_iso_639_3"

@@ -2,7 +2,7 @@
 language_00001: 
   position: 1
   name: unknown
-  display_name: "unknown / 不明"
+  display_name_translations: {"en": "unknown", "ja": "不明"}
   iso_639_1: unknown
   iso_639_2: unknown
   iso_639_3: unknown
@@ -12,7 +12,7 @@ language_00001:
 language_00086: 
   position: 86
   name: Kinyarwanda
-  display_name: Kinyarwanda
+  display_name_translations: {"en": "Kinyarwanda"}
   iso_639_1: rw
   iso_639_2: kin
   iso_639_3: kin
@@ -22,7 +22,7 @@ language_00086:
 language_00141: 
   position: 141
   name: Scottish Gaelic
-  display_name: Scottish Gaelic
+  display_name_translations: {"en": "Scottish Gaelic"}
   iso_639_1: gd
   iso_639_2: gla
   iso_639_3: gla
@@ -32,7 +32,7 @@ language_00141:
 language_00058: 
   position: 58
   name: "Guaran\xC3\xAD"
-  display_name: "Guaran\xC3\xAD"
+  display_name_translations: {"en": "Guaran\xC3\xAD"}
   iso_639_1: gn
   iso_639_2: grn
   iso_639_3: grn
@@ -42,7 +42,7 @@ language_00058:
 language_00113: 
   position: 113
   name: Nauru
-  display_name: Nauru
+  display_name_translations: {"en": "Nauru"}
   iso_639_1: na
   iso_639_2: nau
   iso_639_3: nau
@@ -52,7 +52,7 @@ language_00113:
 language_00087: 
   position: 87
   name: Kirghiz
-  display_name: Kirghiz
+  display_name_translations: {"en": "Kirghiz"}
   iso_639_1: ky
   iso_639_2: kir
   iso_639_3: kir
@@ -62,7 +62,7 @@ language_00087:
 language_00142: 
   position: 142
   name: Serbian
-  display_name: Serbian
+  display_name_translations: {"en": "Serbian"}
   iso_639_1: sr
   iso_639_2: srp
   iso_639_3: srp
@@ -72,7 +72,7 @@ language_00142:
 language_00059: 
   position: 59
   name: Gujarati
-  display_name: Gujarati
+  display_name_translations: {"en": "Gujarati"}
   iso_639_1: gu
   iso_639_2: guj
   iso_639_3: guj
@@ -82,7 +82,7 @@ language_00059:
 language_00114: 
   position: 114
   name: Navajo
-  display_name: Navajo
+  display_name_translations: {"en": "Navajo"}
   iso_639_1: nv
   iso_639_2: nav
   iso_639_3: nav
@@ -92,7 +92,7 @@ language_00114:
 language_00170: 
   position: 170
   name: Turkish
-  display_name: Turkish
+  display_name_translations: {"en": "Turkish"}
   iso_639_1: tr
   iso_639_2: tur
   iso_639_3: tur
@@ -102,7 +102,7 @@ language_00170:
 language_00088: 
   position: 88
   name: Kirundi
-  display_name: Kirundi
+  display_name_translations: {"en": "Kirundi"}
   iso_639_1: rn
   iso_639_2: run
   iso_639_3: run
@@ -112,7 +112,7 @@ language_00088:
 language_00143: 
   position: 143
   name: Serbo-Croatian
-  display_name: Serbo-Croatian
+  display_name_translations: {"en": "Serbo-Croatian"}
   iso_639_1: sh
   iso_639_2: XXX
   iso_639_3: hbs
@@ -122,7 +122,7 @@ language_00143:
 language_00115: 
   position: 115
   name: Ndonga
-  display_name: Ndonga
+  display_name_translations: {"en": "Ndonga"}
   iso_639_1: ng
   iso_639_2: ndo
   iso_639_3: ndo
@@ -132,7 +132,7 @@ language_00115:
 language_00171: 
   position: 171
   name: Turkmen
-  display_name: Turkmen
+  display_name_translations: {"en": "Turkmen"}
   iso_639_1: tk
   iso_639_2: tuk
   iso_639_3: tuk
@@ -142,7 +142,7 @@ language_00171:
 language_00144: 
   position: 144
   name: Shona
-  display_name: Shona
+  display_name_translations: {"en": "Shona"}
   iso_639_1: sn
   iso_639_2: sna
   iso_639_3: sna
@@ -152,7 +152,7 @@ language_00144:
 language_00002: 
   position: 2
   name: Abkhazian
-  display_name: Abkhazian
+  display_name_translations: {"en": "Abkhazian"}
   iso_639_1: ab
   iso_639_2: abk
   iso_639_3: abk
@@ -162,7 +162,7 @@ language_00002:
 language_00116: 
   position: 116
   name: Nepali
-  display_name: Nepali
+  display_name_translations: {"en": "Nepali"}
   iso_639_1: ne
   iso_639_2: nep
   iso_639_3: nep
@@ -172,7 +172,7 @@ language_00116:
 language_00172: 
   position: 172
   name: Twi
-  display_name: Twi
+  display_name_translations: {"en": "Twi"}
   iso_639_1: tw
   iso_639_2: twi
   iso_639_3: twi
@@ -182,7 +182,7 @@ language_00172:
 language_00030: 
   position: 30
   name: Chichewa
-  display_name: Chichewa
+  display_name_translations: {"en": "Chichewa"}
   iso_639_1: ny
   iso_639_2: nya
   iso_639_3: nya
@@ -192,7 +192,7 @@ language_00030:
 language_00089: 
   position: 89
   name: Komi
-  display_name: Komi
+  display_name_translations: {"en": "Komi"}
   iso_639_1: kv
   iso_639_2: kom
   iso_639_3: kom
@@ -202,7 +202,7 @@ language_00089:
 language_00145: 
   position: 145
   name: Sichuan Yi
-  display_name: Sichuan Yi
+  display_name_translations: {"en": "Sichuan Yi"}
   iso_639_1: ii
   iso_639_2: iii
   iso_639_3: iii
@@ -212,7 +212,7 @@ language_00145:
 language_00003: 
   position: 3
   name: Afar
-  display_name: Afar
+  display_name_translations: {"en": "Afar"}
   iso_639_1: aa
   iso_639_2: aar
   iso_639_3: aar
@@ -222,7 +222,7 @@ language_00003:
 language_00117: 
   position: 117
   name: North Ndebele
-  display_name: North Ndebele
+  display_name_translations: {"en": "North Ndebele"}
   iso_639_1: nd
   iso_639_2: nde
   iso_639_3: nde
@@ -232,7 +232,7 @@ language_00117:
 language_00173: 
   position: 173
   name: Uighur
-  display_name: Uighur
+  display_name_translations: {"en": "Uighur"}
   iso_639_1: ug
   iso_639_2: uig
   iso_639_3: uig
@@ -242,7 +242,7 @@ language_00173:
 language_00031: 
   position: 31
   name: Chinese
-  display_name: Chinese
+  display_name_translations: {"en": "Chinese"}
   iso_639_1: zh
   iso_639_2: chi
   iso_639_3: zho
@@ -252,7 +252,7 @@ language_00031:
 language_00004: 
   position: 4
   name: Afrikaans
-  display_name: Afrikaans
+  display_name_translations: {"en": "Afrikaans"}
   iso_639_1: af
   iso_639_2: afr
   iso_639_3: afr
@@ -262,7 +262,7 @@ language_00004:
 language_00118: 
   position: 118
   name: Northern Sami
-  display_name: Northern Sami
+  display_name_translations: {"en": "Northern Sami"}
   iso_639_1: se
   iso_639_2: sme
   iso_639_3: sme
@@ -272,7 +272,7 @@ language_00118:
 language_00060: 
   position: 60
   name: Haitian
-  display_name: Haitian
+  display_name_translations: {"en": "Haitian"}
   iso_639_1: ht
   iso_639_2: hat
   iso_639_3: hat
@@ -282,7 +282,7 @@ language_00060:
 language_00174: 
   position: 174
   name: Ukrainian
-  display_name: Ukrainian
+  display_name_translations: {"en": "Ukrainian"}
   iso_639_1: uk
   iso_639_2: ukr
   iso_639_3: ukr
@@ -292,7 +292,7 @@ language_00174:
 language_00032: 
   position: 32
   name: Church Slavic
-  display_name: Church Slavic
+  display_name_translations: {"en": "Church Slavic"}
   iso_639_1: cu
   iso_639_2: chu
   iso_639_3: chu
@@ -302,7 +302,7 @@ language_00032:
 language_00146: 
   position: 146
   name: Sindhi
-  display_name: Sindhi
+  display_name_translations: {"en": "Sindhi"}
   iso_639_1: sd
   iso_639_2: snd
   iso_639_3: snd
@@ -312,7 +312,7 @@ language_00146:
 language_00119: 
   position: 119
   name: Norwegian
-  display_name: Norwegian
+  display_name_translations: {"en": "Norwegian"}
   iso_639_1: f
   iso_639_2: nor
   iso_639_3: nor
@@ -322,7 +322,7 @@ language_00119:
 language_00061: 
   position: 61
   name: Hausa
-  display_name: Hausa
+  display_name_translations: {"en": "Hausa"}
   iso_639_1: ha
   iso_639_2: hau
   iso_639_3: hau
@@ -332,7 +332,7 @@ language_00061:
 language_00175: 
   position: 175
   name: Urdu
-  display_name: Urdu
+  display_name_translations: {"en": "Urdu"}
   iso_639_1: ur
   iso_639_2: urd
   iso_639_3: urd
@@ -342,7 +342,7 @@ language_00175:
 language_00033: 
   position: 33
   name: Chuvash
-  display_name: Chuvash
+  display_name_translations: {"en": "Chuvash"}
   iso_639_1: cv
   iso_639_2: chv
   iso_639_3: chv
@@ -352,7 +352,7 @@ language_00033:
 language_00147: 
   position: 147
   name: Sinhala
-  display_name: Sinhala
+  display_name_translations: {"en": "Sinhala"}
   iso_639_1: si
   iso_639_2: sin
   iso_639_3: sin
@@ -362,7 +362,7 @@ language_00147:
 language_00005: 
   position: 5
   name: Akan
-  display_name: Akan
+  display_name_translations: {"en": "Akan"}
   iso_639_1: ak
   iso_639_2: aka
   iso_639_3: aka
@@ -372,7 +372,7 @@ language_00005:
 language_00062: 
   position: 62
   name: Hebrew
-  display_name: Hebrew
+  display_name_translations: {"en": "Hebrew"}
   iso_639_1: he
   iso_639_2: heb
   iso_639_3: heb
@@ -382,7 +382,7 @@ language_00062:
 language_00176: 
   position: 176
   name: Uzbek
-  display_name: Uzbek
+  display_name_translations: {"en": "Uzbek"}
   iso_639_1: uz
   iso_639_2: uzb
   iso_639_3: uzb
@@ -392,7 +392,7 @@ language_00176:
 language_00034: 
   position: 34
   name: Cornish
-  display_name: Cornish
+  display_name_translations: {"en": "Cornish"}
   iso_639_1: kw
   iso_639_2: cor
   iso_639_3: cor
@@ -402,7 +402,7 @@ language_00034:
 language_00148: 
   position: 148
   name: Slovak
-  display_name: Slovak
+  display_name_translations: {"en": "Slovak"}
   iso_639_1: sk
   iso_639_2: slo
   iso_639_3: slk
@@ -412,7 +412,7 @@ language_00148:
 language_00006: 
   position: 6
   name: Albanian
-  display_name: Albanian
+  display_name_translations: {"en": "Albanian"}
   iso_639_1: sq
   iso_639_2: alb
   iso_639_3: sqi
@@ -422,7 +422,7 @@ language_00006:
 language_00090: 
   position: 90
   name: Kongo
-  display_name: Kongo
+  display_name_translations: {"en": "Kongo"}
   iso_639_1: kg
   iso_639_2: kon
   iso_639_3: kon
@@ -432,7 +432,7 @@ language_00090:
 language_00063: 
   position: 63
   name: Herero
-  display_name: Herero
+  display_name_translations: {"en": "Herero"}
   iso_639_1: hz
   iso_639_2: her
   iso_639_3: her
@@ -442,7 +442,7 @@ language_00063:
 language_00177: 
   position: 177
   name: Venda
-  display_name: Venda
+  display_name_translations: {"en": "Venda"}
   iso_639_1: ve
   iso_639_2: ven
   iso_639_3: ven
@@ -452,7 +452,7 @@ language_00177:
 language_00035: 
   position: 35
   name: Corsican
-  display_name: Corsican
+  display_name_translations: {"en": "Corsican"}
   iso_639_1: co
   iso_639_2: cos
   iso_639_3: cos
@@ -462,7 +462,7 @@ language_00035:
 language_00149: 
   position: 149
   name: Slovenian
-  display_name: Slovenian
+  display_name_translations: {"en": "Slovenian"}
   iso_639_1: sl
   iso_639_2: slv
   iso_639_3: slv
@@ -472,7 +472,7 @@ language_00149:
 language_00007: 
   position: 7
   name: Amharic
-  display_name: Amharic
+  display_name_translations: {"en": "Amharic"}
   iso_639_1: am
   iso_639_2: amh
   iso_639_3: amh
@@ -482,7 +482,7 @@ language_00007:
 language_00091: 
   position: 91
   name: Korean
-  display_name: Korean
+  display_name_translations: {"en": "Korean"}
   iso_639_1: ko
   iso_639_2: kor
   iso_639_3: kor
@@ -492,7 +492,7 @@ language_00091:
 language_00064: 
   position: 64
   name: Hindi
-  display_name: Hindi
+  display_name_translations: {"en": "Hindi"}
   iso_639_1: hi
   iso_639_2: hin
   iso_639_3: hin
@@ -502,7 +502,7 @@ language_00064:
 language_00178: 
   position: 178
   name: Vietnamese
-  display_name: Vietnamese
+  display_name_translations: {"en": "Vietnamese"}
   iso_639_1: vi
   iso_639_2: vie
   iso_639_3: vie
@@ -512,7 +512,7 @@ language_00178:
 language_00036: 
   position: 36
   name: Cree
-  display_name: Cree
+  display_name_translations: {"en": "Cree"}
   iso_639_1: cr
   iso_639_2: cre
   iso_639_3: cre
@@ -522,7 +522,7 @@ language_00036:
 language_00008: 
   position: 8
   name: Arabic
-  display_name: Arabic
+  display_name_translations: {"en": "Arabic"}
   iso_639_1: ar
   iso_639_2: ara
   iso_639_3: ara
@@ -532,7 +532,7 @@ language_00008:
 language_00092: 
   position: 92
   name: Kurdish
-  display_name: Kurdish
+  display_name_translations: {"en": "Kurdish"}
   iso_639_1: ku
   iso_639_2: kur
   iso_639_3: kur
@@ -542,7 +542,7 @@ language_00092:
 language_00065: 
   position: 65
   name: Hiri Motu
-  display_name: Hiri Motu
+  display_name_translations: {"en": "Hiri Motu"}
   iso_639_1: ho
   iso_639_2: hmo
   iso_639_3: hmo
@@ -552,7 +552,7 @@ language_00065:
 language_00120: 
   position: 120
   name: "Norwegian Bokm\xC3\xA5l"
-  display_name: "Norwegian Bokm\xC3\xA5l"
+  display_name_translations: {"en": "Norwegian Bokm\xC3\xA5l"}
   iso_639_1: nb
   iso_639_2: nob
   iso_639_3: nob
@@ -562,7 +562,7 @@ language_00120:
 language_00179: 
   position: 179
   name: "Volap\xC3\xBCk"
-  display_name: "Volap\xC3\xBCk"
+  display_name_translations: {"en": "Volap\xC3\xBCk"}
   iso_639_1: vo
   iso_639_2: vol
   iso_639_3: vol
@@ -572,7 +572,7 @@ language_00179:
 language_00037: 
   position: 37
   name: Croatian
-  display_name: Croatian
+  display_name_translations: {"en": "Croatian"}
   iso_639_1: hr
   iso_639_2: hrv
   iso_639_3: hrv
@@ -582,7 +582,7 @@ language_00037:
 language_00009: 
   position: 9
   name: Aragonese
-  display_name: Aragonese
+  display_name_translations: {"en": "Aragonese"}
   iso_639_1: an
   iso_639_2: arg
   iso_639_3: arg
@@ -592,7 +592,7 @@ language_00009:
 language_00093: 
   position: 93
   name: Kwanyama
-  display_name: Kwanyama
+  display_name_translations: {"en": "Kwanyama"}
   iso_639_1: kj
   iso_639_2: kua
   iso_639_3: kua
@@ -602,7 +602,7 @@ language_00093:
 language_00066: 
   position: 66
   name: Hungarian
-  display_name: Hungarian
+  display_name_translations: {"en": "Hungarian"}
   iso_639_1: hu
   iso_639_2: hun
   iso_639_3: hun
@@ -612,7 +612,7 @@ language_00066:
 language_00121: 
   position: 121
   name: Norwegian Nynorsk
-  display_name: Norwegian Nynorsk
+  display_name_translations: {"en": "Norwegian Nynorsk"}
   iso_639_1: nn
   iso_639_2: nno
   iso_639_3: nno
@@ -622,7 +622,7 @@ language_00121:
 language_00038: 
   position: 38
   name: Czech
-  display_name: Czech
+  display_name_translations: {"en": "Czech"}
   iso_639_1: cs
   iso_639_2: cze
   iso_639_3: ces
@@ -632,7 +632,7 @@ language_00038:
 language_00094: 
   position: 94
   name: Lao
-  display_name: Lao
+  display_name_translations: {"en": "Lao"}
   iso_639_1: lo
   iso_639_2: lao
   iso_639_3: lao
@@ -642,7 +642,7 @@ language_00094:
 language_00067: 
   position: 67
   name: Icelandic
-  display_name: Icelandic
+  display_name_translations: {"en": "Icelandic"}
   iso_639_1: is
   iso_639_2: ice
   iso_639_3: isl
@@ -652,7 +652,7 @@ language_00067:
 language_00122: 
   position: 122
   name: Occitan
-  display_name: Occitan
+  display_name_translations: {"en": "Occitan"}
   iso_639_1: oc
   iso_639_2: oci
   iso_639_3: oci
@@ -662,7 +662,7 @@ language_00122:
 language_00039: 
   position: 39
   name: Danish
-  display_name: Danish
+  display_name_translations: {"en": "Danish"}
   iso_639_1: da
   iso_639_2: dan
   iso_639_3: dan
@@ -672,7 +672,7 @@ language_00039:
 language_00095: 
   position: 95
   name: Latin
-  display_name: Latin
+  display_name_translations: {"en": "Latin"}
   iso_639_1: la
   iso_639_2: lat
   iso_639_3: lat
@@ -682,7 +682,7 @@ language_00095:
 language_00150: 
   position: 150
   name: Somali
-  display_name: Somali
+  display_name_translations: {"en": "Somali"}
   iso_639_1: so
   iso_639_2: som
   iso_639_3: som
@@ -692,7 +692,7 @@ language_00150:
 language_00123: 
   position: 123
   name: Ojibwa
-  display_name: Ojibwa
+  display_name_translations: {"en": "Ojibwa"}
   iso_639_1: oj
   iso_639_2: oji
   iso_639_3: oji
@@ -702,7 +702,7 @@ language_00123:
 language_00096: 
   position: 96
   name: Latvian
-  display_name: Latvian
+  display_name_translations: {"en": "Latvian"}
   iso_639_1: lv
   iso_639_2: lav
   iso_639_3: lav
@@ -712,7 +712,7 @@ language_00096:
 language_00151: 
   position: 151
   name: Sotho
-  display_name: Sotho
+  display_name_translations: {"en": "Sotho"}
   iso_639_1: st
   iso_639_2: sot
   iso_639_3: sot
@@ -722,7 +722,7 @@ language_00151:
 language_00068: 
   position: 68
   name: Ido
-  display_name: Ido
+  display_name_translations: {"en": "Ido"}
   iso_639_1: io
   iso_639_2: ido
   iso_639_3: ido
@@ -732,7 +732,7 @@ language_00068:
 language_00124: 
   position: 124
   name: Oriya
-  display_name: Oriya
+  display_name_translations: {"en": "Oriya"}
   iso_639_1: or
   iso_639_2: ori
   iso_639_3: ori
@@ -742,7 +742,7 @@ language_00124:
 language_00180: 
   position: 180
   name: Walloon
-  display_name: Walloon
+  display_name_translations: {"en": "Walloon"}
   iso_639_1: wa
   iso_639_2: wln
   iso_639_3: wln
@@ -752,7 +752,7 @@ language_00180:
 language_00097: 
   position: 97
   name: Limburgish
-  display_name: Limburgish
+  display_name_translations: {"en": "Limburgish"}
   iso_639_1: li
   iso_639_2: lim
   iso_639_3: lim
@@ -762,7 +762,7 @@ language_00097:
 language_00152: 
   position: 152
   name: South Ndebele
-  display_name: South Ndebele
+  display_name_translations: {"en": "South Ndebele"}
   iso_639_1: nr
   iso_639_2: nbl
   iso_639_3: nbl
@@ -772,7 +772,7 @@ language_00152:
 language_00010: 
   position: 10
   name: Armenian
-  display_name: Armenian
+  display_name_translations: {"en": "Armenian"}
   iso_639_1: hy
   iso_639_2: arm
   iso_639_3: hye
@@ -782,7 +782,7 @@ language_00010:
 language_00069: 
   position: 69
   name: Igbo
-  display_name: Igbo
+  display_name_translations: {"en": "Igbo"}
   iso_639_1: ig
   iso_639_2: ibo
   iso_639_3: ibo
@@ -792,7 +792,7 @@ language_00069:
 language_00181: 
   position: 181
   name: Welsh
-  display_name: Welsh
+  display_name_translations: {"en": "Welsh"}
   iso_639_1: cy
   iso_639_2: wel
   iso_639_3: cym
@@ -802,7 +802,7 @@ language_00181:
 language_00098: 
   position: 98
   name: Lingala
-  display_name: Lingala
+  display_name_translations: {"en": "Lingala"}
   iso_639_1: ln
   iso_639_2: lin
   iso_639_3: lin
@@ -812,7 +812,7 @@ language_00098:
 language_00153: 
   position: 153
   name: Spanish
-  display_name: Spanish
+  display_name_translations: {"en": "Spanish"}
   iso_639_1: es
   iso_639_2: spa
   iso_639_3: spa
@@ -822,7 +822,7 @@ language_00153:
 language_00011: 
   position: 11
   name: Assamese
-  display_name: Assamese
+  display_name_translations: {"en": "Assamese"}
   iso_639_1: as
   iso_639_2: asm
   iso_639_3: asm
@@ -832,7 +832,7 @@ language_00011:
 language_00125: 
   position: 125
   name: Oromo
-  display_name: Oromo
+  display_name_translations: {"en": "Oromo"}
   iso_639_1: om
   iso_639_2: orm
   iso_639_3: orm
@@ -842,7 +842,7 @@ language_00125:
 language_00182: 
   position: 182
   name: Western Frisian
-  display_name: Western Frisian
+  display_name_translations: {"en": "Western Frisian"}
   iso_639_1: fy
   iso_639_2: fry
   iso_639_3: fry
@@ -852,7 +852,7 @@ language_00182:
 language_00040: 
   position: 40
   name: Divehi
-  display_name: Divehi
+  display_name_translations: {"en": "Divehi"}
   iso_639_1: dv
   iso_639_2: div
   iso_639_3: div
@@ -862,7 +862,7 @@ language_00040:
 language_00099: 
   position: 99
   name: Lithuanian
-  display_name: Lithuanian
+  display_name_translations: {"en": "Lithuanian"}
   iso_639_1: lt
   iso_639_2: lit
   iso_639_3: lit
@@ -872,7 +872,7 @@ language_00099:
 language_00154: 
   position: 154
   name: Sundanese
-  display_name: Sundanese
+  display_name_translations: {"en": "Sundanese"}
   iso_639_1: su
   iso_639_2: sun
   iso_639_3: sun
@@ -882,7 +882,7 @@ language_00154:
 language_00012: 
   position: 12
   name: Avaric
-  display_name: Avaric
+  display_name_translations: {"en": "Avaric"}
   iso_639_1: av
   iso_639_2: ava
   iso_639_3: ava
@@ -892,7 +892,7 @@ language_00012:
 language_00126: 
   position: 126
   name: Ossetian
-  display_name: Ossetian
+  display_name_translations: {"en": "Ossetian"}
   iso_639_1: os
   iso_639_2: oss
   iso_639_3: oss
@@ -902,7 +902,7 @@ language_00126:
 language_00183: 
   position: 183
   name: Wolof
-  display_name: Wolof
+  display_name_translations: {"en": "Wolof"}
   iso_639_1: wo
   iso_639_2: wol
   iso_639_3: wol
@@ -912,7 +912,7 @@ language_00183:
 language_00041: 
   position: 41
   name: Dutch
-  display_name: Dutch
+  display_name_translations: {"en": "Dutch"}
   iso_639_1: nl
   iso_639_2: dut
   iso_639_3: nld
@@ -922,7 +922,7 @@ language_00041:
 language_00155: 
   position: 155
   name: Swahili
-  display_name: Swahili
+  display_name_translations: {"en": "Swahili"}
   iso_639_1: sw
   iso_639_2: swa
   iso_639_3: swa
@@ -932,7 +932,7 @@ language_00155:
 language_00013: 
   position: 13
   name: Avestan
-  display_name: Avestan
+  display_name_translations: {"en": "Avestan"}
   iso_639_1: ae
   iso_639_2: ave
   iso_639_3: ave
@@ -942,7 +942,7 @@ language_00013:
 language_00127: 
   position: 127
   name: Panjabi
-  display_name: Panjabi
+  display_name_translations: {"en": "Panjabi"}
   iso_639_1: pa
   iso_639_2: pan
   iso_639_3: pan
@@ -952,7 +952,7 @@ language_00127:
 language_00128: 
   position: 128
   name: Pashto
-  display_name: Pashto
+  display_name_translations: {"en": "Pashto"}
   iso_639_1: ps
   iso_639_2: pus
   iso_639_3: pus
@@ -962,7 +962,7 @@ language_00128:
 language_00184: 
   position: 184
   name: Xhosa
-  display_name: Xhosa
+  display_name_translations: {"en": "Xhosa"}
   iso_639_1: xh
   iso_639_2: xho
   iso_639_3: xho
@@ -972,7 +972,7 @@ language_00184:
 language_00042: 
   position: 42
   name: Dzongkha
-  display_name: Dzongkha
+  display_name_translations: {"en": "Dzongkha"}
   iso_639_1: dz
   iso_639_2: dzo
   iso_639_3: dzo
@@ -982,7 +982,7 @@ language_00042:
 language_00156: 
   position: 156
   name: Swati
-  display_name: Swati
+  display_name_translations: {"en": "Swati"}
   iso_639_1: ss
   iso_639_2: ssw
   iso_639_3: ssw
@@ -992,7 +992,7 @@ language_00156:
 language_00014: 
   position: 14
   name: Aymara
-  display_name: Aymara
+  display_name_translations: {"en": "Aymara"}
   iso_639_1: ay
   iso_639_2: aym
   iso_639_3: aym
@@ -1002,7 +1002,7 @@ language_00014:
 language_00070: 
   position: 70
   name: Indonesian
-  display_name: Indonesian
+  display_name_translations: {"en": "Indonesian"}
   iso_639_1: id
   iso_639_2: ind
   iso_639_3: ind
@@ -1012,7 +1012,7 @@ language_00070:
 language_00185: 
   position: 185
   name: Yiddish
-  display_name: Yiddish
+  display_name_translations: {"en": "Yiddish"}
   iso_639_1: yi
   iso_639_2: yid
   iso_639_3: yid
@@ -1022,7 +1022,7 @@ language_00185:
 language_00043: 
   position: 43
   name: English
-  display_name: English
+  display_name_translations: {"en": "English"}
   iso_639_1: en
   iso_639_2: eng
   iso_639_3: eng
@@ -1032,7 +1032,7 @@ language_00043:
 language_00157: 
   position: 157
   name: Swedish
-  display_name: Swedish
+  display_name_translations: {"en": "Swedish"}
   iso_639_1: sv
   iso_639_2: swe
   iso_639_3: swe
@@ -1042,7 +1042,7 @@ language_00157:
 language_00015: 
   position: 15
   name: Azerbaijani
-  display_name: Azerbaijani
+  display_name_translations: {"en": "Azerbaijani"}
   iso_639_1: az
   iso_639_2: aze
   iso_639_3: aze
@@ -1052,7 +1052,7 @@ language_00015:
 language_00129: 
   position: 129
   name: Persian
-  display_name: Persian
+  display_name_translations: {"en": "Persian"}
   iso_639_1: fa
   iso_639_2: per
   iso_639_3: fas
@@ -1062,7 +1062,7 @@ language_00129:
 language_00071: 
   position: 71
   name: Interlingua
-  display_name: Interlingua
+  display_name_translations: {"en": "Interlingua"}
   iso_639_1: ia
   iso_639_2: ina
   iso_639_3: ina
@@ -1072,7 +1072,7 @@ language_00071:
 language_00186: 
   position: 186
   name: Yoruba
-  display_name: Yoruba
+  display_name_translations: {"en": "Yoruba"}
   iso_639_1: yo
   iso_639_2: yor
   iso_639_3: yor
@@ -1082,7 +1082,7 @@ language_00186:
 language_00044: 
   position: 44
   name: Esperanto
-  display_name: Esperanto
+  display_name_translations: {"en": "Esperanto"}
   iso_639_1: eo
   iso_639_2: epo
   iso_639_3: epo
@@ -1092,7 +1092,7 @@ language_00044:
 language_00158: 
   position: 158
   name: Tagalog
-  display_name: Tagalog
+  display_name_translations: {"en": "Tagalog"}
   iso_639_1: tl
   iso_639_2: tgl
   iso_639_3: tgl
@@ -1102,7 +1102,7 @@ language_00158:
 language_00016: 
   position: 16
   name: Bambara
-  display_name: Bambara
+  display_name_translations: {"en": "Bambara"}
   iso_639_1: bm
   iso_639_2: bam
   iso_639_3: bam
@@ -1112,7 +1112,7 @@ language_00016:
 language_00072: 
   position: 72
   name: Interlingue
-  display_name: Interlingue
+  display_name_translations: {"en": "Interlingue"}
   iso_639_1: ie
   iso_639_2: ile
   iso_639_3: ile
@@ -1122,7 +1122,7 @@ language_00072:
 language_00017: 
   position: 17
   name: Bashkir
-  display_name: Bashkir
+  display_name_translations: {"en": "Bashkir"}
   iso_639_1: ba
   iso_639_2: bak
   iso_639_3: bak
@@ -1132,7 +1132,7 @@ language_00017:
 language_00159: 
   position: 159
   name: Tahitian
-  display_name: Tahitian
+  display_name_translations: {"en": "Tahitian"}
   iso_639_1: ty
   iso_639_2: tah
   iso_639_3: tah
@@ -1142,7 +1142,7 @@ language_00159:
 language_00187: 
   position: 187
   name: Zhuang
-  display_name: Zhuang
+  display_name_translations: {"en": "Zhuang"}
   iso_639_1: za
   iso_639_2: zha
   iso_639_3: zha
@@ -1152,7 +1152,7 @@ language_00187:
 language_00045: 
   position: 45
   name: Estonian
-  display_name: Estonian
+  display_name_translations: {"en": "Estonian"}
   iso_639_1: et
   iso_639_2: est
   iso_639_3: est
@@ -1162,7 +1162,7 @@ language_00045:
 language_00100: 
   position: 100
   name: Luba-Katanga
-  display_name: Luba-Katanga
+  display_name_translations: {"en": "Luba-Katanga"}
   iso_639_1: lu
   iso_639_2: lub
   iso_639_3: lub
@@ -1172,7 +1172,7 @@ language_00100:
 language_00073: 
   position: 73
   name: Inuktitut
-  display_name: Inuktitut
+  display_name_translations: {"en": "Inuktitut"}
   iso_639_1: iu
   iso_639_2: iku
   iso_639_3: iku
@@ -1182,7 +1182,7 @@ language_00073:
 language_00188: 
   position: 188
   name: Zulu
-  display_name: Zulu
+  display_name_translations: {"en": "Zulu"}
   iso_639_1: zu
   iso_639_2: zul
   iso_639_3: zul
@@ -1192,7 +1192,7 @@ language_00188:
 language_00101: 
   position: 101
   name: Luxembourgish
-  display_name: Luxembourgish
+  display_name_translations: {"en": "Luxembourgish"}
   iso_639_1: lb
   iso_639_2: ltz
   iso_639_3: ltz
@@ -1202,7 +1202,7 @@ language_00101:
 language_00046: 
   position: 46
   name: Ewe
-  display_name: Ewe
+  display_name_translations: {"en": "Ewe"}
   iso_639_1: ee
   iso_639_2: ewe
   iso_639_3: ewe
@@ -1212,7 +1212,7 @@ language_00046:
 language_00018: 
   position: 18
   name: Basque
-  display_name: Basque
+  display_name_translations: {"en": "Basque"}
   iso_639_1: eu
   iso_639_2: baq
   iso_639_3: eus
@@ -1222,7 +1222,7 @@ language_00018:
 language_00074: 
   position: 74
   name: Inupiaq
-  display_name: Inupiaq
+  display_name_translations: {"en": "Inupiaq"}
   iso_639_1: ik
   iso_639_2: ipk
   iso_639_3: ipk
@@ -1232,7 +1232,7 @@ language_00074:
 language_00130: 
   position: 130
   name: Polish
-  display_name: Polish
+  display_name_translations: {"en": "Polish"}
   iso_639_1: pl
   iso_639_2: pol
   iso_639_3: pol
@@ -1242,7 +1242,7 @@ language_00130:
 language_00075: 
   position: 75
   name: Irish
-  display_name: Irish
+  display_name_translations: {"en": "Irish"}
   iso_639_1: ga
   iso_639_2: gle
   iso_639_3: gle
@@ -1252,7 +1252,7 @@ language_00075:
 language_00102: 
   position: 102
   name: Macedonian
-  display_name: Macedonian
+  display_name_translations: {"en": "Macedonian"}
   iso_639_1: mk
   iso_639_2: mac
   iso_639_3: mkd
@@ -1262,7 +1262,7 @@ language_00102:
 language_00019: 
   position: 19
   name: Belarusian
-  display_name: Belarusian
+  display_name_translations: {"en": "Belarusian"}
   iso_639_1: be
   iso_639_2: bel
   iso_639_3: bel
@@ -1272,7 +1272,7 @@ language_00019:
 language_00047: 
   position: 47
   name: Fanti
-  display_name: Fanti
+  display_name_translations: {"en": "Fanti"}
   iso_639_1: ak
   iso_639_2: aka
   iso_639_3: fat
@@ -1282,7 +1282,7 @@ language_00047:
 language_00131: 
   position: 131
   name: Portuguese
-  display_name: Portuguese
+  display_name_translations: {"en": "Portuguese"}
   iso_639_1: pt
   iso_639_2: por
   iso_639_3: por
@@ -1292,7 +1292,7 @@ language_00131:
 language_00076: 
   position: 76
   name: Italian
-  display_name: Italian
+  display_name_translations: {"en": "Italian"}
   iso_639_1: it
   iso_639_2: ita
   iso_639_3: ita
@@ -1302,7 +1302,7 @@ language_00076:
 language_00103: 
   position: 103
   name: Malagasy
-  display_name: Malagasy
+  display_name_translations: {"en": "Malagasy"}
   iso_639_1: mg
   iso_639_2: mlg
   iso_639_3: mlg
@@ -1312,7 +1312,7 @@ language_00103:
 language_00048: 
   position: 48
   name: Faroese
-  display_name: Faroese
+  display_name_translations: {"en": "Faroese"}
   iso_639_1: fo
   iso_639_2: fao
   iso_639_3: fao
@@ -1322,7 +1322,7 @@ language_00048:
 language_00104: 
   position: 104
   name: Malay
-  display_name: Malay
+  display_name_translations: {"en": "Malay"}
   iso_639_1: ms
   iso_639_2: may
   iso_639_3: msa
@@ -1332,9 +1332,7 @@ language_00104:
 language_00132: 
   position: 132
   name: Pali
-  display_name: !binary |
-    UMSBbGk=
-
+  display_name_translations: {"en": "Pali"}
   iso_639_1: pi
   iso_639_2: pli
   iso_639_3: pli
@@ -1344,7 +1342,7 @@ language_00132:
 language_00160: 
   position: 160
   name: Tajik
-  display_name: Tajik
+  display_name_translations: {"en": "Tajik"}
   iso_639_1: tg
   iso_639_2: tgk
   iso_639_3: tgk
@@ -1354,7 +1352,7 @@ language_00160:
 language_00077: 
   position: 77
   name: Japanese
-  display_name: 日本語
+  display_name_translations: {"en": "Japanese", "ja": "日本語"}
   iso_639_1: ja
   iso_639_2: jpn
   iso_639_3: jpn
@@ -1364,7 +1362,7 @@ language_00077:
 language_00049: 
   position: 49
   name: Fijian
-  display_name: Fijian
+  display_name_translations: {"en": "Fijian"}
   iso_639_1: fj
   iso_639_2: fij
   iso_639_3: fij
@@ -1374,7 +1372,7 @@ language_00049:
 language_00133: 
   position: 133
   name: Quechua
-  display_name: Quechua
+  display_name_translations: {"en": "Quechua"}
   iso_639_1: qu
   iso_639_2: que
   iso_639_3: que
@@ -1384,7 +1382,7 @@ language_00133:
 language_00105: 
   position: 105
   name: Malayalam
-  display_name: Malayalam
+  display_name_translations: {"en": "Malayalam"}
   iso_639_1: ml
   iso_639_2: mal
   iso_639_3: mal
@@ -1394,7 +1392,7 @@ language_00105:
 language_00161: 
   position: 161
   name: Tamil
-  display_name: Tamil
+  display_name_translations: {"en": "Tamil"}
   iso_639_1: ta
   iso_639_2: tam
   iso_639_3: tam
@@ -1404,7 +1402,7 @@ language_00161:
 language_00078: 
   position: 78
   name: Javanese
-  display_name: Javanese
+  display_name_translations: {"en": "Javanese"}
   iso_639_1: jv
   iso_639_2: jav
   iso_639_3: jav
@@ -1414,7 +1412,7 @@ language_00078:
 language_00106: 
   position: 106
   name: Maltese
-  display_name: Maltese
+  display_name_translations: {"en": "Maltese"}
   iso_639_1: mt
   iso_639_2: mlt
   iso_639_3: mlt
@@ -1424,7 +1422,7 @@ language_00106:
 language_00134: 
   position: 134
   name: Raeto-Romance
-  display_name: Raeto-Romance
+  display_name_translations: {"en": "Raeto-Romance"}
   iso_639_1: rm
   iso_639_2: roh
   iso_639_3: roh
@@ -1434,7 +1432,7 @@ language_00134:
 language_00020: 
   position: 20
   name: Bengali
-  display_name: Bengali
+  display_name_translations: {"en": "Bengali"}
   iso_639_1: bn
   iso_639_2: ben
   iso_639_3: ben
@@ -1444,7 +1442,7 @@ language_00020:
 language_00079: 
   position: 79
   name: Kalaallisut
-  display_name: Kalaallisut
+  display_name_translations: {"en": "Kalaallisut"}
   iso_639_1: kl
   iso_639_2: kal
   iso_639_3: kal
@@ -1454,7 +1452,7 @@ language_00079:
 language_00162: 
   position: 162
   name: Tatar
-  display_name: Tatar
+  display_name_translations: {"en": "Tatar"}
   iso_639_1: tt
   iso_639_2: tat
   iso_639_3: tat
@@ -1464,7 +1462,7 @@ language_00162:
 language_00107: 
   position: 107
   name: Manx
-  display_name: Manx
+  display_name_translations: {"en": "Manx"}
   iso_639_1: gv
   iso_639_2: glv
   iso_639_3: glv
@@ -1474,7 +1472,7 @@ language_00107:
 language_00163: 
   position: 163
   name: Telugu
-  display_name: Telugu
+  display_name_translations: {"en": "Telugu"}
   iso_639_1: te
   iso_639_2: tel
   iso_639_3: tel
@@ -1484,7 +1482,7 @@ language_00163:
 language_00135: 
   position: 135
   name: Romanian
-  display_name: Romanian
+  display_name_translations: {"en": "Romanian"}
   iso_639_1: ro
   iso_639_2: rum
   iso_639_3: ron
@@ -1494,7 +1492,7 @@ language_00135:
 language_00021: 
   position: 21
   name: Bihari
-  display_name: Bihari
+  display_name_translations: {"en": "Bihari"}
   iso_639_1: bh
   iso_639_2: bih
   iso_639_3: XXX
@@ -1504,7 +1502,7 @@ language_00021:
 language_00164: 
   position: 164
   name: Thai
-  display_name: Thai
+  display_name_translations: {"en": "Thai"}
   iso_639_1: th
   iso_639_2: tha
   iso_639_3: tha
@@ -1514,7 +1512,7 @@ language_00164:
 language_00022: 
   position: 22
   name: Bislama
-  display_name: Bislama
+  display_name_translations: {"en": "Bislama"}
   iso_639_1: bi
   iso_639_2: bis
   iso_639_3: bis
@@ -1524,7 +1522,7 @@ language_00022:
 language_00050: 
   position: 50
   name: Finnish
-  display_name: Finnish
+  display_name_translations: {"en": "Finnish"}
   iso_639_1: fi
   iso_639_2: fin
   iso_639_3: fin
@@ -1534,7 +1532,7 @@ language_00050:
 language_00108: 
   position: 108
   name: Marathi
-  display_name: Marathi
+  display_name_translations: {"en": "Marathi"}
   iso_639_1: mr
   iso_639_2: mar
   iso_639_3: mar
@@ -1544,7 +1542,7 @@ language_00108:
 language_00136: 
   position: 136
   name: Russian
-  display_name: Russian
+  display_name_translations: {"en": "Russian"}
   iso_639_1: ru
   iso_639_2: rus
   iso_639_3: rus
@@ -1554,7 +1552,7 @@ language_00136:
 language_00137: 
   position: 137
   name: Samoan
-  display_name: Samoan
+  display_name_translations: {"en": "Samoan"}
   iso_639_1: sm
   iso_639_2: smo
   iso_639_3: smo
@@ -1564,7 +1562,7 @@ language_00137:
 language_00051: 
   position: 51
   name: French
-  display_name: French
+  display_name_translations: {"en": "French"}
   iso_639_1: fr
   iso_639_2: fre
   iso_639_3: fra
@@ -1574,7 +1572,7 @@ language_00051:
 language_00165: 
   position: 165
   name: Tibetan
-  display_name: Tibetan
+  display_name_translations: {"en": "Tibetan"}
   iso_639_1: bo
   iso_639_2: tib
   iso_639_3: bod
@@ -1584,7 +1582,7 @@ language_00165:
 language_00023: 
   position: 23
   name: Bosnian
-  display_name: Bosnian
+  display_name_translations: {"en": "Bosnian"}
   iso_639_1: bs
   iso_639_2: bos
   iso_639_3: bos
@@ -1594,7 +1592,7 @@ language_00023:
 language_00109: 
   position: 109
   name: Marshallese
-  display_name: Marshallese
+  display_name_translations: {"en": "Marshallese"}
   iso_639_1: mh
   iso_639_2: mah
   iso_639_3: mah
@@ -1604,7 +1602,7 @@ language_00109:
 language_00166: 
   position: 166
   name: Tigrinya
-  display_name: Tigrinya
+  display_name_translations: {"en": "Tigrinya"}
   iso_639_1: ti
   iso_639_2: tir
   iso_639_3: tir
@@ -1614,7 +1612,7 @@ language_00166:
 language_00138: 
   position: 138
   name: Sango
-  display_name: Sango
+  display_name_translations: {"en": "Sango"}
   iso_639_1: sg
   iso_639_2: sag
   iso_639_3: sag
@@ -1624,7 +1622,7 @@ language_00138:
 language_00080: 
   position: 80
   name: Kannada
-  display_name: Kannada
+  display_name_translations: {"en": "Kannada"}
   iso_639_1: kn
   iso_639_2: kan
   iso_639_3: kan
@@ -1634,7 +1632,7 @@ language_00080:
 language_00024: 
   position: 24
   name: Breton
-  display_name: Breton
+  display_name_translations: {"en": "Breton"}
   iso_639_1: br
   iso_639_2: bre
   iso_639_3: bre
@@ -1644,7 +1642,7 @@ language_00024:
 language_00052: 
   position: 52
   name: Fulah
-  display_name: Fulah
+  display_name_translations: {"en": "Fulah"}
   iso_639_1: ff
   iso_639_2: ful
   iso_639_3: ful
@@ -1654,7 +1652,7 @@ language_00052:
 language_00025: 
   position: 25
   name: Bulgarian
-  display_name: Bulgarian
+  display_name_translations: {"en": "Bulgarian"}
   iso_639_1: bg
   iso_639_2: bul
   iso_639_3: bul
@@ -1664,7 +1662,7 @@ language_00025:
 language_00139: 
   position: 139
   name: Sanskrit
-  display_name: Sanskrit
+  display_name_translations: {"en": "Sanskrit"}
   iso_639_1: sa
   iso_639_2: san
   iso_639_3: san
@@ -1674,7 +1672,7 @@ language_00139:
 language_00167: 
   position: 167
   name: Tonga
-  display_name: Tonga
+  display_name_translations: {"en": "Tonga"}
   iso_639_1: to
   iso_639_2: ton
   iso_639_3: ton
@@ -1684,7 +1682,7 @@ language_00167:
 language_00053: 
   position: 53
   name: Galician
-  display_name: Galician
+  display_name_translations: {"en": "Galician"}
   iso_639_1: gl
   iso_639_2: glg
   iso_639_3: glg
@@ -1694,7 +1692,7 @@ language_00053:
 language_00081: 
   position: 81
   name: Kanuri
-  display_name: Kanuri
+  display_name_translations: {"en": "Kanuri"}
   iso_639_1: kr
   iso_639_2: kau
   iso_639_3: kau
@@ -1704,7 +1702,7 @@ language_00081:
 language_00168: 
   position: 168
   name: Tsonga
-  display_name: Tsonga
+  display_name_translations: {"en": "Tsonga"}
   iso_639_1: ts
   iso_639_2: tso
   iso_639_3: tso
@@ -1714,7 +1712,7 @@ language_00168:
 language_00054: 
   position: 54
   name: Ganda
-  display_name: Ganda
+  display_name_translations: {"en": "Ganda"}
   iso_639_1: lg
   iso_639_2: lug
   iso_639_3: lug
@@ -1724,7 +1722,7 @@ language_00054:
 language_00082: 
   position: 82
   name: Kashmiri
-  display_name: Kashmiri
+  display_name_translations: {"en": "Kashmiri"}
   iso_639_1: ks
   iso_639_2: kas
   iso_639_3: kas
@@ -1734,7 +1732,7 @@ language_00082:
 language_00026: 
   position: 26
   name: Burmese
-  display_name: Burmese
+  display_name_translations: {"en": "Burmese"}
   iso_639_1: my
   iso_639_2: bur
   iso_639_3: mya
@@ -1744,7 +1742,7 @@ language_00026:
 language_00110: 
   position: 110
   name: Moldavian
-  display_name: Moldavian
+  display_name_translations: {"en": "Moldavian"}
   iso_639_1: mo
   iso_639_2: mol
   iso_639_3: mol
@@ -1754,7 +1752,7 @@ language_00110:
 language_00055: 
   position: 55
   name: Georgian
-  display_name: Georgian
+  display_name_translations: {"en": "Georgian"}
   iso_639_1: ka
   iso_639_2: geo
   iso_639_3: kat
@@ -1764,7 +1762,7 @@ language_00055:
 language_00083: 
   position: 83
   name: Kazakh
-  display_name: Kazakh
+  display_name_translations: {"en": "Kazakh"}
   iso_639_1: kk
   iso_639_2: kaz
   iso_639_3: kaz
@@ -1774,7 +1772,7 @@ language_00083:
 language_00027: 
   position: 27
   name: Catalan
-  display_name: Catalan
+  display_name_translations: {"en": "Catalan"}
   iso_639_1: ca
   iso_639_2: cat
   iso_639_3: cat
@@ -1784,7 +1782,7 @@ language_00027:
 language_00169: 
   position: 169
   name: Tswana
-  display_name: Tswana
+  display_name_translations: {"en": "Tswana"}
   iso_639_1: tn
   iso_639_2: tsn
   iso_639_3: tsn
@@ -1794,7 +1792,7 @@ language_00169:
 language_00111: 
   position: 111
   name: Mongolian
-  display_name: Mongolian
+  display_name_translations: {"en": "Mongolian"}
   iso_639_1: mn
   iso_639_2: mon
   iso_639_3: mon
@@ -1804,7 +1802,7 @@ language_00111:
 language_00056: 
   position: 56
   name: German
-  display_name: German
+  display_name_translations: {"en": "German"}
   iso_639_1: de
   iso_639_2: ger
   iso_639_3: deu
@@ -1814,7 +1812,7 @@ language_00056:
 language_00084: 
   position: 84
   name: Khmer
-  display_name: Khmer
+  display_name_translations: {"en": "Khmer"}
   iso_639_1: km
   iso_639_2: khm
   iso_639_3: khm
@@ -1824,7 +1822,7 @@ language_00084:
 language_00028: 
   position: 28
   name: Chamorro
-  display_name: Chamorro
+  display_name_translations: {"en": "Chamorro"}
   iso_639_1: ch
   iso_639_2: cha
   iso_639_3: cha
@@ -1834,7 +1832,7 @@ language_00028:
 language_00112: 
   position: 112
   name: Maori
-  display_name: Māorii
+  display_name_translations: {"en": "Māorii"}
   iso_639_1: mi
   iso_639_2: mao
   iso_639_3: mri
@@ -1844,7 +1842,7 @@ language_00112:
 language_00057: 
   position: 57
   name: Greek
-  display_name: Greek
+  display_name_translations: {"en": "Greek"}
   iso_639_1: el
   iso_639_2: gre
   iso_639_3: ell
@@ -1854,7 +1852,7 @@ language_00057:
 language_00085: 
   position: 85
   name: Kikuyu
-  display_name: Kikuyu
+  display_name_translations: {"en": "Kikuyu"}
   iso_639_1: ki
   iso_639_2: kik
   iso_639_3: kik
@@ -1864,7 +1862,7 @@ language_00085:
 language_00029: 
   position: 29
   name: Chechen
-  display_name: Chechen
+  display_name_translations: {"en": "Chechen"}
   iso_639_1: ce
   iso_639_2: che
   iso_639_3: che
@@ -1874,10 +1872,26 @@ language_00029:
 language_00140: 
   position: 140
   name: Sardinian
-  display_name: Sardinian
+  display_name_translations: {"en": "Sardinian"}
   iso_639_1: sc
   iso_639_2: srd
   iso_639_3: srd
   id: 140
   note: 
-  native_name: 
+  native_name:
+
+# == Schema Information
+#
+# Table name: languages
+#
+#  id                        :integer          not null, primary key
+#  name                      :string           not null
+#  native_name               :string
+#  old_display_name          :text
+#  iso_639_1                 :string
+#  iso_639_2                 :string
+#  iso_639_3                 :string
+#  note                      :text
+#  position                  :integer
+#  display_name_translations :jsonb            not null
+#
