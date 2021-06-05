@@ -130,7 +130,7 @@ describe UserImportFile do
         locale: 'ja',
         note: 'Note',
         keyword_list: 'keyword1 keyword2',
-        birth_date: 10.years.ago)
+        birth_date: '2001-01-01')
       user.save!
       file = UserImportFile.create!(
         user: users(:admin),
