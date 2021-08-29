@@ -6,7 +6,7 @@ class WithdrawsController < ApplicationController
   # GET /withdraws
   # GET /withdraws.json
   def index
-    if params[:format] == 'txt'
+    if params[:format] == 'text'
       @withdraws = Withdraw.order('withdraws.created_at DESC').page(params[:page]).per(65534)
     else
       if params[:withdraw]
@@ -29,7 +29,7 @@ class WithdrawsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @withdraws }
       format.js { @withdraw = Withdraw.new }
-      format.txt
+      format.text
     end
   end
 

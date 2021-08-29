@@ -6,7 +6,7 @@ class AcceptsController < ApplicationController
   # GET /accepts
   # GET /accepts.json
   def index
-    if params[:format] == 'txt'
+    if params[:format] == 'text'
       @accepts = Accept.order('accepts.created_at DESC').page(params[:page]).per(65534)
     else
       if params[:accept]
@@ -29,7 +29,7 @@ class AcceptsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @accepts }
       format.js { @accept = Accept.new }
-      format.txt
+      format.text
     end
   end
 
