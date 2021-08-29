@@ -15,7 +15,7 @@ class UserImportResultsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @user_import_results }
-      format.txt
+      format.text
     end
   end
 
