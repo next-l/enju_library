@@ -3,5 +3,8 @@ class User < ApplicationRecord
     :recoverable, :rememberable, :trackable, #, :validatable
     :lockable, lock_strategy: :none, unlock_strategy: :none
 
-  include EnjuLibrary::EnjuUser
+  include EnjuSeed::EnjuUser
+  has_one :profile, dependent: :nullify
 end
+
+Item.include(EnjuLibrary::EnjuItem)

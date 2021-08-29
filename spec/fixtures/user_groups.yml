@@ -1,7 +1,7 @@
 --- 
 user_group_00001: 
-  name: not_specified
-  display_name_translations: {"en": "(not specified)", "ja": "不明"}
+  name: first_group
+  display_name_translations: {"en": "first_group", "ja": "最初のグループ"}
   updated_at: 2007-12-13 21:00:51.564542 +09:00
   id: 1
   note: ""
@@ -11,7 +11,7 @@ user_group_00001:
   number_of_day_to_notify_due_date: 2
 user_group_00002: 
   name: user
-  display_name_translations: {"en": "User", "ja": "一般利用者"}
+  display_name_translations: {"en": "User", "ja": "一般ユーザ"}
   updated_at: 2007-12-23 03:14:56.836548 +09:00
   id: 2
   note: ""

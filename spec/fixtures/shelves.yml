@@ -1,6 +1,6 @@
 --- 
 shelf_00001: 
-  name: web  
+  name: web
   display_name_translations: {"en": "Library bookmark", "ja": "ブックマーク"}
   id: 1
   note:

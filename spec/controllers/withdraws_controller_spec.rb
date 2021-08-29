@@ -94,6 +94,12 @@ RSpec.describe WithdrawsController, type: :controller do
           post :create, params: valid_create_attributes
           expect(response).to redirect_to(withdraws_path(basket_id: valid_create_attributes[:basket_id]))
         end
+
+        it 'should not withdraw a checked-out item' do
+          post :create, params: { basket_id: valid_create_attributes[:basket_id], withdraw: { item_identifier: '00001' } }
+          expect(assigns(:withdraw)).to be_a(Withdraw)
+          expect(response).to be_successful
+        end
       end
 
       context 'with invalid params' do

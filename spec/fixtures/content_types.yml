@@ -71,17 +71,3 @@ content_type_00012:
   display_name_translations: {"en": "Unspecified", "ja": "不明"}
   note: LCMARCに由来
   position: 12
-
-# == Schema Information
-#
-# Table name: content_types
-#
-#  id                        :integer          not null, primary key
-#  name                      :string           not null
-#  display_name              :text
-#  note                      :text
-#  position                  :integer
-#  created_at                :datetime
-#  updated_at                :datetime
-#  display_name_translations :jsonb            not null
-#

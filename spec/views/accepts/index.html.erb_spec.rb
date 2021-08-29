@@ -4,10 +4,16 @@ describe "accepts/index" do
   fixtures :all
 
   before(:each) do
-    2.times do
-      FactoryBot.create(:accept)
-    end
-    assign(:accepts, Accept.page(1))
+    assign(:accepts, Kaminari::paginate_array([
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      ),
+      stub_model(Accept,
+        item_id: 1,
+        created_at: Time.zone.now
+      )
+    ]).page(1))
     basket = FactoryBot.create(:basket)
     assign(:basket, basket)
     assign(:accept, basket.accepts.new)

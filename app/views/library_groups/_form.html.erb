@@ -6,13 +6,10 @@
     <%= f.text_field :name, required: true, class: 'form-control' %>
   </div>
 
-  <% I18n.available_locales.each do |locale| %>
-    <div class="form-group">
-      <% display_name = "display_name_#{locale.to_s}" %>
-      <%= f.label :display_name -%> (<%= locale.to_s %>)<br />
-      <%= f.text_field display_name, class: 'form-control' -%>
-    </div>
-  <% end %>
+  <div class="form-group">
+    <%= f.label :display_name -%><br />
+    <%= f.text_field :display_name, class: 'form-control' -%>
+  </div>
 
   <div class="form-group">
     <%= f.label :header_logo -%><br />
@@ -32,17 +29,15 @@
     <%= f.url_field :url, class: 'form-control' -%>
   </div>
 
-  <% I18n.available_locales.each do |locale| -%>
-    <div class="form-group">
-      <%= f.label :login_banner -%> (<%= locale -%>)
-      <%= f.text_area :"login_banner_#{locale.to_s}", class: 'form-control' -%>
-    </div>
+  <div class="form-group">
+    <%= f.label :login_banner -%>
+    <%= f.text_area :login_banner, class: 'form-control' -%>
+  </div>
 
-    <div class="form-group">
-      <%= f.label :footer_banner -%> (<%= locale -%>)
-      <%= f.text_area :"footer_banner_#{locale.to_s}", class: 'form-control' -%>
-    </div>
-  <% end -%>
+  <div class="form-group">
+    <%= f.label :footer_banner -%>
+    <%= f.text_area :footer_banner, class: 'form-control' -%>
+  </div>
 
   <div class="form-group">
     <%= f.label :max_number_of_results -%><br />

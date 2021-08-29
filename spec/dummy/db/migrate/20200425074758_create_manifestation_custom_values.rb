@@ -7,6 +7,6 @@ class CreateManifestationCustomValues < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
-    add_index :manifestation_custom_values, [:manifestation_custom_property_id, :manifestation_id], unique: true, name: 'index_manifestation_custom_values_on_property_and_manifestation'
+    add_index :manifestation_custom_values, [:manifestation_custom_property_id, :manifestation_id], unique: true, name: 'index_manifestation_custom_values_on_property_manifestation'
   end
 end
