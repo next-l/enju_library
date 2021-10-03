@@ -30,7 +30,7 @@ class UserExportFile < ApplicationRecord
   def export!
     transition_to!(:started)
     tempfile = Tempfile.new(['user_export_file_', '.txt'])
-    file = User.export(format: :txt)
+    file = User.export(format: :text)
     tempfile.puts(file)
     tempfile.close
     self.user_export = File.new(tempfile.path, 'r')
