@@ -58,7 +58,7 @@ module EnjuLibrary
         # format.html.phone {render file: "#{Rails.root}/public/500", layout: false, status: 500}
         format.xml {render template: 'page/500', status: :internal_server_error}
         format.json { render json: {"error": "server_error"} }
-        format.xml {render template: 'page/500.xml', status: :internal_server_error}
+        format.rss {render template: 'page/500.xml', status: :internal_server_error}
       end
     end
 
@@ -71,7 +71,7 @@ module EnjuLibrary
         # format.html.phone {render template: "page/500_nosolr", layout: false, status: 500}
         format.xml {render template: 'page/500', status: :internal_server_error}
         format.json { render json: {"error": "server_error"} }
-        format.xml {render template: 'page/500.xml', status: :internal_server_error}
+        format.rss {render template: 'page/500.xml', status: :internal_server_error}
       end
     end
 
