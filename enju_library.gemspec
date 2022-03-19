@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
   s.add_dependency "globalize"
 
   s.add_development_dependency "enju_leaf", "~> 1.3.5"
-  s.add_development_dependency "enju_biblio", "~> 0.3.13"
+  s.add_development_dependency "enju_biblio", "~> 0.3.14"
   #s.add_development_dependency "enju_manifestation_viewer", "~> 0.3.2"
   s.add_development_dependency "enju_ndl", "~> 0.3.2"
   s.add_development_dependency "enju_event", "~> 0.3.5"
